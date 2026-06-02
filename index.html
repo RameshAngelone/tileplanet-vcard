@@ -1,140 +1,100 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tile Planet</title>
-
+<title>Tile Planet - Digital Card</title>
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
 body{
-margin:0;
 font-family:Arial,sans-serif;
-background:#08111f;
-color:white;
-text-align:center;
-}
-
-.container{
+color:#fff;
+background:
+linear-gradient(rgba(0,0,0,.70),rgba(0,0,0,.85)),
+url('https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1600');
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 padding:20px;
-max-width:500px;
-margin:auto;
 }
-
-.logo{
-width:150px;
-margin-top:20px;
+.container{max-width:1100px;margin:auto}
+.glass{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(16px);
+border:1px solid rgba(255,255,255,.12);
+border-radius:22px;
+box-shadow:0 8px 30px rgba(0,0,0,.45);
 }
-
-.name{
-font-size:32px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.phone{
-font-size:22px;
-margin-bottom:20px;
-}
-
+.hero{padding:25px;text-align:center}
+.logo{width:220px;max-width:100%}
+.red{color:#ff3030}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
 .btn{
-display:block;
-margin:12px 0;
-padding:16px;
-border-radius:15px;
-text-decoration:none;
-color:white;
-font-weight:bold;
-backdrop-filter:blur(15px);
-background:rgba(255,255,255,0.12);
-border:1px solid rgba(255,255,255,0.2);
+text-decoration:none;color:#fff;padding:18px;text-align:center;
+display:block
 }
-
-.section{
-margin-top:30px;
-padding:20px;
-border-radius:20px;
-background:rgba(255,255,255,0.08);
-}
-
-h2{
-color:#ff3333;
+.section{padding:20px;margin-top:20px}
+.catalog a{display:block;margin-top:10px}
+.footer{text-align:center;padding:20px}
+@media(max-width:768px){
+.grid4{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
-
 <body>
-
 <div class="container">
 
+<div class="glass hero">
 <img src="Logo.png" class="logo">
-
-<div class="name">
-Ramesh Chotalia
+<h1>Ramesh Chotalia</h1>
+<h3 class="red">PROPRIETOR</h3>
+<h2>+91 9922533033</h2>
+<p>Premium Tiles. Perfect Spaces.</p>
 </div>
 
-<div class="phone">
-+91 9922533033
+<div class="grid4">
+<a class="glass btn" href="tel:+919922533033">📞 Call</a>
+<a class="glass btn" href="https://wa.me/919922533033">💬 WhatsApp</a>
+<a class="glass btn" href="mailto:ramesh.chotalia13@gmail.com">✉️ Email</a>
+<a class="glass btn" href="https://google.com/maps?q=18.4540227,73.8314302">📍 Location</a>
 </div>
 
-<a class="btn" href="tel:+919922533033">
-📞 Call Now
-</a>
-
-<a class="btn" href="https://wa.me/919922533033">
-💬 WhatsApp
-</a>
-
-<a class="btn"
-href="mailto:ramesh.chotalia13@gmail.com">
-✉️ Email
-</a>
-
-<a class="btn"
-href="https://google.com/maps?q=18.4540227,73.8314302">
-📍 Location
-</a>
-
-<div class="section">
-<h2>Catalogs</h2>
-
-<a class="btn"
-href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view">
-📖 Wall Catalog
-</a>
-
-<a class="btn"
-href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view">
-📖 Floor Catalog
-</a>
+<div class="glass section">
+<h2 class="red">Company Profile</h2><br>
+<h3>Coming Soon</h3>
 </div>
 
-<div class="section">
-<h2>Stock Enquiry</h2>
-
-Harshad Dalvi<br>
-+91 9067121697
-
-<br><br>
-
-<a class="btn"
-href="tel:+919067121697">
-📦 Check Stock
-</a>
+<div class="glass section">
+<h2 class="red">Company Details</h2><br>
+<p><b>Proprietor:</b> Ramesh Chotalia</p><br>
+<p><b>GST:</b> 27AIPPR7422Q1Z9</p><br>
+<p><b>Business:</b> Retailer & Supplier</p><br>
+<p><b>Experience:</b> 10+ Years</p>
 </div>
 
-<div class="section">
-<h2>GST</h2>
-
-27AIPPR7422Q1Z9
+<div class="glass section catalog">
+<h2 class="red">Download Catalogues</h2><br>
+<a class="glass btn" href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view">📖 Wall Catalogue</a>
+<a class="glass btn" href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view">📖 Floor Catalogue</a>
 </div>
 
-<div class="section">
-<h2>Payment</h2>
+<div class="glass section">
+<h2 class="red">Stock Enquiry</h2><br>
+<h3>Harshad Dalvi</h3>
+<p>+91 9067121697</p><br>
+<a class="glass btn" href="tel:+919067121697">📦 Check Stock</a>
+</div>
 
-<img src="upi-qr.png" width="250">
+<div class="glass section" style="text-align:center">
+<h2 class="red">Scan & Pay</h2><br>
+<img src="upi-qr.png" style="max-width:320px;width:100%;border-radius:20px">
+</div>
+
+<div class="footer">
+Tile Planet © 2026
 </div>
 
 </div>
-
 </body>
 </html>
