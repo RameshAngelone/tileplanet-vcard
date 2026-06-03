@@ -1,82 +1,232 @@
-.page{
-max-width:430px;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tile Planet</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#000;
+color:#fff;
+}
+
+.container{
+max-width:420px;
 margin:auto;
-background:#050505;
+background:#0a0a0a;
+min-height:100vh;
 }
 
 .hero{
 background:url('showroom.jpg');
 background-size:cover;
 background-position:center;
-padding:12px;
-border-radius:0 0 25px 25px;
+padding:15px;
+position:relative;
 }
 
-.hero-overlay{
-background:rgba(0,0,0,.70);
-padding:12px;
+.hero::before{
+content:'';
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.65);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+}
+
+.glass{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.15);
 border-radius:20px;
 }
 
-.logo{
-width:180px;
+.topbar{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
 }
 
-.owner{
-font-size:20px;
-font-weight:700;
+.topbtn{
+padding:10px 14px;
+}
+
+.profile{
+display:flex;
+gap:10px;
+align-items:center;
+padding:12px;
+}
+
+.logo{
+width:120px;
+}
+
+.qr{
+width:110px;
+border-radius:12px;
+}
+
+.name{
+font-size:22px;
+font-weight:bold;
+}
+
+.role{
+color:#ff4040;
+margin-top:4px;
+}
+
+.phone{
+margin-top:10px;
+padding:12px;
+background:#550000;
+border-radius:15px;
+font-weight:bold;
+}
+
+.actions{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+padding:10px;
+}
+
+.action{
+padding:10px;
+text-align:center;
+font-size:12px;
+}
+
+.section{
+padding:10px;
+}
+
+.title{
+text-align:center;
+margin:12px 0;
+color:#ff4040;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:6px;
+}
+
+.product{
+text-align:center;
+font-size:10px;
+overflow:hidden;
+}
+
+.product img{
+width:100%;
+height:55px;
+object-fit:cover;
+display:block;
+}
+
+.row2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:8px;
+}
+
+.box{
+padding:10px;
+}
+
+.box img{
+width:100%;
+border-radius:12px;
+}
+
+.paybtn{
+display:block;
+padding:12px;
+text-align:center;
+background:#ff4040;
+border-radius:15px;
+color:#fff;
+text-decoration:none;
 margin-top:10px;
 }
 
-.call-box{
-background:linear-gradient(90deg,#8b0000,#250000);
-padding:12px;
-border-radius:18px;
-margin-top:12px;
-border:1px solid #ff4040;
+.footer{
+padding:15px;
+text-align:center;
+font-size:12px;
+opacity:.8;
 }
 
-.qr-card{
-background:rgba(255,255,255,.08);
-padding:10px;
-border-radius:18px;
-border:1px solid rgba(255,255,255,.15);
+a{
+color:white;
+text-decoration:none;
 }
 
-.qr-card img{
-width:130px;
-border-radius:12px;
-}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
 <div class="hero">
 
-<div class="hero-overlay">
+<div class="hero-content">
 
-<div style="display:flex;justify-content:space-between;">
+<div class="topbar">
+
+<div class="glass topbtn">☰</div>
+
+<div class="glass topbtn"
+onclick="shareCard()">
+Share
+</div>
+
+</div>
+
+<div class="glass profile">
 
 <div>
+
 <img src="Logo.png" class="logo">
 
-<div class="owner">
+<div class="name">
 Ramesh Chotalia
 </div>
 
-<div style="color:red;">
+<div class="role">
 PROPRIETOR
 </div>
 
-<div class="call-box">
+<div class="phone">
 +91 9922533033
 </div>
 
 </div>
 
-<div class="qr-card">
-
 <div>
+
+<img src="upi-qr.png" class="qr">
+
+<p style="font-size:10px;text-align:center;">
 SAVE CONTACT
-</div>
-
-<img src="contact-qr.png">
+</p>
 
 </div>
 
@@ -85,3 +235,152 @@ SAVE CONTACT
 </div>
 
 </div>
+
+<div class="actions">
+
+<a class="glass action"
+href="tel:+919922533033">
+📞<br>Call
+</a>
+
+<a class="glass action"
+href="https://wa.me/919922533033">
+💬<br>Chat
+</a>
+
+<a class="glass action"
+href="mailto:ramesh.chotalia13@gmail.com">
+✉️<br>Email
+</a>
+
+<a class="glass action"
+href="https://google.com/maps?q=18.4540227,73.8314302">
+📍<br>Map
+</a>
+
+</div>
+
+<div class="section">
+
+<h3 class="title">
+OUR PRODUCTS
+</h3>
+
+<div class="products">
+
+<div class="glass product">
+<img src="Walltiles.jpg">
+Wall
+</div>
+
+<div class="glass product">
+<img src="Floortiles.jpg">
+Floor
+</div>
+
+<div class="glass product">
+<img src="Vitrifiedtiles.jpg">
+Vitrified
+</div>
+
+<div class="glass product">
+<img src="Parckingtiles.jpg">
+Parking
+</div>
+
+<div class="glass product">
+<img src="bathroomtiles.jpg">
+Bath
+</div>
+
+</div>
+
+<div class="row2">
+
+<div class="glass box">
+<h4>Wall Catalogue</h4>
+</div>
+
+<div class="glass box">
+<h4>Floor Catalogue</h4>
+</div>
+
+</div>
+
+<div class="row2">
+
+<div class="glass box">
+
+<img src="Company.jpg">
+
+<p>
+Company Profile
+</p>
+
+</div>
+
+<div class="glass box">
+
+GST<br>
+27AIPPR7422Q1Z9
+
+<br><br>
+
+Harshad Dalvi
+
+</div>
+
+</div>
+
+<div class="row2">
+
+<div class="glass box">
+
+<img src="upi-qr.png">
+
+<a class="paybtn"
+href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia">
+
+PAY NOW
+
+</a>
+
+</div>
+
+<div class="glass box">
+
+<img src="map.jpeg">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+Tile Planet © 2026
+
+</div>
+
+</div>
+
+<script>
+
+function shareCard(){
+
+if(navigator.share){
+
+navigator.share({
+title:"Tile Planet",
+url:window.location.href
+});
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
