@@ -1,646 +1,87 @@
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Tile Planet Premium Card</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:Segoe UI,Arial,sans-serif;
-background:#000;
-color:#fff;
-}
-
 .page{
-max-width:480px;
+max-width:430px;
 margin:auto;
-background:url('showroom.jpg');
-background-size:cover;
-background-position:center;
-position:relative;
-min-height:100vh;
-}
-
-.page::before{
-content:'';
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.72);
-}
-
-.content{
-position:relative;
-z-index:2;
-padding:12px;
-}
-
-.glass{
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(14px);
-border:1px solid rgba(255,255,255,.12);
-border-radius:22px;
-box-shadow:0 8px 24px rgba(0,0,0,.45);
-}
-
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
-}
-
-.circle-btn{
-width:52px;
-height:52px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:24px;
-}
-
-.share-btn{
-padding:12px 18px;
-border-radius:18px;
-font-weight:bold;
+background:#050505;
 }
 
 .hero{
-display:grid;
-grid-template-columns:1.3fr .9fr;
-gap:12px;
+background:url('showroom.jpg');
+background-size:cover;
+background-position:center;
+padding:12px;
+border-radius:0 0 25px 25px;
+}
+
+.hero-overlay{
+background:rgba(0,0,0,.70);
+padding:12px;
+border-radius:20px;
 }
 
 .logo{
-width:170px;
-display:block;
-margin:auto;
+width:180px;
 }
 
 .owner{
-font-size:24px;
+font-size:20px;
 font-weight:700;
 margin-top:10px;
 }
 
-.role{
-color:#ff3b3b;
-font-size:16px;
-margin-top:6px;
-font-weight:bold;
-}
-
 .call-box{
-margin-top:14px;
-padding:14px;
+background:linear-gradient(90deg,#8b0000,#250000);
+padding:12px;
 border-radius:18px;
-border:1px solid rgba(255,0,0,.45);
-background:rgba(255,0,0,.08);
-}
-
-.call-box h2{
-font-size:20px;
-}
-
-.call-box p{
-font-size:12px;
-opacity:.85;
+margin-top:12px;
+border:1px solid #ff4040;
 }
 
 .qr-card{
-padding:12px;
-text-align:center;
+background:rgba(255,255,255,.08);
+padding:10px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.15);
 }
 
 .qr-card img{
-width:100%;
-border-radius:14px;
+width:130px;
+border-radius:12px;
 }
+<div class="hero">
 
-.qr-title{
-font-size:14px;
-font-weight:bold;
-margin-bottom:8px;
-}
+<div class="hero-overlay">
 
-.qr-sub{
-font-size:12px;
-opacity:.8;
-margin-top:8px;
-}
+<div style="display:flex;justify-content:space-between;">
 
-.actions{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
-margin-top:15px;
-}
-
-.action{
-padding:12px 6px;
-text-align:center;
-font-size:12px;
-}
-
-.section-title{
-text-align:center;
-margin-top:18px;
-margin-bottom:12px;
-font-size:20px;
-font-weight:bold;
-color:#fff;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
-
-.product{
-overflow:hidden;
-}
-
-.product img{
-width:100%;
-height:120px;
-object-fit:cover;
-display:block;
-}
-
-.product-name{
-padding:10px;
-text-align:center;
-font-size:13px;
-font-weight:bold;
-}
-
-a{
-color:white;
-text-decoration:none;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="page">
-
-<div class="content">
-
-<div class="topbar">
-
-<div class="glass circle-btn">
-☰
-</div>
-
-<div class="glass share-btn"
-onclick="shareCard()">
-Share
-</div>
-
-</div>
-
-<div class="glass hero">
-
-<div style="padding:15px;">
-
+<div>
 <img src="Logo.png" class="logo">
 
 <div class="owner">
 Ramesh Chotalia
 </div>
 
-<div class="role">
+<div style="color:red;">
 PROPRIETOR
 </div>
 
 <div class="call-box">
-
-<h2>
 +91 9922533033
-</h2>
-
-<p>
-Contact For Enquiry
-</p>
-
 </div>
 
 </div>
 
 <div class="qr-card">
 
-<div class="qr-title">
-SAVE OUR CONTACT
+<div>
+SAVE CONTACT
 </div>
 
-<img src="upi-qr.png">
-
-<div class="qr-sub">
-Scan To Save Contact
-</div>
+<img src="contact-qr.png">
 
 </div>
 
 </div>
 
-<div class="actions">
-
-<a href="tel:+919922533033"
-class="glass action">
-📞<br>CALL </a>
-
-<a href="https://wa.me/919922533033"
-class="glass action">
-💬<br>CHAT </a>
-
-<a href="https://google.com/maps?q=18.4540227,73.8314302"
-class="glass action">
-📍<br>MAP </a>
-
-<a href="mailto:ramesh.chotalia13@gmail.com"
-class="glass action">
-✉️<br>EMAIL </a>
-
-</div>
-
-<div class="section-title">
-OUR PRODUCTS
-</div>
-
-<div class="products">
-
-<div class="glass product">
-<img src="Walltiles.jpg">
-<div class="product-name">
-WALL TILES
-</div>
-</div>
-
-<div class="glass product">
-<img src="Floortiles.jpg">
-<div class="product-name">
-FLOOR TILES
-</div>
-</div>
-
-<div class="glass product">
-<img src="Vitrifiedtiles.jpg">
-<div class="product-name">
-VITRIFIED TILES
-</div>
-</div>
-
-<div class="glass product">
-<img src="Parckingtiles.jpg">
-<div class="product-name">
-PARKING TILES
-</div>
-</div>
-
-<div class="glass product">
-<img src="bathroomtiles.jpg">
-<div class="product-name">
-BATHROOM FITTINGS
-</div>
-</div>
-<div class="section-title">
-CATALOGUES
-</div>
-
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-">
-
-<div class="glass" style="padding:15px;text-align:center;">
-
-<h3 style="color:#ff3b3b;">
-Wall Catalogue
-</h3>
-
-<br>
-
-<a class="glass action"
-href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view"
-target="_blank">
-
-📖 DOWNLOAD
-
-</a>
-
-</div>
-
-<div class="glass" style="padding:15px;text-align:center;">
-
-<h3 style="color:#ff3b3b;">
-Floor Catalogue
-</h3>
-
-<br>
-
-<a class="glass action"
-href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view"
-target="_blank">
-
-📖 DOWNLOAD
-
-</a>
-
 </div>
 
 </div>
-
-<div class="section-title">
-COMPANY PROFILE
-</div>
-
-<div class="glass"
-style="
-padding:12px;
-">
-
-<img src="Company.jpg"
-style="
-width:100%;
-border-radius:16px;
-">
-
-<div style="padding:12px;">
-
-<h3 style="color:#ff3b3b;">
-Tile Planet
-</h3>
-
-<br>
-
-<p style="line-height:1.6;font-size:14px;">
-
-Coming Soon
-
-</p>
-
-</div>
-
-</div>
-
-<div class="section-title">
-COMPANY DETAILS
-</div>
-
-<div class="glass"
-style="
-padding:18px;
-line-height:1.8;
-">
-
-<b>Owner:</b>
-Ramesh Chotalia
-
-<br><br>
-
-<b>GST:</b>
-27AIPPR7422Q1Z9
-
-<br><br>
-
-<b>Business:</b>
-Retailer & Supplier
-
-<br><br>
-
-<b>Experience:</b>
-10+ Years
-
-<br><br>
-
-<b>Address:</b>
-
-<br>
-
-Sr No 60
-
-<br>
-
-Opp Ashok Leyland
-
-<br>
-
-Katraj Mumbai Road
-
-<br>
-
-Ambegaon BK
-
-<br>
-
-Pune - 411046
-
-</div>
-
-<div class="section-title">
-STOCK ENQUIRY
-</div>
-
-<div class="glass"
-style="
-padding:18px;
-text-align:center;
-">
-
-<h2 style="color:#4ade80;">
-Harshad Dalvi
-</h2>
-
-<br>
-
-<h3>
-+91 9067121697
-</h3>
-
-<br>
-
-<a href="tel:+919067121697"
-class="glass action">
-
-📦 CHECK STOCK
-
-</a>
-
-</div>
-<div class="section-title">
-PAYMENT
-</div>
-
-<div class="glass"
-style="
-padding:18px;
-text-align:center;
-">
-
-<h3 style="color:#ff3b3b;">
-SCAN & PAY
-</h3>
-
-<br>
-
-<img src="upi-qr.png"
-style="
-width:220px;
-max-width:100%;
-border-radius:15px;
-">
-
-</div>
-
-<div class="section-title">
-QUICK ACTIONS
-</div>
-
-<div class="actions">
-
-<a href="tel:+919922533033"
-class="glass action">
-
-💾<br>
-SAVE
-
-</a>
-
-<a href="#"
-onclick="shareCard()"
-class="glass action">
-
-📤<br>
-SHARE
-
-</a>
-
-<a href="https://wa.me/919922533033"
-class="glass action">
-
-💬<br>
-QUOTE
-
-</a>
-
-<a href="https://wa.me/919922533033"
-class="glass action">
-
-🟢<br>
-HELP
-
-</a>
-
-</div>
-
-<div class="section-title">
-LOCATION
-</div>
-
-<div class="glass"
-style="
-padding:12px;
-">
-
-<img src="map.jpeg"
-style="
-width:100%;
-border-radius:16px;
-">
-
-<br><br>
-
-<a href="https://google.com/maps?q=18.4540227,73.8314302"
-target="_blank"
-class="glass action"
-style="display:block;">
-
-📍 GET DIRECTIONS
-
-</a>
-
-</div>
-
-<div class="glass"
-style="
-padding:18px;
-margin-top:20px;
-text-align:center;
-margin-bottom:20px;
-">
-
-<h2 style="color:#ff3b3b;">
-TILE PLANET
-</h2>
-
-<br>
-
-<p>
-Premium Tiles • Perfect Spaces
-</p>
-
-<br>
-
-<p>
-Ramesh Chotalia
-</p>
-
-<p>
-+91 9922533033
-</p>
-
-<p>
-ramesh.chotalia13@gmail.com
-</p>
-
-<br>
-
-<p style="font-size:12px;opacity:.8;">
-© 2026 Tile Planet
-</p>
-
-</div>
-
-</div>
-</div>
-
-<script>
-
-function shareCard(){
-
-if(navigator.share){
-
-navigator.share({
-title:'Tile Planet',
-text:'Tile Planet Digital Card',
-url:window.location.href
-});
-
-}else{
-
-navigator.clipboard.writeText(window.location.href);
-alert('Link Copied');
-
-}
-
-}
-
-</script>
-
-</body>
-</html>
