@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Tile Planet</title>
 
@@ -14,72 +12,39 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#050505;
+background:#000;
+font-family:Segoe UI,sans-serif;
 color:white;
 }
 
 .container{
 max-width:430px;
 margin:auto;
-padding:12px;
-}
-
-.glass{
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(20px);
--webkit-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.12);
-border-radius:22px;
+background:#050505;
+overflow:hidden;
 }
 
 .hero{
-
-background:
-linear-gradient(
-rgba(0,0,0,.65),
-rgba(0,0,0,.75)
-),
-
-url('showroom.jpg');
-
+position:relative;
+background:url('showroom.jpg');
 background-size:cover;
 background-position:center;
-
-padding:18px;
-
-border-radius:28px;
-
-overflow:hidden;
-
-box-shadow:
-0 10px 40px rgba(255,0,0,.15);
-
+padding:20px;
 }
 
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
+.hero::before{
+content:'';
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.65);
 }
 
-.menuBtn,
-.shareBtn{
-
-width:45px;
-height:45px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-size:22px;
-
-border-radius:50%;
+.hero-content{
+position:relative;
+z-index:2;
 }
 
 .logo{
@@ -89,149 +54,267 @@ margin:auto;
 }
 
 .tagline{
-
 text-align:center;
-
-font-size:13px;
-
+letter-spacing:2px;
+font-size:14px;
 margin-top:8px;
-
-letter-spacing:1px;
-
 color:#ddd;
-
 }
 
-.heroRow{
-
+.top-card{
 display:flex;
-
-justify-content:space-between;
-
-gap:10px;
-
+gap:15px;
 margin-top:20px;
-
+align-items:center;
 }
 
-.leftInfo{
+.left-info{
 flex:1;
 }
 
 .name{
-
-font-size:32px;
-
+font-size:28px;
 font-weight:700;
-
-margin-top:10px;
-
+line-height:1.1;
 }
 
 .role{
-
-color:#ff4040;
-
-font-size:14px;
-
-margin-top:4px;
-
-}
-
-.callBox{
-
-margin-top:15px;
-
-padding:14px;
-
-border-radius:18px;
-
-background:rgba(255,0,0,.18);
-
-border:1px solid rgba(255,0,0,.35);
-
-}
-
-.callBox a{
-
-color:white;
-
-text-decoration:none;
-
-font-size:22px;
-
-font-weight:bold;
-
-}
-
-.qrCard{
-
-width:130px;
-
-padding:10px;
-
-text-align:center;
-
-}
-
-.qrCard img{
-
-width:100%;
-
-border-radius:12px;
-
-}
-
-.qrText{
-
-font-size:11px;
-
+color:#ff5d5d;
 margin-top:8px;
-
 }
 
-.quickActions{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:8px;
-
-margin-top:12px;
-
-}
-
-.action{
-
-padding:12px;
-
-text-align:center;
-
-font-size:12px;
-
-text-decoration:none;
-
-color:white;
-
-}
-
-.sectionTitle{
-
-text-align:center;
-
-margin:18px 0 10px;
-
+.phone-card{
+margin-top:15px;
+background:rgba(180,0,0,.35);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,80,80,.4);
+padding:15px;
+border-radius:20px;
 font-size:18px;
-
 font-weight:bold;
+}
 
-color:#ff4040;
+.contact-qr{
+width:130px;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(15px);
+border-radius:20px;
+padding:10px;
+text-align:center;
+}
 
+.contact-qr img{
+width:100%;
+border-radius:12px;
+background:white;
+padding:5px;
+}
+
+.contact-qr p{
+font-size:12px;
+margin-top:8px;
+}
+
+.action-row{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-top:20px;
+}
+
+.action-btn{
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+padding:15px 5px;
+text-align:center;
+text-decoration:none;
+color:white;
+font-size:13px;
+}
+
+.section-title{
+text-align:center;
+font-size:18px;
+font-weight:700;
+color:#ff6f6f;
+margin:25px 0 15px;
+}
+
+.glass-card{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+backdrop-filter:blur(15px);
+border-radius:25px;
+padding:15px;
+margin:15px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
+padding:0 15px;
+}
+
+.product{
+text-align:center;
+}
+
+.product img{
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+border-radius:18px;
+}
+
+.product p{
+margin-top:5px;
+font-size:12px;
+}
+
+.catalog-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+padding:0 15px;
+}
+
+.catalog-card{
+background:#090909;
+border:1px solid rgba(255,255,255,.08);
+border-radius:25px;
+padding:15px;
+}
+
+.catalog-card h3{
+margin-bottom:5px;
+}
+
+.catalog-card p{
+color:#999;
+font-size:13px;
+margin-bottom:15px;
+}.catalog-btn{
+display:block;
+text-align:center;
+padding:14px;
+border-radius:15px;
+text-decoration:none;
+font-weight:bold;
+color:white;
+margin-top:10px;
+}
+
+.red-btn{
+background:#c60000;
+}
+
+.blue-btn{
+background:#1020d0;
+}
+
+.profile-img{
+width:100%;
+border-radius:20px;
+margin-bottom:15px;
+}
+
+.big-btn{
+display:block;
+text-align:center;
+padding:15px;
+margin-top:15px;
+background:#c60000;
+color:white;
+text-decoration:none;
+font-weight:bold;
+border-radius:18px;
+}
+
+.detail-row{
+padding:8px 0;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.stock-name{
+color:#00d95f;
+font-size:18px;
+font-weight:bold;
+}
+
+.stock-btn{
+display:block;
+background:#008a00;
+padding:15px;
+text-align:center;
+color:white;
+font-weight:bold;
+text-decoration:none;
+border-radius:18px;
+margin-top:15px;
+}
+
+.payment-img{
+width:220px;
+display:block;
+margin:auto;
+border-radius:20px;
+}
+
+.upi{
+text-align:center;
+margin-top:10px;
+font-weight:bold;
+}
+
+.pay-btn{
+display:block;
+text-align:center;
+padding:15px;
+background:#3b00d6;
+color:white;
+font-weight:bold;
+text-decoration:none;
+border-radius:18px;
+margin-top:15px;
+}
+
+.quick-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.quick-btn{
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+padding:18px;
+text-align:center;
+border-radius:18px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.map-img{
+width:100%;
+border-radius:20px;
+}
+
+.footer{
+text-align:center;
+padding:30px 15px;
+color:#aaa;
+}
+
+.footer h2{
+color:#ff7070;
+margin-bottom:10px;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -240,549 +323,305 @@ color:#ff4040;
 
 <div class="hero">
 
-<div class="topbar">
+<div class="hero-content">
 
-<div class="glass menuBtn">
-☰
-</div>
-
-<div class="glass shareBtn"
-onclick="shareCard()">
-⤴
-</div>
-
-</div>
-
-<img src="Logo.png"
-class="logo">
+<img src="Logo.png" class="logo">
 
 <div class="tagline">
 PREMIUM TILES • PERFECT SPACES
 </div>
 
-<div class="heroRow">
+<div class="top-card">
 
-<div class="leftInfo">
+<div class="left-info">
 
 <div class="name">
-Ramesh Chotalia
+Ramesh<br>Chotalia
 </div>
 
 <div class="role">
 PROPRIETOR
 </div>
 
-<div class="callBox">
-
-<a href="tel:+919922533033">
-
+<div class="phone-card">
 📞 +91 9922533033
-
-</a>
-
 </div>
 
 </div>
 
-<div class="glass qrCard">
-
-<img src="contact-qr.jpg">
-
-<div class="qrText">
-SAVE CONTACT
+<div class="contact-qr">
+<img src="contactqr.jpg">
+<p>SAVE CONTACT</p>
 </div>
 
 </div>
 
-</div>
+<div class="action-row">
 
-</div>
-
-<div class="quickActions">
-
-<a class="glass action"
+<a class="action-btn"
 href="tel:+919922533033">
-
 📞<br>CALL
-
 </a>
 
-<a class="glass action"
+<a class="action-btn"
 href="https://wa.me/919922533033">
-
 💬<br>CHAT
-
 </a>
 
-<a class="glass action"
+<a class="action-btn"
 href="mailto:ramesh.chotalia13@gmail.com">
-
 ✉️<br>EMAIL
-
 </a>
 
-<a class="glass action"
-href="https://www.google.com/maps?q=18.4540227,73.8314302">
-
+<a class="action-btn"
+href="https://maps.google.com/?q=18.4540227,73.8314302">
 📍<br>MAP
-
 </a>
 
 </div>
-<!-- PRODUCTS -->
 
-<div class="sectionTitle">
+</div>
+</div>
+
+<div class="section-title">
 OUR PRODUCTS
 </div>
 
-<div style="
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:8px;
-">
+<div class="products">
 
-<div class="glass" style="overflow:hidden;text-align:center;padding-bottom:6px;">
-<img src="Walltiles.jpg" style="width:100%;height:60px;object-fit:cover;">
-<div style="font-size:11px;margin-top:4px;">Wall</div>
+<div class="product">
+<img src="Walltiles.jpg">
+<p>Wall</p>
 </div>
 
-<div class="glass" style="overflow:hidden;text-align:center;padding-bottom:6px;">
-<img src="Floortiles.jpg" style="width:100%;height:60px;object-fit:cover;">
-<div style="font-size:11px;margin-top:4px;">Floor</div>
+<div class="product">
+<img src="Floortiles.jpg">
+<p>Floor</p>
 </div>
 
-<div class="glass" style="overflow:hidden;text-align:center;padding-bottom:6px;">
-<img src="Vitrifiedtiles.jpg" style="width:100%;height:60px;object-fit:cover;">
-<div style="font-size:11px;margin-top:4px;">Vitrified</div>
+<div class="product">
+<img src="Vitrifiedtiles.jpg">
+<p>Vitrified</p>
 </div>
 
-<div class="glass" style="overflow:hidden;text-align:center;padding-bottom:6px;">
-<img src="Parckingtiles.jpg" style="width:100%;height:60px;object-fit:cover;">
-<div style="font-size:11px;margin-top:4px;">Parking</div>
+<div class="product">
+<img src="Parkingtiles.jpg">
+<p>Parking</p>
 </div>
 
-<div class="glass" style="overflow:hidden;text-align:center;padding-bottom:6px;">
-<img src="bathroomtiles.jpg" style="width:100%;height:60px;object-fit:cover;">
-<div style="font-size:11px;margin-top:4px;">Bath</div>
+<div class="product">
+<img src="bathroomtiles.jpg">
+<p>Bath</p>
 </div>
 
 </div>
 
-
-<!-- CATALOGUES -->
-
-<div class="sectionTitle">
+<div class="section-title">
 CATALOGUES
 </div>
 
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-">
+<div class="catalog-grid">
 
-<div class="glass" style="padding:12px;">
+<div class="catalog-card">
+<h3>Wall Tiles</h3>
+<p>Premium Collection</p>
 
-<div style="font-weight:bold;">
-Wall Tiles
-</div>
-
-<div style="font-size:12px;color:#ccc;margin-top:5px;">
-Premium Collection
-</div>
-
-<a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view"
-target="_blank"
-style="
-display:block;
-margin-top:10px;
-padding:10px;
-background:#ff4040;
-color:white;
-text-align:center;
-border-radius:12px;
-text-decoration:none;
-">
-
+<a class="catalog-btn red-btn"
+href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view">
 DOWNLOAD
-
 </a>
-
 </div>
 
-<div class="glass" style="padding:12px;">
+<div class="catalog-card">
+<h3>Floor Tiles</h3>
+<p>600x600 Collection</p>
 
-<div style="font-weight:bold;">
-Floor Tiles
-</div>
-
-<div style="font-size:12px;color:#ccc;margin-top:5px;">
-600x600 Collection
-</div>
-
-<a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view"
-target="_blank"
-style="
-display:block;
-margin-top:10px;
-padding:10px;
-background:#0066ff;
-color:white;
-text-align:center;
-border-radius:12px;
-text-decoration:none;
-">
-
+<a class="catalog-btn blue-btn"
+href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view">
 DOWNLOAD
-
 </a>
-
 </div>
 
-</div>
-
-
-<!-- COMPANY -->
-
-<div class="sectionTitle">
+</div><div class="section-title">
 COMPANY PROFILE
 </div>
 
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-">
+<div class="glass-card">
 
-<div class="glass" style="padding:10px;">
+<img src="showroom.jpg" class="profile-img">
 
-<img src="Company.jpg"
-style="
-width:100%;
-height:130px;
-object-fit:cover;
-border-radius:12px;
-">
+<h2>Tile Planet</h2>
 
-Tile Planet
-
-</h3>
-
-<p style="
-font-size:12px;
-text-align:center;
-color:#ccc;
-">
-
+<p style="color:#999;margin-top:5px;">
 Premium Tiles Supplier
-
 </p>
 
 <a href="company-profile.pdf"
-target="_blank"
-style="
-display:block;
-margin-top:12px;
-padding:12px;
-background:#ef4444;
-color:white;
-text-decoration:none;
-text-align:center;
-border-radius:12px;
-font-weight:bold;
-">
-
+class="big-btn">
 📄 VIEW COMPANY PROFILE
-
 </a>
 
-<div style="
-margin-top:12px;
-font-size:13px;
-line-height:1.7;
-">
+<br>
 
-✓ Wall Tiles<br>
-✓ Floor Tiles<br>
-✓ Vitrified Tiles<br>
-✓ Parking Tiles<br>
-✓ Bathroom Fittings
+<p>✔ Wall Tiles</p>
+<p>✔ Floor Tiles</p>
+<p>✔ Vitrified Tiles</p>
+<p>✔ Parking Tiles</p>
+<p>✔ Bathroom Fittings</p>
 
 </div>
 
-<div class="glass" style="padding:12px;">
-
-<div style="
-font-size:18px;
-font-weight:bold;
-margin-bottom:10px;
-">
-
-Company Details
-
+<div class="section-title">
+COMPANY DETAILS
 </div>
 
-GST:<br>
-27AIPPR7422Q1Z9
+<div class="glass-card">
 
-<br><br>
+<div class="detail-row">
+<b>GST :</b> 27AIPPR7422Q1Z9
+</div>
 
-Owner:<br>
-Ramesh Chotalia
+<div class="detail-row">
+<b>Owner :</b> Ramesh Chotalia
+</div>
 
-<br><br>
+<div class="detail-row">
+<b>Business :</b> Retailer & Supplier
+</div>
 
-Business:<br>
-Retailer & Supplier
+<div class="detail-row">
+<b>Experience :</b> 8+ Years
+</div>
 
-<br><br>
-
-Experience:<br>
-8+ Years
-
+<div class="detail-row">
+<b>Email :</b><br>
+ramesh.chotalia13@gmail.com
 </div>
 
 </div>
-<!-- STOCK ENQUIRY -->
 
-<div class="sectionTitle">
+<div class="section-title">
 STOCK ENQUIRY
 </div>
 
-<div class="glass" style="padding:15px;">
+<div class="glass-card">
 
-<div style="
-font-size:22px;
-font-weight:bold;
-color:#4ade80;
-">
-
+<div class="stock-name">
 Harshad Dalvi
-
 </div>
 
-<div style="
-margin-top:5px;
-font-size:18px;
-">
-
+<div style="font-size:18px;margin-top:10px;">
 +91 9067121697
-
 </div>
 
 <a href="tel:+919067121697"
-style="
-display:block;
-margin-top:12px;
-padding:12px;
-text-align:center;
-background:#16a34a;
-color:white;
-text-decoration:none;
-border-radius:14px;
-font-weight:bold;
-">
-
+class="stock-btn">
 📞 CHECK STOCK
-
 </a>
 
 </div>
 
-
-<!-- PAYMENT -->
-
-<div class="sectionTitle">
+<div class="section-title">
 PAYMENT
 </div>
 
-<div class="glass" style="
-padding:15px;
-text-align:center;
-">
+<div class="glass-card">
 
 <img src="upi-qr.png"
-style="
-width:180px;
-max-width:100%;
-border-radius:15px;
-">
+class="payment-img">
 
-<div style="
-margin-top:10px;
-font-size:14px;
-">
-
-UPI ID
-
-<br>
-
-<b>
+<div class="upi">
+UPI ID<br>
 ramesh.chotalia13@oksbi
-</b>
-
 </div>
 
 <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia"
-style="
-display:block;
-margin-top:12px;
-padding:14px;
-background:#7c3aed;
-color:white;
-text-decoration:none;
-border-radius:14px;
-font-weight:bold;
-">
-
+class="pay-btn">
 💳 PAY NOW
-
 </a>
 
 </div>
 
-
-<!-- QUICK ACTIONS -->
-
-<div class="sectionTitle">
+<div class="section-title">
 QUICK ACTIONS
 </div>
 
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-">
+<div class="glass-card">
 
-<a href="contact.vcf"
-download
-class="glass"
-style="
-padding:15px;
-text-align:center;
-text-decoration:none;
-color:white;
-">
+<div class="quick-grid">
 
+<a href="contactqr.jpg"
+class="quick-btn">
 💾 SAVE CONTACT
-
 </a>
 
 <a href="#"
-onclick="shareCard()"
-class="glass"
-style="
-padding:15px;
-text-align:center;
-text-decoration:none;
-color:white;
-">
-
+onclick="navigator.share({title:'Tile Planet',url:window.location.href})"
+class="quick-btn">
 📤 SHARE CARD
+</a>
 
+<a href="mailto:ramesh.chotalia13@gmail.com"
+class="quick-btn">
+📝 GET QUOTE
+</a>
+
+<a href="https://wa.me/919922533033"
+class="quick-btn">
+🎧 SUPPORT
 </a>
 
 </div>
 
+</div>
 
-<!-- LOCATION -->
-
-<div class="sectionTitle">
+<div class="section-title">
 LOCATION
 </div>
 
-<div class="glass" style="
-padding:10px;
-">
+<div class="glass-card">
 
 <img src="map.jpeg"
-style="
-width:100%;
-border-radius:15px;
-">
+class="map-img">
 
-<a href="https://www.google.com/maps?q=18.4540227,73.8314302"
-target="_blank"
-style="
-display:block;
-margin-top:10px;
-padding:14px;
-text-align:center;
-background:#ef4444;
-color:white;
-text-decoration:none;
-border-radius:14px;
-font-weight:bold;
-">
-
+<a href="https://maps.google.com/?q=18.4540227,73.8314302"
+class="big-btn">
 📍 OPEN MAP
-
 </a>
 
 </div>
 
+<div class="footer">
 
-<!-- FOOTER -->
+<h2>TILE PLANET</h2>
 
-<div style="
-text-align:center;
-padding:25px 10px;
-margin-top:15px;
-">
-
-<div style="
-font-size:26px;
-font-weight:bold;
-color:#ff4040;
-">
-
-TILE PLANET
-
-</div>
-
-<div style="
-margin-top:8px;
-color:#ccc;
-">
-
+<p>
 Premium Tiles • Perfect Spaces
+</p>
 
-</div>
+<br>
 
-<div style="
-margin-top:15px;
-">
-
+<p>
 Ramesh Chotalia
+</p>
 
-<br>
-
+<p>
 +91 9922533033
+</p>
+
+<p>
+ramesh.chotalia13@gmail.com
+</p>
 
 <br>
 
-ramesh.chotalia13@gmail.com
+<p>
+© 2026 Tile Planet
+</p>
 
 </div>
-<script>
 
-function shareCard(){
-
-if(navigator.share){
-
-navigator.share({
-title:"Tile Planet",
-text:"Tile Planet Digital Card",
-url:window.location.href
-});
-
-}else{
-
-alert("Share not supported");
-
-}
-
-}
-
-</script>
 </div>
+
+</body>
+</html>
