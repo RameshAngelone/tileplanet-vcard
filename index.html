@@ -682,3 +682,177 @@ font-size:16px;
 </a>
 
 </div>
+<!-- QUICK ACTIONS -->
+
+<div class="section-title">
+QUICK ACTIONS
+</div>
+
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+padding:12px;
+">
+
+<a href="tileplanet.vcf"
+download
+class="glass-btn"
+style="
+padding:20px;
+font-size:16px;
+">
+
+💾 SAVE CONTACT
+
+</a>
+
+<a href="#"
+onclick="shareCard()"
+class="glass-btn"
+style="
+padding:20px;
+font-size:16px;
+">
+
+📤 SHARE CARD
+
+</a>
+
+<a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20Please%20send%20me%20a%20quotation."
+target="_blank"
+class="glass-btn"
+style="
+padding:20px;
+font-size:16px;
+">
+
+📝 GET QUOTE
+
+</a>
+
+<a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20I%20want%20an%20enquiry."
+target="_blank"
+class="glass-btn"
+style="
+padding:20px;
+font-size:16px;
+">
+
+📩 ENQUIRY
+
+</a>
+
+</div>
+
+
+<!-- LOCATION -->
+
+<div class="section-title">
+LOCATION
+</div>
+
+<div class="main-card"
+style="
+margin:12px;
+">
+
+<img src="map.jpeg"
+style="
+width:100%;
+border-radius:20px;
+margin-bottom:15px;
+">
+
+<a href="https://www.google.com/maps?q=18.4540227,73.8314302"
+target="_blank"
+class="contact-btn"
+style="
+justify-content:center;
+">
+
+📍 OPEN MAP
+
+</a>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="main-card"
+style="
+margin:12px;
+text-align:center;
+">
+
+<h2 style="
+color:#ff7070;
+margin-bottom:10px;
+">
+
+TILE PLANET
+
+</h2>
+
+<p>
+Premium Tiles • Perfect Spaces
+</p>
+
+<br>
+
+<p>
+Ramesh Chotalia
+</p>
+
+<p>
+📞 +91 9922533033
+</p>
+
+<p>
+✉️ ramesh.chotalia13@gmail.com
+</p>
+
+<br>
+
+<p style="
+color:#999;
+font-size:13px;
+">
+
+© 2026 Tile Planet.
+All Rights Reserved.
+
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+function shareCard(){
+
+if(navigator.share){
+
+navigator.share({
+title:'Tile Planet',
+text:'Tile Planet Digital Card',
+url:window.location.href
+});
+
+}else{
+
+navigator.clipboard.writeText(window.location.href);
+
+alert('Link Copied Successfully');
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
