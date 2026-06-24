@@ -202,26 +202,16 @@
 
         .name .badge {
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             background: linear-gradient(135deg, var(--gold), #d48900);
             color: #0a0a0a;
-            padding: 2px 12px;
+            padding: 2px 14px;
             border-radius: 50px;
             letter-spacing: 0.3px;
             text-shadow: none;
             box-shadow: 0 2px 16px rgba(240, 165, 0, 0.25);
             display: inline-block;
             vertical-align: middle;
-        }
-
-        .designation {
-            color: var(--gold-light);
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.8px;
-            margin-top: 2px;
-            opacity: 0.9;
-            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
         }
 
         /* ─── CONTACT BUTTON ─── */
@@ -335,22 +325,22 @@
         /* ─── SECTION TITLE ─── */
         .section-title {
             text-align: center;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: #fff;
             margin-top: 32px;
             margin-bottom: 16px;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.2px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 0 16px;
+            gap: 10px;
+            padding: 0 12px;
         }
 
         .section-title .line {
             flex: 1;
-            max-width: 32px;
+            max-width: 28px;
             height: 2px;
             background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.3));
         }
@@ -360,7 +350,7 @@
         }
 
         .section-title .emoji {
-            font-size: 20px;
+            font-size: 18px;
         }
 
         /* ─── PRODUCT GRID ─── */
@@ -405,11 +395,11 @@
             letter-spacing: 0.2px;
         }
 
-        /* ─── CATALOG GRID ─── */
+        /* ─── CATALOG GRID (3 columns forced) ─── */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 10px;
             padding: 0 12px;
         }
 
@@ -419,7 +409,7 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: var(--radius-md);
-            padding: 16px 12px 14px;
+            padding: 14px 8px 12px;
             text-align: center;
             transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -432,39 +422,40 @@
         }
 
         .catalog-card .icon-big {
-            font-size: 24px;
+            font-size: 20px;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .catalog-card h3 {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             color: #fff;
             letter-spacing: -0.2px;
+            line-height: 1.2;
         }
 
         .catalog-card p {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text-muted);
-            margin: 2px 0 10px;
+            margin: 2px 0 8px;
             font-weight: 400;
         }
 
         .catalog-card .dl-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 16px;
+            gap: 4px;
+            padding: 4px 10px;
             border-radius: 60px;
             background: rgba(240, 165, 0, 0.10);
             border: 1px solid rgba(240, 165, 0, 0.15);
             color: #fff;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
         }
 
         .catalog-card .dl-btn:hover {
@@ -477,15 +468,15 @@
         /* ─── NEW BADGE ─── */
         .badge-new {
             display: inline-block;
-            font-size: 8px;
+            font-size: 7px;
             font-weight: 700;
             text-transform: uppercase;
             background: linear-gradient(135deg, var(--gold), #d48900);
             color: #0a0a0a;
-            padding: 1px 10px;
+            padding: 1px 8px;
             border-radius: 50px;
             letter-spacing: 0.5px;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         /* ─── COMPANY PROFILE ─── */
@@ -500,17 +491,18 @@
             margin-top: 14px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4px 16px;
-            font-size: 14px;
+            gap: 4px 12px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
+            text-align: left;
         }
 
         .feature-list span {
             display: flex;
             align-items: center;
             gap: 6px;
-            padding: 4px 0;
+            padding: 3px 0;
         }
 
         .feature-list span::before {
@@ -547,7 +539,7 @@
             font-weight: 500;
         }
 
-        /* ─── STOCK ─── */
+        /* ─── STOCK / SAMPLING / PAYMENT ─── */
         .stock-name {
             font-size: 20px;
             font-weight: 700;
@@ -636,6 +628,13 @@
             border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
+        .footer-logo {
+            width: 130px;
+            display: block;
+            margin: 0 auto 10px;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+        }
+
         .footer-card .brand {
             font-size: 20px;
             font-weight: 800;
@@ -648,21 +647,18 @@
         }
 
         .footer-card .sub {
-            color: var(--text-muted);
-            font-size: 12px;
-            margin-bottom: 12px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 4px;
             letter-spacing: 0.5px;
         }
 
-        .footer-card .contact-line {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin: 2px 0;
-        }
-
-        .footer-card .contact-line b {
-            color: #fff;
+        .footer-card .slogan-highlight {
+            color: var(--gold-light);
             font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
         }
 
         .footer-card .copy {
@@ -676,12 +672,33 @@
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 400px) {
+            /* Catalog stays 3 columns */
             .catalog-grid {
-                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+                padding: 0 8px;
             }
-            .catalog-grid .catalog-card:last-child {
-                grid-column: 1 / -1;
+            .catalog-card {
+                padding: 10px 4px 10px;
             }
+            .catalog-card h3 {
+                font-size: 10px;
+            }
+            .catalog-card p {
+                font-size: 8px;
+                margin-bottom: 6px;
+            }
+            .catalog-card .dl-btn {
+                font-size: 8px;
+                padding: 3px 6px;
+            }
+            .catalog-card .icon-big {
+                font-size: 16px;
+            }
+            .badge-new {
+                font-size: 6px;
+                padding: 0 6px;
+            }
+
             .name {
                 font-size: 22px;
             }
@@ -712,11 +729,18 @@
                 padding: 10px 16px;
             }
             .section-title {
-                font-size: 19px;
-                gap: 8px;
+                font-size: 17px;
+                gap: 6px;
             }
             .section-title .line {
-                max-width: 20px;
+                max-width: 16px;
+            }
+            .feature-list {
+                font-size: 12px;
+                gap: 2px 8px;
+            }
+            .footer-logo {
+                width: 100px;
             }
         }
 
@@ -782,7 +806,7 @@
             transform: translateX(100%);
         }
 
-        /* gold accent underline for section titles */
+        /* accent underline for section titles */
         .accent-underline {
             display: inline-block;
             position: relative;
@@ -819,12 +843,12 @@
 
                     <div class="top-row">
                         <div class="name-box">
-                            <!-- NAME — CRYSTAL CLEAR, NO BLUR -->
+                            <!-- NAME + BADGE (PROP.) ONLY -->
                             <div class="name">
                                 Ramesh Chotalia
                                 <span class="badge">PROP.</span>
                             </div>
-                            <div class="designation">✦ PROPRIETOR · TILE PLANET</div>
+                            <!-- Proprietor line removed as requested -->
 
                             <a href="tel:+919922533033" class="contact-btn">
                                 <span class="icon">📞</span> +91 9922533033
@@ -887,7 +911,7 @@
             </div>
         </div>
 
-        <!-- ═══ CATALOGUES ═══ -->
+        <!-- ═══ CATALOGUES (3 in a line) ═══ -->
         <div class="section-title">
             <span class="line"></span>
             <span class="emoji">📚</span> CATALOGUES
@@ -926,7 +950,7 @@
         <span class="badge-new">✦ New</span>
         <a href="https://drive.google.com/file/d/1OoOO2rFnY4Bw6tkv5vGwYsrAz4bSGLU6/view?usp=sharing"
         target="_blank"
-        class="dl-btn" style="border-color: rgba(240,165,0,0.35); background: rgba(240,165,0,0.12); margin-top:6px;">
+        class="dl-btn" style="border-color: rgba(240,165,0,0.35); background: rgba(240,165,0,0.12); margin-top:4px;">
         ⬇ DOWNLOAD
     </a>
 </div>
@@ -944,8 +968,9 @@
 
     <img src="Company.png" class="profile-img" alt="Company" />
 
-    <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px;">Tile Planet</h2>
-    <p style="color:var(--text-secondary); margin-top:2px; font-size:14px;">Premium Tiles Supplier · Since 2016</p>
+    <!-- Centered Title & Subtitle -->
+    <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px; text-align: center;">Tile Planet</h2>
+    <p style="color:var(--text-secondary); margin-top:2px; font-size:14px; text-align: center;">Premium Tiles Supplier - 2018</p>
 
     <a href="company-profile.pdf"
     target="_blank"
@@ -954,12 +979,14 @@
     📄 VIEW COMPANY PROFILE
 </a>
 
-<div class="feature-list">
+<!-- Feature List with Sanityware added -->
+<div class="feature-list" style="text-align: left;">
     <span>Wall Tiles</span>
     <span>Floor Tiles</span>
     <span>Vitrified Tiles</span>
     <span>Parking Tiles</span>
-    <span style="grid-column:1/-1;">Bathroom Fittings</span>
+    <span>Bathroom Fitting</span>
+    <span>Sanityware</span> <!-- Added -->
 </div>
 
 </div>
@@ -983,27 +1010,28 @@
 
 </div>
 
-<!-- ═══ STOCK ENQUIRY ═══ -->
+<!-- ═══ STOCK ENQUIRY / SAMPLING / PAYMENT ═══ -->
 <div class="section-title">
     <span class="line"></span>
-    <span class="emoji">📦</span> STOCK ENQUIRY
+    <span class="emoji">📦</span> STOCK ENQUIRY / SAMPLING / PAYMENT
     <span class="line"></span>
 </div>
 
-<div class="glass-card" style="margin:0 12px;">
+<div class="glass-card" style="margin:0 12px; text-align: center;">
 
+    <!-- Centered Name and Number -->
     <div class="stock-name">Harshad Dalvi</div>
     <div class="stock-phone">📱 +91 9067121697</div>
 
     <a href="tel:+919067121697"
     class="contact-btn w-full justify-center"
     style="background:rgba(76,217,100,0.08); border-color:rgba(76,217,100,0.20);">
-    📞 CHECK STOCK
+    📞 CONTACT FOR STOCK
 </a>
 
 </div>
 
-<!-- ═══ PAYMENT ═══ -->
+<!-- ═══ PAYMENT QR ═══ -->
 <div class="section-title">
     <span class="line"></span>
     <span class="emoji">💳</span> PAYMENT
@@ -1142,12 +1170,14 @@ class="glass-btn">
 <!-- ═══ FOOTER ═══ -->
 <div class="footer-card">
 
-    <div class="brand">🏛️ TILE <span>PLANET</span></div>
-    <div class="sub">Premium Tiles · Perfect Spaces</div>
+    <!-- Logo at the bottom -->
+    <img src="Logo.png" class="footer-logo" alt="Tile Planet" />
 
-    <div class="contact-line"><b>Ramesh Chotalia</b></div>
-    <div class="contact-line">📞 <b>+91 9922533033</b></div>
-    <div class="contact-line">✉️ <b>ramesh.chotalia13@gmail.com</b></div>
+    <div class="brand">🏛️ TILE <span>PLANET</span></div>
+    <div class="sub">Your One-Stop Tile Solution</div>
+    <div class="slogan-highlight">✦ Visit Our Showroom Once ✦</div>
+
+    <!-- Removed Ramesh Chotalia, Phone, Email as requested -->
 
     <div class="copy">© 2026 Tile Planet. All Rights Reserved.</div>
 
