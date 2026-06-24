@@ -3,74 +3,130 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tile Planet Digital Card</title>
+    <title>Tile Planet · Premium Digital Card</title>
     <style>
         /* ─── RESET & BASE ─── */
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --gold: #f0a500;
+            --gold-light: #f8c84a;
+            --gold-glow: rgba(240, 165, 0, 0.25);
+            --dark-bg: #080808;
+            --card-bg: rgba(255, 255, 255, 0.035);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.4);
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background: #0b0b0b;
-            color: #f5f5f5;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 430px;
-            margin: 0 auto;
-            background: radial-gradient(ellipse at 20% 10%, #161616, #0a0a0a 70%);
-            min-height: 100vh;
-            padding: 0 0 20px 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* ─── SCROLLBAR ─── */
         ::-webkit-scrollbar {
-            width: 3px;
+            width: 4px;
         }
         ::-webkit-scrollbar-track {
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: #f0a500;
-            border-radius: 6px;
+            background: var(--gold);
+            border-radius: 20px;
         }
 
-        /* ─── GLASS CARD ─── */
+        /* ─── CONTAINER ─── */
+        .container {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 0 0 24px 0;
+            background:
+                radial-gradient(ellipse at 20% 0%, #1a1208 0%, #0a0a0a 60%, #080808 100%);
+            position: relative;
+        }
+
+        /* subtle ambient glow */
+        .container::before {
+            content: '';
+            position: fixed;
+            top: -30%;
+            right: -20%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(240, 165, 0, 0.04), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── GLASS CARD (premium) ─── */
         .glass-card {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 22px;
-            padding: 16px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            background: var(--card-bg);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 18px 20px;
+            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.4s ease;
+            position: relative;
+            z-index: 1;
         }
 
         .glass-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
         /* ─── HERO ─── */
         .hero {
             position: relative;
-            background: url('showroom.jpg') center center / cover no-repeat;
-            padding: 18px 16px 22px;
-            border-radius: 0 0 32px 32px;
+            padding: 14px 14px 20px;
+            border-radius: 0 0 36px 36px;
             overflow: hidden;
+            background: url('showroom.jpg') center center / cover no-repeat;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(145deg, rgba(0, 0, 0, 0.80) 0%, rgba(0, 0, 0, 0.55) 100%);
+            background:
+                linear-gradient(160deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.50) 60%, rgba(0, 0, 0, 0.70) 100%);
             z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(8, 8, 8, 0.6), transparent);
+            z-index: 0;
+            pointer-events: none;
         }
 
         .hero-content {
@@ -78,97 +134,142 @@
             z-index: 2;
         }
 
+        /* ─── LOGO ─── */
+        .logo-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2px;
+        }
+
         .logo {
-            width: 170px;
+            width: 160px;
             display: block;
-            margin: 0 auto 4px;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.7)) brightness(1.05);
+            transition: transform 0.5s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
         }
 
         .tagline {
             text-align: center;
-            font-size: 11px;
-            letter-spacing: 2.5px;
+            font-size: 10px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: #f0c27a;
+            color: var(--gold-light);
             font-weight: 500;
-            margin-bottom: 14px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            margin-bottom: 16px;
+            opacity: 0.9;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
         }
 
-        /* ─── MAIN CARD (HERO INNER) ─── */
-        .main-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 22px;
-            padding: 16px;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+        /* ─── HERO INNER CARD ─── */
+        .hero-card {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-lg);
+            padding: 18px 18px 14px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
         }
 
         .top-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 10px;
+            gap: 12px;
         }
 
         .name-box {
             flex: 1;
         }
 
+        /* ─── NAME — CRYSTAL CLEAR ─── */
         .name {
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            background: linear-gradient(135deg, #ffffff 50%, #f0c27a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(240, 165, 0, 0.06);
+            line-height: 1.1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .name .badge {
+            font-size: 12px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--gold), #d48900);
+            color: #0a0a0a;
+            padding: 2px 12px;
+            border-radius: 50px;
+            letter-spacing: 0.3px;
+            text-shadow: none;
+            box-shadow: 0 2px 16px rgba(240, 165, 0, 0.25);
+            display: inline-block;
+            vertical-align: middle;
         }
 
         .designation {
-            color: #f0a500;
+            color: var(--gold-light);
             font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-weight: 500;
+            letter-spacing: 0.8px;
             margin-top: 2px;
+            opacity: 0.9;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
         }
 
+        /* ─── CONTACT BUTTON ─── */
         .contact-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             margin-top: 10px;
-            padding: 11px 18px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(240, 165, 0, 0.20), rgba(240, 165, 0, 0.08));
-            border: 1px solid rgba(240, 165, 0, 0.35);
+            padding: 12px 22px;
+            border-radius: 60px;
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.18), rgba(240, 165, 0, 0.06));
+            border: 1px solid rgba(240, 165, 0, 0.25);
             text-decoration: none;
             color: #fff;
             font-size: 15px;
             font-weight: 600;
-            transition: all 0.25s ease;
-            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.2px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .contact-btn:hover {
-            background: linear-gradient(135deg, rgba(240, 165, 0, 0.35), rgba(240, 165, 0, 0.15));
-            border-color: rgba(240, 165, 0, 0.6);
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(240, 165, 0, 0.15);
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.30), rgba(240, 165, 0, 0.10));
+            border-color: var(--gold);
+            transform: scale(1.03);
+            box-shadow: 0 0 40px rgba(240, 165, 0, 0.12), inset 0 0 30px rgba(240, 165, 0, 0.04);
         }
 
+        .contact-btn .icon {
+            font-size: 18px;
+        }
+
+        /* ─── QR ─── */
         .contact-qr {
-            width: 58px;
-            min-width: 58px;
+            width: 62px;
+            min-width: 62px;
             padding: 4px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.04);
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-qr:hover {
+            transform: scale(1.04);
         }
 
         .contact-qr img {
@@ -181,14 +282,15 @@
 
         .contact-qr p {
             font-size: 7px;
-            margin-top: 3px;
+            margin-top: 4px;
             line-height: 1.1;
-            color: #aaa;
+            color: var(--text-muted);
             font-weight: 600;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        /* ─── QUICK ACTIONS (HERO) ─── */
+        /* ─── QUICK ACTIONS (hero) ─── */
         .quick-actions {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -200,27 +302,17 @@
             text-decoration: none;
             color: #fff;
             padding: 10px 4px;
-            border-radius: 14px;
+            border-radius: var(--radius-md);
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 11px;
             font-weight: 600;
-            transition: all 0.25s ease;
-            line-height: 1.4;
-        }
-
-        .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(240, 165, 0, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .glass-btn br {
-            display: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            line-height: 1.3;
+            letter-spacing: 0.2px;
         }
 
         .glass-btn .icon {
@@ -229,33 +321,46 @@
             margin-bottom: 2px;
         }
 
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(240, 165, 0, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-btn:active {
+            transform: scale(0.95);
+        }
+
         /* ─── SECTION TITLE ─── */
         .section-title {
             text-align: center;
-            font-size: 26px;
-            font-weight: 800;
+            font-size: 22px;
+            font-weight: 700;
             color: #fff;
-            margin-top: 28px;
+            margin-top: 32px;
             margin-bottom: 16px;
-            letter-spacing: -0.5px;
-            position: relative;
+            letter-spacing: -0.3px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
+            gap: 12px;
+            padding: 0 16px;
         }
 
-        .section-title::before,
-        .section-title::after {
-            content: '';
+        .section-title .line {
             flex: 1;
-            max-width: 40px;
+            max-width: 32px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.4));
+            background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.3));
         }
 
-        .section-title::after {
-            background: linear-gradient(90deg, rgba(240, 165, 0, 0.4), transparent);
+        .section-title .line:last-child {
+            background: linear-gradient(90deg, rgba(240, 165, 0, 0.3), transparent);
+        }
+
+        .section-title .emoji {
+            font-size: 20px;
         }
 
         /* ─── PRODUCT GRID ─── */
@@ -263,39 +368,44 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 8px;
-            padding: 0 8px;
+            padding: 0 12px;
         }
 
         .product {
             text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        .product img {
+        .product:hover {
+            transform: translateY(-4px);
+        }
+
+        .product-img {
             width: 100%;
-            height: 60px;
+            aspect-ratio: 1 / 1;
             object-fit: cover;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.25s ease, box-shadow 0.3s ease;
-            filter: brightness(1.1) contrast(1.05);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
         }
 
-        .product img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(240, 165, 0, 0.2);
-            border-color: rgba(240, 165, 0, 0.3);
+        .product:hover .product-img {
+            border-color: rgba(240, 165, 0, 0.25);
+            box-shadow: 0 8px 28px rgba(240, 165, 0, 0.08);
         }
 
         .product span {
             display: block;
             margin-top: 6px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-secondary);
             letter-spacing: 0.2px;
         }
 
-        /* ─── CATALOG GRID (3 columns) ─── */
+        /* ─── CATALOG GRID ─── */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -304,107 +414,137 @@
         }
 
         .catalog-card {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 18px;
-            padding: 14px 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            padding: 16px 12px 14px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .catalog-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(240, 165, 0, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(240, 165, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .catalog-card .icon-big {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 4px;
         }
 
         .catalog-card h3 {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #fff;
             letter-spacing: -0.2px;
         }
 
         .catalog-card p {
-            font-size: 11px;
-            color: #aaa;
-            margin: 4px 0 10px;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin: 2px 0 10px;
+            font-weight: 400;
         }
 
         .catalog-card .dl-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 7px 14px;
-            border-radius: 30px;
-            background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(240, 165, 0, 0.05));
-            border: 1px solid rgba(240, 165, 0, 0.25);
+            padding: 6px 16px;
+            border-radius: 60px;
+            background: rgba(240, 165, 0, 0.10);
+            border: 1px solid rgba(240, 165, 0, 0.15);
             color: #fff;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
         }
 
         .catalog-card .dl-btn:hover {
-            background: linear-gradient(135deg, rgba(240, 165, 0, 0.35), rgba(240, 165, 0, 0.1));
-            border-color: rgba(240, 165, 0, 0.5);
-            box-shadow: 0 0 25px rgba(240, 165, 0, 0.15);
+            background: rgba(240, 165, 0, 0.20);
+            border-color: var(--gold);
             transform: scale(1.04);
+            box-shadow: 0 0 30px rgba(240, 165, 0, 0.08);
+        }
+
+        /* ─── NEW BADGE ─── */
+        .badge-new {
+            display: inline-block;
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--gold), #d48900);
+            color: #0a0a0a;
+            padding: 1px 10px;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
         }
 
         /* ─── COMPANY PROFILE ─── */
         .profile-img {
             width: 100%;
-            border-radius: 16px;
+            border-radius: var(--radius-md);
             margin-bottom: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .feature-list {
             margin-top: 14px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px 14px;
-            font-size: 15px;
+            gap: 4px 16px;
+            font-size: 14px;
             font-weight: 500;
-            color: #ddd;
+            color: var(--text-secondary);
         }
 
         .feature-list span {
             display: flex;
             align-items: center;
             gap: 6px;
+            padding: 4px 0;
         }
 
         .feature-list span::before {
             content: '◆';
-            color: #f0a500;
-            font-size: 10px;
+            color: var(--gold);
+            font-size: 8px;
+            opacity: 0.7;
         }
 
         /* ─── TABLE ─── */
         .info-table {
             width: 100%;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 2.2;
             border-collapse: collapse;
         }
 
         .info-table td {
             padding: 3px 0;
-            color: #eee;
+            color: var(--text-secondary);
             font-weight: 500;
         }
 
         .info-table .label {
-            color: #f0a500;
+            color: var(--gold-light);
             font-weight: 600;
-            width: 38%;
+            width: 34%;
             letter-spacing: 0.2px;
+            font-size: 13px;
+        }
+
+        .info-table .value {
+            color: #fff;
+            font-weight: 500;
         }
 
         /* ─── STOCK ─── */
@@ -416,27 +556,27 @@
         }
 
         .stock-phone {
-            font-size: 18px;
-            color: #ddd;
-            margin: 4px 0 12px;
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin: 2px 0 12px;
         }
 
         /* ─── PAYMENT ─── */
         .payment-img {
-            width: 200px;
+            width: 180px;
             max-width: 100%;
             display: block;
             margin: 0 auto;
-            border-radius: 16px;
+            border-radius: var(--radius-md);
             background: #fff;
             padding: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .upi-id {
             margin-top: 12px;
-            font-size: 17px;
-            color: #ddd;
+            font-size: 15px;
+            color: var(--text-secondary);
         }
 
         .upi-id b {
@@ -444,84 +584,97 @@
             font-weight: 700;
             display: block;
             margin-top: 2px;
-            font-size: 18px;
-            letter-spacing: 0.3px;
+            font-size: 17px;
+            letter-spacing: 0.2px;
         }
 
         /* ─── REVIEWS ─── */
         .stars {
             font-size: 44px;
             color: #ffd700;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.25);
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            letter-spacing: 4px;
         }
 
-        /* ─── FOLLOW / QUICK GRID ─── */
+        /* ─── TWO GRID ─── */
         .two-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             padding: 0 12px;
         }
 
         .two-grid .glass-btn {
             padding: 16px 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            border-radius: 16px;
+            border-radius: var(--radius-md);
+            letter-spacing: 0.2px;
+        }
+
+        .two-grid .glass-btn .icon {
+            font-size: 22px;
         }
 
         /* ─── LOCATION ─── */
         .map-img {
             width: 100%;
-            border-radius: 18px;
+            border-radius: var(--radius-md);
             margin-bottom: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         /* ─── FOOTER ─── */
         .footer-card {
             margin: 12px;
             text-align: center;
-            padding: 20px 16px;
-            border-radius: 22px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 24px 16px 18px;
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        .footer-card h2 {
-            color: #f0a500;
-            font-size: 22px;
-            margin-bottom: 4px;
+        .footer-card .brand {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
             letter-spacing: -0.3px;
         }
 
+        .footer-card .brand span {
+            color: var(--gold);
+        }
+
         .footer-card .sub {
-            color: #aaa;
-            font-size: 13px;
+            color: var(--text-muted);
+            font-size: 12px;
             margin-bottom: 12px;
+            letter-spacing: 0.5px;
         }
 
         .footer-card .contact-line {
-            font-size: 15px;
-            color: #ddd;
+            font-size: 14px;
+            color: var(--text-secondary);
             margin: 2px 0;
         }
 
         .footer-card .contact-line b {
             color: #fff;
+            font-weight: 600;
         }
 
         .footer-card .copy {
             margin-top: 14px;
-            color: #666;
-            font-size: 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            font-size: 11px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
             padding-top: 14px;
+            letter-spacing: 0.3px;
         }
 
-        /* ─── RESPONSIVE TWEAKS ─── */
+        /* ─── RESPONSIVE ─── */
         @media (max-width: 400px) {
             .catalog-grid {
                 grid-template-columns: 1fr 1fr;
@@ -532,29 +685,46 @@
             .name {
                 font-size: 22px;
             }
-            .product-grid {
-                gap: 5px;
+            .name .badge {
+                font-size: 10px;
+                padding: 1px 10px;
             }
-            .product img {
-                height: 48px;
+            .product-grid {
+                gap: 6px;
+                padding: 0 8px;
+            }
+            .product-img {
+                border-radius: var(--radius-sm);
             }
             .product span {
-                font-size: 11px;
+                font-size: 10px;
             }
             .two-grid {
                 gap: 8px;
+                padding: 0 8px;
             }
             .two-grid .glass-btn {
-                font-size: 12px;
-                padding: 14px 6px;
+                font-size: 11px;
+                padding: 12px 6px;
+            }
+            .contact-btn {
+                font-size: 13px;
+                padding: 10px 16px;
+            }
+            .section-title {
+                font-size: 19px;
+                gap: 8px;
+            }
+            .section-title .line {
+                max-width: 20px;
             }
         }
 
         @media (min-width: 431px) {
             .container {
-                border-left: 1px solid rgba(255, 255, 255, 0.04);
-                border-right: 1px solid rgba(255, 255, 255, 0.04);
-                box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+                border-left: 1px solid rgba(255, 255, 255, 0.02);
+                border-right: 1px solid rgba(255, 255, 255, 0.02);
+                box-shadow: 0 0 80px rgba(0, 0, 0, 0.9);
             }
         }
 
@@ -571,20 +741,63 @@
         .mb-8 {
             margin-bottom: 8px;
         }
-        .px-12 {
-            padding-left: 12px;
-            padding-right: 12px;
-        }
         .text-center {
             text-align: center;
         }
+        .w-full {
+            width: 100%;
+        }
+        .justify-center {
+            justify-content: center;
+        }
         .gap-6 {
             gap: 6px;
+        }
+        .flex {
+            display: flex;
         }
         .flex-center {
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        /* subtle shimmer on hover for premium feel */
+        .shimmer-hover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer-hover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.02) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        .shimmer-hover:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* gold accent underline for section titles */
+        .accent-underline {
+            display: inline-block;
+            position: relative;
+        }
+
+        .accent-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -596,23 +809,31 @@
         <div class="hero">
             <div class="hero-content">
 
-                <img src="Logo.png" class="logo" alt="Tile Planet" />
+                <div class="logo-wrap">
+                    <img src="Logo.png" class="logo" alt="Tile Planet" />
+                </div>
 
-                <div class="tagline">Premium Tiles • Perfect Spaces</div>
+                <div class="tagline">✦ Premium Tiles · Perfect Spaces ✦</div>
 
-                <div class="main-card">
+                <div class="hero-card">
 
                     <div class="top-row">
                         <div class="name-box">
-                            <div class="name">Ramesh Chotalia</div>
-                            <div class="designation">✦ PROPRIETOR</div>
+                            <!-- NAME — CRYSTAL CLEAR, NO BLUR -->
+                            <div class="name">
+                                Ramesh Chotalia
+                                <span class="badge">PROP.</span>
+                            </div>
+                            <div class="designation">✦ PROPRIETOR · TILE PLANET</div>
+
                             <a href="tel:+919922533033" class="contact-btn">
-                                📞 +91 9922533033
+                                <span class="icon">📞</span> +91 9922533033
                             </a>
                         </div>
+
                         <div class="contact-qr">
                             <img src="contact-qr.jpg" alt="QR" />
-                            <p>SAVE CONTACT</p>
+                            <p>Save Contact</p>
                         </div>
                     </div>
 
@@ -637,39 +858,47 @@
         </div>
 
         <!-- ═══ PRODUCTS ═══ -->
-        <div class="section-title">OUR PRODUCTS</div>
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">🏺</span> OUR PRODUCTS
+            <span class="line"></span>
+        </div>
 
         <div class="product-grid">
             <div class="product">
-                <img src="Walltiles.jpg" alt="Wall" />
+                <img src="Walltiles.jpg" class="product-img" alt="Wall" />
                 <span>Wall</span>
             </div>
             <div class="product">
-                <img src="Floortiles.jpg" alt="Floor" />
+                <img src="Floortiles.jpg" class="product-img" alt="Floor" />
                 <span>Floor</span>
             </div>
             <div class="product">
-                <img src="Vitrifiedtiles.jpg" alt="Vitrified" />
+                <img src="Vitrifiedtiles.jpg" class="product-img" alt="Vitrified" />
                 <span>Vitrified</span>
             </div>
             <div class="product">
-                <img src="Parckingtiles.jpg" alt="Parking" />
+                <img src="Parckingtiles.jpg" class="product-img" alt="Parking" />
                 <span>Parking</span>
             </div>
             <div class="product">
-                <img src="bathroomtiles.jpg" alt="Bath" />
+                <img src="bathroomtiles.jpg" class="product-img" alt="Bath" />
                 <span>Bath</span>
             </div>
         </div>
 
-        <!-- ═══ CATALOGUES (3 items → 3‑col grid) ═══ -->
-        <div class="section-title">CATALOGUES</div>
+        <!-- ═══ CATALOGUES ═══ -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">📚</span> CATALOGUES
+            <span class="line"></span>
+        </div>
 
         <div class="catalog-grid">
 
-            <!-- Wall Tiles -->
             <div class="catalog-card">
-                <h3>🧱 Wall Tiles</h3>
+                <span class="icon-big">🧱</span>
+                <h3>Wall Tiles</h3>
                 <p>Premium Collection</p>
                 <a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view"
                 target="_blank"
@@ -678,9 +907,9 @@
             </a>
         </div>
 
-        <!-- Floor Tiles -->
         <div class="catalog-card">
-            <h3>🟫 Floor Tiles</h3>
+            <span class="icon-big">🟫</span>
+            <h3>Floor Tiles</h3>
             <p>600×600 Collection</p>
             <a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view"
             target="_blank"
@@ -689,13 +918,15 @@
         </a>
     </div>
 
-    <!-- ★ NEW: 300x600mm Wall Tiles -->
-    <div class="catalog-card" style="border-color: rgba(240,165,0,0.2); background: rgba(240,165,0,0.06);">
-        <h3 style="color: #f0c27a;">📐 300×600mm</h3>
-        <p style="color: #ccc;">Wall Tiles • Modern Size</p>
+    <!-- ★ NEW: 300×600mm Wall Tiles — highlighted -->
+    <div class="catalog-card" style="border-color: rgba(240,165,0,0.20); background: rgba(240,165,0,0.05);">
+        <span class="icon-big">📐</span>
+        <h3 style="color: var(--gold-light);">300×600mm</h3>
+        <p style="color: var(--text-secondary);">Wall Tiles · Modern</p>
+        <span class="badge-new">✦ New</span>
         <a href="https://drive.google.com/file/d/1OoOO2rFnY4Bw6tkv5vGwYsrAz4bSGLU6/view?usp=sharing"
         target="_blank"
-        class="dl-btn" style="border-color: rgba(240,165,0,0.5); background: rgba(240,165,0,0.15);">
+        class="dl-btn" style="border-color: rgba(240,165,0,0.35); background: rgba(240,165,0,0.12); margin-top:6px;">
         ⬇ DOWNLOAD
     </a>
 </div>
@@ -703,19 +934,23 @@
 </div>
 
 <!-- ═══ COMPANY PROFILE ═══ -->
-<div class="section-title">COMPANY PROFILE</div>
+<div class="section-title">
+    <span class="line"></span>
+    <span class="emoji">🏛️</span> COMPANY PROFILE
+    <span class="line"></span>
+</div>
 
 <div class="glass-card" style="margin:0 12px;">
 
     <img src="Company.png" class="profile-img" alt="Company" />
 
-    <h2 style="font-size:22px; letter-spacing:-0.3px;">Tile Planet</h2>
-    <p style="color:#aaa; margin-top:2px;">Premium Tiles Supplier</p>
+    <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px;">Tile Planet</h2>
+    <p style="color:var(--text-secondary); margin-top:2px; font-size:14px;">Premium Tiles Supplier · Since 2016</p>
 
     <a href="company-profile.pdf"
     target="_blank"
-    class="contact-btn"
-    style="justify-content:center; margin-top:14px; width:100%;">
+    class="contact-btn w-full justify-center"
+    style="margin-top:14px;">
     📄 VIEW COMPANY PROFILE
 </a>
 
@@ -730,22 +965,30 @@
 </div>
 
 <!-- ═══ COMPANY DETAILS ═══ -->
-<div class="section-title">COMPANY DETAILS</div>
+<div class="section-title">
+    <span class="line"></span>
+    <span class="emoji">📋</span> COMPANY DETAILS
+    <span class="line"></span>
+</div>
 
 <div class="glass-card" style="margin:0 12px;">
 
     <table class="info-table">
-        <tr><td class="label">GST</td><td>27AIPPR7422Q1Z9</td></tr>
-        <tr><td class="label">Owner</td><td>Ramesh Chotalia</td></tr>
-        <tr><td class="label">Business</td><td>Retailer &amp; Supplier</td></tr>
-        <tr><td class="label">Experience</td><td>10+ Years</td></tr>
-        <tr><td class="label">Address</td><td>Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK,<br />Pune – 411046</td></tr>
+        <tr><td class="label">GST</td><td class="value">27AIPPR7422Q1Z9</td></tr>
+        <tr><td class="label">Owner</td><td class="value">Ramesh Chotalia</td></tr>
+        <tr><td class="label">Business</td><td class="value">Retailer &amp; Supplier</td></tr>
+        <tr><td class="label">Experience</td><td class="value">10+ Years</td></tr>
+        <tr><td class="label">Address</td><td class="value" style="font-size:14px; line-height:1.6;">Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK,<br />Pune – 411046</td></tr>
     </table>
 
 </div>
 
 <!-- ═══ STOCK ENQUIRY ═══ -->
-<div class="section-title">STOCK ENQUIRY</div>
+<div class="section-title">
+    <span class="line"></span>
+    <span class="emoji">📦</span> STOCK ENQUIRY
+    <span class="line"></span>
+</div>
 
 <div class="glass-card" style="margin:0 12px;">
 
@@ -753,15 +996,19 @@
     <div class="stock-phone">📱 +91 9067121697</div>
 
     <a href="tel:+919067121697"
-    class="contact-btn"
-    style="justify-content:center; width:100%; background:rgba(76,217,100,0.12); border-color:rgba(76,217,100,0.3);">
+    class="contact-btn w-full justify-center"
+    style="background:rgba(76,217,100,0.08); border-color:rgba(76,217,100,0.20);">
     📞 CHECK STOCK
 </a>
 
 </div>
 
 <!-- ═══ PAYMENT ═══ -->
-<div class="section-title">PAYMENT</div>
+<div class="section-title">
+    <span class="line"></span>
+    <span class="emoji">💳</span> PAYMENT
+    <span class="line"></span>
+</div>
 
 <div class="glass-card" style="margin:0 12px; text-align:center;">
 
@@ -773,96 +1020,112 @@
     </div>
 
     <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia"
-    class="contact-btn"
-    style="justify-content:center; width:100%; margin-top:14px;">
+    class="contact-btn w-full justify-center"
+    style="margin-top:14px;">
     💳 PAY NOW
 </a>
 
 </div>
 
 <!-- ═══ GOOGLE REVIEWS ═══ -->
-<div class="section-title">GOOGLE REVIEWS</div>
+<div class="section-title">
+    <span class="line"></span>
+    <span class="emoji">⭐</span> GOOGLE REVIEWS
+    <span class="line"></span>
+</div>
 
 <div class="glass-card" style="margin:0 12px; text-align:center;">
 
     <span class="stars">★★★★★</span>
 
-    <h2 style="font-size:20px; margin-bottom:2px;">Love Our Service?</h2>
-    <p style="color:#aaa; font-size:14px;">Please share your experience on Google</p>
+    <h2 style="font-size:19px; font-weight:700; margin-bottom:2px;">Love Our Service?</h2>
+    <p style="color:var(--text-secondary); font-size:14px;">Share your experience on Google</p>
 
     <a href="https://g.page/r/CXkwBZtskIM3EAE/review"
     target="_blank"
-    class="contact-btn"
-    style="justify-content:center; width:100%; margin-top:14px;">
+    class="contact-btn w-full justify-center"
+    style="margin-top:14px;">
     ⭐ WRITE REVIEW
 </a>
 
 </div>
 
 <!-- ═══ FOLLOW US ═══ -->
-<div class="section-title">FOLLOW US</div>
+<div class="section-title">
+    <span class="line"></span>
+    <span class="emoji">📱</span> FOLLOW US
+    <span class="line"></span>
+</div>
 
 <div class="two-grid">
 
     <a href="https://www.instagram.com/ramesh.chotalia13/"
     target="_blank"
     class="glass-btn">
-    📸 Instagram
+    <span class="icon">📸</span> Instagram
 </a>
 
 <a href="https://www.facebook.com/tileplanet.co.in/"
 target="_blank"
 class="glass-btn">
-👍 Facebook
+<span class="icon">👍</span> Facebook
 </a>
 
 <a href="https://www.youtube.com/@tileplanet501"
 target="_blank"
 class="glass-btn">
-▶️ YouTube
+<span class="icon">▶️</span> YouTube
 </a>
 
 <a href="https://wa.me/919922533033"
 target="_blank"
 class="glass-btn">
-💬 WhatsApp
+<span class="icon">💬</span> WhatsApp
 </a>
 
 </div>
 
 <!-- ═══ QUICK ACTIONS ═══ -->
-<div class="section-title">QUICK ACTIONS</div>
+<div class="section-title">
+    <span class="line"></span>
+    <span class="emoji">⚡</span> QUICK ACTIONS
+    <span class="line"></span>
+</div>
 
 <div class="two-grid">
 
     <a href="tileplanet.vcf"
     download
     class="glass-btn">
-    💾 SAVE CONTACT
+    <span class="icon">💾</span> Save Contact
 </a>
 
 <a href="#"
 onclick="shareCard()"
 class="glass-btn">
-📤 SHARE CARD
+<span class="icon">📤</span> Share Card
 </a>
 
 <a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20Please%20send%20me%20a%20quotation."
 target="_blank"
 class="glass-btn">
-📝 GET QUOTE
+<span class="icon">📝</span> Get Quote
 </a>
 
 <a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20I%20want%20an%20enquiry."
 target="_blank"
 class="glass-btn">
-📩 ENQUIRY
+<span class="icon">📩</span> Enquiry
 </a>
 
 </div>
 
 <!-- ═══ LOCATION ═══ -->
-<div class="section-title">LOCATION</div>
+<div class="section-title">
+    <span class="line"></span>
+    <span class="emoji">📍</span> LOCATION
+    <span class="line"></span>
+</div>
 
 <div class="glass-card" style="margin:0 12px;">
 
@@ -870,8 +1133,7 @@ class="glass-btn">
 
     <a href="https://www.google.com/maps?q=18.452402,73.832586"
     target="_blank"
-    class="contact-btn"
-    style="justify-content:center; width:100%;">
+    class="contact-btn w-full justify-center">
     📍 OPEN MAP
 </a>
 
@@ -880,8 +1142,8 @@ class="glass-btn">
 <!-- ═══ FOOTER ═══ -->
 <div class="footer-card">
 
-    <h2>🏛️ TILE PLANET</h2>
-    <div class="sub">Premium Tiles • Perfect Spaces</div>
+    <div class="brand">🏛️ TILE <span>PLANET</span></div>
+    <div class="sub">Premium Tiles · Perfect Spaces</div>
 
     <div class="contact-line"><b>Ramesh Chotalia</b></div>
     <div class="contact-line">📞 <b>+91 9922533033</b></div>
@@ -899,7 +1161,7 @@ class="glass-btn">
         if (navigator.share) {
             navigator.share({
                 title: 'Tile Planet',
-                text: 'Tile Planet Digital Card',
+                text: 'Tile Planet — Premium Tiles Digital Card',
                 url: window.location.href
             }).catch(() => {});
         } else {
