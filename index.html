@@ -15,19 +15,19 @@
         }
 
         :root {
-            --gold: #f0a500;
-            --gold-light: #f8c84a;
-            --gold-glow: rgba(240, 165, 0, 0.25);
-            --dark-bg: #080808;
-            --card-bg: rgba(255, 255, 255, 0.035);
-            --border-subtle: rgba(255, 255, 255, 0.06);
+            --gold: #f5a623;
+            --gold-light: #ffd700;
+            --gold-glow: rgba(255, 215, 0, 0.35);
+            --dark-bg: #0d0d0d;
+            --card-bg: rgba(255, 255, 255, 0.07);
+            --border-subtle: rgba(255, 255, 255, 0.10);
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-muted: rgba(255, 255, 255, 0.4);
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-muted: rgba(255, 255, 255, 0.5);
             --radius-lg: 28px;
             --radius-md: 18px;
             --radius-sm: 12px;
-            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.7);
+            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 80px rgba(255, 215, 0, 0.04);
         }
 
         html {
@@ -62,32 +62,32 @@
             min-height: 100vh;
             padding: 0 0 24px 0;
             background:
-                radial-gradient(ellipse at 20% 0%, #1a1208 0%, #0a0a0a 60%, #080808 100%);
+                radial-gradient(ellipse at 30% 0%, #1e1508 0%, #0d0b08 50%, #080808 100%);
             position: relative;
         }
 
-        /* subtle ambient glow */
+        /* ambient glow — brighter */
         .container::before {
             content: '';
             position: fixed;
-            top: -30%;
-            right: -20%;
+            top: -20%;
+            right: -10%;
             width: 60%;
             height: 60%;
-            background: radial-gradient(circle, rgba(240, 165, 0, 0.04), transparent 70%);
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.07), transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* ─── GLASS CARD (premium) ─── */
+        /* ─── GLASS CARD — BRIGHT & PREMIUM ─── */
         .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 215, 0, 0.12);
             border-radius: var(--radius-lg);
             padding: 18px 20px;
-            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 215, 0, 0.06);
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 box-shadow 0.4s ease;
             position: relative;
@@ -96,7 +96,7 @@
 
         .glass-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.04);
         }
 
         /* ─── HERO ─── */
@@ -113,7 +113,7 @@
             position: absolute;
             inset: 0;
             background:
-                linear-gradient(160deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.50) 60%, rgba(0, 0, 0, 0.70) 100%);
+                linear-gradient(160deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.40) 60%, rgba(0, 0, 0, 0.60) 100%);
             z-index: 0;
         }
 
@@ -124,7 +124,7 @@
             left: 0;
             right: 0;
             height: 50%;
-            background: linear-gradient(to top, rgba(8, 8, 8, 0.6), transparent);
+            background: linear-gradient(to top, rgba(13, 13, 13, 0.4), transparent);
             z-index: 0;
             pointer-events: none;
         }
@@ -144,7 +144,7 @@
         .logo {
             width: 160px;
             display: block;
-            filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.7)) brightness(1.05);
+            filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.7)) brightness(1.08);
             transition: transform 0.5s ease;
         }
 
@@ -158,21 +158,21 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold-light);
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 16px;
-            opacity: 0.9;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+            opacity: 1;
+            text-shadow: 0 2px 16px rgba(255, 215, 0, 0.15);
         }
 
         /* ─── HERO INNER CARD ─── */
         .hero-card {
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(32px);
-            -webkit-backdrop-filter: blur(32px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.50);
+            backdrop-filter: blur(36px);
+            -webkit-backdrop-filter: blur(36px);
+            border: 1px solid rgba(255, 215, 0, 0.10);
             border-radius: var(--radius-lg);
             padding: 18px 18px 14px;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 215, 0, 0.05);
         }
 
         .top-row {
@@ -186,13 +186,13 @@
             flex: 1;
         }
 
-        /* ─── NAME — CRYSTAL CLEAR ─── */
+        /* ─── NAME — CRYSTAL CLEAR, BRIGHT ─── */
         .name {
             font-size: 28px;
             font-weight: 800;
             letter-spacing: -0.5px;
             color: #ffffff;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(240, 165, 0, 0.06);
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.06);
             line-height: 1.1;
             display: flex;
             align-items: center;
@@ -203,13 +203,13 @@
         .name .badge {
             font-size: 12px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--gold), #d48900);
+            background: linear-gradient(135deg, var(--gold-light), #e8a800);
             color: #0a0a0a;
             padding: 2px 14px;
             border-radius: 50px;
             letter-spacing: 0.3px;
             text-shadow: none;
-            box-shadow: 0 2px 16px rgba(240, 165, 0, 0.25);
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.30);
             display: inline-block;
             vertical-align: middle;
         }
@@ -223,8 +223,8 @@
             margin-top: 10px;
             padding: 12px 22px;
             border-radius: 60px;
-            background: linear-gradient(135deg, rgba(240, 165, 0, 0.18), rgba(240, 165, 0, 0.06));
-            border: 1px solid rgba(240, 165, 0, 0.25);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(255, 215, 0, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.30);
             text-decoration: none;
             color: #fff;
             font-size: 15px;
@@ -236,10 +236,10 @@
         }
 
         .contact-btn:hover {
-            background: linear-gradient(135deg, rgba(240, 165, 0, 0.30), rgba(240, 165, 0, 0.10));
-            border-color: var(--gold);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.30), rgba(255, 215, 0, 0.10));
+            border-color: var(--gold-light);
             transform: scale(1.03);
-            box-shadow: 0 0 40px rgba(240, 165, 0, 0.12), inset 0 0 30px rgba(240, 165, 0, 0.04);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.12), inset 0 0 40px rgba(255, 215, 0, 0.04);
         }
 
         .contact-btn .icon {
@@ -252,9 +252,9 @@
             min-width: 62px;
             padding: 4px;
             border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.08);
             transition: transform 0.3s ease;
         }
 
@@ -294,10 +294,10 @@
             padding: 10px 4px;
             border-radius: var(--radius-md);
             text-align: center;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             font-size: 11px;
             font-weight: 600;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -312,14 +312,10 @@
         }
 
         .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(240, 165, 0, 0.25);
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(255, 215, 0, 0.30);
             transform: translateY(-3px);
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-        }
-
-        .glass-btn:active {
-            transform: scale(0.95);
         }
 
         /* ─── SECTION TITLE ─── */
@@ -342,11 +338,11 @@
             flex: 1;
             max-width: 28px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.3));
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4));
         }
 
         .section-title .line:last-child {
-            background: linear-gradient(90deg, rgba(240, 165, 0, 0.3), transparent);
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.4), transparent);
         }
 
         .section-title .emoji {
@@ -376,14 +372,15 @@
             aspect-ratio: 1 / 1;
             object-fit: cover;
             border-radius: var(--radius-md);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 215, 0, 0.08);
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .product:hover .product-img {
-            border-color: rgba(240, 165, 0, 0.25);
-            box-shadow: 0 8px 28px rgba(240, 165, 0, 0.08);
+            border-color: rgba(255, 215, 0, 0.35);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.10);
         }
 
         .product span {
@@ -395,7 +392,7 @@
             letter-spacing: 0.2px;
         }
 
-        /* ─── CATALOG GRID (3 columns forced) ─── */
+        /* ─── CATALOG GRID — BRIGHT CARDS ─── */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -404,21 +401,22 @@
         }
 
         .catalog-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.07);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.10);
             border-radius: var(--radius-md);
             padding: 14px 8px 12px;
             text-align: center;
             transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .catalog-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(240, 165, 0, 0.15);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 215, 0, 0.30);
             transform: translateY(-4px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.04);
         }
 
         .catalog-card .icon-big {
@@ -448,8 +446,8 @@
             gap: 4px;
             padding: 4px 10px;
             border-radius: 60px;
-            background: rgba(240, 165, 0, 0.10);
-            border: 1px solid rgba(240, 165, 0, 0.15);
+            background: rgba(255, 215, 0, 0.12);
+            border: 1px solid rgba(255, 215, 0, 0.20);
             color: #fff;
             font-size: 9px;
             font-weight: 600;
@@ -459,10 +457,10 @@
         }
 
         .catalog-card .dl-btn:hover {
-            background: rgba(240, 165, 0, 0.20);
-            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.25);
+            border-color: var(--gold-light);
             transform: scale(1.04);
-            box-shadow: 0 0 30px rgba(240, 165, 0, 0.08);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.10);
         }
 
         /* ─── NEW BADGE ─── */
@@ -471,7 +469,7 @@
             font-size: 7px;
             font-weight: 700;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--gold), #d48900);
+            background: linear-gradient(135deg, var(--gold-light), #e8a800);
             color: #0a0a0a;
             padding: 1px 8px;
             border-radius: 50px;
@@ -484,7 +482,7 @@
             width: 100%;
             border-radius: var(--radius-md);
             margin-bottom: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.06);
         }
 
         .feature-list {
@@ -507,9 +505,35 @@
 
         .feature-list span::before {
             content: '◆';
-            color: var(--gold);
+            color: var(--gold-light);
             font-size: 8px;
-            opacity: 0.7;
+            opacity: 0.9;
+        }
+
+        /* ─── TWO BUTTONS (Download & View) ─── */
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .btn-group .contact-btn {
+            margin-top: 0;
+            width: 100%;
+            justify-content: center;
+            font-size: 13px;
+            padding: 10px 12px;
+        }
+
+        .btn-group .contact-btn.view-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-group .contact-btn.view-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         /* ─── TABLE ─── */
@@ -562,7 +586,7 @@
             border-radius: var(--radius-md);
             background: #fff;
             padding: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 215, 0, 0.08);
         }
 
         .upi-id {
@@ -580,14 +604,50 @@
             letter-spacing: 0.2px;
         }
 
-        /* ─── REVIEWS ─── */
-        .stars {
-            font-size: 44px;
-            color: #ffd700;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
+        /* ─── GOOGLE REVIEWS — BRIGHT STARS + GOOGLE COLORS ─── */
+        .google-review-wrap {
+            text-align: center;
+            padding: 8px 0;
+        }
+
+        .google-review-wrap .google-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .google-review-wrap .google-brand .g {
+            font-size: 28px;
+            font-weight: 800;
+        }
+        .google-review-wrap .google-brand .g-1 {
+            color: #4285F4;
+        }
+        .google-review-wrap .google-brand .g-2 {
+            color: #EA4335;
+        }
+        .google-review-wrap .google-brand .g-3 {
+            color: #FBBC05;
+        }
+        .google-review-wrap .google-brand .g-4 {
+            color: #4285F4;
+        }
+        .google-review-wrap .google-brand .g-5 {
+            color: #34A853;
+        }
+        .google-review-wrap .google-brand .g-6 {
+            color: #EA4335;
+        }
+
+        .stars-bright {
+            font-size: 48px;
+            color: #FFD700;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.40), 0 0 80px rgba(255, 215, 0, 0.15);
             display: block;
             margin-bottom: 4px;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
         }
 
         /* ─── TWO GRID ─── */
@@ -615,7 +675,7 @@
             width: 100%;
             border-radius: var(--radius-md);
             margin-bottom: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.06);
         }
 
         /* ─── FOOTER ─── */
@@ -624,15 +684,15 @@
             text-align: center;
             padding: 24px 16px 18px;
             border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.06);
         }
 
         .footer-logo {
             width: 130px;
             display: block;
             margin: 0 auto 10px;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5)) brightness(1.05);
         }
 
         .footer-card .brand {
@@ -643,7 +703,7 @@
         }
 
         .footer-card .brand span {
-            color: var(--gold);
+            color: var(--gold-light);
         }
 
         .footer-card .sub {
@@ -665,14 +725,13 @@
             margin-top: 14px;
             color: var(--text-muted);
             font-size: 11px;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 215, 0, 0.05);
             padding-top: 14px;
             letter-spacing: 0.3px;
         }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 400px) {
-            /* Catalog stays 3 columns */
             .catalog-grid {
                 gap: 6px;
                 padding: 0 8px;
@@ -698,7 +757,6 @@
                 font-size: 6px;
                 padding: 0 6px;
             }
-
             .name {
                 font-size: 22px;
             }
@@ -742,12 +800,27 @@
             .footer-logo {
                 width: 100px;
             }
+            .btn-group {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .btn-group .contact-btn {
+                font-size: 11px;
+                padding: 8px 10px;
+            }
+            .stars-bright {
+                font-size: 36px;
+                letter-spacing: 4px;
+            }
+            .google-review-wrap .google-brand .g {
+                font-size: 22px;
+            }
         }
 
         @media (min-width: 431px) {
             .container {
-                border-left: 1px solid rgba(255, 255, 255, 0.02);
-                border-right: 1px solid rgba(255, 255, 255, 0.02);
+                border-left: 1px solid rgba(255, 215, 0, 0.04);
+                border-right: 1px solid rgba(255, 215, 0, 0.04);
                 box-shadow: 0 0 80px rgba(0, 0, 0, 0.9);
             }
         }
@@ -785,44 +858,6 @@
             align-items: center;
             justify-content: center;
         }
-
-        /* subtle shimmer on hover for premium feel */
-        .shimmer-hover {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shimmer-hover::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.02) 50%, transparent 60%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-            pointer-events: none;
-        }
-
-        .shimmer-hover:hover::after {
-            transform: translateX(100%);
-        }
-
-        /* accent underline for section titles */
-        .accent-underline {
-            display: inline-block;
-            position: relative;
-        }
-
-        .accent-underline::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            border-radius: 2px;
-        }
     </style>
 </head>
 <body>
@@ -843,12 +878,10 @@
 
                     <div class="top-row">
                         <div class="name-box">
-                            <!-- NAME + BADGE (PROP.) ONLY -->
                             <div class="name">
                                 Ramesh Chotalia
                                 <span class="badge">PROP.</span>
                             </div>
-                            <!-- Proprietor line removed as requested -->
 
                             <a href="tel:+919922533033" class="contact-btn">
                                 <span class="icon">📞</span> +91 9922533033
@@ -911,7 +944,7 @@
             </div>
         </div>
 
-        <!-- ═══ CATALOGUES (3 in a line) ═══ -->
+        <!-- ═══ CATALOGUES ═══ -->
         <div class="section-title">
             <span class="line"></span>
             <span class="emoji">📚</span> CATALOGUES
@@ -942,15 +975,14 @@
         </a>
     </div>
 
-    <!-- ★ NEW: 300×600mm Wall Tiles — highlighted -->
-    <div class="catalog-card" style="border-color: rgba(240,165,0,0.20); background: rgba(240,165,0,0.05);">
+    <div class="catalog-card" style="border-color: rgba(255,215,0,0.25); background: rgba(255,215,0,0.07);">
         <span class="icon-big">📐</span>
         <h3 style="color: var(--gold-light);">300×600mm</h3>
         <p style="color: var(--text-secondary);">Wall Tiles · Modern</p>
         <span class="badge-new">✦ New</span>
         <a href="https://drive.google.com/file/d/1OoOO2rFnY4Bw6tkv5vGwYsrAz4bSGLU6/view?usp=sharing"
         target="_blank"
-        class="dl-btn" style="border-color: rgba(240,165,0,0.35); background: rgba(240,165,0,0.12); margin-top:4px;">
+        class="dl-btn" style="border-color: rgba(255,215,0,0.40); background: rgba(255,215,0,0.15); margin-top:4px;">
         ⬇ DOWNLOAD
     </a>
 </div>
@@ -968,26 +1000,27 @@
 
     <img src="Company.png" class="profile-img" alt="Company" />
 
-    <!-- Centered Title & Subtitle -->
     <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px; text-align: center;">Tile Planet</h2>
     <p style="color:var(--text-secondary); margin-top:2px; font-size:14px; text-align: center;">Premium Tiles Supplier - 2018</p>
 
-    <a href="company-profile.pdf"
-    target="_blank"
-    class="contact-btn w-full justify-center"
-    style="margin-top:14px;">
-    📄 VIEW COMPANY PROFILE
-</a>
+    <!-- TWO BUTTONS: Download & View -->
+    <div class="btn-group">
+        <a href="company-profile.pdf" download class="contact-btn">
+            ⬇ DOWNLOAD
+        </a>
+        <a href="company-profile.pdf" target="_blank" class="contact-btn view-btn">
+            👁️ VIEW
+        </a>
+    </div>
 
-<!-- Feature List with Sanityware added -->
-<div class="feature-list" style="text-align: left;">
-    <span>Wall Tiles</span>
-    <span>Floor Tiles</span>
-    <span>Vitrified Tiles</span>
-    <span>Parking Tiles</span>
-    <span>Bathroom Fitting</span>
-    <span>Sanityware</span> <!-- Added -->
-</div>
+    <div class="feature-list" style="text-align: left;">
+        <span>Wall Tiles</span>
+        <span>Floor Tiles</span>
+        <span>Vitrified Tiles</span>
+        <span>Parking Tiles</span>
+        <span>Bathroom Fitting</span>
+        <span>Sanityware</span>
+    </div>
 
 </div>
 
@@ -1019,13 +1052,12 @@
 
 <div class="glass-card" style="margin:0 12px; text-align: center;">
 
-    <!-- Centered Name and Number -->
     <div class="stock-name">Harshad Dalvi</div>
     <div class="stock-phone">📱 +91 9067121697</div>
 
     <a href="tel:+919067121697"
     class="contact-btn w-full justify-center"
-    style="background:rgba(76,217,100,0.08); border-color:rgba(76,217,100,0.20);">
+    style="background:rgba(76,217,100,0.10); border-color:rgba(76,217,100,0.25);">
     📞 CONTACT FOR STOCK
 </a>
 
@@ -1055,7 +1087,7 @@
 
 </div>
 
-<!-- ═══ GOOGLE REVIEWS ═══ -->
+<!-- ═══ GOOGLE REVIEWS — with Google Colors & Bright Stars ═══ -->
 <div class="section-title">
     <span class="line"></span>
     <span class="emoji">⭐</span> GOOGLE REVIEWS
@@ -1064,17 +1096,32 @@
 
 <div class="glass-card" style="margin:0 12px; text-align:center;">
 
-    <span class="stars">★★★★★</span>
+    <div class="google-review-wrap">
 
-    <h2 style="font-size:19px; font-weight:700; margin-bottom:2px;">Love Our Service?</h2>
-    <p style="color:var(--text-secondary); font-size:14px;">Share your experience on Google</p>
+        <!-- Google Brand Colors -->
+        <div class="google-brand">
+            <span class="g g-1">G</span>
+            <span class="g g-2">o</span>
+            <span class="g g-3">o</span>
+            <span class="g g-4">g</span>
+            <span class="g g-5">l</span>
+            <span class="g g-6">e</span>
+        </div>
 
-    <a href="https://g.page/r/CXkwBZtskIM3EAE/review"
-    target="_blank"
-    class="contact-btn w-full justify-center"
-    style="margin-top:14px;">
-    ⭐ WRITE REVIEW
-</a>
+        <!-- Bright Yellow Stars -->
+        <span class="stars-bright">★★★★★</span>
+
+        <h2 style="font-size:19px; font-weight:700; margin-bottom:2px;">Love Our Service?</h2>
+        <p style="color:var(--text-secondary); font-size:14px;">Share your experience on Google</p>
+
+        <a href="https://g.page/r/CXkwBZtskIM3EAE/review"
+        target="_blank"
+        class="contact-btn w-full justify-center"
+        style="margin-top:14px;">
+        ⭐ WRITE REVIEW
+    </a>
+
+</div>
 
 </div>
 
@@ -1099,7 +1146,8 @@ class="glass-btn">
 <span class="icon">👍</span> Facebook
 </a>
 
-<a href="https://www.youtube.com/@tileplanet501"
+<!-- Updated YouTube Link -->
+<a href="https://www.youtube.com/results?search_query=tile+planet"
 target="_blank"
 class="glass-btn">
 <span class="icon">▶️</span> YouTube
@@ -1148,7 +1196,7 @@ class="glass-btn">
 
 </div>
 
-<!-- ═══ LOCATION ═══ -->
+<!-- ═══ LOCATION — Updated Coordinates ═══ -->
 <div class="section-title">
     <span class="line"></span>
     <span class="emoji">📍</span> LOCATION
@@ -1159,7 +1207,7 @@ class="glass-btn">
 
     <img src="map.jpeg" class="map-img" alt="Map" />
 
-    <a href="https://www.google.com/maps?q=18.452402,73.832586"
+    <a href="https://www.google.com/maps?q=18.452656,73.832591"
     target="_blank"
     class="contact-btn w-full justify-center">
     📍 OPEN MAP
@@ -1170,14 +1218,11 @@ class="glass-btn">
 <!-- ═══ FOOTER ═══ -->
 <div class="footer-card">
 
-    <!-- Logo at the bottom -->
     <img src="Logo.png" class="footer-logo" alt="Tile Planet" />
 
     <div class="brand">🏛️ TILE <span>PLANET</span></div>
     <div class="sub">Your One-Stop Tile Solution</div>
     <div class="slogan-highlight">✦ Visit Our Showroom Once ✦</div>
-
-    <!-- Removed Ramesh Chotalia, Phone, Email as requested -->
 
     <div class="copy">© 2026 Tile Planet. All Rights Reserved.</div>
 
