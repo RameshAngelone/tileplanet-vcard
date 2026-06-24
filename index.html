@@ -1,910 +1,913 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tile Planet Digital Card</title>
+    <style>
+        /* ─── RESET & BASE ─── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
 
-<title>Tile Planet Digital Card</title>
+        body {
+            background: #0b0b0b;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
 
-<style>
+        .container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: radial-gradient(ellipse at 20% 10%, #161616, #0a0a0a 70%);
+            min-height: 100vh;
+            padding: 0 0 20px 0;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
-}
+        /* ─── SCROLLBAR ─── */
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f0a500;
+            border-radius: 6px;
+        }
 
-body{
-background:#000;
-color:#fff;
-overflow-x:hidden;
-}
+        /* ─── GLASS CARD ─── */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 22px;
+            padding: 16px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+        }
 
-.container{
-max-width:430px;
-margin:auto;
-background:#000;
-min-height:100vh;
-}
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+        }
 
-.hero{
-position:relative;
-background:url('showroom.jpg') center center/cover;
-padding:15px;
-}
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            background: url('showroom.jpg') center center / cover no-repeat;
+            padding: 18px 16px 22px;
+            border-radius: 0 0 32px 32px;
+            overflow: hidden;
+        }
 
-.hero::before{
-content:'';
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.75);
-}
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.80) 0%, rgba(0, 0, 0, 0.55) 100%);
+            z-index: 0;
+        }
 
-.hero-content{
-position:relative;
-z-index:2;
-}
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
 
-.logo{
-width:170px;
-display:block;
-margin:auto;
-}
+        .logo {
+            width: 170px;
+            display: block;
+            margin: 0 auto 4px;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+        }
 
-.tagline{
-text-align:center;
-font-size:12px;
-letter-spacing:1px;
-margin-top:6px;
-color:#ddd;
-}
+        .tagline {
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #f0c27a;
+            font-weight: 500;
+            margin-bottom: 14px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
 
-.main-card{
-margin-top:12px;
-padding:14px;
-border-radius:22px;
-background:rgba(255,255,255,.06);
-backdrop-filter:blur(20px);
--webkit-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.10);
-box-shadow:0 8px 25px rgba(0,0,0,.40);
-}
+        /* ─── MAIN CARD (HERO INNER) ─── */
+        .main-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            padding: 16px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+        }
 
-.top-row{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-gap:6px;
-}
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
 
-.name-box{
-flex:1;
-}
+        .name-box {
+            flex: 1;
+        }
 
-.name{
-font-size:24px;
-font-weight:700;
-white-space:nowrap;
-}
+        .name {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #ffffff 50%, #f0c27a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-.designation{
-color:#ff6666;
-margin-top:5px;
-font-size:13px;
-}
+        .designation {
+            color: #f0a500;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
 
-.contact-btn{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:8px;
-margin-top:10px;
-padding:12px;
-border-radius:16px;
-background:rgba(255,0,0,.18);
-border:1px solid rgba(255,0,0,.35);
-text-decoration:none;
-color:#fff;
-font-size:16px;
-font-weight:700;
-}
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 11px 18px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.20), rgba(240, 165, 0, 0.08));
+            border: 1px solid rgba(240, 165, 0, 0.35);
+            text-decoration: none;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            letter-spacing: 0.3px;
+        }
 
-.contact-qr{
-width:55px;
-min-width:55px;
-padding:3px;
-border-radius:10px;
-background:rgba(255,255,255,.05);
-text-align:center;
-}
+        .contact-btn:hover {
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.35), rgba(240, 165, 0, 0.15));
+            border-color: rgba(240, 165, 0, 0.6);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(240, 165, 0, 0.15);
+        }
 
-.contact-qr img{
-width:100%;
-background:#fff;
-padding:2px;
-border-radius:6px;
-display:block;
-}
+        .contact-qr {
+            width: 58px;
+            min-width: 58px;
+            padding: 4px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
 
-.contact-qr p{
-font-size:7px;
-margin-top:2px;
-line-height:1.1;
-}
+        .contact-qr img {
+            width: 100%;
+            background: #fff;
+            padding: 3px;
+            border-radius: 8px;
+            display: block;
+        }
 
-.quick-actions{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
-margin-top:10px;
-margin-bottom:4px;
-}
+        .contact-qr p {
+            font-size: 7px;
+            margin-top: 3px;
+            line-height: 1.1;
+            color: #aaa;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
 
-.glass-btn{
-text-decoration:none;
-color:#fff;
-padding:10px 4px;
-border-radius:14px;
-text-align:center;
-background:rgba(255,255,255,.06);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,.10);
-font-size:11px;
-font-weight:600;
-}
+        /* ─── QUICK ACTIONS (HERO) ─── */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 14px;
+        }
 
-.glass-btn:hover{
-background:rgba(255,255,255,.12);
-}
+        .glass-btn {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 4px;
+            border-radius: 14px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            line-height: 1.4;
+        }
 
-.section-title{
-width:100%;
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(240, 165, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
 
-text-align:center !important;
+        .glass-btn br {
+            display: none;
+        }
 
-font-size:28px;
-font-weight:900;
+        .glass-btn .icon {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
 
-color:#ffffff;
+        /* ─── SECTION TITLE ─── */
+        .section-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 800;
+            color: #fff;
+            margin-top: 28px;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
 
-margin-top:20px;
-margin-bottom:15px;
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            flex: 1;
+            max-width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.4));
+        }
 
-display:block;
+        .section-title::after {
+            background: linear-gradient(90deg, rgba(240, 165, 0, 0.4), transparent);
+        }
 
-clear:both;
-}
-  
-.product-grid{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:6px;
-padding:0 8px;
-}
+        /* ─── PRODUCT GRID ─── */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            padding: 0 8px;
+        }
 
-.product{
-text-align:center;
-}
+        .product {
+            text-align: center;
+        }
 
-.product img{
-width:100%;
-height:58px;
-object-fit:cover;
-border-radius:12px;
+        .product img {
+            width: 100%;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            filter: brightness(1.1) contrast(1.05);
+        }
 
-filter:brightness(1.15) contrast(1.1);
+        .product img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(240, 165, 0, 0.2);
+            border-color: rgba(240, 165, 0, 0.3);
+        }
 
-border:1px solid rgba(255,255,255,.15);
-}
+        .product span {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.2px;
+        }
 
-.product span{
-display:block;
-margin-top:6px;
+        /* ─── CATALOG GRID (3 columns) ─── */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0 12px;
+        }
 
-font-size:14px;
-font-weight:700;
+        .catalog-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 18px;
+            padding: 14px 12px 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
 
-color:#ffffff;
+        .catalog-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(240, 165, 0, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
 
-opacity:1;
+        .catalog-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.2px;
+        }
 
-text-shadow:none;
+        .catalog-card p {
+            font-size: 11px;
+            color: #aaa;
+            margin: 4px 0 10px;
+        }
 
-letter-spacing:.3px;
-}
-  
-table td{
-color:#fff;
-font-weight:500;
-}
-.catalog-grid,
-.quick-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-padding:0 12px;
-}
+        .catalog-card .dl-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(240, 165, 0, 0.05));
+            border: 1px solid rgba(240, 165, 0, 0.25);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
 
-.catalog-card{
-background:rgba(255,255,255,.04);
-border:1px solid rgba(255,255,255,.08);
-border-radius:18px;
-padding:12px;
-}
+        .catalog-card .dl-btn:hover {
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.35), rgba(240, 165, 0, 0.1));
+            border-color: rgba(240, 165, 0, 0.5);
+            box-shadow: 0 0 25px rgba(240, 165, 0, 0.15);
+            transform: scale(1.04);
+        }
 
-.catalog-card h3{
-font-size:16px;
-}
+        /* ─── COMPANY PROFILE ─── */
+        .profile-img {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
 
-.catalog-card p{
-font-size:12px;
-color:#aaa;
-margin-top:4px;
-}
+        .feature-list {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 14px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #ddd;
+        }
 
-.profile-img,
-.map-img{
-width:100%;
-border-radius:16px;
-}
+        .feature-list span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-.stock-name{
-font-size:18px;
-font-weight:700;
-color:#36d66b;
-}
+        .feature-list span::before {
+            content: '◆';
+            color: #f0a500;
+            font-size: 10px;
+        }
 
-.payment-img{
-width:170px;
-display:block;
-margin:auto;
-border-radius:14px;
-}
+        /* ─── TABLE ─── */
+        .info-table {
+            width: 100%;
+            font-size: 16px;
+            line-height: 2.2;
+            border-collapse: collapse;
+        }
 
-.footer{
-text-align:center;
-padding:20px;
-font-size:13px;
-color:#aaa;
-}
+        .info-table td {
+            padding: 3px 0;
+            color: #eee;
+            font-weight: 500;
+        }
 
-.footer h2{
-color:#ff7070;
-margin-bottom:8px;
-}
+        .info-table .label {
+            color: #f0a500;
+            font-weight: 600;
+            width: 38%;
+            letter-spacing: 0.2px;
+        }
 
-</style>
+        /* ─── STOCK ─── */
+        .stock-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4cd964;
+            letter-spacing: -0.3px;
+        }
+
+        .stock-phone {
+            font-size: 18px;
+            color: #ddd;
+            margin: 4px 0 12px;
+        }
+
+        /* ─── PAYMENT ─── */
+        .payment-img {
+            width: 200px;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+            border-radius: 16px;
+            background: #fff;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .upi-id {
+            margin-top: 12px;
+            font-size: 17px;
+            color: #ddd;
+        }
+
+        .upi-id b {
+            color: #fff;
+            font-weight: 700;
+            display: block;
+            margin-top: 2px;
+            font-size: 18px;
+            letter-spacing: 0.3px;
+        }
+
+        /* ─── REVIEWS ─── */
+        .stars {
+            font-size: 44px;
+            color: #ffd700;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.25);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* ─── FOLLOW / QUICK GRID ─── */
+        .two-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 0 12px;
+        }
+
+        .two-grid .glass-btn {
+            padding: 16px 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 16px;
+        }
+
+        /* ─── LOCATION ─── */
+        .map-img {
+            width: 100%;
+            border-radius: 18px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* ─── FOOTER ─── */
+        .footer-card {
+            margin: 12px;
+            text-align: center;
+            padding: 20px 16px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .footer-card h2 {
+            color: #f0a500;
+            font-size: 22px;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .footer-card .sub {
+            color: #aaa;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .footer-card .contact-line {
+            font-size: 15px;
+            color: #ddd;
+            margin: 2px 0;
+        }
+
+        .footer-card .contact-line b {
+            color: #fff;
+        }
+
+        .footer-card .copy {
+            margin-top: 14px;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 14px;
+        }
+
+        /* ─── RESPONSIVE TWEAKS ─── */
+        @media (max-width: 400px) {
+            .catalog-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .catalog-grid .catalog-card:last-child {
+                grid-column: 1 / -1;
+            }
+            .name {
+                font-size: 22px;
+            }
+            .product-grid {
+                gap: 5px;
+            }
+            .product img {
+                height: 48px;
+            }
+            .product span {
+                font-size: 11px;
+            }
+            .two-grid {
+                gap: 8px;
+            }
+            .two-grid .glass-btn {
+                font-size: 12px;
+                padding: 14px 6px;
+            }
+        }
+
+        @media (min-width: 431px) {
+            .container {
+                border-left: 1px solid rgba(255, 255, 255, 0.04);
+                border-right: 1px solid rgba(255, 255, 255, 0.04);
+                box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        /* ─── UTILITY ─── */
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mt-12 {
+            margin-top: 12px;
+        }
+        .mt-16 {
+            margin-top: 16px;
+        }
+        .mb-8 {
+            margin-bottom: 8px;
+        }
+        .px-12 {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .gap-6 {
+            gap: 6px;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
+    <div class="container">
 
-<div class="hero">
+        <!-- ═══ HERO ═══ -->
+        <div class="hero">
+            <div class="hero-content">
 
-<div class="hero-content">
+                <img src="Logo.png" class="logo" alt="Tile Planet" />
 
-<img src="Logo.png" class="logo">
+                <div class="tagline">Premium Tiles • Perfect Spaces</div>
 
-<div class="tagline">
-PREMIUM TILES • PERFECT SPACES
+                <div class="main-card">
+
+                    <div class="top-row">
+                        <div class="name-box">
+                            <div class="name">Ramesh Chotalia</div>
+                            <div class="designation">✦ PROPRIETOR</div>
+                            <a href="tel:+919922533033" class="contact-btn">
+                                📞 +91 9922533033
+                            </a>
+                        </div>
+                        <div class="contact-qr">
+                            <img src="contact-qr.jpg" alt="QR" />
+                            <p>SAVE CONTACT</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <a href="tel:+919922533033" class="glass-btn">
+                            <span class="icon">📞</span> CALL
+                        </a>
+                        <a href="https://wa.me/919922533033" class="glass-btn">
+                            <span class="icon">💬</span> CHAT
+                        </a>
+                        <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn">
+                            <span class="icon">✉️</span> EMAIL
+                        </a>
+                        <a href="https://maps.google.com" class="glass-btn">
+                            <span class="icon">📍</span> MAP
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ═══ PRODUCTS ═══ -->
+        <div class="section-title">OUR PRODUCTS</div>
+
+        <div class="product-grid">
+            <div class="product">
+                <img src="Walltiles.jpg" alt="Wall" />
+                <span>Wall</span>
+            </div>
+            <div class="product">
+                <img src="Floortiles.jpg" alt="Floor" />
+                <span>Floor</span>
+            </div>
+            <div class="product">
+                <img src="Vitrifiedtiles.jpg" alt="Vitrified" />
+                <span>Vitrified</span>
+            </div>
+            <div class="product">
+                <img src="Parckingtiles.jpg" alt="Parking" />
+                <span>Parking</span>
+            </div>
+            <div class="product">
+                <img src="bathroomtiles.jpg" alt="Bath" />
+                <span>Bath</span>
+            </div>
+        </div>
+
+        <!-- ═══ CATALOGUES (3 items → 3‑col grid) ═══ -->
+        <div class="section-title">CATALOGUES</div>
+
+        <div class="catalog-grid">
+
+            <!-- Wall Tiles -->
+            <div class="catalog-card">
+                <h3>🧱 Wall Tiles</h3>
+                <p>Premium Collection</p>
+                <a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view"
+                target="_blank"
+                class="dl-btn">
+                ⬇ DOWNLOAD
+            </a>
+        </div>
+
+        <!-- Floor Tiles -->
+        <div class="catalog-card">
+            <h3>🟫 Floor Tiles</h3>
+            <p>600×600 Collection</p>
+            <a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view"
+            target="_blank"
+            class="dl-btn">
+            ⬇ DOWNLOAD
+        </a>
+    </div>
+
+    <!-- ★ NEW: 300x600mm Wall Tiles -->
+    <div class="catalog-card" style="border-color: rgba(240,165,0,0.2); background: rgba(240,165,0,0.06);">
+        <h3 style="color: #f0c27a;">📐 300×600mm</h3>
+        <p style="color: #ccc;">Wall Tiles • Modern Size</p>
+        <a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view"
+        target="_blank"
+        class="dl-btn" style="border-color: rgba(240,165,0,0.5); background: rgba(240,165,0,0.15);">
+        ⬇ DOWNLOAD
+    </a>
 </div>
 
-<div class="main-card">
-
-<div class="top-row">
-
-<div class="name-box">
-
-<div class="name">
-Ramesh Chotalia
 </div>
 
-<div class="designation">
-PROPRIETOR
-</div>
+<!-- ═══ COMPANY PROFILE ═══ -->
+<div class="section-title">COMPANY PROFILE</div>
 
-<a href="tel:+919922533033" class="contact-btn">
-📞 +91 9922533033
+<div class="glass-card" style="margin:0 12px;">
+
+    <img src="Company.png" class="profile-img" alt="Company" />
+
+    <h2 style="font-size:22px; letter-spacing:-0.3px;">Tile Planet</h2>
+    <p style="color:#aaa; margin-top:2px;">Premium Tiles Supplier</p>
+
+    <a href="company-profile.pdf"
+    target="_blank"
+    class="contact-btn"
+    style="justify-content:center; margin-top:14px; width:100%;">
+    📄 VIEW COMPANY PROFILE
 </a>
 
-</div>
-<div class="contact-qr">
-<img src="contact-qr.jpg">
-<p>SAVE CONTACT</p>
-</div>
-</div>
-
-</div>
-
-<div class="quick-actions">
-
-<a href="tel:+919922533033" class="glass-btn">
-📞<br>CALL
-</a>
-
-<a href="https://wa.me/919922533033" class="glass-btn">
-💬<br>CHAT
-</a>
-
-<a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn">
-✉️<br>EMAIL
-</a>
-
-<a href="https://maps.google.com" class="glass-btn">
-📍<br>MAP
-</a>
-
+<div class="feature-list">
+    <span>Wall Tiles</span>
+    <span>Floor Tiles</span>
+    <span>Vitrified Tiles</span>
+    <span>Parking Tiles</span>
+    <span style="grid-column:1/-1;">Bathroom Fittings</span>
 </div>
 
 </div>
 
-<div class="section-title">
-OUR PRODUCTS
-</div>
+<!-- ═══ COMPANY DETAILS ═══ -->
+<div class="section-title">COMPANY DETAILS</div>
 
-<div class="product-grid">
+<div class="glass-card" style="margin:0 12px;">
 
-<div class="product">
-<img src="Walltiles.jpg">
-<span>Wall</span>
-</div>
-
-<div class="product">
-<img src="Floortiles.jpg">
-<span>Floor</span>
-</div>
-
-<div class="product">
-<img src="Vitrifiedtiles.jpg">
-<span>Vitrified</span>
-</div>
-
-<div class="product">
-<img src="Parckingtiles.jpg">
-<span>Parking</span>
-</div>
-
-<div class="product">
-<img src="bathroomtiles.jpg">
-<span>Bath</span>
-</div>
-
-</div>
-<!-- CATALOGUES -->
-
-<div class="section-title">
-CATALOGUES
-</div>
-
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-padding:12px;
-">
-
-<div class="main-card">
-
-<h2 style="font-size:18px;">Wall Tiles</h2>
-
-<p style="color:#999;margin-top:6px;">
-Premium Collection
-</p>
-
-<a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view"
-target="_blank"
-class="contact-btn">
-DOWNLOAD
-</a>
+    <table class="info-table">
+        <tr><td class="label">GST</td><td>27AIPPR7422Q1Z9</td></tr>
+        <tr><td class="label">Owner</td><td>Ramesh Chotalia</td></tr>
+        <tr><td class="label">Business</td><td>Retailer &amp; Supplier</td></tr>
+        <tr><td class="label">Experience</td><td>10+ Years</td></tr>
+        <tr><td class="label">Address</td><td>Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK,<br />Pune – 411046</td></tr>
+    </table>
 
 </div>
 
-<div class="main-card">
+<!-- ═══ STOCK ENQUIRY ═══ -->
+<div class="section-title">STOCK ENQUIRY</div>
 
-<h2 style="font-size:18px;">Floor Tiles</h2>
+<div class="glass-card" style="margin:0 12px;">
 
-<p style="color:#999;margin-top:6px;">
-600x600 Collection
-</p>
+    <div class="stock-name">Harshad Dalvi</div>
+    <div class="stock-phone">📱 +91 9067121697</div>
 
-<a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view"
-target="_blank"
-class="contact-btn">
-DOWNLOAD
-</a>
-
-</div>
-
-</div>
-
-
-<!-- COMPANY PROFILE -->
-
-<div class="section-title">
-COMPANY PROFILE
-</div>
-
-<div class="main-card" style="margin:12px;">
-
-<img src="Company.png"
-style="
-width:100%;
-border-radius:18px;
-margin-bottom:15px;
-">
-
-<h2 style="margin-bottom:5px;">
-Tile Planet
-</h2>
-
-<p style="color:#999;">
-Premium Tiles Supplier
-</p>
-
-<a href="company-profile.pdf"
-target="_blank"
-class="contact-btn"
-style="
-margin-top:15px;
-justify-content:center;
-">
-
-📄 VIEW COMPANY PROFILE
-
-</a>
-
-<div style="
-margin-top:18px;
-line-height:2;
-font-size:17px;
-">
-
-✓ Wall Tiles<br>
-✓ Floor Tiles<br>
-✓ Vitrified Tiles<br>
-✓ Parking Tiles<br>
-✓ Bathroom Fittings
-
-</div>
-
-</div>
-
-
-<!-- COMPANY DETAILS -->
-
-<div class="section-title">
-COMPANY DETAILS
-</div>
-
-<div class="main-card" style="margin:12px;">
-
-<table style="
-width:100%;
-font-size:17px;
-line-height:2;
-">
-
-<tr>
-<td style="color:#ff7070;">
-GST
-</td>
-<td>
-27AIPPR7422Q1Z9
-</td>
-</tr>
-
-<tr>
-<td style="color:#ff7070;">
-Owner
-</td>
-<td>
-Ramesh Chotalia
-</td>
-</tr>
-
-<tr>
-<td style="color:#ff7070;">
-Business
-</td>
-<td>
-Retailer & Supplier
-</td>
-</tr>
-
-<tr>
-<td style="color:#ff7070;">
-Experience
-</td>
-<td>
-10+ Years
-</td>
-</tr>
-
-<tr>
-<td style="color:#ff7070;">
-Address
-</td>
-<td>
-Sr. No.60,
-Opp Ashok Leyland,
-Katraj-Mumbai Road,
-Ambegaon BK,
-Pune - 411046
-</td>
-</tr>
-
-</table>
-
-</div>
-<!-- STOCK ENQUIRY -->
-
-<div class="section-title">
-STOCK ENQUIRY
-</div>
-
-<div class="main-card" style="margin:12px;">
-
-<h2 style="
-color:#32d74b;
-margin-bottom:8px;
-">
-Harshad Dalvi
-</h2>
-
-<p style="
-font-size:18px;
-margin-bottom:15px;
-">
-+91 9067121697
-</p>
-
-<a href="tel:+919067121697"
-class="contact-btn"
-style="
-justify-content:center;
-background:rgba(0,160,0,.25);
-border:1px solid rgba(0,255,0,.35);
-">
-
-📞 CHECK STOCK
-
+    <a href="tel:+919067121697"
+    class="contact-btn"
+    style="justify-content:center; width:100%; background:rgba(76,217,100,0.12); border-color:rgba(76,217,100,0.3);">
+    📞 CHECK STOCK
 </a>
 
 </div>
 
+<!-- ═══ PAYMENT ═══ -->
+<div class="section-title">PAYMENT</div>
 
-<!-- PAYMENT -->
+<div class="glass-card" style="margin:0 12px; text-align:center;">
 
-<div class="section-title">
-PAYMENT
-</div>
+    <img src="upi-qr.png" class="payment-img" alt="UPI QR" />
 
-<div class="main-card"
-style="
-margin:12px;
-text-align:center;
-">
+    <div class="upi-id">
+        UPI ID
+        <b>ramesh.chotalia13@oksbi</b>
+    </div>
 
-<img src="upi-qr.png"
-style="
-width:220px;
-max-width:100%;
-border-radius:20px;
-background:white;
-padding:8px;
-">
-
-<div style="
-margin-top:12px;
-font-size:18px;
-">
-
-UPI ID
-
-<br>
-
-<b>
-ramesh.chotalia13@oksbi
-</b>
-
-</div>
-
-<a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia"
-class="contact-btn"
-style="
-justify-content:center;
-margin-top:15px;
-">
-
-💳 PAY NOW
-
+    <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia"
+    class="contact-btn"
+    style="justify-content:center; width:100%; margin-top:14px;">
+    💳 PAY NOW
 </a>
 
 </div>
 
+<!-- ═══ GOOGLE REVIEWS ═══ -->
+<div class="section-title">GOOGLE REVIEWS</div>
 
-<!-- GOOGLE REVIEWS -->
+<div class="glass-card" style="margin:0 12px; text-align:center;">
 
-<div class="section-title">
-GOOGLE REVIEWS
-</div>
+    <span class="stars">★★★★★</span>
 
-<div class="main-card"
-style="
-margin:12px;
-text-align:center;
-">
+    <h2 style="font-size:20px; margin-bottom:2px;">Love Our Service?</h2>
+    <p style="color:#aaa; font-size:14px;">Please share your experience on Google</p>
 
-<span style="
-font-size:45px;
-color:#FFD700;
-text-shadow:0 0 20px #FFD700;
-">
-⭐⭐⭐⭐⭐
-</span>
-
-<h2>
-Love Our Service?
-</h2>
-
-<p style="
-color:#999;
-margin-top:8px;
-">
-
-Please share your experience on Google
-
-</p>
-
-<a href="https://g.page/r/CXkwBZtskIM3EAE/review"
-target="_blank"
-class="contact-btn"
-style="
-justify-content:center;
-margin-top:15px;
-">
-
-⭐ WRITE REVIEW
-
+    <a href="https://g.page/r/CXkwBZtskIM3EAE/review"
+    target="_blank"
+    class="contact-btn"
+    style="justify-content:center; width:100%; margin-top:14px;">
+    ⭐ WRITE REVIEW
 </a>
 
 </div>
 
+<!-- ═══ FOLLOW US ═══ -->
+<div class="section-title">FOLLOW US</div>
 
-<!-- FOLLOW US -->
+<div class="two-grid">
 
-<div class="section-title">
-FOLLOW US
-</div>
-
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-padding:12px;
-">
-
-<a href="https://www.instagram.com/ramesh.chotalia13/"
-target="_blank"
-class="glass-btn"
-style="
-padding:18px;
-font-size:16px;
-">
-
-📸 Instagram
-
+    <a href="https://www.instagram.com/ramesh.chotalia13/"
+    target="_blank"
+    class="glass-btn">
+    📸 Instagram
 </a>
 
 <a href="https://www.facebook.com/tileplanet.co.in/"
 target="_blank"
-class="glass-btn"
-style="
-padding:18px;
-font-size:16px;
-">
-
+class="glass-btn">
 👍 Facebook
-
 </a>
 
 <a href="https://www.youtube.com/@tileplanet501"
 target="_blank"
-class="glass-btn"
-style="
-padding:18px;
-font-size:16px;
-">
-
+class="glass-btn">
 ▶️ YouTube
-
 </a>
 
 <a href="https://wa.me/919922533033"
 target="_blank"
-class="glass-btn"
-style="
-padding:18px;
-font-size:16px;
-">
-
+class="glass-btn">
 💬 WhatsApp
-
 </a>
 
 </div>
-<!-- QUICK ACTIONS -->
 
-<div class="section-title">
-QUICK ACTIONS
-</div>
+<!-- ═══ QUICK ACTIONS ═══ -->
+<div class="section-title">QUICK ACTIONS</div>
 
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-padding:12px;
-">
+<div class="two-grid">
 
-<a href="tileplanet.vcf"
-download
-class="glass-btn"
-style="
-padding:20px;
-font-size:16px;
-">
-
-💾 SAVE CONTACT
-
+    <a href="tileplanet.vcf"
+    download
+    class="glass-btn">
+    💾 SAVE CONTACT
 </a>
 
 <a href="#"
 onclick="shareCard()"
-class="glass-btn"
-style="
-padding:20px;
-font-size:16px;
-">
-
+class="glass-btn">
 📤 SHARE CARD
-
 </a>
 
 <a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20Please%20send%20me%20a%20quotation."
 target="_blank"
-class="glass-btn"
-style="
-padding:20px;
-font-size:16px;
-">
-
+class="glass-btn">
 📝 GET QUOTE
-
 </a>
 
 <a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20I%20want%20an%20enquiry."
 target="_blank"
-class="glass-btn"
-style="
-padding:20px;
-font-size:16px;
-">
-
+class="glass-btn">
 📩 ENQUIRY
-
 </a>
 
 </div>
 
+<!-- ═══ LOCATION ═══ -->
+<div class="section-title">LOCATION</div>
 
-<!-- LOCATION -->
+<div class="glass-card" style="margin:0 12px;">
 
-<div class="section-title">
-LOCATION
-</div>
+    <img src="map.jpeg" class="map-img" alt="Map" />
 
-<div class="main-card"
-style="
-margin:12px;
-">
-
-<img src="map.jpeg"
-style="
-width:100%;
-border-radius:20px;
-margin-bottom:15px;
-">
-
-<a href="https://www.google.com/maps?q=18.452402,73.832586"
-target="_blank"
-class="contact-btn"
-style="
-justify-content:center;
-">
-
-📍 OPEN MAP
-
+    <a href="https://www.google.com/maps?q=18.452402,73.832586"
+    target="_blank"
+    class="contact-btn"
+    style="justify-content:center; width:100%;">
+    📍 OPEN MAP
 </a>
 
 </div>
 
+<!-- ═══ FOOTER ═══ -->
+<div class="footer-card">
 
-<!-- FOOTER -->
+    <h2>🏛️ TILE PLANET</h2>
+    <div class="sub">Premium Tiles • Perfect Spaces</div>
 
-<div class="main-card"
-style="
-margin:12px;
-text-align:center;
-">
+    <div class="contact-line"><b>Ramesh Chotalia</b></div>
+    <div class="contact-line">📞 <b>+91 9922533033</b></div>
+    <div class="contact-line">✉️ <b>ramesh.chotalia13@gmail.com</b></div>
 
-<h2 style="
-color:#ff7070;
-margin-bottom:10px;
-">
-
-TILE PLANET
-
-</h2>
-
-<p>
-Premium Tiles • Perfect Spaces
-</p>
-
-<br>
-
-<p>
-Ramesh Chotalia
-</p>
-
-<p>
-📞 +91 9922533033
-</p>
-
-<p>
-✉️ ramesh.chotalia13@gmail.com
-</p>
-
-<br>
-
-<p style="
-color:#999;
-font-size:13px;
-">
-
-© 2026 Tile Planet.
-All Rights Reserved.
-
-</p>
+    <div class="copy">© 2026 Tile Planet. All Rights Reserved.</div>
 
 </div>
 
 </div>
 
-
+<!-- ═══ SHARE SCRIPT ═══ -->
 <script>
-
-function shareCard(){
-
-if(navigator.share){
-
-navigator.share({
-title:'Tile Planet',
-text:'Tile Planet Digital Card',
-url:window.location.href
-});
-
-}else{
-
-navigator.clipboard.writeText(window.location.href);
-
-alert('Link Copied Successfully');
-
-}
-
-}
-
+    function shareCard() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Tile Planet',
+                text: 'Tile Planet Digital Card',
+                url: window.location.href
+            }).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => alert('✅ Link Copied Successfully'))
+                .catch(() => alert('📋 Copy this link: ' + window.location.href));
+        }
+    }
 </script>
 
 </body>
