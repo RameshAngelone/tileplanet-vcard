@@ -510,30 +510,17 @@
             opacity: 0.9;
         }
 
-        /* ─── TWO BUTTONS (Download & View) ─── */
-        .btn-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+        /* ─── SINGLE BUTTON (replaces two) ─── */
+        .single-btn-wrap {
             margin-top: 14px;
+            text-align: center;
         }
 
-        .btn-group .contact-btn {
-            margin-top: 0;
+        .single-btn-wrap .contact-btn {
             width: 100%;
             justify-content: center;
-            font-size: 13px;
-            padding: 10px 12px;
-        }
-
-        .btn-group .contact-btn.view-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-group .contact-btn.view-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
+            font-size: 15px;
+            padding: 12px 16px;
         }
 
         /* ─── TABLE ─── */
@@ -800,13 +787,9 @@
             .footer-logo {
                 width: 100px;
             }
-            .btn-group {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .btn-group .contact-btn {
-                font-size: 11px;
-                padding: 8px 10px;
+            .single-btn-wrap .contact-btn {
+                font-size: 13px;
+                padding: 10px;
             }
             .stars-bright {
                 font-size: 36px;
@@ -904,7 +887,8 @@
                         <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn">
                             <span class="icon">✉️</span> EMAIL
                         </a>
-                        <a href="https://maps.google.com" class="glass-btn">
+                        <!-- UPDATED MAP LINK with same coordinates as bottom -->
+                        <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn">
                             <span class="icon">📍</span> MAP
                         </a>
                     </div>
@@ -1003,13 +987,10 @@
     <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px; text-align: center;">Tile Planet</h2>
     <p style="color:var(--text-secondary); margin-top:2px; font-size:14px; text-align: center;">Premium Tiles Supplier - 2018</p>
 
-    <!-- TWO BUTTONS: Download & View -->
-    <div class="btn-group">
-        <a href="company-profile.pdf" download class="contact-btn">
-            ⬇ DOWNLOAD
-        </a>
-        <a href="company-profile.pdf" target="_blank" class="contact-btn view-btn">
-            👁️ VIEW
+    <!-- SINGLE BUTTON: VIEW & DOWNLOAD (opens PDF in new tab) -->
+    <div class="single-btn-wrap">
+        <a href="company-profile.pdf" target="_blank" class="contact-btn">
+            👁️ VIEW / DOWNLOAD
         </a>
     </div>
 
