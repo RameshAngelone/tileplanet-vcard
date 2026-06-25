@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tile Planet · Premium Digital Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
     <style>
         /* ─── RESET & BASE ─── */
         *,
@@ -61,12 +62,10 @@
             margin: 0 auto;
             min-height: 100vh;
             padding: 0 0 24px 0;
-            background:
-                radial-gradient(ellipse at 30% 0%, #1e1508 0%, #0d0b08 50%, #080808 100%);
+            background: radial-gradient(ellipse at 30% 0%, #1e1508 0%, #0d0b08 50%, #080808 100%);
             position: relative;
         }
 
-        /* ambient glow — brighter */
         .container::before {
             content: '';
             position: fixed;
@@ -112,8 +111,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                linear-gradient(160deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.40) 60%, rgba(0, 0, 0, 0.60) 100%);
+            background: linear-gradient(160deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.40) 60%, rgba(0, 0, 0, 0.60) 100%);
             z-index: 0;
         }
 
@@ -164,7 +162,13 @@
             text-shadow: 0 2px 16px rgba(255, 215, 0, 0.15);
         }
 
-        /* ─── HERO INNER CARD ─── */
+        /* ─── PERSPECTIVE WRAPPER (3D TILT) ─── */
+        .tilt-wrapper {
+            perspective: 1500px;
+            transform-style: preserve-3d;
+        }
+
+        /* ─── HERO INNER CARD (TILT CARD) ─── */
         .hero-card {
             background: rgba(0, 0, 0, 0.50);
             backdrop-filter: blur(36px);
@@ -173,6 +177,48 @@
             border-radius: var(--radius-lg);
             padding: 18px 18px 14px;
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 215, 0, 0.05);
+            transition: transform 0.1s ease, box-shadow 0.4s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+            position: relative;
+        }
+
+        /* ─── GOLD SHIMMER BORDER (only on hero-card) ─── */
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 30px;
+            padding: 2px;
+            background: conic-gradient(from 0deg, #d4af37, #f5e56b, #d4af37, #b8860b, #d4af37);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: shimmerBorder 6s linear infinite;
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        @keyframes shimmerBorder {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* ─── GOLD TEXT (Luxury) ─── */
+        .gold-text {
+            background: linear-gradient(135deg, #f5e56b 0%, #d4af37 40%, #b8860b 70%, #f5e56b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
         }
 
         .top-row {
@@ -180,24 +226,25 @@
             justify-content: space-between;
             align-items: flex-start;
             gap: 12px;
+            transform: translateZ(30px);
         }
 
         .name-box {
             flex: 1;
         }
 
-        /* ─── NAME — CRYSTAL CLEAR, BRIGHT ─── */
+        /* ─── NAME — LUXURY ─── */
         .name {
-            font-size: 28px;
-            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
             letter-spacing: -0.5px;
-            color: #ffffff;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.06);
             line-height: 1.1;
             display: flex;
             align-items: center;
             gap: 8px;
             flex-wrap: wrap;
+            transform: translateZ(40px);
         }
 
         .name .badge {
@@ -212,6 +259,8 @@
             box-shadow: 0 2px 20px rgba(255, 215, 0, 0.30);
             display: inline-block;
             vertical-align: middle;
+            font-family: 'Inter', sans-serif;
+            transform: translateZ(35px);
         }
 
         /* ─── CONTACT BUTTON ─── */
@@ -233,12 +282,13 @@
             letter-spacing: 0.2px;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
+            transform: translateZ(35px);
         }
 
         .contact-btn:hover {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.30), rgba(255, 215, 0, 0.10));
             border-color: var(--gold-light);
-            transform: scale(1.03);
+            transform: scale(1.03) translateZ(40px);
             box-shadow: 0 0 50px rgba(255, 215, 0, 0.12), inset 0 0 40px rgba(255, 215, 0, 0.04);
         }
 
@@ -256,10 +306,11 @@
             text-align: center;
             border: 1px solid rgba(255, 215, 0, 0.08);
             transition: transform 0.3s ease;
+            transform: translateZ(40px);
         }
 
         .contact-qr:hover {
-            transform: scale(1.04);
+            transform: scale(1.04) translateZ(45px);
         }
 
         .contact-qr img {
@@ -286,6 +337,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             margin-top: 14px;
+            transform: translateZ(25px);
         }
 
         .glass-btn {
@@ -314,7 +366,7 @@
         .glass-btn:hover {
             background: rgba(255, 255, 255, 0.10);
             border-color: rgba(255, 215, 0, 0.30);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.02);
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
         }
 
@@ -510,17 +562,30 @@
             opacity: 0.9;
         }
 
-        /* ─── SINGLE BUTTON (replaces two) ─── */
-        .single-btn-wrap {
+        /* ─── TWO BUTTONS (Download & View) ─── */
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-top: 14px;
-            text-align: center;
         }
 
-        .single-btn-wrap .contact-btn {
+        .btn-group .contact-btn {
+            margin-top: 0;
             width: 100%;
             justify-content: center;
-            font-size: 15px;
-            padding: 12px 16px;
+            font-size: 13px;
+            padding: 10px 12px;
+        }
+
+        .btn-group .contact-btn.view-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-group .contact-btn.view-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         /* ─── TABLE ─── */
@@ -591,7 +656,7 @@
             letter-spacing: 0.2px;
         }
 
-        /* ─── GOOGLE REVIEWS — BRIGHT STARS + GOOGLE COLORS ─── */
+        /* ─── GOOGLE REVIEWS ─── */
         .google-review-wrap {
             text-align: center;
             padding: 8px 0;
@@ -745,7 +810,7 @@
                 padding: 0 6px;
             }
             .name {
-                font-size: 22px;
+                font-size: 26px;
             }
             .name .badge {
                 font-size: 10px;
@@ -787,9 +852,13 @@
             .footer-logo {
                 width: 100px;
             }
-            .single-btn-wrap .contact-btn {
-                font-size: 13px;
-                padding: 10px;
+            .btn-group {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .btn-group .contact-btn {
+                font-size: 11px;
+                padding: 8px 10px;
             }
             .stars-bright {
                 font-size: 36px;
@@ -857,42 +926,45 @@
 
                 <div class="tagline">✦ Premium Tiles · Perfect Spaces ✦</div>
 
-                <div class="hero-card">
+                <!-- 3D Tilt Wrapper -->
+                <div class="tilt-wrapper" id="tiltWrapper">
+                    <div class="hero-card" id="tiltCard">
 
-                    <div class="top-row">
-                        <div class="name-box">
-                            <div class="name">
-                                Ramesh Chotalia
-                                <span class="badge">PROP.</span>
+                        <div class="top-row">
+                            <div class="name-box">
+                                <div class="name">
+                                    <span class="gold-text">Ramesh Chotalia</span>
+                                    <span class="badge">PROP.</span>
+                                </div>
+
+                                <a href="tel:+919922533033" class="contact-btn">
+                                    <span class="icon">📞</span> +91 9922533033
+                                </a>
                             </div>
 
-                            <a href="tel:+919922533033" class="contact-btn">
-                                <span class="icon">📞</span> +91 9922533033
+                            <div class="contact-qr">
+                                <img src="contact-qr.jpg" alt="QR" />
+                                <p>Save Contact</p>
+                            </div>
+                        </div>
+
+                        <div class="quick-actions">
+                            <a href="tel:+919922533033" class="glass-btn">
+                                <span class="icon">📞</span> CALL
+                            </a>
+                            <a href="https://wa.me/919922533033" class="glass-btn">
+                                <span class="icon">💬</span> CHAT
+                            </a>
+                            <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn">
+                                <span class="icon">✉️</span> EMAIL
+                            </a>
+                            <!-- Correct map link -->
+                            <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn">
+                                <span class="icon">📍</span> MAP
                             </a>
                         </div>
 
-                        <div class="contact-qr">
-                            <img src="contact-qr.jpg" alt="QR" />
-                            <p>Save Contact</p>
-                        </div>
                     </div>
-
-                    <div class="quick-actions">
-                        <a href="tel:+919922533033" class="glass-btn">
-                            <span class="icon">📞</span> CALL
-                        </a>
-                        <a href="https://wa.me/919922533033" class="glass-btn">
-                            <span class="icon">💬</span> CHAT
-                        </a>
-                        <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn">
-                            <span class="icon">✉️</span> EMAIL
-                        </a>
-                        <!-- UPDATED MAP LINK with same coordinates as bottom -->
-                        <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn">
-                            <span class="icon">📍</span> MAP
-                        </a>
-                    </div>
-
                 </div>
 
             </div>
@@ -987,10 +1059,13 @@
     <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px; text-align: center;">Tile Planet</h2>
     <p style="color:var(--text-secondary); margin-top:2px; font-size:14px; text-align: center;">Premium Tiles Supplier - 2018</p>
 
-    <!-- SINGLE BUTTON: VIEW & DOWNLOAD (opens PDF in new tab) -->
-    <div class="single-btn-wrap">
-        <a href="company-profile.pdf" target="_blank" class="contact-btn">
-            👁️ VIEW / DOWNLOAD
+    <!-- TWO BUTTONS: Download & View -->
+    <div class="btn-group">
+        <a href="company-profile.pdf" download class="contact-btn">
+            ⬇ DOWNLOAD
+        </a>
+        <a href="company-profile.pdf" target="_blank" class="contact-btn view-btn">
+            👁️ VIEW
         </a>
     </div>
 
@@ -1226,6 +1301,32 @@ class="glass-btn">
                 .catch(() => alert('📋 Copy this link: ' + window.location.href));
         }
     }
+
+    // ─── 3D TILT SCRIPT ───
+    document.addEventListener('DOMContentLoaded', function() {
+        const card = document.getElementById('tiltCard');
+        const wrapper = document.getElementById('tiltWrapper');
+
+        wrapper.addEventListener('mousemove', function(e) {
+            const rect = wrapper.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -8; // max tilt 8deg
+            const rotateY = ((x - centerX) / centerX) * 8;
+
+            card.style.transform =
+                `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        wrapper.addEventListener('mouseleave', function() {
+            card.style.transform =
+                `rotateX(0deg) rotateY(0deg)`;
+        });
+    });
 </script>
 
 </body>
