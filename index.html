@@ -78,7 +78,7 @@
             z-index: 0;
         }
 
-        /* ─── GLASS CARD — BRIGHT & PREMIUM ─── */
+        /* ─── GLASS CARD ─── */
         .glass-card {
             background: rgba(255, 255, 255, 0.07);
             backdrop-filter: blur(32px);
@@ -183,7 +183,7 @@
             position: relative;
         }
 
-        /* ─── GOLD SHIMMER BORDER (only on hero-card) ─── */
+        /* ─── GOLD SHIMMER BORDER ─── */
         .hero-card::before {
             content: '';
             position: absolute;
@@ -212,13 +212,13 @@
             }
         }
 
-        /* ─── GOLD TEXT (Luxury) ─── */
+        /* ─── GOLD TEXT — FIXED (No Blur, Full Highlight) ─── */
         .gold-text {
-            background: linear-gradient(135deg, #f5e56b 0%, #d4af37 40%, #b8860b 70%, #f5e56b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block;
+            color: #FFD700;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.2);
+            font-weight: 700;
+            -webkit-text-fill-color: #FFD700;
+            background: none;
         }
 
         .top-row {
@@ -331,7 +331,7 @@
             text-transform: uppercase;
         }
 
-        /* ─── QUICK ACTIONS (hero) ─── */
+        /* ─── QUICK ACTIONS ─── */
         .quick-actions {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -444,7 +444,7 @@
             letter-spacing: 0.2px;
         }
 
-        /* ─── CATALOG GRID — BRIGHT CARDS ─── */
+        /* ─── CATALOG GRID ─── */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -562,30 +562,17 @@
             opacity: 0.9;
         }
 
-        /* ─── TWO BUTTONS (Download & View) ─── */
-        .btn-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+        /* ─── SINGLE BUTTON WRAP (For Company Profile) ─── */
+        .single-btn-wrap {
             margin-top: 14px;
+            text-align: center;
         }
 
-        .btn-group .contact-btn {
-            margin-top: 0;
+        .single-btn-wrap .contact-btn {
             width: 100%;
             justify-content: center;
-            font-size: 13px;
-            padding: 10px 12px;
-        }
-
-        .btn-group .contact-btn.view-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-group .contact-btn.view-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
+            font-size: 14px;
+            padding: 12px 16px;
         }
 
         /* ─── TABLE ─── */
@@ -852,13 +839,9 @@
             .footer-logo {
                 width: 100px;
             }
-            .btn-group {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .btn-group .contact-btn {
-                font-size: 11px;
-                padding: 8px 10px;
+            .single-btn-wrap .contact-btn {
+                font-size: 13px;
+                padding: 10px;
             }
             .stars-bright {
                 font-size: 36px;
@@ -878,38 +861,16 @@
         }
 
         /* ─── UTILITY ─── */
-        .mt-8 {
-            margin-top: 8px;
-        }
-        .mt-12 {
-            margin-top: 12px;
-        }
-        .mt-16 {
-            margin-top: 16px;
-        }
-        .mb-8 {
-            margin-bottom: 8px;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .w-full {
-            width: 100%;
-        }
-        .justify-center {
-            justify-content: center;
-        }
-        .gap-6 {
-            gap: 6px;
-        }
-        .flex {
-            display: flex;
-        }
-        .flex-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .mt-8 { margin-top: 8px; }
+        .mt-12 { margin-top: 12px; }
+        .mt-16 { margin-top: 16px; }
+        .mb-8 { margin-bottom: 8px; }
+        .text-center { text-align: center; }
+        .w-full { width: 100%; }
+        .justify-center { justify-content: center; }
+        .gap-6 { gap: 6px; }
+        .flex { display: flex; }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
@@ -933,6 +894,7 @@
                         <div class="top-row">
                             <div class="name-box">
                                 <div class="name">
+                                    <!-- UPDATED: Full Highlighted Name (No Blur) -->
                                     <span class="gold-text">Ramesh Chotalia</span>
                                     <span class="badge">PROP.</span>
                                 </div>
@@ -958,7 +920,6 @@
                             <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn">
                                 <span class="icon">✉️</span> EMAIL
                             </a>
-                            <!-- Correct map link -->
                             <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn">
                                 <span class="icon">📍</span> MAP
                             </a>
@@ -1059,13 +1020,10 @@
     <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px; text-align: center;">Tile Planet</h2>
     <p style="color:var(--text-secondary); margin-top:2px; font-size:14px; text-align: center;">Premium Tiles Supplier - 2018</p>
 
-    <!-- TWO BUTTONS: Download & View -->
-    <div class="btn-group">
-        <a href="company-profile.pdf" download class="contact-btn">
-            ⬇ DOWNLOAD
-        </a>
-        <a href="company-profile.pdf" target="_blank" class="contact-btn view-btn">
-            👁️ VIEW
+    <!-- ✅ SINGLE BUTTON (Replaces the two buttons) -->
+    <div class="single-btn-wrap">
+        <a href="company-profile.pdf" target="_blank" class="contact-btn">
+            📄 VIEW / DOWNLOAD PROFILE
         </a>
     </div>
 
@@ -1143,7 +1101,7 @@
 
 </div>
 
-<!-- ═══ GOOGLE REVIEWS — with Google Colors & Bright Stars ═══ -->
+<!-- ═══ GOOGLE REVIEWS ═══ -->
 <div class="section-title">
     <span class="line"></span>
     <span class="emoji">⭐</span> GOOGLE REVIEWS
@@ -1154,7 +1112,6 @@
 
     <div class="google-review-wrap">
 
-        <!-- Google Brand Colors -->
         <div class="google-brand">
             <span class="g g-1">G</span>
             <span class="g g-2">o</span>
@@ -1164,7 +1121,6 @@
             <span class="g g-6">e</span>
         </div>
 
-        <!-- Bright Yellow Stars -->
         <span class="stars-bright">★★★★★</span>
 
         <h2 style="font-size:19px; font-weight:700; margin-bottom:2px;">Love Our Service?</h2>
@@ -1202,7 +1158,6 @@ class="glass-btn">
 <span class="icon">👍</span> Facebook
 </a>
 
-<!-- Updated YouTube Link -->
 <a href="https://www.youtube.com/results?search_query=tile+planet"
 target="_blank"
 class="glass-btn">
@@ -1252,7 +1207,7 @@ class="glass-btn">
 
 </div>
 
-<!-- ═══ LOCATION — Updated Coordinates ═══ -->
+<!-- ═══ LOCATION ═══ -->
 <div class="section-title">
     <span class="line"></span>
     <span class="emoji">📍</span> LOCATION
@@ -1286,7 +1241,7 @@ class="glass-btn">
 
 </div>
 
-<!-- ═══ SHARE SCRIPT ═══ -->
+<!-- ═══ SHARE SCRIPT & 3D TILT ═══ -->
 <script>
     function shareCard() {
         if (navigator.share) {
@@ -1302,7 +1257,7 @@ class="glass-btn">
         }
     }
 
-    // ─── 3D TILT SCRIPT ───
+    // 3D TILT
     document.addEventListener('DOMContentLoaded', function() {
         const card = document.getElementById('tiltCard');
         const wrapper = document.getElementById('tiltWrapper');
@@ -1311,20 +1266,15 @@ class="glass-btn">
             const rect = wrapper.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-
-            const rotateX = ((y - centerY) / centerY) * -8; // max tilt 8deg
+            const rotateX = ((y - centerY) / centerY) * -8;
             const rotateY = ((x - centerX) / centerX) * 8;
-
-            card.style.transform =
-                `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
         wrapper.addEventListener('mouseleave', function() {
-            card.style.transform =
-                `rotateX(0deg) rotateY(0deg)`;
+            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
         });
     });
 </script>
