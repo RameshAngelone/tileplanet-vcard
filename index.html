@@ -622,6 +622,226 @@
             margin: 2px 0 12px;
         }
 
+        /* ─── BUTTON GROUP (Stock + Live Inventory) ─── */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .btn-group .contact-btn {
+            width: 100%;
+            justify-content: center;
+            margin-top: 0;
+        }
+
+        .btn-live-inventory {
+            background: linear-gradient(135deg, rgba(0, 200, 255, 0.15), rgba(0, 200, 255, 0.04)) !important;
+            border-color: rgba(0, 200, 255, 0.30) !important;
+        }
+
+        .btn-live-inventory:hover {
+            background: linear-gradient(135deg, rgba(0, 200, 255, 0.25), rgba(0, 200, 255, 0.08)) !important;
+            border-color: #00c8ff !important;
+            box-shadow: 0 0 50px rgba(0, 200, 255, 0.12), inset 0 0 40px rgba(0, 200, 255, 0.04) !important;
+        }
+
+        .btn-live-inventory .pulse-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #00e676;
+            border-radius: 50%;
+            margin-right: 4px;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(0.7);
+            }
+        }
+
+        /* ─── LOGIN MODAL ─── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-box {
+            background: rgba(20, 18, 16, 0.95);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px 28px;
+            max-width: 360px;
+            width: 100%;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.05);
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-box .modal-icon {
+            font-size: 42px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .modal-box h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.3px;
+            margin-bottom: 4px;
+        }
+
+        .modal-box p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .modal-box .input-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+
+        .modal-box .input-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .modal-box .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 215, 0, 0.10);
+            color: #fff;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        .modal-box .input-group input:focus {
+            border-color: rgba(255, 215, 0, 0.40);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.05);
+        }
+
+        .modal-box .input-group input::placeholder {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .modal-box .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .modal-box .modal-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 60px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-box .modal-actions .btn-login {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.08));
+            border: 1px solid rgba(255, 215, 0, 0.30);
+            color: #fff;
+        }
+
+        .modal-box .modal-actions .btn-login:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.35), rgba(255, 215, 0, 0.12));
+            border-color: var(--gold-light);
+            transform: scale(1.02);
+        }
+
+        .modal-box .modal-actions .btn-cancel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+        }
+
+        .modal-box .modal-actions .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .modal-box .error-msg {
+            color: #ff6b6b;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 10px;
+            min-height: 20px;
+            display: none;
+        }
+
+        .modal-box .error-msg.show {
+            display: block;
+        }
+
+        .modal-box .close-modal {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-box .close-modal:hover {
+            color: #fff;
+        }
+
         /* ─── PAYMENT ─── */
         .payment-img {
             width: 180px;
@@ -857,6 +1077,20 @@
             .google-review-wrap .google-brand .g {
                 font-size: 22px;
             }
+            .btn-group .contact-btn {
+                font-size: 13px;
+                padding: 10px 16px;
+            }
+            .modal-box {
+                padding: 24px 18px 20px;
+            }
+            .modal-box h2 {
+                font-size: 17px;
+            }
+            .modal-box .modal-actions button {
+                font-size: 12px;
+                padding: 10px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -1071,7 +1305,7 @@
     <h3 style="color: #4cd964;">600×600 Matt</h3>
     <p style="color: var(--text-secondary);">Premium Matt Finish</p>
     <span class="badge-new" style="background: linear-gradient(135deg, #4cd964, #2ecc71); color: #0a0a0a;">✦ New</span>
-    <a href="https://drive.google.com/file/d/1mbzMv5LI4UY3YTGXxXRWoE81Y_6w5j7g/view?usp=sharing"
+    <a href="https://drive.google.com/file/d/1YOUR_MATT_CATALOG_ID/view"
     target="_blank"
     class="dl-btn" style="border-color: rgba(76,217,100,0.30); background: rgba(76,217,100,0.12);">
     ⬇ DOWNLOAD
@@ -1142,11 +1376,16 @@
     <div class="stock-name">Harshad Dalvi</div>
     <div class="stock-phone">📱 +91 9067121697</div>
 
-    <a href="tel:+919067121697"
-    class="contact-btn w-full justify-center"
-    style="background:rgba(76,217,100,0.10); border-color:rgba(76,217,100,0.25);">
-    📞 CONTACT FOR STOCK
-</a>
+    <!-- ─── BUTTON GROUP: Contact for Stock + Live Inventory ─── -->
+    <div class="btn-group">
+        <a href="tel:+919067121697" class="contact-btn" style="background:rgba(76,217,100,0.10); border-color:rgba(76,217,100,0.25);">
+            📞 CONTACT FOR STOCK
+        </a>
+
+        <a href="#" class="contact-btn btn-live-inventory" onclick="openLiveInventory(); return false;">
+            <span class="pulse-dot"></span> LIVE INVENTORY
+        </a>
+    </div>
 
 </div>
 
@@ -1314,8 +1553,43 @@ class="glass-btn">
 
 </div>
 
+<!-- ═══ LOGIN MODAL ═══ -->
+<div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+        <button class="close-modal" onclick="closeLoginModal()">✕</button>
+        <span class="modal-icon">🔐</span>
+        <h2>Live Inventory</h2>
+        <p>Enter your credentials to access real-time stock</p>
+
+        <div class="input-group">
+            <label for="loginUser">Username</label>
+            <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username" />
+        </div>
+
+        <div class="input-group">
+            <label for="loginPass">Password</label>
+            <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password" />
+        </div>
+
+        <div class="error-msg" id="loginError">❌ Invalid username or password. Please try again.</div>
+
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeLoginModal()">Cancel</button>
+            <button class="btn-login" onclick="handleLogin()">🔓 Login</button>
+        </div>
+    </div>
+</div>
+
 <!-- ═══ SHARE SCRIPT & 3D TILT ═══ -->
 <script>
+    // ─── CREDENTIALS (Change these as needed) ───
+    const VALID_USERNAME = 'admin';
+    const VALID_PASSWORD = 'tile123';
+
+    // ─── INVENTORY URL (Replace with your actual live inventory link) ───
+    const INVENTORY_URL = 'https://docs.google.com/spreadsheets/d/YOUR_LIVE_INVENTORY_SHEET_ID/edit';
+
+    // ─── SHARE CARD ───
     function shareCard() {
         if (navigator.share) {
             navigator.share({
@@ -1330,8 +1604,80 @@ class="glass-btn">
         }
     }
 
-    // 3D TILT
+    // ─── OPEN LIVE INVENTORY (Triggers Login Modal) ───
+    function openLiveInventory() {
+        // Show the login modal
+        document.getElementById('loginModal').classList.add('active');
+        // Clear previous inputs and error
+        document.getElementById('loginUser').value = '';
+        document.getElementById('loginPass').value = '';
+        document.getElementById('loginError').classList.remove('show');
+        // Focus on username field
+        setTimeout(() => {
+            document.getElementById('loginUser').focus();
+        }, 100);
+    }
+
+    // ─── CLOSE LOGIN MODAL ───
+    function closeLoginModal() {
+        document.getElementById('loginModal').classList.remove('active');
+        document.getElementById('loginError').classList.remove('show');
+    }
+
+    // ─── HANDLE LOGIN ───
+    function handleLogin() {
+        const username = document.getElementById('loginUser').value.trim();
+        const password = document.getElementById('loginPass').value.trim();
+        const errorEl = document.getElementById('loginError');
+
+        // Check credentials
+        if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+            // Success — close modal and open inventory
+            errorEl.classList.remove('show');
+            closeLoginModal();
+
+            // Open inventory URL
+            if (INVENTORY_URL.includes('YOUR_LIVE_INVENTORY_SHEET_ID')) {
+                alert('🔧 Please update the INVENTORY_URL in the script with your actual live inventory link.');
+            } else {
+                window.open(INVENTORY_URL, '_blank');
+            }
+        } else {
+            // Show error
+            errorEl.classList.add('show');
+            // Shake animation (simple)
+            errorEl.style.animation = 'none';
+            setTimeout(() => {
+                errorEl.style.animation = 'fadeIn 0.3s ease';
+            }, 10);
+            // Clear password field
+            document.getElementById('loginPass').value = '';
+            document.getElementById('loginPass').focus();
+        }
+    }
+
+    // ─── ENTER KEY SUPPORT ON LOGIN ───
     document.addEventListener('DOMContentLoaded', function() {
+        const passField = document.getElementById('loginPass');
+        const userField = document.getElementById('loginUser');
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        }
+
+        passField.addEventListener('keydown', handleEnter);
+        userField.addEventListener('keydown', handleEnter);
+
+        // Click outside modal to close (optional)
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLoginModal();
+            }
+        });
+
+        // 3D TILT
         const card = document.getElementById('tiltCard');
         const wrapper = document.getElementById('tiltWrapper');
 
