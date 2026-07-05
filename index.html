@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Tile Planet · Premium Digital Card</title>
+
+    <!-- PWA: Manifest & Theme -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#D4AF37" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
     <style>
         /* ─── RESET & BASE ─── */
@@ -31,9 +37,7 @@
             --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 80px rgba(255, 215, 0, 0.04);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background: var(--dark-bg);
@@ -44,19 +48,10 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ─── SCROLLBAR ─── */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 20px;
-        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 20px; }
 
-        /* ─── CONTAINER ─── */
         .container {
             max-width: 430px;
             margin: 0 auto;
@@ -78,7 +73,6 @@
             z-index: 0;
         }
 
-        /* ─── GLASS CARD ─── */
         .glass-card {
             background: rgba(255, 255, 255, 0.07);
             backdrop-filter: blur(32px);
@@ -88,7 +82,7 @@
             padding: 18px 20px;
             box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 215, 0, 0.06);
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                box-shadow 0.4s ease;
+                        box-shadow 0.4s ease;
             position: relative;
             z-index: 1;
         }
@@ -98,7 +92,6 @@
             box-shadow: 0 28px 70px rgba(0, 0, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.04);
         }
 
-        /* ─── HERO ─── */
         .hero {
             position: relative;
             padding: 14px 14px 20px;
@@ -132,7 +125,6 @@
             z-index: 2;
         }
 
-        /* ─── LOGO ─── */
         .logo-wrap {
             display: flex;
             justify-content: center;
@@ -146,9 +138,7 @@
             transition: transform 0.5s ease;
         }
 
-        .logo:hover {
-            transform: scale(1.02);
-        }
+        .logo:hover { transform: scale(1.02); }
 
         .tagline {
             text-align: center;
@@ -162,13 +152,11 @@
             text-shadow: 0 2px 16px rgba(255, 215, 0, 0.15);
         }
 
-        /* ─── PERSPECTIVE WRAPPER (3D TILT) ─── */
         .tilt-wrapper {
             perspective: 1500px;
             transform-style: preserve-3d;
         }
 
-        /* ─── HERO INNER CARD (TILT CARD) ─── */
         .hero-card {
             background: rgba(0, 0, 0, 0.50);
             backdrop-filter: blur(36px);
@@ -183,7 +171,6 @@
             position: relative;
         }
 
-        /* ─── GOLD SHIMMER BORDER ─── */
         .hero-card::before {
             content: '';
             position: absolute;
@@ -201,18 +188,11 @@
         }
 
         @keyframes shimmerBorder {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* ─── GOLD TEXT — FIXED (No Blur, Full Highlight) ─── */
         .gold-text {
             color: #FFD700;
             text-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.2);
@@ -229,11 +209,8 @@
             transform: translateZ(30px);
         }
 
-        .name-box {
-            flex: 1;
-        }
+        .name-box { flex: 1; }
 
-        /* ─── NAME — LUXURY ─── */
         .name {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
@@ -263,7 +240,6 @@
             transform: translateZ(35px);
         }
 
-        /* ─── CONTACT BUTTON ─── */
         .contact-btn {
             display: inline-flex;
             align-items: center;
@@ -292,11 +268,8 @@
             box-shadow: 0 0 50px rgba(255, 215, 0, 0.12), inset 0 0 40px rgba(255, 215, 0, 0.04);
         }
 
-        .contact-btn .icon {
-            font-size: 18px;
-        }
+        .contact-btn .icon { font-size: 18px; }
 
-        /* ─── QR ─── */
         .contact-qr {
             width: 62px;
             min-width: 62px;
@@ -309,9 +282,7 @@
             transform: translateZ(40px);
         }
 
-        .contact-qr:hover {
-            transform: scale(1.04) translateZ(45px);
-        }
+        .contact-qr:hover { transform: scale(1.04) translateZ(45px); }
 
         .contact-qr img {
             width: 100%;
@@ -331,7 +302,6 @@
             text-transform: uppercase;
         }
 
-        /* ─── QUICK ACTIONS ─── */
         .quick-actions {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -370,7 +340,187 @@
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
         }
 
-        /* ─── SECTION TITLE ─── */
+        /* ─── INSTALL BUTTON ─── */
+        .install-btn-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 14px;
+            transform: translateZ(30px);
+        }
+
+        .install-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 230px;
+            height: 48px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ffd700, #f5a623);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            background-clip: padding-box;
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            color: #0a0a0a;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .install-btn .btn-icon { font-size: 18px; line-height: 1; }
+        .install-btn .btn-sub {
+            display: block;
+            font-size: 9px;
+            font-weight: 500;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
+            text-shadow: none;
+        }
+        .install-btn .btn-text-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+
+        .install-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4), 0 0 60px rgba(255, 215, 0, 0.1);
+            border-color: var(--gold-light);
+        }
+        .install-btn:active { transform: scale(0.97); }
+
+        .install-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            animation: rippleAnim 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes rippleAnim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        .install-hidden { display: none !important; }
+
+        /* ─── INSTRUCTION MODALS ─── */
+        .install-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .install-modal-overlay.active { display: flex; }
+
+        .install-modal-box {
+            background: rgba(20, 18, 16, 0.95);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px 28px;
+            max-width: 380px;
+            width: 100%;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            text-align: center;
+            position: relative;
+        }
+
+        .install-modal-box .close-modal {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .install-modal-box .close-modal:hover { color: #fff; }
+
+        .install-modal-box .modal-icon { font-size: 44px; display: block; margin-bottom: 8px; }
+        .install-modal-box h2 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .install-modal-box p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .install-modal-box .step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.05);
+        }
+
+        .install-modal-box .step .num {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--gold-light);
+            min-width: 28px;
+        }
+        .install-modal-box .step .desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .install-modal-box .step .desc small {
+            display: block;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .install-modal-box .got-it-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #ffd700, #f5a623);
+            color: #0a0a0a;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 6px;
+            font-family: 'Inter', sans-serif;
+        }
+        .install-modal-box .got-it-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ─── SECTIONS (Unchanged) ─── */
         .section-title {
             text-align: center;
             font-size: 20px;
@@ -392,16 +542,11 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4));
         }
-
         .section-title .line:last-child {
             background: linear-gradient(90deg, rgba(255, 215, 0, 0.4), transparent);
         }
+        .section-title .emoji { font-size: 18px; }
 
-        .section-title .emoji {
-            font-size: 18px;
-        }
-
-        /* ─── PRODUCT GRID ─── */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -414,10 +559,7 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-
-        .product:hover {
-            transform: translateY(-4px);
-        }
+        .product:hover { transform: translateY(-4px); }
 
         .product-img {
             width: 100%;
@@ -429,12 +571,10 @@
             background: rgba(255, 255, 255, 0.03);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-
         .product:hover .product-img {
             border-color: rgba(255, 215, 0, 0.35);
             box-shadow: 0 8px 30px rgba(255, 215, 0, 0.10);
         }
-
         .product span {
             display: block;
             margin-top: 6px;
@@ -444,7 +584,6 @@
             letter-spacing: 0.2px;
         }
 
-        /* ─── CATALOG GRID — ALL IN ONE LINE ─── */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -476,20 +615,8 @@
             box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.04);
         }
 
-        .catalog-card .icon-big {
-            font-size: 20px;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .catalog-card h3 {
-            font-size: 11px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -0.2px;
-            line-height: 1.2;
-        }
-
+        .catalog-card .icon-big { font-size: 20px; display: block; margin-bottom: 2px; }
+        .catalog-card h3 { font-size: 11px; font-weight: 700; color: #fff; letter-spacing: -0.2px; line-height: 1.2; }
         .catalog-card p {
             font-size: 8.5px;
             color: var(--text-muted);
@@ -513,7 +640,6 @@
             letter-spacing: 0.2px;
             margin-top: 2px;
         }
-
         .catalog-card .dl-btn:hover {
             background: rgba(255, 215, 0, 0.25);
             border-color: var(--gold-light);
@@ -521,7 +647,6 @@
             box-shadow: 0 0 40px rgba(255, 215, 0, 0.10);
         }
 
-        /* ─── NEW BADGE ─── */
         .badge-new {
             display: inline-block;
             font-size: 6.5px;
@@ -535,7 +660,6 @@
             margin-top: 2px;
         }
 
-        /* ─── COMPANY PROFILE ─── */
         .profile-img {
             width: 100%;
             border-radius: var(--radius-md);
@@ -560,7 +684,6 @@
             gap: 6px;
             padding: 3px 0;
         }
-
         .feature-list span::before {
             content: '◆';
             color: var(--gold-light);
@@ -568,12 +691,10 @@
             opacity: 0.9;
         }
 
-        /* ─── SINGLE BUTTON WRAP (For Company Profile) ─── */
         .single-btn-wrap {
             margin-top: 14px;
             text-align: center;
         }
-
         .single-btn-wrap .contact-btn {
             width: 100%;
             justify-content: center;
@@ -581,20 +702,13 @@
             padding: 12px 16px;
         }
 
-        /* ─── TABLE ─── */
         .info-table {
             width: 100%;
             font-size: 15px;
             line-height: 2.2;
             border-collapse: collapse;
         }
-
-        .info-table td {
-            padding: 3px 0;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
+        .info-table td { padding: 3px 0; color: var(--text-secondary); font-weight: 500; }
         .info-table .label {
             color: var(--gold-light);
             font-weight: 600;
@@ -602,45 +716,23 @@
             letter-spacing: 0.2px;
             font-size: 13px;
         }
+        .info-table .value { color: #fff; font-weight: 500; }
 
-        .info-table .value {
-            color: #fff;
-            font-weight: 500;
-        }
+        .stock-name { font-size: 20px; font-weight: 700; color: #4cd964; letter-spacing: -0.3px; }
+        .stock-phone { font-size: 17px; color: var(--text-secondary); margin: 2px 0 12px; }
 
-        /* ─── STOCK / SAMPLING / PAYMENT ─── */
-        .stock-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: #4cd964;
-            letter-spacing: -0.3px;
-        }
-
-        .stock-phone {
-            font-size: 17px;
-            color: var(--text-secondary);
-            margin: 2px 0 12px;
-        }
-
-        /* ─── BUTTON GROUP (Stock + Live Inventory) ─── */
         .btn-group {
             display: flex;
             flex-direction: column;
             gap: 10px;
             margin-top: 4px;
         }
-
-        .btn-group .contact-btn {
-            width: 100%;
-            justify-content: center;
-            margin-top: 0;
-        }
+        .btn-group .contact-btn { width: 100%; justify-content: center; margin-top: 0; }
 
         .btn-live-inventory {
             background: linear-gradient(135deg, rgba(0, 200, 255, 0.15), rgba(0, 200, 255, 0.04)) !important;
             border-color: rgba(0, 200, 255, 0.30) !important;
         }
-
         .btn-live-inventory:hover {
             background: linear-gradient(135deg, rgba(0, 200, 255, 0.25), rgba(0, 200, 255, 0.08)) !important;
             border-color: #00c8ff !important;
@@ -658,15 +750,113 @@
         }
 
         @keyframes pulse-dot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.4;
-                transform: scale(0.7);
-            }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        .payment-img {
+            width: 180px;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+            border-radius: var(--radius-md);
+            background: #fff;
+            padding: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.08);
+        }
+
+        .upi-id { margin-top: 12px; font-size: 15px; color: var(--text-secondary); }
+        .upi-id b {
+            color: #fff;
+            font-weight: 700;
+            display: block;
+            margin-top: 2px;
+            font-size: 17px;
+            letter-spacing: 0.2px;
+        }
+
+        .google-review-wrap { text-align: center; padding: 8px 0; }
+
+        .google-review-wrap .google-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .google-review-wrap .google-brand .g { font-size: 28px; font-weight: 800; }
+        .g-1 { color: #4285F4; }
+        .g-2 { color: #EA4335; }
+        .g-3 { color: #FBBC05; }
+        .g-4 { color: #4285F4; }
+        .g-5 { color: #34A853; }
+        .g-6 { color: #EA4335; }
+
+        .stars-bright {
+            font-size: 48px;
+            color: #FFD700;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.40), 0 0 80px rgba(255, 215, 0, 0.15);
+            display: block;
+            margin-bottom: 4px;
+            letter-spacing: 6px;
+        }
+
+        .two-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 12px;
+        }
+
+        .two-grid .glass-btn {
+            padding: 16px 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            letter-spacing: 0.2px;
+        }
+        .two-grid .glass-btn .icon { font-size: 22px; }
+
+        .map-img {
+            width: 100%;
+            border-radius: var(--radius-md);
+            margin-bottom: 14px;
+            border: 1px solid rgba(255, 215, 0, 0.06);
+        }
+
+        .footer-card {
+            margin: 12px;
+            text-align: center;
+            padding: 24px 16px 18px;
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.06);
+        }
+
+        .footer-logo {
+            width: 130px;
+            display: block;
+            margin: 0 auto 10px;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5)) brightness(1.05);
+        }
+
+        .footer-card .brand { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+        .footer-card .brand span { color: var(--gold-light); }
+        .footer-card .sub { color: var(--text-secondary); font-size: 13px; margin-bottom: 4px; letter-spacing: 0.5px; }
+        .footer-card .slogan-highlight {
+            color: var(--gold-light);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+        }
+        .footer-card .copy {
+            margin-top: 14px;
+            color: var(--text-muted);
+            font-size: 11px;
+            border-top: 1px solid rgba(255, 215, 0, 0.05);
+            padding-top: 14px;
+            letter-spacing: 0.3px;
         }
 
         /* ─── LOGIN MODAL ─── */
@@ -683,21 +873,7 @@
             padding: 20px;
             animation: fadeIn 0.3s ease;
         }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal-box {
             background: rgba(20, 18, 16, 0.95);
@@ -713,31 +889,11 @@
             position: relative;
         }
 
-        .modal-box .modal-icon {
-            font-size: 42px;
-            display: block;
-            margin-bottom: 6px;
-        }
+        .modal-box .modal-icon { font-size: 42px; display: block; margin-bottom: 6px; }
+        .modal-box h2 { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -0.3px; margin-bottom: 4px; }
+        .modal-box p { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; }
 
-        .modal-box h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -0.3px;
-            margin-bottom: 4px;
-        }
-
-        .modal-box p {
-            color: var(--text-muted);
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-
-        .modal-box .input-group {
-            margin-bottom: 14px;
-            text-align: left;
-        }
-
+        .modal-box .input-group { margin-bottom: 14px; text-align: left; }
         .modal-box .input-group label {
             display: block;
             font-size: 11px;
@@ -760,23 +916,17 @@
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
             outline: none;
         }
-
         .modal-box .input-group input:focus {
             border-color: rgba(255, 215, 0, 0.40);
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.05);
         }
-
-        .modal-box .input-group input::placeholder {
-            color: var(--text-muted);
-            font-size: 13px;
-        }
+        .modal-box .input-group input::placeholder { color: var(--text-muted); font-size: 13px; }
 
         .modal-box .modal-actions {
             display: flex;
             gap: 10px;
             margin-top: 6px;
         }
-
         .modal-box .modal-actions button {
             flex: 1;
             padding: 12px;
@@ -788,25 +938,21 @@
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
         }
-
         .modal-box .modal-actions .btn-login {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.08));
             border: 1px solid rgba(255, 215, 0, 0.30);
             color: #fff;
         }
-
         .modal-box .modal-actions .btn-login:hover {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.35), rgba(255, 215, 0, 0.12));
             border-color: var(--gold-light);
             transform: scale(1.02);
         }
-
         .modal-box .modal-actions .btn-cancel {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.06);
             color: var(--text-muted);
         }
-
         .modal-box .modal-actions .btn-cancel:hover {
             background: rgba(255, 255, 255, 0.10);
             border-color: rgba(255, 255, 255, 0.15);
@@ -820,10 +966,7 @@
             min-height: 20px;
             display: none;
         }
-
-        .modal-box .error-msg.show {
-            display: block;
-        }
+        .modal-box .error-msg.show { display: block; }
 
         .modal-box .close-modal {
             position: absolute;
@@ -837,290 +980,52 @@
             transition: color 0.3s ease;
             font-family: 'Inter', sans-serif;
         }
-
-        .modal-box .close-modal:hover {
-            color: #fff;
-        }
-
-        /* ─── PAYMENT ─── */
-        .payment-img {
-            width: 180px;
-            max-width: 100%;
-            display: block;
-            margin: 0 auto;
-            border-radius: var(--radius-md);
-            background: #fff;
-            padding: 8px;
-            border: 1px solid rgba(255, 215, 0, 0.08);
-        }
-
-        .upi-id {
-            margin-top: 12px;
-            font-size: 15px;
-            color: var(--text-secondary);
-        }
-
-        .upi-id b {
-            color: #fff;
-            font-weight: 700;
-            display: block;
-            margin-top: 2px;
-            font-size: 17px;
-            letter-spacing: 0.2px;
-        }
-
-        /* ─── GOOGLE REVIEWS ─── */
-        .google-review-wrap {
-            text-align: center;
-            padding: 8px 0;
-        }
-
-        .google-review-wrap .google-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 6px;
-        }
-
-        .google-review-wrap .google-brand .g {
-            font-size: 28px;
-            font-weight: 800;
-        }
-        .google-review-wrap .google-brand .g-1 {
-            color: #4285F4;
-        }
-        .google-review-wrap .google-brand .g-2 {
-            color: #EA4335;
-        }
-        .google-review-wrap .google-brand .g-3 {
-            color: #FBBC05;
-        }
-        .google-review-wrap .google-brand .g-4 {
-            color: #4285F4;
-        }
-        .google-review-wrap .google-brand .g-5 {
-            color: #34A853;
-        }
-        .google-review-wrap .google-brand .g-6 {
-            color: #EA4335;
-        }
-
-        .stars-bright {
-            font-size: 48px;
-            color: #FFD700;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.40), 0 0 80px rgba(255, 215, 0, 0.15);
-            display: block;
-            margin-bottom: 4px;
-            letter-spacing: 6px;
-        }
-
-        /* ─── TWO GRID ─── */
-        .two-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            padding: 0 12px;
-        }
-
-        .two-grid .glass-btn {
-            padding: 16px 8px;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: var(--radius-md);
-            letter-spacing: 0.2px;
-        }
-
-        .two-grid .glass-btn .icon {
-            font-size: 22px;
-        }
-
-        /* ─── LOCATION ─── */
-        .map-img {
-            width: 100%;
-            border-radius: var(--radius-md);
-            margin-bottom: 14px;
-            border: 1px solid rgba(255, 215, 0, 0.06);
-        }
-
-        /* ─── FOOTER ─── */
-        .footer-card {
-            margin: 12px;
-            text-align: center;
-            padding: 24px 16px 18px;
-            border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 215, 0, 0.06);
-        }
-
-        .footer-logo {
-            width: 130px;
-            display: block;
-            margin: 0 auto 10px;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5)) brightness(1.05);
-        }
-
-        .footer-card .brand {
-            font-size: 20px;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: -0.3px;
-        }
-
-        .footer-card .brand span {
-            color: var(--gold-light);
-        }
-
-        .footer-card .sub {
-            color: var(--text-secondary);
-            font-size: 13px;
-            margin-bottom: 4px;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-card .slogan-highlight {
-            color: var(--gold-light);
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 12px;
-            letter-spacing: 0.3px;
-        }
-
-        .footer-card .copy {
-            margin-top: 14px;
-            color: var(--text-muted);
-            font-size: 11px;
-            border-top: 1px solid rgba(255, 215, 0, 0.05);
-            padding-top: 14px;
-            letter-spacing: 0.3px;
-        }
+        .modal-box .close-modal:hover { color: #fff; }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 400px) {
-            .catalog-grid {
-                gap: 6px;
-                padding: 0 8px;
-            }
-            .catalog-card {
-                padding: 10px 4px 10px;
-                min-height: 110px;
-            }
-            .catalog-card h3 {
-                font-size: 9px;
-            }
-            .catalog-card p {
-                font-size: 7px;
-                margin-bottom: 4px;
-            }
-            .catalog-card .dl-btn {
-                font-size: 7px;
-                padding: 3px 6px;
-            }
-            .catalog-card .icon-big {
-                font-size: 16px;
-            }
-            .badge-new {
-                font-size: 5.5px;
-                padding: 0 5px;
-            }
-            .name {
-                font-size: 26px;
-            }
-            .name .badge {
-                font-size: 10px;
-                padding: 1px 10px;
-            }
-            .product-grid {
-                gap: 6px;
-                padding: 0 8px;
-            }
-            .product-img {
-                border-radius: var(--radius-sm);
-            }
-            .product span {
-                font-size: 10px;
-            }
-            .two-grid {
-                gap: 8px;
-                padding: 0 8px;
-            }
-            .two-grid .glass-btn {
-                font-size: 11px;
-                padding: 12px 6px;
-            }
-            .contact-btn {
-                font-size: 13px;
-                padding: 10px 16px;
-            }
-            .section-title {
-                font-size: 17px;
-                gap: 6px;
-            }
-            .section-title .line {
-                max-width: 16px;
-            }
-            .feature-list {
-                font-size: 12px;
-                gap: 2px 8px;
-            }
-            .footer-logo {
-                width: 100px;
-            }
-            .single-btn-wrap .contact-btn {
-                font-size: 13px;
-                padding: 10px;
-            }
-            .stars-bright {
-                font-size: 36px;
-                letter-spacing: 4px;
-            }
-            .google-review-wrap .google-brand .g {
-                font-size: 22px;
-            }
-            .btn-group .contact-btn {
-                font-size: 13px;
-                padding: 10px 16px;
-            }
-            .modal-box {
-                padding: 24px 18px 20px;
-            }
-            .modal-box h2 {
-                font-size: 17px;
-            }
-            .modal-box .modal-actions button {
-                font-size: 12px;
-                padding: 10px;
-            }
+            .catalog-grid { gap: 6px; padding: 0 8px; }
+            .catalog-card { padding: 10px 4px; min-height: 110px; }
+            .catalog-card h3 { font-size: 9px; }
+            .catalog-card p { font-size: 7px; margin-bottom: 4px; }
+            .catalog-card .dl-btn { font-size: 7px; padding: 3px 6px; }
+            .catalog-card .icon-big { font-size: 16px; }
+            .badge-new { font-size: 5.5px; padding: 0 5px; }
+            .name { font-size: 26px; }
+            .name .badge { font-size: 10px; padding: 1px 10px; }
+            .product-grid { gap: 6px; padding: 0 8px; }
+            .product-img { border-radius: var(--radius-sm); }
+            .product span { font-size: 10px; }
+            .two-grid { gap: 8px; padding: 0 8px; }
+            .two-grid .glass-btn { font-size: 11px; padding: 12px 6px; }
+            .contact-btn { font-size: 13px; padding: 10px 16px; }
+            .section-title { font-size: 17px; gap: 6px; }
+            .section-title .line { max-width: 16px; }
+            .feature-list { font-size: 12px; gap: 2px 8px; }
+            .footer-logo { width: 100px; }
+            .single-btn-wrap .contact-btn { font-size: 13px; padding: 10px; }
+            .stars-bright { font-size: 36px; letter-spacing: 4px; }
+            .google-review-wrap .google-brand .g { font-size: 22px; }
+            .btn-group .contact-btn { font-size: 13px; padding: 10px 16px; }
+            .install-btn { width: 200px; height: 44px; font-size: 13px; }
+            .install-btn .btn-sub { font-size: 8px; }
+            .modal-box { padding: 24px 18px 20px; }
+            .modal-box h2 { font-size: 17px; }
+            .modal-box .modal-actions button { font-size: 12px; padding: 10px; }
+            .install-modal-box { padding: 24px 18px 20px; }
+            .install-modal-box h2 { font-size: 17px; }
+            .install-modal-box .step { padding: 10px 12px; }
+            .install-modal-box .step .desc { font-size: 13px; }
         }
 
         @media (max-width: 360px) {
-            .catalog-grid {
-                gap: 4px;
-                padding: 0 6px;
-            }
-            .catalog-card {
-                padding: 8px 3px 8px;
-                min-height: 95px;
-                border-radius: var(--radius-sm);
-            }
-            .catalog-card h3 {
-                font-size: 8px;
-            }
-            .catalog-card p {
-                font-size: 6.5px;
-                margin-bottom: 3px;
-            }
-            .catalog-card .dl-btn {
-                font-size: 6.5px;
-                padding: 2px 5px;
-            }
-            .catalog-card .icon-big {
-                font-size: 14px;
-            }
-            .badge-new {
-                font-size: 5px;
-                padding: 0 4px;
-            }
+            .catalog-grid { gap: 4px; padding: 0 6px; }
+            .catalog-card { padding: 8px 3px; min-height: 95px; border-radius: var(--radius-sm); }
+            .catalog-card h3 { font-size: 8px; }
+            .catalog-card p { font-size: 6.5px; margin-bottom: 3px; }
+            .catalog-card .dl-btn { font-size: 6.5px; padding: 2px 5px; }
+            .catalog-card .icon-big { font-size: 14px; }
+            .badge-new { font-size: 5px; padding: 0 4px; }
         }
 
         @media (min-width: 431px) {
@@ -1131,39 +1036,16 @@
             }
         }
 
-        /* ─── UTILITY ─── */
-        .mt-8 {
-            margin-top: 8px;
-        }
-        .mt-12 {
-            margin-top: 12px;
-        }
-        .mt-16 {
-            margin-top: 16px;
-        }
-        .mb-8 {
-            margin-bottom: 8px;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .w-full {
-            width: 100%;
-        }
-        .justify-center {
-            justify-content: center;
-        }
-        .gap-6 {
-            gap: 6px;
-        }
-        .flex {
-            display: flex;
-        }
-        .flex-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .mt-8 { margin-top: 8px; }
+        .mt-12 { margin-top: 12px; }
+        .mt-16 { margin-top: 16px; }
+        .mb-8 { margin-bottom: 8px; }
+        .text-center { text-align: center; }
+        .w-full { width: 100%; }
+        .justify-center { justify-content: center; }
+        .gap-6 { gap: 6px; }
+        .flex { display: flex; }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
@@ -1180,7 +1062,6 @@
 
                 <div class="tagline">✦ Premium Tiles · Perfect Spaces ✦</div>
 
-                <!-- 3D Tilt Wrapper -->
                 <div class="tilt-wrapper" id="tiltWrapper">
                     <div class="hero-card" id="tiltCard">
 
@@ -1215,6 +1096,17 @@
                             <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn">
                                 <span class="icon">📍</span> MAP
                             </a>
+                        </div>
+
+                        <!-- ═══ INSTALL BUTTON (Added) ═══ -->
+                        <div class="install-btn-wrapper">
+                            <button id="installAppBtn" class="install-btn">
+                                <span class="btn-icon">📲</span>
+                                <span class="btn-text-wrap">
+                                    Install App
+                                    <span class="btn-sub">Open in One Click</span>
+                                </span>
+                            </button>
                         </div>
 
                     </div>
@@ -1253,7 +1145,7 @@
             </div>
         </div>
 
-        <!-- ═══ CATALOGUES — ALL IN ONE LINE ═══ -->
+        <!-- ═══ CATALOGUES ═══ -->
         <div class="section-title">
             <span class="line"></span>
             <span class="emoji">📚</span> CATALOGUES
@@ -1261,442 +1153,475 @@
         </div>
 
         <div class="catalog-grid">
-
-            <!-- 1. Wall Tiles -->
             <div class="catalog-card">
                 <span class="icon-big">🧱</span>
                 <h3>Wall Tiles</h3>
                 <p>Premium Collection</p>
-                <a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view"
-                target="_blank"
-                class="dl-btn">
-                ⬇ DOWNLOAD
+                <a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view" target="_blank" class="dl-btn">⬇ DOWNLOAD</a>
+            </div>
+            <div class="catalog-card">
+                <span class="icon-big">🟫</span>
+                <h3>Floor Tiles</h3>
+                <p>600×600 Collection</p>
+                <a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view" target="_blank" class="dl-btn">⬇ DOWNLOAD</a>
+            </div>
+            <div class="catalog-card" style="border-color: rgba(255,215,0,0.25); background: rgba(255,215,0,0.07);">
+                <span class="icon-big">📐</span>
+                <h3 style="color: var(--gold-light);">300×600mm</h3>
+                <p style="color: var(--text-secondary);">Wall Tiles · Modern</p>
+                <span class="badge-new">✦ New</span>
+                <a href="https://drive.google.com/file/d/1OoOO2rFnY4Bw6tkv5vGwYsrAz4bSGLU6/view?usp=sharing" target="_blank" class="dl-btn" style="border-color: rgba(255,215,0,0.40); background: rgba(255,215,0,0.15);">⬇ DOWNLOAD</a>
+            </div>
+            <div class="catalog-card" style="border-color: rgba(76,217,100,0.20); background: rgba(76,217,100,0.05);">
+                <span class="icon-big">🔲</span>
+                <h3 style="color: #4cd964;">600×600 Matt</h3>
+                <p style="color: var(--text-secondary);">Premium Matt Finish</p>
+                <span class="badge-new" style="background: linear-gradient(135deg, #4cd964, #2ecc71); color: #0a0a0a;">✦ New</span>
+                <a href="https://drive.google.com/file/d/1mbzMv5LI4UY3YTGXxXRWoE81Y_6w5j7g/view" target="_blank" class="dl-btn" style="border-color: rgba(76,217,100,0.30); background: rgba(76,217,100,0.12);">⬇ DOWNLOAD</a>
+            </div>
+        </div>
+
+        <!-- ═══ COMPANY PROFILE ═══ -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">🏛️</span> COMPANY PROFILE
+            <span class="line"></span>
+        </div>
+
+        <div class="glass-card" style="margin:0 12px;">
+            <img src="Company.png" class="profile-img" alt="Company" />
+            <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px; text-align: center;">Tile Planet</h2>
+            <p style="color:var(--text-secondary); margin-top:2px; font-size:14px; text-align: center;">Premium Tiles Supplier - 2018</p>
+            <div class="single-btn-wrap">
+                <a href="company-profile.pdf" target="_blank" class="contact-btn">📄 VIEW / DOWNLOAD PROFILE</a>
+            </div>
+            <div class="feature-list" style="text-align: left;">
+                <span>Wall Tiles</span>
+                <span>Floor Tiles</span>
+                <span>Vitrified Tiles</span>
+                <span>Parking Tiles</span>
+                <span>Bathroom Fitting</span>
+                <span>Sanityware</span>
+            </div>
+        </div>
+
+        <!-- ═══ COMPANY DETAILS ═══ -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">📋</span> COMPANY DETAILS
+            <span class="line"></span>
+        </div>
+
+        <div class="glass-card" style="margin:0 12px;">
+            <table class="info-table">
+                <tr><td class="label">GST</td><td class="value">27AIPPR7422Q1Z9</td></tr>
+                <tr><td class="label">Owner</td><td class="value">Ramesh Chotalia</td></tr>
+                <tr><td class="label">Business</td><td class="value">Retailer &amp; Supplier</td></tr>
+                <tr><td class="label">Experience</td><td class="value">10+ Years</td></tr>
+                <tr><td class="label">Address</td><td class="value" style="font-size:14px; line-height:1.6;">Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK, Pune – 411046</td></tr>
+            </table>
+        </div>
+
+        <!-- ═══ STOCK ENQUIRY ═══ -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">📦</span> STOCK ENQUIRY / SAMPLING / PAYMENT
+            <span class="line"></span>
+        </div>
+
+        <div class="glass-card" style="margin:0 12px; text-align: center;">
+            <div class="stock-name">Harshad Dalvi</div>
+            <div class="stock-phone">📱 +91 9067121697</div>
+            <div class="btn-group">
+                <a href="tel:+919067121697" class="contact-btn" style="background:rgba(76,217,100,0.10); border-color:rgba(76,217,100,0.25);">📞 CONTACT FOR STOCK</a>
+                <a href="#" class="contact-btn btn-live-inventory" onclick="openLiveInventory(); return false;">
+                    <span class="pulse-dot"></span> LIVE INVENTORY
+                </a>
+            </div>
+        </div>
+
+        <!-- ═══ PAYMENT QR ═══ -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">💳</span> PAYMENT
+            <span class="line"></span>
+        </div>
+
+        <div class="glass-card" style="margin:0 12px; text-align:center;">
+            <img src="upi-qr.png" class="payment-img" alt="UPI QR" />
+            <div class="upi-id">
+                UPI ID
+                <b>ramesh.chotalia13@oksbi</b>
+            </div>
+            <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="contact-btn w-full justify-center" style="margin-top:14px;">💳 PAY NOW</a>
+        </div>
+
+        <!-- ═══ GOOGLE REVIEWS ═══ -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">⭐</span> GOOGLE REVIEWS
+            <span class="line"></span>
+        </div>
+
+        <div class="glass-card" style="margin:0 12px; text-align:center;">
+            <div class="google-review-wrap">
+                <div class="google-brand">
+                    <span class="g g-1">G</span>
+                    <span class="g g-2">o</span>
+                    <span class="g g-3">o</span>
+                    <span class="g g-4">g</span>
+                    <span class="g g-5">l</span>
+                    <span class="g g-6">e</span>
+                </div>
+                <span class="stars-bright">★★★★★</span>
+                <h2 style="font-size:19px; font-weight:700; margin-bottom:2px;">Love Our Service?</h2>
+                <p style="color:var(--text-secondary); font-size:14px;">Share your experience on Google</p>
+                <a href="https://g.page/r/CXkwBZtskIM3EAE/review" target="_blank" class="contact-btn w-full justify-center" style="margin-top:14px;">⭐ WRITE REVIEW</a>
+            </div>
+        </div>
+
+        <!-- ═══ FOLLOW US ═══ -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">📱</span> FOLLOW US
+            <span class="line"></span>
+        </div>
+
+        <div class="two-grid">
+            <a href="https://www.instagram.com/ramesh.chotalia13/" target="_blank" class="glass-btn"><span class="icon">📸</span> Instagram</a>
+            <a href="https://www.facebook.com/tileplanet.co.in/" target="_blank" class="glass-btn"><span class="icon">👍</span> Facebook</a>
+            <a href="https://www.youtube.com/results?search_query=tile+planet" target="_blank" class="glass-btn"><span class="icon">▶️</span> YouTube</a>
+            <a href="https://wa.me/919922533033" target="_blank" class="glass-btn"><span class="icon">💬</span> WhatsApp</a>
+        </div>
+
+        <!-- ═══ QUICK ACTIONS ═══ -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">⚡</span> QUICK ACTIONS
+            <span class="line"></span>
+        </div>
+
+        <div class="two-grid">
+            <a href="tileplanet.vcf" download class="glass-btn">
+                <span class="icon">💾</span> Save Contact
+            </a>
+            <a href="#" onclick="shareCard()" class="glass-btn">
+                <span class="icon">📤</span> Share Card
+            </a>
+            <a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20Please%20send%20me%20a%20quotation." target="_blank" class="glass-btn">
+                <span class="icon">📝</span> Get Quote
+            </a>
+            <a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20I%20want%20an%20enquiry." target="_blank" class="glass-btn">
+                <span class="icon">📩</span> Enquiry
             </a>
         </div>
 
-        <!-- 2. Floor Tiles -->
-        <div class="catalog-card">
-            <span class="icon-big">🟫</span>
-            <h3>Floor Tiles</h3>
-            <p>600×600 Collection</p>
-            <a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view"
-            target="_blank"
-            class="dl-btn">
-            ⬇ DOWNLOAD
-        </a>
-    </div>
-
-    <!-- 3. 300×600mm Wall Tiles (New) -->
-    <div class="catalog-card" style="border-color: rgba(255,215,0,0.25); background: rgba(255,215,0,0.07);">
-        <span class="icon-big">📐</span>
-        <h3 style="color: var(--gold-light);">300×600mm</h3>
-        <p style="color: var(--text-secondary);">Wall Tiles · Modern</p>
-        <span class="badge-new">✦ New</span>
-        <a href="https://drive.google.com/file/d/1OoOO2rFnY4Bw6tkv5vGwYsrAz4bSGLU6/view?usp=sharing"
-        target="_blank"
-        class="dl-btn" style="border-color: rgba(255,215,0,0.40); background: rgba(255,215,0,0.15);">
-        ⬇ DOWNLOAD
-    </a>
-</div>
-
-<!-- 4. 600×600 Matt Finishing (NEW) -->
-<div class="catalog-card" style="border-color: rgba(76,217,100,0.20); background: rgba(76,217,100,0.05);">
-    <span class="icon-big">🔲</span>
-    <h3 style="color: #4cd964;">600×600 Matt</h3>
-    <p style="color: var(--text-secondary);">Premium Matt Finish</p>
-    <span class="badge-new" style="background: linear-gradient(135deg, #4cd964, #2ecc71); color: #0a0a0a;">✦ New</span>
-    <a href="https://drive.google.com/file/d/1mbzMv5LI4UY3YTGXxXRWoE81Y_6w5j7g/view?usp=sharing"
-    target="_blank"
-    class="dl-btn" style="border-color: rgba(76,217,100,0.30); background: rgba(76,217,100,0.12);">
-    ⬇ DOWNLOAD
-</a>
-</div>
-
-</div>
-
-<!-- ═══ COMPANY PROFILE ═══ -->
-<div class="section-title">
-    <span class="line"></span>
-    <span class="emoji">🏛️</span> COMPANY PROFILE
-    <span class="line"></span>
-</div>
-
-<div class="glass-card" style="margin:0 12px;">
-
-    <img src="Company.png" class="profile-img" alt="Company" />
-
-    <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px; text-align: center;">Tile Planet</h2>
-    <p style="color:var(--text-secondary); margin-top:2px; font-size:14px; text-align: center;">Premium Tiles Supplier - 2018</p>
-
-    <div class="single-btn-wrap">
-        <a href="company-profile.pdf" target="_blank" class="contact-btn">
-            📄 VIEW / DOWNLOAD PROFILE
-        </a>
-    </div>
-
-    <div class="feature-list" style="text-align: left;">
-        <span>Wall Tiles</span>
-        <span>Floor Tiles</span>
-        <span>Vitrified Tiles</span>
-        <span>Parking Tiles</span>
-        <span>Bathroom Fitting</span>
-        <span>Sanityware</span>
-    </div>
-
-</div>
-
-<!-- ═══ COMPANY DETAILS ═══ -->
-<div class="section-title">
-    <span class="line"></span>
-    <span class="emoji">📋</span> COMPANY DETAILS
-    <span class="line"></span>
-</div>
-
-<div class="glass-card" style="margin:0 12px;">
-
-    <table class="info-table">
-        <tr><td class="label">GST</td><td class="value">27AIPPR7422Q1Z9</td></tr>
-        <tr><td class="label">Owner</td><td class="value">Ramesh Chotalia</td></tr>
-        <tr><td class="label">Business</td><td class="value">Retailer &amp; Supplier</td></tr>
-        <tr><td class="label">Experience</td><td class="value">10+ Years</td></tr>
-        <tr><td class="label">Address</td><td class="value" style="font-size:14px; line-height:1.6;">Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK, Pune – 411046</td></tr>
-    </table>
-
-</div>
-
-<!-- ═══ STOCK ENQUIRY / SAMPLING / PAYMENT ═══ -->
-<div class="section-title">
-    <span class="line"></span>
-    <span class="emoji">📦</span> STOCK ENQUIRY / SAMPLING / PAYMENT
-    <span class="line"></span>
-</div>
-
-<div class="glass-card" style="margin:0 12px; text-align: center;">
-
-    <div class="stock-name">Harshad Dalvi</div>
-    <div class="stock-phone">📱 +91 9067121697</div>
-
-    <!-- ─── BUTTON GROUP: Contact for Stock + Live Inventory ─── -->
-    <div class="btn-group">
-        <a href="tel:+919067121697" class="contact-btn" style="background:rgba(76,217,100,0.10); border-color:rgba(76,217,100,0.25);">
-            📞 CONTACT FOR STOCK
-        </a>
-
-        <a href="#" class="contact-btn btn-live-inventory" onclick="openLiveInventory(); return false;">
-            <span class="pulse-dot"></span> LIVE INVENTORY
-        </a>
-    </div>
-
-</div>
-
-<!-- ═══ PAYMENT QR ═══ -->
-<div class="section-title">
-    <span class="line"></span>
-    <span class="emoji">💳</span> PAYMENT
-    <span class="line"></span>
-</div>
-
-<div class="glass-card" style="margin:0 12px; text-align:center;">
-
-    <img src="upi-qr.png" class="payment-img" alt="UPI QR" />
-
-    <div class="upi-id">
-        UPI ID
-        <b>ramesh.chotalia13@oksbi</b>
-    </div>
-
-    <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia"
-    class="contact-btn w-full justify-center"
-    style="margin-top:14px;">
-    💳 PAY NOW
-</a>
-
-</div>
-
-<!-- ═══ GOOGLE REVIEWS ═══ -->
-<div class="section-title">
-    <span class="line"></span>
-    <span class="emoji">⭐</span> GOOGLE REVIEWS
-    <span class="line"></span>
-</div>
-
-<div class="glass-card" style="margin:0 12px; text-align:center;">
-
-    <div class="google-review-wrap">
-
-        <div class="google-brand">
-            <span class="g g-1">G</span>
-            <span class="g g-2">o</span>
-            <span class="g g-3">o</span>
-            <span class="g g-4">g</span>
-            <span class="g g-5">l</span>
-            <span class="g g-6">e</span>
+        <!-- ═══ LOCATION ═══ -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">📍</span> LOCATION
+            <span class="line"></span>
         </div>
 
-        <span class="stars-bright">★★★★★</span>
-
-        <h2 style="font-size:19px; font-weight:700; margin-bottom:2px;">Love Our Service?</h2>
-        <p style="color:var(--text-secondary); font-size:14px;">Share your experience on Google</p>
-
-        <a href="https://g.page/r/CXkwBZtskIM3EAE/review"
-        target="_blank"
-        class="contact-btn w-full justify-center"
-        style="margin-top:14px;">
-        ⭐ WRITE REVIEW
-    </a>
-
-</div>
-
-</div>
-
-<!-- ═══ FOLLOW US ═══ -->
-<div class="section-title">
-    <span class="line"></span>
-    <span class="emoji">📱</span> FOLLOW US
-    <span class="line"></span>
-</div>
-
-<div class="two-grid">
-
-    <a href="https://www.instagram.com/ramesh.chotalia13/"
-    target="_blank"
-    class="glass-btn">
-    <span class="icon">📸</span> Instagram
-</a>
-
-<a href="https://www.facebook.com/tileplanet.co.in/"
-target="_blank"
-class="glass-btn">
-<span class="icon">👍</span> Facebook
-</a>
-
-<a href="https://www.youtube.com/results?search_query=tile+planet"
-target="_blank"
-class="glass-btn">
-<span class="icon">▶️</span> YouTube
-</a>
-
-<a href="https://wa.me/919922533033"
-target="_blank"
-class="glass-btn">
-<span class="icon">💬</span> WhatsApp
-</a>
-
-</div>
-
-<!-- ═══ QUICK ACTIONS ═══ -->
-<div class="section-title">
-    <span class="line"></span>
-    <span class="emoji">⚡</span> QUICK ACTIONS
-    <span class="line"></span>
-</div>
-
-<div class="two-grid">
-
-    <a href="tileplanet.vcf"
-    download
-    class="glass-btn">
-    <span class="icon">💾</span> Save Contact
-</a>
-
-<a href="#"
-onclick="shareCard()"
-class="glass-btn">
-<span class="icon">📤</span> Share Card
-</a>
-
-<a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20Please%20send%20me%20a%20quotation."
-target="_blank"
-class="glass-btn">
-<span class="icon">📝</span> Get Quote
-</a>
-
-<a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20I%20want%20an%20enquiry."
-target="_blank"
-class="glass-btn">
-<span class="icon">📩</span> Enquiry
-</a>
-
-</div>
-
-<!-- ═══ LOCATION ═══ -->
-<div class="section-title">
-    <span class="line"></span>
-    <span class="emoji">📍</span> LOCATION
-    <span class="line"></span>
-</div>
-
-<div class="glass-card" style="margin:0 12px;">
-
-    <img src="map.jpeg" class="map-img" alt="Map" />
-
-    <a href="https://www.google.com/maps?q=18.452656,73.832591"
-    target="_blank"
-    class="contact-btn w-full justify-center">
-    📍 OPEN MAP
-</a>
-
-</div>
-
-<!-- ═══ FOOTER ═══ -->
-<div class="footer-card">
-
-    <img src="Logo.png" class="footer-logo" alt="Tile Planet" />
-
-    <div class="brand">🏛️ TILE <span>PLANET</span></div>
-    <div class="sub">Your One-Stop Tile Solution</div>
-    <div class="slogan-highlight">✦ Visit Our Showroom Once ✦</div>
-
-    <div class="copy">© 2026 Tile Planet. All Rights Reserved.</div>
-
-</div>
-
-</div>
-
-<!-- ═══ LOGIN MODAL ═══ -->
-<div class="modal-overlay" id="loginModal">
-    <div class="modal-box">
-        <button class="close-modal" onclick="closeLoginModal()">✕</button>
-        <span class="modal-icon">🔐</span>
-        <h2>Live Inventory</h2>
-        <p>Enter your credentials to access real-time stock</p>
-
-        <div class="input-group">
-            <label for="loginUser">Username</label>
-            <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username" />
+        <div class="glass-card" style="margin:0 12px;">
+            <img src="map.jpeg" class="map-img" alt="Map" />
+            <a href="https://www.google.com/maps?q=18.452656,73.832591" target="_blank" class="contact-btn w-full justify-center">📍 OPEN MAP</a>
         </div>
 
-        <div class="input-group">
-            <label for="loginPass">Password</label>
-            <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password" />
+        <!-- ═══ FOOTER ═══ -->
+        <div class="footer-card">
+            <img src="Logo.png" class="footer-logo" alt="Tile Planet" />
+            <div class="brand">🏛️ TILE <span>PLANET</span></div>
+            <div class="sub">Your One-Stop Tile Solution</div>
+            <div class="slogan-highlight">✦ Visit Our Showroom Once ✦</div>
+            <div class="copy">© 2026 Tile Planet. All Rights Reserved.</div>
         </div>
 
-        <div class="error-msg" id="loginError">❌ Invalid username or password. Please try again.</div>
+    </div>
 
-        <div class="modal-actions">
-            <button class="btn-cancel" onclick="closeLoginModal()">Cancel</button>
-            <button class="btn-login" onclick="handleLogin()">🔓 Login</button>
+    <!-- ═══ iOS INSTRUCTION MODAL ═══ -->
+    <div id="iosModal" class="install-modal-overlay">
+        <div class="install-modal-box">
+            <button class="close-modal" onclick="closeModal('iosModal')">✕</button>
+            <span class="modal-icon">📲</span>
+            <h2>Install Tile Planet App</h2>
+            <p>Follow these simple steps to add to your Home Screen</p>
+            <div class="step">
+                <span class="num">1</span>
+                <div class="desc">
+                    Tap the Share button
+                    <small>⬆️ at the bottom of Safari</small>
+                </div>
+            </div>
+            <div class="step">
+                <span class="num">2</span>
+                <div class="desc">
+                    Select "Add to Home Screen"
+                    <small>🟢 scroll down and tap</small>
+                </div>
+            </div>
+            <div class="step">
+                <span class="num">3</span>
+                <div class="desc">
+                    Tap "Add" in the top right
+                    <small>✅ done!</small>
+                </div>
+            </div>
+            <button class="got-it-btn" onclick="closeModal('iosModal')">Got it!</button>
         </div>
     </div>
-</div>
 
-<!-- ═══ SHARE SCRIPT & 3D TILT ═══ -->
-<script>
-    // ─── CREDENTIALS (Change these as needed) ───
-    const VALID_USERNAME = 'admin';
-    const VALID_PASSWORD = 'tile123';
+    <!-- ═══ ANDROID / GENERAL INSTRUCTION MODAL ═══ -->
+    <div id="androidModal" class="install-modal-overlay">
+        <div class="install-modal-box">
+            <button class="close-modal" onclick="closeModal('androidModal')">✕</button>
+            <span class="modal-icon">📲</span>
+            <h2>Add to Home Screen</h2>
+            <p>Install this app in one easy step</p>
+            <div class="step">
+                <span class="num">1</span>
+                <div class="desc">
+                    Tap the menu (⋮) or (︙) in your browser
+                    <small>usually at the top right</small>
+                </div>
+            </div>
+            <div class="step">
+                <span class="num">2</span>
+                <div class="desc">
+                    Select "Add to Home Screen" or "Install App"
+                    <small>scroll down if needed</small>
+                </div>
+            </div>
+            <div class="step">
+                <span class="num">3</span>
+                <div class="desc">
+                    Tap "Add" and you're done!
+                    <small>✅ app icon on your home screen</small>
+                </div>
+            </div>
+            <button class="got-it-btn" onclick="closeModal('androidModal')">Got it!</button>
+        </div>
+    </div>
 
-    // ─── INVENTORY URL (Replace with your actual live inventory link) ───
-    const INVENTORY_URL = 'https://docs.google.com/spreadsheets/d/YOUR_LIVE_INVENTORY_SHEET_ID/edit';
+    <!-- ═══ LOGIN MODAL (Live Inventory) ═══ -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeLoginModal()">✕</button>
+            <span class="modal-icon">🔐</span>
+            <h2>Live Inventory</h2>
+            <p>Enter your credentials to access real-time stock</p>
+            <div class="input-group">
+                <label for="loginUser">Username</label>
+                <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username" />
+            </div>
+            <div class="input-group">
+                <label for="loginPass">Password</label>
+                <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password" />
+            </div>
+            <div class="error-msg" id="loginError">❌ Invalid username or password. Please try again.</div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeLoginModal()">Cancel</button>
+                <button class="btn-login" onclick="handleLogin()">🔓 Login</button>
+            </div>
+        </div>
+    </div>
 
-    // ─── SHARE CARD ───
-    function shareCard() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'Tile Planet',
-                text: 'Tile Planet — Premium Tiles Digital Card',
-                url: window.location.href
-            }).catch(() => {});
-        } else {
-            navigator.clipboard.writeText(window.location.href)
-                .then(() => alert('✅ Link Copied Successfully'))
-                .catch(() => alert('📋 Copy this link: ' + window.location.href));
-        }
-    }
-
-    // ─── OPEN LIVE INVENTORY (Triggers Login Modal) ───
-    function openLiveInventory() {
-        // Show the login modal
-        document.getElementById('loginModal').classList.add('active');
-        // Clear previous inputs and error
-        document.getElementById('loginUser').value = '';
-        document.getElementById('loginPass').value = '';
-        document.getElementById('loginError').classList.remove('show');
-        // Focus on username field
-        setTimeout(() => {
-            document.getElementById('loginUser').focus();
-        }, 100);
-    }
-
-    // ─── CLOSE LOGIN MODAL ───
-    function closeLoginModal() {
-        document.getElementById('loginModal').classList.remove('active');
-        document.getElementById('loginError').classList.remove('show');
-    }
-
-    // ─── HANDLE LOGIN ───
-    function handleLogin() {
-        const username = document.getElementById('loginUser').value.trim();
-        const password = document.getElementById('loginPass').value.trim();
-        const errorEl = document.getElementById('loginError');
-
-        // Check credentials
-        if (username === VALID_USERNAME && password === VALID_PASSWORD) {
-            // Success — close modal and open inventory
-            errorEl.classList.remove('show');
-            closeLoginModal();
-
-            // Open inventory URL
-            if (INVENTORY_URL.includes('YOUR_LIVE_INVENTORY_SHEET_ID')) {
-                alert('🔧 Please update the INVENTORY_URL in the script with your actual live inventory link.');
+    <script>
+        // ─── SHARE CARD ───
+        function shareCard() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Tile Planet',
+                    text: 'Tile Planet — Premium Tiles Digital Card',
+                    url: window.location.href
+                }).catch(() => {});
             } else {
-                window.open(INVENTORY_URL, '_blank');
+                navigator.clipboard.writeText(window.location.href)
+                    .then(() => alert('✅ Link Copied Successfully'))
+                    .catch(() => alert('📋 Copy this link: ' + window.location.href));
             }
-        } else {
-            // Show error
-            errorEl.classList.add('show');
-            // Shake animation (simple)
-            errorEl.style.animation = 'none';
-            setTimeout(() => {
-                errorEl.style.animation = 'fadeIn 0.3s ease';
-            }, 10);
-            // Clear password field
+        }
+
+        // ─── LIVE INVENTORY LOGIN ───
+        const VALID_USERNAME = 'admin';
+        const VALID_PASSWORD = 'tile123';
+        const INVENTORY_URL = 'https://docs.google.com/spreadsheets/d/YOUR_LIVE_INVENTORY_SHEET_ID/edit';
+
+        function openLiveInventory() {
+            document.getElementById('loginModal').classList.add('active');
+            document.getElementById('loginUser').value = '';
             document.getElementById('loginPass').value = '';
-            document.getElementById('loginPass').focus();
-        }
-    }
-
-    // ─── ENTER KEY SUPPORT ON LOGIN ───
-    document.addEventListener('DOMContentLoaded', function() {
-        const passField = document.getElementById('loginPass');
-        const userField = document.getElementById('loginUser');
-
-        function handleEnter(e) {
-            if (e.key === 'Enter') {
-                handleLogin();
-            }
+            document.getElementById('loginError').classList.remove('show');
+            setTimeout(() => {
+                document.getElementById('loginUser').focus();
+            }, 100);
         }
 
-        passField.addEventListener('keydown', handleEnter);
-        userField.addEventListener('keydown', handleEnter);
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('loginError').classList.remove('show');
+        }
 
-        // Click outside modal to close (optional)
-        document.getElementById('loginModal').addEventListener('click', function(e) {
-            if (e.target === this) {
+        function handleLogin() {
+            const username = document.getElementById('loginUser').value.trim();
+            const password = document.getElementById('loginPass').value.trim();
+            const errorEl = document.getElementById('loginError');
+
+            if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+                errorEl.classList.remove('show');
                 closeLoginModal();
+                if (INVENTORY_URL.includes('YOUR_LIVE_INVENTORY_SHEET_ID')) {
+                    alert('🔧 Please update the INVENTORY_URL in the script with your actual live inventory link.');
+                } else {
+                    window.open(INVENTORY_URL, '_blank');
+                }
+            } else {
+                errorEl.classList.add('show');
+                errorEl.style.animation = 'none';
+                setTimeout(() => {
+                    errorEl.style.animation = 'fadeIn 0.3s ease';
+                }, 10);
+                document.getElementById('loginPass').value = '';
+                document.getElementById('loginPass').focus();
+            }
+        }
+
+        // ─── PWA: INSTALL LOGIC ───
+        let deferredPrompt = null;
+        let isAppInstalled = false;
+        const installBtn = document.getElementById('installAppBtn');
+        const iosModal = document.getElementById('iosModal');
+        const androidModal = document.getElementById('androidModal');
+
+        function checkIfInstalled() {
+            if (window.navigator.standalone === true) isAppInstalled = true;
+            if (window.matchMedia('(display-mode: standalone)').matches) isAppInstalled = true;
+            return isAppInstalled;
+        }
+
+        function hideInstallButton() {
+            if (isAppInstalled) {
+                installBtn.classList.add('install-hidden');
+            } else {
+                installBtn.classList.remove('install-hidden');
+            }
+        }
+
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        function handleInstallClick(e) {
+            e.preventDefault();
+            if (isAppInstalled) return;
+
+            const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            if (isIos) {
+                openModal('iosModal');
+                return;
+            }
+
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        isAppInstalled = true;
+                        hideInstallButton();
+                    }
+                    deferredPrompt = null;
+                });
+                return;
+            }
+
+            // Fallback – show Android/generic guide
+            openModal('androidModal');
+        }
+
+        // ─── EVENTS ───
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (!isAppInstalled) installBtn.classList.remove('install-hidden');
+        });
+
+        window.addEventListener('appinstalled', () => {
+            isAppInstalled = true;
+            hideInstallButton();
+        });
+
+        window.addEventListener('load', () => {
+            if (checkIfInstalled()) {
+                hideInstallButton();
+            } else {
+                installBtn.classList.remove('install-hidden');
             }
         });
 
-        // 3D TILT
-        const card = document.getElementById('tiltCard');
-        const wrapper = document.getElementById('tiltWrapper');
-
-        wrapper.addEventListener('mousemove', function(e) {
-            const rect = wrapper.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -8;
-            const rotateY = ((x - centerX) / centerX) * 8;
-            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        installBtn.addEventListener('click', function(e) {
+            // Ripple effect
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+            handleInstallClick(e);
         });
 
-        wrapper.addEventListener('mouseleave', function() {
-            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        // Close modals when overlay clicked
+        document.querySelectorAll('.install-modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('active');
+            });
         });
-    });
-</script>
+
+        // ─── 3D TILT ───
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.getElementById('tiltCard');
+            const wrapper = document.getElementById('tiltWrapper');
+
+            wrapper.addEventListener('mousemove', function(e) {
+                const rect = wrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            wrapper.addEventListener('mouseleave', function() {
+                card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            });
+        });
+
+        // ─── LOGIN ENTER KEY ───
+        document.addEventListener('DOMContentLoaded', function() {
+            const passField = document.getElementById('loginPass');
+            const userField = document.getElementById('loginUser');
+
+            function handleEnter(e) {
+                if (e.key === 'Enter') handleLogin();
+            }
+
+            passField.addEventListener('keydown', handleEnter);
+            userField.addEventListener('keydown', handleEnter);
+
+            document.getElementById('loginModal').addEventListener('click', function(e) {
+                if (e.target === this) closeLoginModal();
+            });
+        });
+
+        // ─── SERVICE WORKER REGISTRATION ───
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.warn('Service Worker registration failed:', err));
+        }
+    </script>
 
 </body>
 </html>
