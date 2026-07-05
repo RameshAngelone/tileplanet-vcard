@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offline · Tile Planet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0d0d0d;
+            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .offline-container {
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 215, 0, 0.10);
+            border-radius: 28px;
+            padding: 48px 32px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 80px rgba(255, 215, 0, 0.03);
+        }
+
+        .offline-container .icon {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .offline-container h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .offline-container p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .offline-container .brand {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .offline-container .retry-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #ffd700, #f5a623);
+            color: #0a0a0a;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .offline-container .retry-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .offline-container .retry-btn:active {
+            transform: scale(0.96);
+        }
+
+        .offline-container .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            margin: 16px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <span class="icon">📡</span>
+        <h1>No Internet Connection</h1>
+        <div class="divider"></div>
+        <p>
+            Please check your network and try again.<br />
+            <span style="color: rgba(255,255,255,0.3); font-size:13px;">You can still access previously viewed pages.</span>
+        </p>
+        <div class="brand">✦ Tile Planet ✦</div>
+        <button class="retry-btn" onclick="window.location.reload()">
+            🔄 Retry
+        </button>
+    </div>
+</body>
+</html>
