@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Tile Planet · World Class</title>
+    <title>Tile Planet · Dynamic</title>
 
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json" />
@@ -23,7 +24,6 @@
         :root {
             --gold: #d4af37;
             --gold-light: #f5d76e;
-            --gold-neon: #f9e79f;
             --dark-bg: #050505;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(212, 175, 55, 0.08);
@@ -39,7 +39,6 @@
 
         html {
             scroll-behavior: smooth;
-            cursor: none;
         }
 
         body {
@@ -50,9 +49,98 @@
             -webkit-font-smoothing: antialiased;
             padding-bottom: 90px;
             min-height: 100vh;
+            /* Dynamic background will be set via JS */;
         }
 
-        /* ─── SCROLL PROGRESS BAR ─── */
+        /* ─── DYNAMIC BACKGROUND ─── */
+        .dynamic-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            transition: background 1.2s ease;
+            will-change: background;
+        }
+
+        /* floating particles (always) */
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, var(--gold-light), transparent);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+            opacity: 0.25;
+        }
+        .particle:nth-child(1) {
+            left: 10%;
+            animation-duration: 18s;
+            animation-delay: 0s;
+            width: 8px;
+            height: 8px;
+        }
+        .particle:nth-child(2) {
+            left: 25%;
+            animation-duration: 22s;
+            animation-delay: 2s;
+            width: 4px;
+            height: 4px;
+        }
+        .particle:nth-child(3) {
+            left: 50%;
+            animation-duration: 20s;
+            animation-delay: 4s;
+            width: 10px;
+            height: 10px;
+            opacity: 0.15;
+        }
+        .particle:nth-child(4) {
+            left: 75%;
+            animation-duration: 25s;
+            animation-delay: 1s;
+            width: 5px;
+            height: 5px;
+        }
+        .particle:nth-child(5) {
+            left: 90%;
+            animation-duration: 19s;
+            animation-delay: 3s;
+            width: 7px;
+            height: 7px;
+        }
+        .particle:nth-child(6) {
+            left: 40%;
+            animation-duration: 23s;
+            animation-delay: 5s;
+            width: 12px;
+            height: 12px;
+            opacity: 0.1;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(720deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* ─── SCROLL PROGRESS ─── */
         #progress-bar {
             position: fixed;
             top: 0;
@@ -61,122 +149,8 @@
             background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
             z-index: 99999;
             width: 0%;
-            box-shadow: 0 0 20px var(--gold-glow, rgba(212, 175, 55, 0.5));
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
             transition: width 0.1s linear;
-        }
-
-        /* ─── ANIMATED MESH BACKGROUND ─── */
-        .mesh-bg {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            overflow: hidden;
-            background: #050505;
-        }
-
-        .mesh-bg .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.6;
-            animation: meshMove 18s ease-in-out infinite alternate;
-        }
-
-        .mesh-bg .blob:nth-child(1) {
-            width: 60vw;
-            height: 60vw;
-            top: -20%;
-            left: -20%;
-            background: radial-gradient(circle, #2a1f0c, transparent 70%);
-            animation-duration: 22s;
-        }
-
-        .mesh-bg .blob:nth-child(2) {
-            width: 50vw;
-            height: 50vw;
-            bottom: -20%;
-            right: -20%;
-            background: radial-gradient(circle, #1a1005, transparent 70%);
-            animation-duration: 26s;
-            animation-delay: -4s;
-        }
-
-        .mesh-bg .blob:nth-child(3) {
-            width: 40vw;
-            height: 40vw;
-            top: 40%;
-            left: 30%;
-            background: radial-gradient(circle, #3d2b10, transparent 70%);
-            animation-duration: 20s;
-            animation-delay: -8s;
-            opacity: 0.3;
-        }
-
-        @keyframes meshMove {
-            0% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-            33% {
-                transform: translate(40px, -60px) scale(1.1) rotate(5deg);
-            }
-            66% {
-                transform: translate(-30px, 40px) scale(0.9) rotate(-3deg);
-            }
-            100% {
-                transform: translate(20px, -20px) scale(1.05) rotate(2deg);
-            }
-        }
-
-        /* ─── CUSTOM CURSOR ─── */
-        .cursor-ring {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 1.5px solid rgba(212, 175, 55, 0.6);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 99998;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease, border-color 0.4s ease, background 0.4s ease, transform 0.15s ease;
-            backdrop-filter: blur(2px);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
-        }
-
-        .cursor-dot {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background: var(--gold-light);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 99999;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 20px var(--gold-light);
-            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
-        }
-
-        .cursor-ring.active {
-            width: 70px;
-            height: 70px;
-            border-color: var(--gold-light);
-            background: rgba(212, 175, 55, 0.08);
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
-        }
-
-        .cursor-dot.active {
-            width: 10px;
-            height: 10px;
-            background: #fff;
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            .cursor-ring,
-            .cursor-dot {
-                display: none !important;
-            }
-            body {
-                cursor: auto !important;
-            }
         }
 
         /* ─── CONTAINER ─── */
@@ -188,7 +162,7 @@
             z-index: 1;
         }
 
-        /* ─── GLASS CARD (Ultra Premium) ─── */
+        /* ─── GLASS CARD ─── */
         .glass-card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(40px) saturate(1.4);
@@ -225,7 +199,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(165deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
+            background: linear-gradient(165deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.75) 100%);
             z-index: 0;
         }
 
@@ -302,7 +276,6 @@
             transition: background 0.1s ease;
         }
 
-        /* Animated Gold Border */
         .hero-card::before {
             content: '';
             position: absolute;
@@ -331,7 +304,6 @@
             }
         }
 
-        /* ─── LAYERED 3D CONTENT ─── */
         .layer {
             position: relative;
             z-index: 1;
@@ -431,7 +403,6 @@
             position: relative;
             overflow: hidden;
             will-change: transform;
-            /* Magnetic */;
         }
 
         .contact-btn .btn-text {
@@ -454,6 +425,7 @@
         .contact-btn:hover {
             border-color: var(--gold-light);
             box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), inset 0 0 30px rgba(212, 175, 55, 0.04);
+            transform: scale(1.03);
         }
 
         .contact-qr {
@@ -1026,7 +998,7 @@
             padding-top: 14px;
         }
 
-        /* ─── BOTTOM NAV (Morphing) ─── */
+        /* ─── BOTTOM NAV ─── */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -1386,19 +1358,21 @@
 </head>
 <body>
 
+    <!-- ═══ DYNAMIC BACKGROUND (will be set by JS) ═══ -->
+    <div class="dynamic-bg" id="dynamicBg"></div>
+
+    <!-- ═══ FLOATING PARTICLES ═══ -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
     <!-- ═══ SCROLL PROGRESS ═══ -->
     <div id="progress-bar"></div>
-
-    <!-- ═══ CUSTOM CURSOR ═══ -->
-    <div class="cursor-ring" id="cursorRing"></div>
-    <div class="cursor-dot" id="cursorDot"></div>
-
-    <!-- ═══ MESH BACKGROUND ═══ -->
-    <div class="mesh-bg">
-        <div class="blob"></div>
-        <div class="blob"></div>
-        <div class="blob"></div>
-    </div>
 
     <div class="container">
 
@@ -1412,12 +1386,8 @@
 
                 <div class="tilt-wrapper" id="tiltWrapper">
                     <div class="hero-card" id="tiltCard">
-                        <!-- Multi-layer Glow -->
                         <div class="layer-bg-glow" id="spotlight"></div>
 
-                        <!-- Layer 1: Background stuff, not needed -->
-
-                        <!-- Layer 2: Top Row -->
                         <div class="top-row layer layer-2">
                             <div class="name-box">
                                 <div class="name">
@@ -1434,7 +1404,6 @@
                             </div>
                         </div>
 
-                        <!-- Layer 3: Quick Actions -->
                         <div class="quick-actions layer layer-3">
                             <a href="tel:+919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">📞</span> CALL</a>
                             <a href="https://wa.me/919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">💬</span> CHAT</a>
@@ -1442,7 +1411,6 @@
                             <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn magnetic" data-strength="10"><span class="icon">📍</span> MAP</a>
                         </div>
 
-                        <!-- Layer 4: Install Button -->
                         <div class="install-btn-wrapper layer layer-4">
                             <button id="installAppBtn" class="install-btn magnetic" data-strength="20">
                                 <span class="btn-icon">📲</span>
@@ -1621,6 +1589,40 @@
     </div>
 
     <script>
+        // ─── DYNAMIC BACKGROUND (changes daily) ───
+        (function setDailyBackground() {
+            const bg = document.getElementById('dynamicBg');
+            // Array of beautiful gradient palettes
+            const gradients = [
+                'radial-gradient(circle at 30% 10%, #1a0f0a 0%, #2a1a0e 30%, #0d0805 70%, #050505 100%)',
+                'radial-gradient(circle at 70% 20%, #0d1a2b 0%, #162b3d 30%, #0a101a 70%, #050505 100%)',
+                'radial-gradient(circle at 50% 50%, #1e1a0c 0%, #2d2414 30%, #100d06 70%, #050505 100%)',
+                'radial-gradient(circle at 20% 80%, #1a0f1a 0%, #2d1a2d 30%, #100a10 70%, #050505 100%)',
+                'radial-gradient(circle at 60% 40%, #0f1a0f 0%, #1a2d1a 30%, #0a100a 70%, #050505 100%)',
+                'radial-gradient(circle at 40% 60%, #1a1008 0%, #2d1c0e 30%, #0d0805 70%, #050505 100%)',
+                'radial-gradient(circle at 80% 80%, #0f0f1a 0%, #1a1a2d 30%, #0a0a10 70%, #050505 100%)'
+            ];
+
+            // Use date to pick a gradient (changes every day)
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+            const index = dayOfYear % gradients.length;
+
+            // Also add a subtle golden glow overlay
+            bg.style.background = gradients[index];
+            // Add a tiny floating golden overlay for warmth
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                    position: absolute; inset: 0;
+                    background: radial-gradient(circle at 50% 30%, rgba(212,175,55,0.04), transparent 70%);
+                    pointer-events: none;
+                `;
+            bg.appendChild(overlay);
+
+            // Store the chosen gradient name for debugging (optional)
+            console.log('Today\'s background palette index:', index);
+        })();
+
         // ─── SHARE ───
         function shareCard() {
             if (navigator.share) {
@@ -1728,35 +1730,6 @@
             overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); });
         });
 
-        // ─── CUSTOM CURSOR ───
-        const ring = document.getElementById('cursorRing');
-        const dot = document.getElementById('cursorDot');
-        let mouseX = 0,
-            mouseY = 0;
-
-        if (window.matchMedia('(hover: hover)').matches) {
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                ring.style.left = mouseX + 'px';
-                ring.style.top = mouseY + 'px';
-                dot.style.left = mouseX + 'px';
-                dot.style.top = mouseY + 'px';
-            });
-
-            document.querySelectorAll('a, button, .glass-btn, .contact-btn, .install-btn, .catalog-card, .product').forEach(
-            el => {
-                el.addEventListener('mouseenter', () => {
-                    ring.classList.add('active');
-                    dot.classList.add('active');
-                });
-                el.addEventListener('mouseleave', () => {
-                    ring.classList.remove('active');
-                    dot.classList.remove('active');
-                });
-            });
-        }
-
         // ─── MAGNETIC BUTTONS ───
         document.querySelectorAll('.magnetic').forEach(btn => {
             if (window.matchMedia('(hover: hover)').matches) {
@@ -1797,10 +1770,8 @@
                 const rotateX = ((y - centerY) / centerY) * -8;
                 const rotateY = ((x - centerX) / centerX) * 8;
 
-                // Rotate the whole card
                 card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-                // Move layers at different speeds (Parallax)
                 layers.forEach((layer, index) => {
                     const speed = 0.5 + (index * 0.1);
                     const moveX = (x - centerX) / centerX * 10 * speed;
@@ -1808,7 +1779,6 @@
                     layer.style.transform = `translate(${moveX}px, ${moveY}px) translateZ(${20 + index * 20}px)`;
                 });
 
-                // Spotlight
                 const px = (x / rect.width) * 100;
                 const py = (y / rect.height) * 100;
                 spotlight.style.setProperty('--mx', px + '%');
