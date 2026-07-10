@@ -2,109 +2,230 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>Tile Planet · Premium Digital Card</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Tile Planet · World Class</title>
 
-    <!-- PWA: Manifest & Theme -->
+    <!-- PWA -->
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#D4AF37" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet" />
+
     <style>
-        /* ─── RESET & BASE ─── */
-        *,
-        *::before,
-        *::after {
+        /* ─── RESET ─── */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         :root {
-            --gold: #f5a623;
-            --gold-light: #ffd700;
-            --gold-glow: rgba(255, 215, 0, 0.35);
-            --dark-bg: #0d0d0d;
-            --card-bg: rgba(255, 255, 255, 0.07);
-            --border-subtle: rgba(255, 255, 255, 0.10);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.85);
-            --text-muted: rgba(255, 255, 255, 0.5);
-            --radius-lg: 28px;
-            --radius-md: 18px;
+            --gold: #d4af37;
+            --gold-light: #f5d76e;
+            --gold-neon: #f9e79f;
+            --dark-bg: #050505;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(212, 175, 55, 0.08);
+            --text-primary: #f5f0eb;
+            --text-secondary: rgba(245, 240, 235, 0.75);
+            --text-muted: rgba(245, 240, 235, 0.35);
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 16px;
             --radius-sm: 12px;
-            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 80px rgba(255, 215, 0, 0.04);
+            --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+            cursor: none;
+        }
 
         body {
             background: var(--dark-bg);
             color: var(--text-primary);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 20px; }
-
-        .container {
-            max-width: 430px;
-            margin: 0 auto;
+            padding-bottom: 90px;
             min-height: 100vh;
-            padding: 0 0 24px 0;
-            background: radial-gradient(ellipse at 30% 0%, #1e1508 0%, #0d0b08 50%, #080808 100%);
-            position: relative;
         }
 
-        .container::before {
-            content: '';
+        /* ─── SCROLL PROGRESS BAR ─── */
+        #progress-bar {
             position: fixed;
-            top: -20%;
-            right: -10%;
-            width: 60%;
-            height: 60%;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.07), transparent 70%);
-            pointer-events: none;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            z-index: 99999;
+            width: 0%;
+            box-shadow: 0 0 20px var(--gold-glow, rgba(212, 175, 55, 0.5));
+            transition: width 0.1s linear;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(32px);
-            -webkit-backdrop-filter: blur(32px);
-            border: 1px solid rgba(255, 215, 0, 0.12);
-            border-radius: var(--radius-lg);
-            padding: 18px 20px;
-            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 215, 0, 0.06);
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        box-shadow 0.4s ease;
+        /* ─── ANIMATED MESH BACKGROUND ─── */
+        .mesh-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            background: #050505;
+        }
+
+        .mesh-bg .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: meshMove 18s ease-in-out infinite alternate;
+        }
+
+        .mesh-bg .blob:nth-child(1) {
+            width: 60vw;
+            height: 60vw;
+            top: -20%;
+            left: -20%;
+            background: radial-gradient(circle, #2a1f0c, transparent 70%);
+            animation-duration: 22s;
+        }
+
+        .mesh-bg .blob:nth-child(2) {
+            width: 50vw;
+            height: 50vw;
+            bottom: -20%;
+            right: -20%;
+            background: radial-gradient(circle, #1a1005, transparent 70%);
+            animation-duration: 26s;
+            animation-delay: -4s;
+        }
+
+        .mesh-bg .blob:nth-child(3) {
+            width: 40vw;
+            height: 40vw;
+            top: 40%;
+            left: 30%;
+            background: radial-gradient(circle, #3d2b10, transparent 70%);
+            animation-duration: 20s;
+            animation-delay: -8s;
+            opacity: 0.3;
+        }
+
+        @keyframes meshMove {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            33% {
+                transform: translate(40px, -60px) scale(1.1) rotate(5deg);
+            }
+            66% {
+                transform: translate(-30px, 40px) scale(0.9) rotate(-3deg);
+            }
+            100% {
+                transform: translate(20px, -20px) scale(1.05) rotate(2deg);
+            }
+        }
+
+        /* ─── CUSTOM CURSOR ─── */
+        .cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid rgba(212, 175, 55, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99998;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease, border-color 0.4s ease, background 0.4s ease, transform 0.15s ease;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px var(--gold-light);
+            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+        }
+
+        .cursor-ring.active {
+            width: 70px;
+            height: 70px;
+            border-color: var(--gold-light);
+            background: rgba(212, 175, 55, 0.08);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
+        }
+
+        .cursor-dot.active {
+            width: 10px;
+            height: 10px;
+            background: #fff;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .cursor-ring,
+            .cursor-dot {
+                display: none !important;
+            }
+            body {
+                cursor: auto !important;
+            }
+        }
+
+        /* ─── CONTAINER ─── */
+        .container {
+            max-width: 440px;
+            margin: 0 auto;
+            padding: 0 0 20px 0;
             position: relative;
             z-index: 1;
         }
 
-        .glass-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.04);
+        /* ─── GLASS CARD (Ultra Premium) ─── */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(40px) saturate(1.4);
+            -webkit-backdrop-filter: blur(40px) saturate(1.4);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 20px 22px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(212, 175, 55, 0.04);
+            transition: all var(--transition);
+            position: relative;
+            z-index: 1;
+            will-change: transform;
         }
 
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 80px rgba(212, 175, 55, 0.03);
+        }
+
+        /* ─── HERO ─── */
         .hero {
             position: relative;
-            padding: 14px 14px 20px;
-            border-radius: 0 0 36px 36px;
+            padding: 12px 12px 24px;
+            border-radius: 0 0 40px 40px;
             overflow: hidden;
             background: url('showroom.jpg') center center / cover no-repeat;
+            min-height: 360px;
+            display: flex;
+            align-items: flex-end;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(160deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.40) 60%, rgba(0, 0, 0, 0.60) 100%);
+            background: linear-gradient(165deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
             z-index: 0;
         }
 
@@ -114,15 +235,15 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 50%;
-            background: linear-gradient(to top, rgba(13, 13, 13, 0.4), transparent);
+            height: 60%;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.7), transparent);
             z-index: 0;
-            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
+            width: 100%;
         }
 
         .logo-wrap {
@@ -132,112 +253,162 @@
         }
 
         .logo {
-            width: 160px;
-            display: block;
-            filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.7)) brightness(1.08);
-            transition: transform 0.5s ease;
+            width: 170px;
+            filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.9)) brightness(1.08);
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-        .logo:hover { transform: scale(1.02); }
+        .logo:hover {
+            transform: scale(1.04) rotate(-1deg);
+        }
 
         .tagline {
             text-align: center;
-            font-size: 10px;
-            letter-spacing: 3px;
+            font-size: 9px;
+            letter-spacing: 5px;
             text-transform: uppercase;
             color: var(--gold-light);
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 16px;
-            opacity: 1;
-            text-shadow: 0 2px 16px rgba(255, 215, 0, 0.15);
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            opacity: 0.9;
         }
 
+        /* ─── 3D HERO CARD (Multi-Layer) ─── */
         .tilt-wrapper {
-            perspective: 1500px;
+            perspective: 1400px;
             transform-style: preserve-3d;
         }
 
         .hero-card {
-            background: rgba(0, 0, 0, 0.50);
-            backdrop-filter: blur(36px);
-            -webkit-backdrop-filter: blur(36px);
-            border: 1px solid rgba(255, 215, 0, 0.10);
+            background: rgba(10, 8, 6, 0.65);
+            backdrop-filter: blur(50px) saturate(1.5);
+            -webkit-backdrop-filter: blur(50px) saturate(1.5);
+            border: 1px solid rgba(212, 175, 55, 0.08);
             border-radius: var(--radius-lg);
-            padding: 18px 18px 14px;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 215, 0, 0.05);
-            transition: transform 0.1s ease, box-shadow 0.4s ease;
+            padding: 22px 22px 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(212, 175, 55, 0.05);
             transform-style: preserve-3d;
             will-change: transform;
             position: relative;
+            overflow: hidden;
         }
 
+        .hero-card .layer-bg-glow {
+            position: absolute;
+            inset: -50%;
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(212, 175, 55, 0.12), transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+            transition: background 0.1s ease;
+        }
+
+        /* Animated Gold Border */
         .hero-card::before {
             content: '';
             position: absolute;
             inset: -2px;
-            border-radius: 30px;
+            border-radius: 26px;
             padding: 2px;
-            background: conic-gradient(from 0deg, #d4af37, #f5e56b, #d4af37, #b8860b, #d4af37);
+            background: conic-gradient(from 0deg, #d4af37, #f9e79f, #d4af37, #b8860b, #d4af37, #f9e79f, #d4af37);
             background-size: 300% 300%;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             animation: shimmerBorder 6s linear infinite;
-            opacity: 0.6;
-            z-index: -1;
+            opacity: 0.5;
+            z-index: 0;
         }
 
         @keyframes shimmerBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
-        .gold-text {
-            color: #FFD700;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.2);
-            font-weight: 700;
-            -webkit-text-fill-color: #FFD700;
-            background: none;
+        /* ─── LAYERED 3D CONTENT ─── */
+        .layer {
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+        }
+
+        .layer-1 {
+            transform: translateZ(20px);
+        }
+        .layer-2 {
+            transform: translateZ(40px);
+        }
+        .layer-3 {
+            transform: translateZ(60px);
+        }
+        .layer-4 {
+            transform: translateZ(80px);
+        }
+        .layer-5 {
+            transform: translateZ(100px);
         }
 
         .top-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 12px;
-            transform: translateZ(30px);
+            gap: 14px;
         }
 
-        .name-box { flex: 1; }
+        .name-box {
+            flex: 1;
+        }
 
         .name {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
             font-weight: 700;
             letter-spacing: -0.5px;
-            line-height: 1.1;
+            line-height: 1;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
-            transform: translateZ(40px);
+        }
+
+        .gold-shimmer-text {
+            background: linear-gradient(135deg, #f9e79f, #d4af37, #f9e79f, #d4af37);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 4s ease-in-out infinite;
+            text-shadow: none;
+        }
+
+        @keyframes shimmerText {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         .name .badge {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--gold-light), #e8a800);
-            color: #0a0a0a;
+            background: linear-gradient(135deg, var(--gold-light), #d4a017);
+            color: #0a0806;
             padding: 2px 14px;
             border-radius: 50px;
-            letter-spacing: 0.3px;
-            text-shadow: none;
-            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.30);
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
             display: inline-block;
-            vertical-align: middle;
             font-family: 'Inter', sans-serif;
-            transform: translateZ(35px);
+            -webkit-text-fill-color: #0a0806;
         }
 
         .contact-btn {
@@ -246,43 +417,59 @@
             justify-content: center;
             gap: 8px;
             margin-top: 10px;
-            padding: 12px 22px;
+            padding: 11px 22px;
             border-radius: 60px;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(255, 215, 0, 0.05));
-            border: 1px solid rgba(255, 215, 0, 0.30);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.02));
+            border: 1px solid rgba(212, 175, 55, 0.2);
             text-decoration: none;
             color: #fff;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            letter-spacing: 0.2px;
+            transition: all var(--transition);
+            letter-spacing: 0.3px;
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            transform: translateZ(35px);
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+            /* Magnetic */;
         }
 
+        .contact-btn .btn-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), transparent);
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+
+        .contact-btn:hover::after {
+            opacity: 1;
+        }
         .contact-btn:hover {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.30), rgba(255, 215, 0, 0.10));
             border-color: var(--gold-light);
-            transform: scale(1.03) translateZ(40px);
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.12), inset 0 0 40px rgba(255, 215, 0, 0.04);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), inset 0 0 30px rgba(212, 175, 55, 0.04);
         }
-
-        .contact-btn .icon { font-size: 18px; }
 
         .contact-qr {
-            width: 62px;
-            min-width: 62px;
+            width: 64px;
+            min-width: 64px;
             padding: 4px;
             border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             text-align: center;
-            border: 1px solid rgba(255, 215, 0, 0.08);
-            transition: transform 0.3s ease;
-            transform: translateZ(40px);
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            transition: transform var(--transition);
         }
 
-        .contact-qr:hover { transform: scale(1.04) translateZ(45px); }
+        .contact-qr:hover {
+            transform: scale(1.05);
+        }
 
         .contact-qr img {
             width: 100%;
@@ -293,9 +480,8 @@
         }
 
         .contact-qr p {
-            font-size: 7px;
+            font-size: 6px;
             margin-top: 4px;
-            line-height: 1.1;
             color: var(--text-muted);
             font-weight: 600;
             letter-spacing: 0.5px;
@@ -307,7 +493,6 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             margin-top: 14px;
-            transform: translateZ(25px);
         }
 
         .glass-btn {
@@ -316,36 +501,37 @@
             padding: 10px 4px;
             border-radius: var(--radius-md);
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 11px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 10px;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all var(--transition);
             line-height: 1.3;
-            letter-spacing: 0.2px;
+            will-change: transform;
         }
 
         .glass-btn .icon {
             display: block;
             font-size: 20px;
             margin-bottom: 2px;
+            transition: transform var(--transition);
         }
 
+        .glass-btn:hover .icon {
+            transform: scale(1.2) translateY(-3px);
+        }
         .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.10);
-            border-color: rgba(255, 215, 0, 0.30);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* ─── INSTALL BUTTON ─── */
         .install-btn-wrapper {
             display: flex;
             justify-content: center;
             margin-top: 14px;
-            transform: translateZ(30px);
         }
 
         .install-btn {
@@ -353,36 +539,29 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            width: 230px;
-            height: 48px;
+            width: 240px;
+            height: 50px;
             border: none;
             border-radius: 30px;
-            background: linear-gradient(135deg, #ffd700, #f5a623);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            background-clip: padding-box;
-            border: 1px solid rgba(255, 215, 0, 0.35);
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            color: #0a0a0a;
+            background: linear-gradient(135deg, #ffd700, #d4a017);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 30px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            color: #0a0806;
             font-size: 14px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.3px;
+            transition: all var(--transition);
             position: relative;
             overflow: hidden;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+            will-change: transform;
         }
 
-        .install-btn .btn-icon { font-size: 18px; line-height: 1; }
         .install-btn .btn-sub {
             display: block;
             font-size: 9px;
             font-weight: 500;
-            opacity: 0.8;
-            letter-spacing: 0.5px;
-            text-shadow: none;
+            opacity: 0.7;
         }
         .install-btn .btn-text-wrap {
             display: flex;
@@ -393,56 +572,581 @@
 
         .install-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4), 0 0 60px rgba(255, 215, 0, 0.1);
-            border-color: var(--gold-light);
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.5);
         }
-        .install-btn:active { transform: scale(0.97); }
 
         .install-btn .ripple {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.6);
             transform: scale(0);
             animation: rippleAnim 0.6s ease-out;
             pointer-events: none;
         }
 
         @keyframes rippleAnim {
-            to { transform: scale(4); opacity: 0; }
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
 
-        .install-hidden { display: none !important; }
+        .install-hidden {
+            display: none !important;
+        }
 
-        /* ─── INSTRUCTION MODALS ─── */
+        /* ─── SECTION TITLE ─── */
+        .section-title {
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 34px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 0 12px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title .line {
+            flex: 1;
+            max-width: 20px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2));
+        }
+        .section-title .line:last-child {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), transparent);
+        }
+
+        .section-title .label {
+            font-size: 8px;
+            font-weight: 700;
+            color: var(--gold-light);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(212, 175, 55, 0.05);
+            padding: 2px 12px;
+            border-radius: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.04);
+        }
+
+        /* ─── PRODUCT GRID ─── */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            padding: 0 12px;
+        }
+
+        .product {
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .product.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .product:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(212, 175, 55, 0.04);
+            transition: all var(--transition);
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .product:hover .product-img {
+            border-color: rgba(212, 175, 55, 0.25);
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08), 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .product span {
+            display: block;
+            margin-top: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* ─── CATALOG 3D FLIP ─── */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 0 12px;
+        }
+
+        .catalog-card {
+            perspective: 900px;
+            height: 150px;
+            opacity: 0;
+            transform: translateY(30px) rotateY(10deg);
+            transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .catalog-card.visible {
+            opacity: 1;
+            transform: translateY(0) rotateY(0deg);
+        }
+
+        .catalog-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .catalog-card:hover .catalog-inner {
+            transform: rotateY(180deg);
+        }
+
+        .catalog-front,
+        .catalog-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: var(--radius-md);
+            padding: 16px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.04);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .catalog-back {
+            transform: rotateY(180deg);
+            background: rgba(8, 7, 5, 0.95);
+            border-color: rgba(212, 175, 55, 0.1);
+            gap: 6px;
+        }
+
+        .catalog-front .icon-big {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .catalog-front h3 {
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .catalog-front p {
+            font-size: 8px;
+            color: var(--text-muted);
+        }
+
+        .catalog-back .dl-btn {
+            display: inline-flex;
+            padding: 6px 14px;
+            border-radius: 60px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition);
+        }
+
+        .catalog-back .dl-btn:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold-light);
+            transform: scale(1.05);
+        }
+
+        .badge-new {
+            font-size: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--gold-light), #d4a017);
+            color: #0a0806;
+            padding: 1px 8px;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* ─── OTHER COMPONENTS ─── */
+        .profile-img,
+        .map-img,
+        .payment-img {
+            width: 100%;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(212, 175, 55, 0.04);
+            transition: all var(--transition);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        .profile-img:hover,
+        .map-img:hover,
+        .payment-img:hover {
+            transform: scale(1.01);
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+        .payment-img {
+            max-width: 200px;
+            display: block;
+            margin: 0 auto;
+            background: #fff;
+            padding: 10px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 14px;
+        }
+        .feature-list span::before {
+            content: '◆';
+            color: var(--gold-light);
+            font-size: 7px;
+            margin-right: 6px;
+        }
+
+        .info-table {
+            width: 100%;
+            font-size: 13px;
+            line-height: 2.2;
+            border-collapse: collapse;
+        }
+        .info-table td {
+            padding: 4px 0;
+            color: var(--text-secondary);
+        }
+        .info-table .label {
+            color: var(--gold-light);
+            font-weight: 600;
+            width: 34%;
+            font-size: 10px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+        .info-table .value {
+            color: #fff;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .stock-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4cd964;
+        }
+        .stock-phone {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .btn-group .contact-btn {
+            width: 100%;
+            justify-content: center;
+            margin-top: 0;
+        }
+
+        .btn-live-inventory {
+            background: linear-gradient(135deg, rgba(0, 200, 255, 0.08), rgba(0, 200, 255, 0.01)) !important;
+            border-color: rgba(0, 200, 255, 0.15) !important;
+        }
+        .btn-live-inventory:hover {
+            border-color: #00c8ff !important;
+            box-shadow: 0 0 60px rgba(0, 200, 255, 0.08) !important;
+        }
+        .btn-live-inventory .pulse-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #00e676;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(0.7);
+            }
+        }
+
+        .upi-id {
+            margin-top: 14px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .upi-id b {
+            color: #fff;
+            font-weight: 700;
+            display: block;
+            font-size: 17px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .google-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+        .google-brand .g {
+            font-size: 26px;
+            font-weight: 800;
+        }
+        .g-1 {
+            color: #4285F4;
+        }
+        .g-2 {
+            color: #EA4335;
+        }
+        .g-3 {
+            color: #FBBC05;
+        }
+        .g-4 {
+            color: #4285F4;
+        }
+        .g-5 {
+            color: #34A853;
+        }
+        .g-6 {
+            color: #EA4335;
+        }
+
+        .stars-bright {
+            font-size: 44px;
+            color: #FFD700;
+            text-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
+            display: block;
+            letter-spacing: 6px;
+        }
+
+        .two-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 12px;
+        }
+        .two-grid .glass-btn {
+            padding: 16px 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .two-grid .glass-btn .icon {
+            font-size: 22px;
+        }
+
+        .single-btn-wrap {
+            margin-top: 14px;
+            text-align: center;
+        }
+        .single-btn-wrap .contact-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .footer-card {
+            margin: 12px;
+            text-align: center;
+            padding: 28px 16px 20px;
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(212, 175, 55, 0.03);
+        }
+        .footer-logo {
+            width: 130px;
+            display: block;
+            margin: 0 auto 10px;
+            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
+        }
+        .footer-card .brand {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+        }
+        .footer-card .brand span {
+            color: var(--gold-light);
+        }
+        .footer-card .sub {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        .footer-card .slogan-highlight {
+            color: var(--gold-light);
+            font-weight: 600;
+            font-size: 14px;
+            margin: 6px 0 12px;
+        }
+        .footer-card .copy {
+            margin-top: 14px;
+            color: var(--text-muted);
+            font-size: 11px;
+            border-top: 1px solid rgba(212, 175, 55, 0.03);
+            padding-top: 14px;
+        }
+
+        /* ─── BOTTOM NAV (Morphing) ─── */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: rgba(8, 7, 5, 0.7);
+            backdrop-filter: blur(30px) saturate(1.6);
+            -webkit-backdrop-filter: blur(30px) saturate(1.6);
+            border-top: 1px solid rgba(212, 175, 55, 0.05);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 6px 0 env(safe-area-inset-bottom);
+            max-width: 440px;
+            margin: 0 auto;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .bottom-nav .nav-item {
+            text-decoration: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all var(--transition);
+            padding: 6px 16px;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .bottom-nav .nav-item .nav-icon {
+            font-size: 22px;
+            margin-bottom: 2px;
+            transition: transform var(--transition);
+        }
+
+        .bottom-nav .nav-item:hover .nav-icon {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .bottom-nav .nav-item.active {
+            color: var(--gold-light);
+        }
+
+        .bottom-nav .nav-item.active::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 30px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.04);
+            z-index: -1;
+        }
+
+        .bottom-nav .nav-item.active .nav-icon {
+            transform: translateY(-2px);
+        }
+
+        /* ─── MODALS ─── */
+        .modal-overlay,
         .install-modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
+            z-index: 99999;
             padding: 20px;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
-        .install-modal-overlay.active { display: flex; }
+        .modal-overlay.active,
+        .install-modal-overlay.active {
+            display: flex;
+        }
 
+        .modal-box,
         .install-modal-box {
-            background: rgba(20, 18, 16, 0.95);
+            background: rgba(12, 10, 8, 0.98);
             backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.08);
             border-radius: var(--radius-lg);
             padding: 32px 28px 28px;
             max-width: 380px;
             width: 100%;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
             text-align: center;
             position: relative;
+            animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box .close-modal,
         .install-modal-box .close-modal {
             position: absolute;
             top: 14px;
@@ -450,19 +1154,108 @@
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 22px;
+            font-size: 20px;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: color var(--transition);
             font-family: 'Inter', sans-serif;
         }
-        .install-modal-box .close-modal:hover { color: #fff; }
+        .modal-box .close-modal:hover,
+        .install-modal-box .close-modal:hover {
+            color: #fff;
+        }
 
-        .install-modal-box .modal-icon { font-size: 44px; display: block; margin-bottom: 8px; }
-        .install-modal-box h2 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .modal-box .modal-icon,
+        .install-modal-box .modal-icon {
+            font-size: 44px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .modal-box h2,
+        .install-modal-box h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .modal-box p,
         .install-modal-box p {
             color: var(--text-muted);
             font-size: 14px;
             margin-bottom: 20px;
+        }
+
+        .modal-box .input-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+        .modal-box .input-group label {
+            display: block;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .modal-box .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            color: #fff;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color var(--transition);
+            outline: none;
+        }
+        .modal-box .input-group input:focus {
+            border-color: rgba(212, 175, 55, 0.2);
+        }
+
+        .modal-box .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+        .modal-box .modal-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 60px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+        .modal-box .modal-actions .btn-login {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.03));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            color: #fff;
+        }
+        .modal-box .modal-actions .btn-login:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.06));
+            border-color: var(--gold-light);
+        }
+        .modal-box .modal-actions .btn-cancel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+        }
+        .modal-box .modal-actions .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .modal-box .error-msg {
+            color: #ff6b6b;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 10px;
+            display: none;
+        }
+        .modal-box .error-msg.show {
+            display: block;
         }
 
         .install-modal-box .step {
@@ -470,13 +1263,12 @@
             align-items: center;
             gap: 14px;
             text-align: left;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: var(--radius-sm);
-            padding: 12px 16px;
+            padding: 10px 14px;
             margin-bottom: 10px;
-            border: 1px solid rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.03);
         }
-
         .install-modal-box .step .num {
             font-size: 18px;
             font-weight: 800;
@@ -493,614 +1285,166 @@
             color: var(--text-muted);
             font-weight: 400;
             font-size: 12px;
-            margin-top: 2px;
         }
-
         .install-modal-box .got-it-btn {
             width: 100%;
             padding: 14px;
             border: none;
             border-radius: 60px;
-            background: linear-gradient(135deg, #ffd700, #f5a623);
-            color: #0a0a0a;
+            background: linear-gradient(135deg, #ffd700, #d4a017);
+            color: #0a0806;
             font-weight: 700;
             font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 6px;
+            transition: all var(--transition);
             font-family: 'Inter', sans-serif;
         }
         .install-modal-box .got-it-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.2);
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* ─── SECTIONS (Unchanged) ─── */
-        .section-title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-            margin-top: 32px;
-            margin-bottom: 16px;
-            letter-spacing: -0.2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 0 12px;
-        }
-
-        .section-title .line {
-            flex: 1;
-            max-width: 28px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4));
-        }
-        .section-title .line:last-child {
-            background: linear-gradient(90deg, rgba(255, 215, 0, 0.4), transparent);
-        }
-        .section-title .emoji { font-size: 18px; }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            padding: 0 12px;
-        }
-
-        .product {
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .product:hover { transform: translateY(-4px); }
-
-        .product-img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(255, 215, 0, 0.08);
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        .product:hover .product-img {
-            border-color: rgba(255, 215, 0, 0.35);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.10);
-        }
-        .product span {
-            display: block;
-            margin-top: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            letter-spacing: 0.2px;
-        }
-
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            padding: 0 12px;
-        }
-
-        .catalog-card {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 215, 0, 0.10);
-            border-radius: var(--radius-md);
-            padding: 14px 6px 12px;
-            text-align: center;
-            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 130px;
-        }
-
-        .catalog-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 215, 0, 0.30);
-            transform: translateY(-4px);
-            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.04);
-        }
-
-        .catalog-card .icon-big { font-size: 20px; display: block; margin-bottom: 2px; }
-        .catalog-card h3 { font-size: 11px; font-weight: 700; color: #fff; letter-spacing: -0.2px; line-height: 1.2; }
-        .catalog-card p {
-            font-size: 8.5px;
-            color: var(--text-muted);
-            margin: 2px 0 6px;
-            font-weight: 400;
-        }
-
-        .catalog-card .dl-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 10px;
-            border-radius: 60px;
-            background: rgba(255, 215, 0, 0.12);
-            border: 1px solid rgba(255, 215, 0, 0.20);
-            color: #fff;
-            font-size: 8.5px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            letter-spacing: 0.2px;
-            margin-top: 2px;
-        }
-        .catalog-card .dl-btn:hover {
-            background: rgba(255, 215, 0, 0.25);
-            border-color: var(--gold-light);
-            transform: scale(1.04);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.10);
-        }
-
-        .badge-new {
-            display: inline-block;
-            font-size: 6.5px;
-            font-weight: 700;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, var(--gold-light), #e8a800);
-            color: #0a0a0a;
-            padding: 1px 7px;
-            border-radius: 50px;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
-        }
-
-        .profile-img {
-            width: 100%;
-            border-radius: var(--radius-md);
-            margin-bottom: 12px;
-            border: 1px solid rgba(255, 215, 0, 0.06);
-        }
-
-        .feature-list {
-            margin-top: 14px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 12px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-align: left;
-        }
-
-        .feature-list span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 3px 0;
-        }
-        .feature-list span::before {
-            content: '◆';
-            color: var(--gold-light);
-            font-size: 8px;
-            opacity: 0.9;
-        }
-
-        .single-btn-wrap {
-            margin-top: 14px;
-            text-align: center;
-        }
-        .single-btn-wrap .contact-btn {
-            width: 100%;
-            justify-content: center;
-            font-size: 14px;
-            padding: 12px 16px;
-        }
-
-        .info-table {
-            width: 100%;
-            font-size: 15px;
-            line-height: 2.2;
-            border-collapse: collapse;
-        }
-        .info-table td { padding: 3px 0; color: var(--text-secondary); font-weight: 500; }
-        .info-table .label {
-            color: var(--gold-light);
-            font-weight: 600;
-            width: 34%;
-            letter-spacing: 0.2px;
-            font-size: 13px;
-        }
-        .info-table .value { color: #fff; font-weight: 500; }
-
-        .stock-name { font-size: 20px; font-weight: 700; color: #4cd964; letter-spacing: -0.3px; }
-        .stock-phone { font-size: 17px; color: var(--text-secondary); margin: 2px 0 12px; }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 4px;
-        }
-        .btn-group .contact-btn { width: 100%; justify-content: center; margin-top: 0; }
-
-        .btn-live-inventory {
-            background: linear-gradient(135deg, rgba(0, 200, 255, 0.15), rgba(0, 200, 255, 0.04)) !important;
-            border-color: rgba(0, 200, 255, 0.30) !important;
-        }
-        .btn-live-inventory:hover {
-            background: linear-gradient(135deg, rgba(0, 200, 255, 0.25), rgba(0, 200, 255, 0.08)) !important;
-            border-color: #00c8ff !important;
-            box-shadow: 0 0 50px rgba(0, 200, 255, 0.12), inset 0 0 40px rgba(0, 200, 255, 0.04) !important;
-        }
-
-        .btn-live-inventory .pulse-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #00e676;
-            border-radius: 50%;
-            margin-right: 4px;
-            animation: pulse-dot 1.8s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.7); }
-        }
-
-        .payment-img {
-            width: 180px;
-            max-width: 100%;
-            display: block;
-            margin: 0 auto;
-            border-radius: var(--radius-md);
-            background: #fff;
-            padding: 8px;
-            border: 1px solid rgba(255, 215, 0, 0.08);
-        }
-
-        .upi-id { margin-top: 12px; font-size: 15px; color: var(--text-secondary); }
-        .upi-id b {
-            color: #fff;
-            font-weight: 700;
-            display: block;
-            margin-top: 2px;
-            font-size: 17px;
-            letter-spacing: 0.2px;
-        }
-
-        .google-review-wrap { text-align: center; padding: 8px 0; }
-
-        .google-review-wrap .google-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 6px;
-        }
-        .google-review-wrap .google-brand .g { font-size: 28px; font-weight: 800; }
-        .g-1 { color: #4285F4; }
-        .g-2 { color: #EA4335; }
-        .g-3 { color: #FBBC05; }
-        .g-4 { color: #4285F4; }
-        .g-5 { color: #34A853; }
-        .g-6 { color: #EA4335; }
-
-        .stars-bright {
-            font-size: 48px;
-            color: #FFD700;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.40), 0 0 80px rgba(255, 215, 0, 0.15);
-            display: block;
-            margin-bottom: 4px;
-            letter-spacing: 6px;
-        }
-
-        .two-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            padding: 0 12px;
-        }
-
-        .two-grid .glass-btn {
-            padding: 16px 8px;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: var(--radius-md);
-            letter-spacing: 0.2px;
-        }
-        .two-grid .glass-btn .icon { font-size: 22px; }
-
-        .map-img {
-            width: 100%;
-            border-radius: var(--radius-md);
-            margin-bottom: 14px;
-            border: 1px solid rgba(255, 215, 0, 0.06);
-        }
-
-        .footer-card {
-            margin: 12px;
-            text-align: center;
-            padding: 24px 16px 18px;
-            border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 215, 0, 0.06);
-        }
-
-        .footer-logo {
-            width: 130px;
-            display: block;
-            margin: 0 auto 10px;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5)) brightness(1.05);
-        }
-
-        .footer-card .brand { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
-        .footer-card .brand span { color: var(--gold-light); }
-        .footer-card .sub { color: var(--text-secondary); font-size: 13px; margin-bottom: 4px; letter-spacing: 0.5px; }
-        .footer-card .slogan-highlight {
-            color: var(--gold-light);
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 12px;
-            letter-spacing: 0.3px;
-        }
-        .footer-card .copy {
-            margin-top: 14px;
-            color: var(--text-muted);
-            font-size: 11px;
-            border-top: 1px solid rgba(255, 215, 0, 0.05);
-            padding-top: 14px;
-            letter-spacing: 0.3px;
-        }
-
-        /* ─── LOGIN MODAL ─── */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 20px;
-            animation: fadeIn 0.3s ease;
-        }
-        .modal-overlay.active { display: flex; }
-
-        .modal-box {
-            background: rgba(20, 18, 16, 0.95);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            border-radius: var(--radius-lg);
-            padding: 32px 28px 28px;
-            max-width: 360px;
-            width: 100%;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.05);
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-box .modal-icon { font-size: 42px; display: block; margin-bottom: 6px; }
-        .modal-box h2 { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -0.3px; margin-bottom: 4px; }
-        .modal-box p { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; }
-
-        .modal-box .input-group { margin-bottom: 14px; text-align: left; }
-        .modal-box .input-group label {
-            display: block;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .modal-box .input-group input {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 215, 0, 0.10);
-            color: #fff;
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            outline: none;
-        }
-        .modal-box .input-group input:focus {
-            border-color: rgba(255, 215, 0, 0.40);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.05);
-        }
-        .modal-box .input-group input::placeholder { color: var(--text-muted); font-size: 13px; }
-
-        .modal-box .modal-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 6px;
-        }
-        .modal-box .modal-actions button {
-            flex: 1;
-            padding: 12px;
-            border-radius: 60px;
-            border: none;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-        .modal-box .modal-actions .btn-login {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.08));
-            border: 1px solid rgba(255, 215, 0, 0.30);
-            color: #fff;
-        }
-        .modal-box .modal-actions .btn-login:hover {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.35), rgba(255, 215, 0, 0.12));
-            border-color: var(--gold-light);
-            transform: scale(1.02);
-        }
-        .modal-box .modal-actions .btn-cancel {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: var(--text-muted);
-        }
-        .modal-box .modal-actions .btn-cancel:hover {
-            background: rgba(255, 255, 255, 0.10);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .modal-box .error-msg {
-            color: #ff6b6b;
-            font-size: 12px;
-            font-weight: 500;
-            margin-top: 10px;
-            min-height: 20px;
-            display: none;
-        }
-        .modal-box .error-msg.show { display: block; }
-
-        .modal-box .close-modal {
-            position: absolute;
-            top: 14px;
-            right: 18px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 22px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-        .modal-box .close-modal:hover { color: #fff; }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 400px) {
-            .catalog-grid { gap: 6px; padding: 0 8px; }
-            .catalog-card { padding: 10px 4px; min-height: 110px; }
-            .catalog-card h3 { font-size: 9px; }
-            .catalog-card p { font-size: 7px; margin-bottom: 4px; }
-            .catalog-card .dl-btn { font-size: 7px; padding: 3px 6px; }
-            .catalog-card .icon-big { font-size: 16px; }
-            .badge-new { font-size: 5.5px; padding: 0 5px; }
-            .name { font-size: 26px; }
-            .name .badge { font-size: 10px; padding: 1px 10px; }
-            .product-grid { gap: 6px; padding: 0 8px; }
-            .product-img { border-radius: var(--radius-sm); }
-            .product span { font-size: 10px; }
-            .two-grid { gap: 8px; padding: 0 8px; }
-            .two-grid .glass-btn { font-size: 11px; padding: 12px 6px; }
-            .contact-btn { font-size: 13px; padding: 10px 16px; }
-            .section-title { font-size: 17px; gap: 6px; }
-            .section-title .line { max-width: 16px; }
-            .feature-list { font-size: 12px; gap: 2px 8px; }
-            .footer-logo { width: 100px; }
-            .single-btn-wrap .contact-btn { font-size: 13px; padding: 10px; }
-            .stars-bright { font-size: 36px; letter-spacing: 4px; }
-            .google-review-wrap .google-brand .g { font-size: 22px; }
-            .btn-group .contact-btn { font-size: 13px; padding: 10px 16px; }
-            .install-btn { width: 200px; height: 44px; font-size: 13px; }
-            .install-btn .btn-sub { font-size: 8px; }
-            .modal-box { padding: 24px 18px 20px; }
-            .modal-box h2 { font-size: 17px; }
-            .modal-box .modal-actions button { font-size: 12px; padding: 10px; }
-            .install-modal-box { padding: 24px 18px 20px; }
-            .install-modal-box h2 { font-size: 17px; }
-            .install-modal-box .step { padding: 10px 12px; }
-            .install-modal-box .step .desc { font-size: 13px; }
-        }
-
-        @media (max-width: 360px) {
-            .catalog-grid { gap: 4px; padding: 0 6px; }
-            .catalog-card { padding: 8px 3px; min-height: 95px; border-radius: var(--radius-sm); }
-            .catalog-card h3 { font-size: 8px; }
-            .catalog-card p { font-size: 6.5px; margin-bottom: 3px; }
-            .catalog-card .dl-btn { font-size: 6.5px; padding: 2px 5px; }
-            .catalog-card .icon-big { font-size: 14px; }
-            .badge-new { font-size: 5px; padding: 0 4px; }
-        }
-
-        @media (min-width: 431px) {
-            .container {
-                border-left: 1px solid rgba(255, 215, 0, 0.04);
-                border-right: 1px solid rgba(255, 215, 0, 0.04);
-                box-shadow: 0 0 80px rgba(0, 0, 0, 0.9);
+            .name {
+                font-size: 26px;
+            }
+            .hero-card {
+                padding: 16px;
+            }
+            .catalog-card {
+                height: 130px;
+            }
+            .catalog-front h3 {
+                font-size: 9px;
+            }
+            .catalog-front .icon-big {
+                font-size: 18px;
+            }
+            .product-grid {
+                gap: 6px;
+                padding: 0 8px;
+            }
+            .two-grid {
+                gap: 8px;
+                padding: 0 8px;
+            }
+            .two-grid .glass-btn {
+                font-size: 11px;
+                padding: 12px 6px;
+            }
+            .contact-btn {
+                font-size: 12px;
+                padding: 10px 16px;
+            }
+            .section-title {
+                font-size: 13px;
+            }
+            .stars-bright {
+                font-size: 36px;
+            }
+            .bottom-nav .nav-item {
+                padding: 4px 10px;
+                font-size: 7px;
+            }
+            .bottom-nav .nav-item .nav-icon {
+                font-size: 18px;
             }
         }
 
-        .mt-8 { margin-top: 8px; }
-        .mt-12 { margin-top: 12px; }
-        .mt-16 { margin-top: 16px; }
-        .mb-8 { margin-bottom: 8px; }
-        .text-center { text-align: center; }
-        .w-full { width: 100%; }
-        .justify-center { justify-content: center; }
-        .gap-6 { gap: 6px; }
-        .flex { display: flex; }
-        .flex-center { display: flex; align-items: center; justify-content: center; }
+        @media (max-width: 360px) {
+            .name {
+                font-size: 22px;
+            }
+            .contact-qr {
+                width: 48px;
+                min-width: 48px;
+            }
+            .quick-actions .glass-btn {
+                font-size: 8px;
+                padding: 6px 2px;
+            }
+            .quick-actions .glass-btn .icon {
+                font-size: 16px;
+            }
+            .catalog-card {
+                height: 110px;
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
+
+    <!-- ═══ SCROLL PROGRESS ═══ -->
+    <div id="progress-bar"></div>
+
+    <!-- ═══ CUSTOM CURSOR ═══ -->
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- ═══ MESH BACKGROUND ═══ -->
+    <div class="mesh-bg">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
 
     <div class="container">
 
         <!-- ═══ HERO ═══ -->
         <div class="hero">
             <div class="hero-content">
-
                 <div class="logo-wrap">
                     <img src="Logo.png" class="logo" alt="Tile Planet" />
                 </div>
-
                 <div class="tagline">✦ Premium Tiles · Perfect Spaces ✦</div>
 
                 <div class="tilt-wrapper" id="tiltWrapper">
                     <div class="hero-card" id="tiltCard">
+                        <!-- Multi-layer Glow -->
+                        <div class="layer-bg-glow" id="spotlight"></div>
 
-                        <div class="top-row">
+                        <!-- Layer 1: Background stuff, not needed -->
+
+                        <!-- Layer 2: Top Row -->
+                        <div class="top-row layer layer-2">
                             <div class="name-box">
                                 <div class="name">
-                                    <span class="gold-text">Ramesh Chotalia</span>
+                                    <span class="gold-shimmer-text">Ramesh Chotalia</span>
                                     <span class="badge">PROP.</span>
                                 </div>
-
-                                <a href="tel:+919922533033" class="contact-btn">
-                                    <span class="icon">📞</span> +91 9922533033
+                                <a href="tel:+919922533033" class="contact-btn magnetic" data-strength="15">
+                                    <span class="btn-text">📞 +91 9922533033</span>
                                 </a>
                             </div>
-
-                            <div class="contact-qr">
+                            <div class="contact-qr layer layer-4">
                                 <img src="contact-qr.jpg" alt="QR" />
                                 <p>Save Contact</p>
                             </div>
                         </div>
 
-                        <div class="quick-actions">
-                            <a href="tel:+919922533033" class="glass-btn">
-                                <span class="icon">📞</span> CALL
-                            </a>
-                            <a href="https://wa.me/919922533033" class="glass-btn">
-                                <span class="icon">💬</span> CHAT
-                            </a>
-                            <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn">
-                                <span class="icon">✉️</span> EMAIL
-                            </a>
-                            <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn">
-                                <span class="icon">📍</span> MAP
-                            </a>
+                        <!-- Layer 3: Quick Actions -->
+                        <div class="quick-actions layer layer-3">
+                            <a href="tel:+919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">📞</span> CALL</a>
+                            <a href="https://wa.me/919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">💬</span> CHAT</a>
+                            <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn magnetic" data-strength="10"><span class="icon">✉️</span> EMAIL</a>
+                            <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn magnetic" data-strength="10"><span class="icon">📍</span> MAP</a>
                         </div>
 
-                        <!-- ═══ INSTALL BUTTON (Added) ═══ -->
-                        <div class="install-btn-wrapper">
-                            <button id="installAppBtn" class="install-btn">
+                        <!-- Layer 4: Install Button -->
+                        <div class="install-btn-wrapper layer layer-4">
+                            <button id="installAppBtn" class="install-btn magnetic" data-strength="20">
                                 <span class="btn-icon">📲</span>
                                 <span class="btn-text-wrap">
                                     Install App
@@ -1108,229 +1452,131 @@
                                 </span>
                             </button>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
 
         <!-- ═══ PRODUCTS ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">🏺</span> OUR PRODUCTS
-            <span class="line"></span>
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">✦</span> 🏺 OUR PRODUCTS <span class="label">✦</span><span class="line"></span>
         </div>
-
         <div class="product-grid">
-            <div class="product">
-                <img src="Walltiles.jpg" class="product-img" alt="Wall" />
-                <span>Wall</span>
-            </div>
-            <div class="product">
-                <img src="Floortiles.jpg" class="product-img" alt="Floor" />
-                <span>Floor</span>
-            </div>
-            <div class="product">
-                <img src="Vitrifiedtiles.jpg" class="product-img" alt="Vitrified" />
-                <span>Vitrified</span>
-            </div>
-            <div class="product">
-                <img src="Parckingtiles.jpg" class="product-img" alt="Parking" />
-                <span>Parking</span>
-            </div>
-            <div class="product">
-                <img src="bathroomtiles.jpg" class="product-img" alt="Bath" />
-                <span>Bath</span>
-            </div>
+            <div class="product" data-delay="0.05"><img src="Walltiles.jpg" class="product-img" /><span>Wall</span></div>
+            <div class="product" data-delay="0.10"><img src="Floortiles.jpg" class="product-img" /><span>Floor</span></div>
+            <div class="product" data-delay="0.15"><img src="Vitrifiedtiles.jpg" class="product-img" /><span>Vitrified</span></div>
+            <div class="product" data-delay="0.20"><img src="Parckingtiles.jpg" class="product-img" /><span>Parking</span></div>
+            <div class="product" data-delay="0.25"><img src="bathroomtiles.jpg" class="product-img" /><span>Bath</span></div>
         </div>
 
-        <!-- ═══ CATALOGUES ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">📚</span> CATALOGUES
-            <span class="line"></span>
+        <!-- ═══ CATALOGS ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">📖</span> 📚 CATALOGUES <span class="label">📖</span><span class="line"></span>
         </div>
-
         <div class="catalog-grid">
-            <div class="catalog-card">
-                <span class="icon-big">🧱</span>
-                <h3>Wall Tiles</h3>
-                <p>Premium Collection</p>
-                <a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view" target="_blank" class="dl-btn">⬇ DOWNLOAD</a>
+            <div class="catalog-card" data-delay="0.05">
+                <div class="catalog-inner">
+                    <div class="catalog-front"><span class="icon-big">🧱</span><h3>Wall Tiles</h3><p>Premium</p></div>
+                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Collection</p><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
+                </div>
             </div>
-            <div class="catalog-card">
-                <span class="icon-big">🟫</span>
-                <h3>Floor Tiles</h3>
-                <p>600×600 Collection</p>
-                <a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view" target="_blank" class="dl-btn">⬇ DOWNLOAD</a>
+            <div class="catalog-card" data-delay="0.10">
+                <div class="catalog-inner">
+                    <div class="catalog-front"><span class="icon-big">🟫</span><h3>Floor Tiles</h3><p>600×600</p></div>
+                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Collection</p><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
+                </div>
             </div>
-            <div class="catalog-card" style="border-color: rgba(255,215,0,0.25); background: rgba(255,215,0,0.07);">
-                <span class="icon-big">📐</span>
-                <h3 style="color: var(--gold-light);">300×600mm</h3>
-                <p style="color: var(--text-secondary);">Wall Tiles · Modern</p>
-                <span class="badge-new">✦ New</span>
-                <a href="https://drive.google.com/file/d/1OoOO2rFnY4Bw6tkv5vGwYsrAz4bSGLU6/view?usp=sharing" target="_blank" class="dl-btn" style="border-color: rgba(255,215,0,0.40); background: rgba(255,215,0,0.15);">⬇ DOWNLOAD</a>
+            <div class="catalog-card" data-delay="0.15">
+                <div class="catalog-inner" style="border-color:rgba(212,175,55,0.3);">
+                    <div class="catalog-front" style="background:rgba(212,175,55,0.05);border-color:rgba(212,175,55,0.1);"><span class="icon-big">📐</span><h3 style="color:var(--gold-light);">300×600mm</h3><p>Modern</p><span class="badge-new">✦ New</span></div>
+                    <div class="catalog-back"><span class="badge-new">✦ New</span><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
+                </div>
             </div>
-            <div class="catalog-card" style="border-color: rgba(76,217,100,0.20); background: rgba(76,217,100,0.05);">
-                <span class="icon-big">🔲</span>
-                <h3 style="color: #4cd964;">600×600 Matt</h3>
-                <p style="color: var(--text-secondary);">Premium Matt Finish</p>
-                <span class="badge-new" style="background: linear-gradient(135deg, #4cd964, #2ecc71); color: #0a0a0a;">✦ New</span>
-                <a href="https://drive.google.com/file/d/1mbzMv5LI4UY3YTGXxXRWoE81Y_6w5j7g/view" target="_blank" class="dl-btn" style="border-color: rgba(76,217,100,0.30); background: rgba(76,217,100,0.12);">⬇ DOWNLOAD</a>
+            <div class="catalog-card" data-delay="0.20">
+                <div class="catalog-inner" style="border-color:rgba(76,217,100,0.2);">
+                    <div class="catalog-front" style="background:rgba(76,217,100,0.03);"><span class="icon-big">🔲</span><h3 style="color:#4cd964;">600×600 Matt</h3><p>Matt Finish</p><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span></div>
+                    <div class="catalog-back"><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
+                </div>
             </div>
         </div>
 
-        <!-- ═══ COMPANY PROFILE ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">🏛️</span> COMPANY PROFILE
-            <span class="line"></span>
+        <!-- ═══ PROFILE ═══ -->
+        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">🏛️</span> 🏛️ PROFILE <span class="label">🏛️</span><span class="line"></span></div>
+        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
+            <img src="Company.png" class="profile-img" />
+            <h2 style="font-size:22px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;">Tile Planet</h2>
+            <p style="color:var(--text-secondary);text-align:center;">Premium Tiles Supplier · Est. 2018</p>
+            <div class="single-btn-wrap"><a href="#" class="contact-btn magnetic" data-strength="12">📄 VIEW / DOWNLOAD PROFILE</a></div>
+            <div class="feature-list"><span>Wall Tiles</span><span>Floor Tiles</span><span>Vitrified Tiles</span><span>Parking Tiles</span><span>Bathroom Fitting</span><span>Sanitaryware</span></div>
         </div>
 
-        <div class="glass-card" style="margin:0 12px;">
-            <img src="Company.png" class="profile-img" alt="Company" />
-            <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.3px; text-align: center;">Tile Planet</h2>
-            <p style="color:var(--text-secondary); margin-top:2px; font-size:14px; text-align: center;">Premium Tiles Supplier - 2018</p>
-            <div class="single-btn-wrap">
-                <a href="company-profile.pdf" target="_blank" class="contact-btn">📄 VIEW / DOWNLOAD PROFILE</a>
-            </div>
-            <div class="feature-list" style="text-align: left;">
-                <span>Wall Tiles</span>
-                <span>Floor Tiles</span>
-                <span>Vitrified Tiles</span>
-                <span>Parking Tiles</span>
-                <span>Bathroom Fitting</span>
-                <span>Sanityware</span>
-            </div>
-        </div>
-
-        <!-- ═══ COMPANY DETAILS ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">📋</span> COMPANY DETAILS
-            <span class="line"></span>
-        </div>
-
-        <div class="glass-card" style="margin:0 12px;">
+        <!-- ═══ DETAILS ═══ -->
+        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">📋</span> 📋 DETAILS <span class="label">📋</span><span class="line"></span></div>
+        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
             <table class="info-table">
                 <tr><td class="label">GST</td><td class="value">27AIPPR7422Q1Z9</td></tr>
                 <tr><td class="label">Owner</td><td class="value">Ramesh Chotalia</td></tr>
                 <tr><td class="label">Business</td><td class="value">Retailer &amp; Supplier</td></tr>
                 <tr><td class="label">Experience</td><td class="value">10+ Years</td></tr>
-                <tr><td class="label">Address</td><td class="value" style="font-size:14px; line-height:1.6;">Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK, Pune – 411046</td></tr>
+                <tr><td class="label">Address</td><td class="value" style="font-size:12px;line-height:1.6;">Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK, Pune – 411046</td></tr>
             </table>
         </div>
 
-        <!-- ═══ STOCK ENQUIRY ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">📦</span> STOCK ENQUIRY / SAMPLING / PAYMENT
-            <span class="line"></span>
-        </div>
-
-        <div class="glass-card" style="margin:0 12px; text-align: center;">
+        <!-- ═══ STOCK & PAYMENT ═══ -->
+        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">📦</span> 📦 STOCK &amp; PAYMENT <span class="label">📦</span><span class="line"></span></div>
+        <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
             <div class="stock-name">Harshad Dalvi</div>
             <div class="stock-phone">📱 +91 9067121697</div>
             <div class="btn-group">
-                <a href="tel:+919067121697" class="contact-btn" style="background:rgba(76,217,100,0.10); border-color:rgba(76,217,100,0.25);">📞 CONTACT FOR STOCK</a>
-                <a href="#" class="contact-btn btn-live-inventory" onclick="openLiveInventory(); return false;">
-                    <span class="pulse-dot"></span> LIVE INVENTORY
-                </a>
+                <a href="tel:+919067121697" class="contact-btn magnetic" style="background:rgba(76,217,100,0.05);border-color:rgba(76,217,100,0.15);" data-strength="12">📞 CONTACT FOR STOCK</a>
+                <a href="#" class="contact-btn btn-live-inventory magnetic" onclick="openLiveInventory(); return false;" data-strength="12"><span class="pulse-dot"></span> LIVE INVENTORY</a>
             </div>
         </div>
 
-        <!-- ═══ PAYMENT QR ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">💳</span> PAYMENT
-            <span class="line"></span>
+        <div class="glass-card animate-on-scroll" style="margin:12px 12px 0;text-align:center;">
+            <img src="upi-qr.png" class="payment-img" />
+            <div class="upi-id">UPI ID <b>ramesh.chotalia13@oksbi</b></div>
+            <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">💳 PAY NOW</a>
         </div>
 
-        <div class="glass-card" style="margin:0 12px; text-align:center;">
-            <img src="upi-qr.png" class="payment-img" alt="UPI QR" />
-            <div class="upi-id">
-                UPI ID
-                <b>ramesh.chotalia13@oksbi</b>
-            </div>
-            <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="contact-btn w-full justify-center" style="margin-top:14px;">💳 PAY NOW</a>
+        <!-- ═══ REVIEWS ═══ -->
+        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">⭐</span> ⭐ REVIEWS <span class="label">⭐</span><span class="line"></span></div>
+        <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
+            <div class="google-brand"><span class="g g-1">G</span><span class="g g-2">o</span><span class="g g-3">o</span><span class="g g-4">g</span><span class="g g-5">l</span><span class="g g-6">e</span></div>
+            <span class="stars-bright">★★★★★</span>
+            <h2 style="font-size:19px;font-weight:700;font-family:'Playfair Display',serif;">Love Our Service?</h2>
+            <p style="color:var(--text-secondary);">Share your experience</p>
+            <a href="#" target="_blank" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">⭐ WRITE REVIEW</a>
         </div>
 
-        <!-- ═══ GOOGLE REVIEWS ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">⭐</span> GOOGLE REVIEWS
-            <span class="line"></span>
+        <!-- ═══ FOLLOW ═══ -->
+        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">📱</span> 📱 FOLLOW US <span class="label">📱</span><span class="line"></span></div>
+        <div class="two-grid animate-on-scroll">
+            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">📸</span> Instagram</a>
+            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">👍</span> Facebook</a>
+            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">▶️</span> YouTube</a>
+            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">💬</span> WhatsApp</a>
         </div>
 
-        <div class="glass-card" style="margin:0 12px; text-align:center;">
-            <div class="google-review-wrap">
-                <div class="google-brand">
-                    <span class="g g-1">G</span>
-                    <span class="g g-2">o</span>
-                    <span class="g g-3">o</span>
-                    <span class="g g-4">g</span>
-                    <span class="g g-5">l</span>
-                    <span class="g g-6">e</span>
-                </div>
-                <span class="stars-bright">★★★★★</span>
-                <h2 style="font-size:19px; font-weight:700; margin-bottom:2px;">Love Our Service?</h2>
-                <p style="color:var(--text-secondary); font-size:14px;">Share your experience on Google</p>
-                <a href="https://g.page/r/CXkwBZtskIM3EAE/review" target="_blank" class="contact-btn w-full justify-center" style="margin-top:14px;">⭐ WRITE REVIEW</a>
-            </div>
-        </div>
-
-        <!-- ═══ FOLLOW US ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">📱</span> FOLLOW US
-            <span class="line"></span>
-        </div>
-
-        <div class="two-grid">
-            <a href="https://www.instagram.com/ramesh.chotalia13/" target="_blank" class="glass-btn"><span class="icon">📸</span> Instagram</a>
-            <a href="https://www.facebook.com/tileplanet.co.in/" target="_blank" class="glass-btn"><span class="icon">👍</span> Facebook</a>
-            <a href="https://www.youtube.com/results?search_query=tile+planet" target="_blank" class="glass-btn"><span class="icon">▶️</span> YouTube</a>
-            <a href="https://wa.me/919922533033" target="_blank" class="glass-btn"><span class="icon">💬</span> WhatsApp</a>
-        </div>
-
-        <!-- ═══ QUICK ACTIONS ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">⚡</span> QUICK ACTIONS
-            <span class="line"></span>
-        </div>
-
-        <div class="two-grid">
-            <a href="tileplanet.vcf" download class="glass-btn">
-                <span class="icon">💾</span> Save Contact
-            </a>
-            <a href="#" onclick="shareCard()" class="glass-btn">
-                <span class="icon">📤</span> Share Card
-            </a>
-            <a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20Please%20send%20me%20a%20quotation." target="_blank" class="glass-btn">
-                <span class="icon">📝</span> Get Quote
-            </a>
-            <a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20I%20want%20an%20enquiry." target="_blank" class="glass-btn">
-                <span class="icon">📩</span> Enquiry
-            </a>
+        <!-- ═══ QUICK ═══ -->
+        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">⚡</span> ⚡ QUICK <span class="label">⚡</span><span class="line"></span></div>
+        <div class="two-grid animate-on-scroll">
+            <a href="#" download class="glass-btn magnetic" data-strength="8"><span class="icon">💾</span> Save Contact</a>
+            <a href="#" onclick="shareCard()" class="glass-btn magnetic" data-strength="8"><span class="icon">📤</span> Share Card</a>
+            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📝</span> Get Quote</a>
+            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📩</span> Enquiry</a>
         </div>
 
         <!-- ═══ LOCATION ═══ -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">📍</span> LOCATION
-            <span class="line"></span>
-        </div>
-
-        <div class="glass-card" style="margin:0 12px;">
-            <img src="map.jpeg" class="map-img" alt="Map" />
-            <a href="https://www.google.com/maps?q=18.452656,73.832591" target="_blank" class="contact-btn w-full justify-center">📍 OPEN MAP</a>
+        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">📍</span> 📍 LOCATION <span class="label">📍</span><span class="line"></span></div>
+        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
+            <img src="map.jpeg" class="map-img" />
+            <a href="#" target="_blank" class="contact-btn w-full justify-center magnetic" data-strength="15">📍 OPEN MAP</a>
         </div>
 
         <!-- ═══ FOOTER ═══ -->
-        <div class="footer-card">
-            <img src="Logo.png" class="footer-logo" alt="Tile Planet" />
+        <div class="footer-card animate-on-scroll">
+            <img src="Logo.png" class="footer-logo" />
             <div class="brand">🏛️ TILE <span>PLANET</span></div>
             <div class="sub">Your One-Stop Tile Solution</div>
             <div class="slogan-highlight">✦ Visit Our Showroom Once ✦</div>
@@ -1339,110 +1585,55 @@
 
     </div>
 
-    <!-- ═══ iOS INSTRUCTION MODAL ═══ -->
+    <!-- ═══ BOTTOM NAV ═══ -->
+    <div class="bottom-nav" id="bottomNav">
+        <a href="tel:+919922533033" class="nav-item active" data-target="call"><span class="nav-icon">📞</span> Call</a>
+        <a href="https://wa.me/919922533033" class="nav-item" data-target="chat"><span class="nav-icon">💬</span> Chat</a>
+        <a href="#" class="nav-item" data-target="map"><span class="nav-icon">📍</span> Map</a>
+        <a href="#" onclick="shareCard(); return false;" class="nav-item" data-target="share"><span class="nav-icon">📤</span> Share</a>
+    </div>
+
+    <!-- ═══ MODALS ═══ -->
     <div id="iosModal" class="install-modal-overlay">
-        <div class="install-modal-box">
-            <button class="close-modal" onclick="closeModal('iosModal')">✕</button>
-            <span class="modal-icon">📲</span>
-            <h2>Install Tile Planet App</h2>
-            <p>Follow these simple steps to add to your Home Screen</p>
-            <div class="step">
-                <span class="num">1</span>
-                <div class="desc">
-                    Tap the Share button
-                    <small>⬆️ at the bottom of Safari</small>
-                </div>
-            </div>
-            <div class="step">
-                <span class="num">2</span>
-                <div class="desc">
-                    Select "Add to Home Screen"
-                    <small>🟢 scroll down and tap</small>
-                </div>
-            </div>
-            <div class="step">
-                <span class="num">3</span>
-                <div class="desc">
-                    Tap "Add" in the top right
-                    <small>✅ done!</small>
-                </div>
-            </div>
+        <div class="install-modal-box"><button class="close-modal" onclick="closeModal('iosModal')">✕</button><span class="modal-icon">📲</span><h2>Install App</h2><p>Add to Home Screen</p>
+            <div class="step"><span class="num">1</span><div class="desc">Tap Share <small>⬆️ at bottom</small></div></div>
+            <div class="step"><span class="num">2</span><div class="desc">Select "Add to Home Screen" <small>🟢 scroll down</small></div></div>
+            <div class="step"><span class="num">3</span><div class="desc">Tap "Add" <small>✅ done!</small></div></div>
             <button class="got-it-btn" onclick="closeModal('iosModal')">Got it!</button>
         </div>
     </div>
-
-    <!-- ═══ ANDROID / GENERAL INSTRUCTION MODAL ═══ -->
     <div id="androidModal" class="install-modal-overlay">
-        <div class="install-modal-box">
-            <button class="close-modal" onclick="closeModal('androidModal')">✕</button>
-            <span class="modal-icon">📲</span>
-            <h2>Add to Home Screen</h2>
-            <p>Install this app in one easy step</p>
-            <div class="step">
-                <span class="num">1</span>
-                <div class="desc">
-                    Tap the menu (⋮) or (︙) in your browser
-                    <small>usually at the top right</small>
-                </div>
-            </div>
-            <div class="step">
-                <span class="num">2</span>
-                <div class="desc">
-                    Select "Add to Home Screen" or "Install App"
-                    <small>scroll down if needed</small>
-                </div>
-            </div>
-            <div class="step">
-                <span class="num">3</span>
-                <div class="desc">
-                    Tap "Add" and you're done!
-                    <small>✅ app icon on your home screen</small>
-                </div>
-            </div>
+        <div class="install-modal-box"><button class="close-modal" onclick="closeModal('androidModal')">✕</button><span class="modal-icon">📲</span><h2>Add to Home Screen</h2><p>Install in one step</p>
+            <div class="step"><span class="num">1</span><div class="desc">Tap menu (⋮) or (︙) <small>top right</small></div></div>
+            <div class="step"><span class="num">2</span><div class="desc">Select "Install App" <small>scroll down</small></div></div>
+            <div class="step"><span class="num">3</span><div class="desc">Tap "Add" <small>✅ done!</small></div></div>
             <button class="got-it-btn" onclick="closeModal('androidModal')">Got it!</button>
         </div>
     </div>
 
-    <!-- ═══ LOGIN MODAL (Live Inventory) ═══ -->
     <div class="modal-overlay" id="loginModal">
-        <div class="modal-box">
-            <button class="close-modal" onclick="closeLoginModal()">✕</button>
-            <span class="modal-icon">🔐</span>
-            <h2>Live Inventory</h2>
-            <p>Enter your credentials to access real-time stock</p>
-            <div class="input-group">
-                <label for="loginUser">Username</label>
-                <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username" />
-            </div>
-            <div class="input-group">
-                <label for="loginPass">Password</label>
-                <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password" />
-            </div>
-            <div class="error-msg" id="loginError">❌ Invalid username or password. Please try again.</div>
-            <div class="modal-actions">
-                <button class="btn-cancel" onclick="closeLoginModal()">Cancel</button>
-                <button class="btn-login" onclick="handleLogin()">🔓 Login</button>
-            </div>
+        <div class="modal-box"><button class="close-modal" onclick="closeLoginModal()">✕</button><span class="modal-icon">🔐</span><h2>Live Inventory</h2><p>Enter credentials</p>
+            <div class="input-group"><label for="loginUser">Username</label><input type="text" id="loginUser" placeholder="Username" /></div>
+            <div class="input-group"><label for="loginPass">Password</label><input type="password" id="loginPass" placeholder="Password" /></div>
+            <div class="error-msg" id="loginError">❌ Invalid credentials.</div>
+            <div class="modal-actions"><button class="btn-cancel" onclick="closeLoginModal()">Cancel</button><button class="btn-login" onclick="handleLogin()">🔓 Login</button></div>
         </div>
     </div>
 
     <script>
-        // ─── SHARE CARD ───
+        // ─── SHARE ───
         function shareCard() {
             if (navigator.share) {
-                navigator.share({
-                    title: 'Tile Planet',
-                    text: 'Tile Planet — Premium Tiles Digital Card',
-                    url: window.location.href
-                }).catch(() => {});
+                navigator.share({ title: 'Tile Planet', text: 'Tile Planet — Premium Tiles', url: window.location.href })
+                    .catch(() => {});
             } else {
                 navigator.clipboard.writeText(window.location.href)
-                    .then(() => alert('✅ Link Copied Successfully'))
-                    .catch(() => alert('📋 Copy this link: ' + window.location.href));
+                    .then(() => alert('✅ Link Copied'))
+                    .catch(() => alert('📋 Copy: ' + window.location.href));
             }
         }
 
-        // ─── LIVE INVENTORY LOGIN ───
+        // ─── LOGIN ───
         const VALID_USERNAME = 'admin';
         const VALID_PASSWORD = 'tile123';
         const INVENTORY_URL = 'https://docs.google.com/spreadsheets/d/YOUR_LIVE_INVENTORY_SHEET_ID/edit';
@@ -1452,9 +1643,7 @@
             document.getElementById('loginUser').value = '';
             document.getElementById('loginPass').value = '';
             document.getElementById('loginError').classList.remove('show');
-            setTimeout(() => {
-                document.getElementById('loginUser').focus();
-            }, 100);
+            setTimeout(() => document.getElementById('loginUser').focus(), 150);
         }
 
         function closeLoginModal() {
@@ -1466,32 +1655,22 @@
             const username = document.getElementById('loginUser').value.trim();
             const password = document.getElementById('loginPass').value.trim();
             const errorEl = document.getElementById('loginError');
-
             if (username === VALID_USERNAME && password === VALID_PASSWORD) {
                 errorEl.classList.remove('show');
                 closeLoginModal();
-                if (INVENTORY_URL.includes('YOUR_LIVE_INVENTORY_SHEET_ID')) {
-                    alert('🔧 Please update the INVENTORY_URL in the script with your actual live inventory link.');
-                } else {
-                    window.open(INVENTORY_URL, '_blank');
-                }
+                if (INVENTORY_URL.includes('YOUR_LIVE_INVENTORY_SHEET_ID')) alert('🔧 Update INVENTORY_URL.');
+                else window.open(INVENTORY_URL, '_blank');
             } else {
                 errorEl.classList.add('show');
-                errorEl.style.animation = 'none';
-                setTimeout(() => {
-                    errorEl.style.animation = 'fadeIn 0.3s ease';
-                }, 10);
                 document.getElementById('loginPass').value = '';
                 document.getElementById('loginPass').focus();
             }
         }
 
-        // ─── PWA: INSTALL LOGIC ───
+        // ─── PWA INSTALL ───
         let deferredPrompt = null;
         let isAppInstalled = false;
         const installBtn = document.getElementById('installAppBtn');
-        const iosModal = document.getElementById('iosModal');
-        const androidModal = document.getElementById('androidModal');
 
         function checkIfInstalled() {
             if (window.navigator.standalone === true) isAppInstalled = true;
@@ -1500,64 +1679,39 @@
         }
 
         function hideInstallButton() {
-            if (isAppInstalled) {
-                installBtn.classList.add('install-hidden');
-            } else {
-                installBtn.classList.remove('install-hidden');
-            }
+            if (isAppInstalled) installBtn.classList.add('install-hidden');
+            else installBtn.classList.remove('install-hidden');
         }
 
         function openModal(id) { document.getElementById(id).classList.add('active'); }
+
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
         function handleInstallClick(e) {
             e.preventDefault();
             if (isAppInstalled) return;
-
             const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            if (isIos) {
-                openModal('iosModal');
-                return;
-            }
-
+            if (isIos) { openModal('iosModal'); return; }
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        isAppInstalled = true;
-                        hideInstallButton();
-                    }
+                    if (choiceResult.outcome === 'accepted') { isAppInstalled = true;
+                        hideInstallButton(); }
                     deferredPrompt = null;
                 });
                 return;
             }
-
-            // Fallback – show Android/generic guide
             openModal('androidModal');
         }
 
-        // ─── EVENTS ───
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            if (!isAppInstalled) installBtn.classList.remove('install-hidden');
-        });
-
-        window.addEventListener('appinstalled', () => {
-            isAppInstalled = true;
-            hideInstallButton();
-        });
-
-        window.addEventListener('load', () => {
-            if (checkIfInstalled()) {
-                hideInstallButton();
-            } else {
-                installBtn.classList.remove('install-hidden');
-            }
-        });
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault();
+            deferredPrompt = e; if (!isAppInstalled) installBtn.classList.remove('install-hidden'); });
+        window.addEventListener('appinstalled', () => { isAppInstalled = true;
+            hideInstallButton(); });
+        window.addEventListener('load', () => { if (checkIfInstalled()) hideInstallButton(); else installBtn.classList.remove(
+                'install-hidden'); });
 
         installBtn.addEventListener('click', function(e) {
-            // Ripple effect
             const ripple = document.createElement('span');
             ripple.className = 'ripple';
             const rect = this.getBoundingClientRect();
@@ -1570,17 +1724,69 @@
             handleInstallClick(e);
         });
 
-        // Close modals when overlay clicked
-        document.querySelectorAll('.install-modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', function(e) {
-                if (e.target === this) this.classList.remove('active');
-            });
+        document.querySelectorAll('.install-modal-overlay, .modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); });
         });
 
-        // ─── 3D TILT ───
+        // ─── CUSTOM CURSOR ───
+        const ring = document.getElementById('cursorRing');
+        const dot = document.getElementById('cursorDot');
+        let mouseX = 0,
+            mouseY = 0;
+
+        if (window.matchMedia('(hover: hover)').matches) {
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                ring.style.left = mouseX + 'px';
+                ring.style.top = mouseY + 'px';
+                dot.style.left = mouseX + 'px';
+                dot.style.top = mouseY + 'px';
+            });
+
+            document.querySelectorAll('a, button, .glass-btn, .contact-btn, .install-btn, .catalog-card, .product').forEach(
+            el => {
+                el.addEventListener('mouseenter', () => {
+                    ring.classList.add('active');
+                    dot.classList.add('active');
+                });
+                el.addEventListener('mouseleave', () => {
+                    ring.classList.remove('active');
+                    dot.classList.remove('active');
+                });
+            });
+        }
+
+        // ─── MAGNETIC BUTTONS ───
+        document.querySelectorAll('.magnetic').forEach(btn => {
+            if (window.matchMedia('(hover: hover)').matches) {
+                btn.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    const strength = parseFloat(this.dataset.strength) || 10;
+                    this.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translate(0, 0)';
+                });
+            }
+        });
+
+        // ─── SCROLL PROGRESS ───
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        });
+
+        // ─── 3D TILT + SPOTLIGHT (Multi-layer) ───
         document.addEventListener('DOMContentLoaded', function() {
             const card = document.getElementById('tiltCard');
             const wrapper = document.getElementById('tiltWrapper');
+            const spotlight = document.getElementById('spotlight');
+            const layers = card.querySelectorAll('.layer');
 
             wrapper.addEventListener('mousemove', function(e) {
                 const rect = wrapper.getBoundingClientRect();
@@ -1590,36 +1796,76 @@
                 const centerY = rect.height / 2;
                 const rotateX = ((y - centerY) / centerY) * -8;
                 const rotateY = ((x - centerX) / centerX) * 8;
+
+                // Rotate the whole card
                 card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+                // Move layers at different speeds (Parallax)
+                layers.forEach((layer, index) => {
+                    const speed = 0.5 + (index * 0.1);
+                    const moveX = (x - centerX) / centerX * 10 * speed;
+                    const moveY = (y - centerY) / centerY * 10 * speed;
+                    layer.style.transform = `translate(${moveX}px, ${moveY}px) translateZ(${20 + index * 20}px)`;
+                });
+
+                // Spotlight
+                const px = (x / rect.width) * 100;
+                const py = (y / rect.height) * 100;
+                spotlight.style.setProperty('--mx', px + '%');
+                spotlight.style.setProperty('--my', py + '%');
             });
 
             wrapper.addEventListener('mouseleave', function() {
                 card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                layers.forEach(layer => {
+                    layer.style.transform = `translate(0, 0) translateZ(${parseInt(layer.style.transform?.match(/translateZ\((\d+)px\)/)?.[1] || 20)}px)`;
+                });
+                spotlight.style.setProperty('--mx', '50%');
+                spotlight.style.setProperty('--my', '50%');
             });
         });
 
-        // ─── LOGIN ENTER KEY ───
+        // ─── SCROLL ANIMATIONS (Intersection Observer) ───
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const delay = parseFloat(el.dataset.delay) || 0;
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                        }, delay * 1000);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.section-title, .product, .catalog-card, .animate-on-scroll').forEach(el => observer
+                .observe(el));
+        });
+
+        // ─── BOTTOM NAV ACTIVE STATE ───
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // ─── LOGIN ENTER ───
         document.addEventListener('DOMContentLoaded', function() {
             const passField = document.getElementById('loginPass');
             const userField = document.getElementById('loginUser');
 
-            function handleEnter(e) {
-                if (e.key === 'Enter') handleLogin();
-            }
-
+            function handleEnter(e) { if (e.key === 'Enter') handleLogin(); }
             passField.addEventListener('keydown', handleEnter);
             userField.addEventListener('keydown', handleEnter);
-
-            document.getElementById('loginModal').addEventListener('click', function(e) {
-                if (e.target === this) closeLoginModal();
-            });
+            document.getElementById('loginModal').addEventListener('click', function(e) { if (e.target === this)
+                    closeLoginModal(); });
         });
 
-        // ─── SERVICE WORKER REGISTRATION ───
+        // ─── SERVICE WORKER ───
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(reg => console.log('Service Worker registered'))
-                .catch(err => console.warn('Service Worker registration failed:', err));
+            navigator.serviceWorker.register('/service-worker.js').catch(() => {});
         }
     </script>
 
