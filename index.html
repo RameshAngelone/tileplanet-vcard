@@ -48,11 +48,11 @@
             font-family: 'Inter', -apple-system, sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 130px; /* space for bottom nav + ticker */
+            padding-bottom: 130px;
             min-height: 100vh;
         }
 
-        /* ─── DYNAMIC BACKGROUND (changes hourly) ─── */
+        /* ─── DYNAMIC BACKGROUND ─── */
         .dynamic-bg {
             position: fixed;
             inset: 0;
@@ -570,7 +570,7 @@
             border: 1px solid rgba(212,175,55,0.04);
         }
 
-        /* ─── PRODUCT GRID (NO LIGHTBOX) ─── */
+        /* ─── PRODUCT GRID ─── */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -579,7 +579,7 @@
         }
         .product {
             text-align: center;
-            cursor: default; /* no click interaction */
+            cursor: default;
             transition: all var(--transition);
             opacity: 0;
             transform: translateY(30px) scale(0.95);
@@ -709,7 +709,7 @@
             margin-top: 2px;
         }
 
-        /* ─── TESTIMONIAL CAROUSEL ─── */
+        /* ─── TESTIMONIAL CAROUSEL (10 ITEMS) ─── */
         .testimonial-section {
             padding: 0 12px;
         }
@@ -717,7 +717,7 @@
             position: relative;
             overflow: hidden;
             border-radius: var(--radius-lg);
-            min-height: 160px;
+            min-height: 170px;
         }
         .testimonial-track {
             display: flex;
@@ -747,24 +747,27 @@
             line-height: 1.6;
         }
         .testimonial-item .author {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
-            color: #fff;
+            color: var(--gold-light);
             margin-top: 8px;
         }
         .testimonial-item .author small {
             font-weight: 400;
             color: var(--text-muted);
+            font-size: 11px;
         }
         .testimonial-dots {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 8px;
-            margin-top: 12px;
+            margin-top: 14px;
+            padding: 0 4px;
         }
         .testimonial-dots .dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: var(--text-muted);
             border: none;
@@ -774,9 +777,9 @@
         }
         .testimonial-dots .dot.active {
             background: var(--gold-light);
-            width: 24px;
+            width: 28px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(212,175,55,0.2);
+            box-shadow: 0 0 20px rgba(212,175,55,0.3);
         }
 
         /* ─── COMPANY PROFILE ─── */
@@ -1020,45 +1023,58 @@
             padding-top: 14px;
         }
 
-        /* ─── SCROLLING TICKER (NEW) ─── */
+        /* ─── SCROLLING TICKER (HIGHLIGHTED) ─── */
         .ticker-bar {
             position: fixed;
-            bottom: 70px; /* above bottom nav */
+            bottom: 70px;
             left: 0;
             right: 0;
             z-index: 998;
-            background: rgba(10, 8, 6, 0.85);
+            background: linear-gradient(90deg, rgba(20, 15, 10, 0.95), rgba(30, 22, 12, 0.95));
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(212,175,55,0.08);
-            border-bottom: 1px solid rgba(212,175,55,0.08);
-            padding: 6px 0;
+            border-top: 2px solid var(--gold-light);
+            border-bottom: 2px solid var(--gold-light);
+            padding: 10px 0;
             overflow: hidden;
             max-width: 440px;
             margin: 0 auto;
-            box-shadow: 0 -4px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 -8px 40px rgba(212, 175, 55, 0.15), inset 0 0 60px rgba(212, 175, 55, 0.02);
         }
         .ticker-track {
             display: flex;
             white-space: nowrap;
-            animation: tickerScroll 25s linear infinite;
+            animation: tickerScroll 30s linear infinite;
         }
         .ticker-track span {
             display: inline-block;
-            padding: 0 40px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--gold-light);
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 20px rgba(212,175,55,0.1);
+            padding: 0 50px;
+            font-size: 18px; /* Bigger font */
+            font-weight: 800; /* Bold */
+            color: #fff;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.1);
+            letter-spacing: 0.8px;
+            background: linear-gradient(90deg, var(--gold-light), #fff, var(--gold-light));
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerTextTicker 3s linear infinite;
         }
         .ticker-track i {
-            margin-right: 8px;
+            margin-right: 12px;
             color: #ff6b6b;
+            -webkit-text-fill-color: #ff6b6b;
+            font-size: 20px;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
         }
         @keyframes tickerScroll {
             0% { transform: translateX(0%); }
             100% { transform: translateX(-50%); }
+        }
+        @keyframes shimmerTextTicker {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
         /* ─── BOTTOM NAV ─── */
@@ -1322,8 +1338,9 @@
             .bottom-nav .nav-item { padding: 4px 10px; font-size: 7px; }
             .bottom-nav .nav-item .nav-icon { font-size: 18px; }
             .top-bar .lang-btn, .top-bar .audio-btn { font-size: 10px; padding: 3px 10px; }
-            .ticker-track span { font-size: 11px; padding: 0 20px; }
-            .ticker-bar { bottom: 60px; }
+            .ticker-track span { font-size: 15px; padding: 0 20px; }
+            .ticker-bar { bottom: 60px; padding: 8px 0; }
+            .testimonial-item .quote { font-size: 13px; }
         }
 
         @media (max-width: 360px) {
@@ -1439,7 +1456,7 @@
             </div>
         </div>
 
-        <!-- ═══ 1. OUR PRODUCTS (NO LIGHTBOX) ═══ -->
+        <!-- ═══ 1. OUR PRODUCTS ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">✦</span>
             <span class="lang-en">🏺 OUR PRODUCTS</span><span class="lang-hi">🏺 हमारे उत्पाद</span>
@@ -1486,7 +1503,7 @@
             </div>
         </div>
 
-        <!-- ═══ 3. TESTIMONIALS ═══ -->
+        <!-- ═══ 3. TESTIMONIALS (10 Items) ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">💬</span>
             <span class="lang-en">💬 TESTIMONIALS</span><span class="lang-hi">💬 ग्राहक समीक्षा</span>
@@ -1495,6 +1512,7 @@
         <div class="testimonial-section animate-on-scroll">
             <div class="testimonial-carousel" id="testimonialCarousel">
                 <div class="testimonial-track" id="testimonialTrack">
+                    <!-- 10 Unique Testimonials -->
                     <div class="testimonial-item">
                         <span class="stars">★★★★★</span>
                         <p class="quote">"Tile Planet की क्वालिटी और सर्विस दोनों ही बेहतरीन हैं। हमने अपने नए घर के लिए यहीं से टाइल्स खरीदीं, बहुत खुश हैं!"</p>
@@ -1510,12 +1528,55 @@
                         <p class="quote">"We got parking tiles and vitrified tiles from Tile Planet. The quality is unmatched and delivery was on time."</p>
                         <div class="author">Suresh Patil <small>· Satara</small></div>
                     </div>
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"Tile Planet gave us the best deal on vitrified tiles. The collection is huge and the pricing is very competitive!"</p>
+                        <div class="author">Rajesh K. <small>· Nashik</small></div>
+                    </div>
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"Excellent variety and great customer service. They guided us perfectly for our home renovation project."</p>
+                        <div class="author">Sneha P. <small>· Mumbai</small></div>
+                    </div>
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"We used their parking tiles for our commercial project. Very durable, stylish, and reasonably priced."</p>
+                        <div class="author">Vikram S. <small>· Pune</small></div>
+                    </div>
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"Ramesh bhai guided us perfectly on which tiles to choose for our bathroom. Superb experience overall!"</p>
+                        <div class="author">Anita D. <small>· Kolhapur</small></div>
+                    </div>
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"Best tile shop in Pune. Huge collection of 600x600 matt finish tiles. We found exactly what we wanted."</p>
+                        <div class="author">Manoj R. <small>· Pimpri</small></div>
+                    </div>
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"Fast delivery and great pricing. Tile Planet is our go-to supplier for all our construction projects."</p>
+                        <div class="author">Sunil G. <small>· Sangli</small></div>
+                    </div>
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"Amazing quality and a very professional team. We are completely satisfied with the service and products."</p>
+                        <div class="author">Pooja M. <small>· Solapur</small></div>
+                    </div>
                 </div>
             </div>
             <div class="testimonial-dots" id="testimonialDots">
+                <!-- 10 dots generated dynamically or manually (manually added for 10) -->
                 <button class="dot active" data-index="0"></button>
                 <button class="dot" data-index="1"></button>
                 <button class="dot" data-index="2"></button>
+                <button class="dot" data-index="3"></button>
+                <button class="dot" data-index="4"></button>
+                <button class="dot" data-index="5"></button>
+                <button class="dot" data-index="6"></button>
+                <button class="dot" data-index="7"></button>
+                <button class="dot" data-index="8"></button>
+                <button class="dot" data-index="9"></button>
             </div>
         </div>
 
@@ -1676,12 +1737,11 @@
 
     </div>
 
-    <!-- ═══ SCROLLING TICKER (NEW) ═══ -->
+    <!-- ═══ SCROLLING TICKER (HIGHLIGHTED + BIGGER FONT) ═══ -->
     <div class="ticker-bar">
         <div class="ticker-track">
-            <span><i class="fas fa-bullhorn"></i> 🔥 <span class="lang-en">Offer: 10/07/2026 – Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">🔥 ऑफर: 10/07/2026 – टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
-            <span><i class="fas fa-bullhorn"></i> 🔥 <span class="lang-en">Offer: 10/07/2026 – Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">🔥 ऑफर: 10/07/2026 – टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
-            <!-- Duplicate for seamless loop -->
+            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: 10/07/2026 – Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">📢 ऑफर: 10/07/2026 – टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
+            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: 10/07/2026 – Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">📢 ऑफर: 10/07/2026 – टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
         </div>
     </div>
 
@@ -1782,12 +1842,12 @@
             bg.style.background = palettes[index];
         })();
 
-        // ─── TESTIMONIAL CAROUSEL ───
+        // ─── TESTIMONIAL CAROUSEL (10 items) ───
         (function initTestimonial() {
             let current = 0;
             const track = document.getElementById('testimonialTrack');
             const dots = document.querySelectorAll('.testimonial-dots .dot');
-            const total = dots.length;
+            const total = dots.length; // 10
 
             function goTo(index) {
                 current = index;
@@ -1795,7 +1855,7 @@
                 dots.forEach((d, i) => d.classList.toggle('active', i === index));
             }
             dots.forEach((dot, i) => { dot.addEventListener('click', () => goTo(i)); });
-            setInterval(() => { goTo((current + 1) % total); }, 5000);
+            setInterval(() => { goTo((current + 1) % total); }, 6000);
             let startX = 0;
             const carousel = document.getElementById('testimonialCarousel');
             carousel.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
@@ -2060,8 +2120,7 @@
             navigator.serviceWorker.register('/service-worker.js').catch(() => {});
         }
 
-        console.log('🚀 Tile Planet — Complete Digital Card with Ticker');
-        console.log('✨ Removed lightbox & floating WhatsApp, added scrolling notification bar.');
+        console.log('🚀 Tile Planet — Premium Card with 10 Testimonials & Big Ticker');
     </script>
 
 </body>
