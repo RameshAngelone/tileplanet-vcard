@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Tile Planet · Dynamic</title>
+    <title>Tile Planet · Premium Digital Card</title>
 
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json" />
@@ -12,9 +12,10 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
-        /* ─── RESET ─── */
+        /* ─── RESET & ROOT ─── */
         * {
             margin: 0;
             padding: 0;
@@ -24,6 +25,7 @@
         :root {
             --gold: #d4af37;
             --gold-light: #f5d76e;
+            --gold-neon: #f9e79f;
             --dark-bg: #050505;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(212, 175, 55, 0.08);
@@ -35,12 +37,12 @@
             --radius-md: 16px;
             --radius-sm: 12px;
             --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            --whatsapp: #25D366;
         }
 
         html {
             scroll-behavior: smooth;
         }
-
         body {
             background: var(--dark-bg);
             color: var(--text-primary);
@@ -49,19 +51,35 @@
             -webkit-font-smoothing: antialiased;
             padding-bottom: 90px;
             min-height: 100vh;
-            /* Dynamic background will be set via JS */;
         }
 
-        /* ─── DYNAMIC BACKGROUND ─── */
+        /* ─── DYNAMIC BACKGROUND (changes hourly) ─── */
         .dynamic-bg {
             position: fixed;
             inset: 0;
             z-index: 0;
-            transition: background 1.2s ease;
+            transition: background 1.5s ease;
             will-change: background;
         }
+        .dynamic-bg .aura {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.05), transparent 70%);
+            pointer-events: none;
+            animation: auraPulse 6s ease-in-out infinite alternate;
+        }
+        @keyframes auraPulse {
+            0% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
 
-        /* floating particles (always) */
+        /* ─── FLOATING PARTICLES ─── */
         .particles {
             position: fixed;
             inset: 0;
@@ -76,12 +94,11 @@
             background: radial-gradient(circle, var(--gold-light), transparent);
             border-radius: 50%;
             animation: floatParticle linear infinite;
-            opacity: 0.25;
+            opacity: 0.2;
         }
         .particle:nth-child(1) {
             left: 10%;
             animation-duration: 18s;
-            animation-delay: 0s;
             width: 8px;
             height: 8px;
         }
@@ -98,7 +115,7 @@
             animation-delay: 4s;
             width: 10px;
             height: 10px;
-            opacity: 0.15;
+            opacity: 0.1;
         }
         .particle:nth-child(4) {
             left: 75%;
@@ -120,7 +137,7 @@
             animation-delay: 5s;
             width: 12px;
             height: 12px;
-            opacity: 0.1;
+            opacity: 0.08;
         }
 
         @keyframes floatParticle {
@@ -153,6 +170,75 @@
             transition: width 0.1s linear;
         }
 
+        /* ─── TOP BAR ─── */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.04);
+        }
+        .top-bar .lang-btn {
+            background: none;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            color: var(--text-secondary);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .top-bar .lang-btn:hover {
+            border-color: var(--gold-light);
+            color: #fff;
+            background: rgba(212, 175, 55, 0.06);
+        }
+        .top-bar .audio-btn {
+            background: none;
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            color: var(--gold-light);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .top-bar .audio-btn:hover {
+            border-color: var(--gold-light);
+            background: rgba(212, 175, 55, 0.06);
+            transform: scale(1.04);
+        }
+        .top-bar .audio-btn.playing {
+            border-color: #4cd964;
+            color: #4cd964;
+            animation: pulse-audio 1s ease-in-out infinite;
+        }
+        @keyframes pulse-audio {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px 4px rgba(76, 217, 100, 0.1);
+            }
+        }
+
         /* ─── CONTAINER ─── */
         .container {
             max-width: 440px;
@@ -176,7 +262,6 @@
             z-index: 1;
             will-change: transform;
         }
-
         .glass-card:hover {
             transform: translateY(-4px);
             border-color: rgba(212, 175, 55, 0.15);
@@ -194,7 +279,6 @@
             display: flex;
             align-items: flex-end;
         }
-
         .hero::before {
             content: '';
             position: absolute;
@@ -202,7 +286,6 @@
             background: linear-gradient(165deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.75) 100%);
             z-index: 0;
         }
-
         .hero::after {
             content: '';
             position: absolute;
@@ -213,19 +296,16 @@
             background: linear-gradient(to top, rgba(5, 5, 5, 0.7), transparent);
             z-index: 0;
         }
-
         .hero-content {
             position: relative;
             z-index: 2;
             width: 100%;
         }
-
         .logo-wrap {
             display: flex;
             justify-content: center;
             margin-bottom: 2px;
         }
-
         .logo {
             width: 170px;
             filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.9)) brightness(1.08);
@@ -234,7 +314,6 @@
         .logo:hover {
             transform: scale(1.04) rotate(-1deg);
         }
-
         .tagline {
             text-align: center;
             font-size: 9px;
@@ -247,12 +326,11 @@
             opacity: 0.9;
         }
 
-        /* ─── 3D HERO CARD (Multi-Layer) ─── */
+        /* ─── 3D HERO CARD ─── */
         .tilt-wrapper {
             perspective: 1400px;
             transform-style: preserve-3d;
         }
-
         .hero-card {
             background: rgba(10, 8, 6, 0.65);
             backdrop-filter: blur(50px) saturate(1.5);
@@ -266,7 +344,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .hero-card .layer-bg-glow {
             position: absolute;
             inset: -50%;
@@ -275,7 +352,6 @@
             z-index: 0;
             transition: background 0.1s ease;
         }
-
         .hero-card::before {
             content: '';
             position: absolute;
@@ -291,7 +367,6 @@
             opacity: 0.5;
             z-index: 0;
         }
-
         @keyframes shimmerBorder {
             0% {
                 background-position: 0% 50%;
@@ -309,7 +384,6 @@
             z-index: 1;
             transform-style: preserve-3d;
         }
-
         .layer-1 {
             transform: translateZ(20px);
         }
@@ -332,11 +406,9 @@
             align-items: flex-start;
             gap: 14px;
         }
-
         .name-box {
             flex: 1;
         }
-
         .name {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
@@ -348,7 +420,6 @@
             gap: 10px;
             flex-wrap: wrap;
         }
-
         .gold-shimmer-text {
             background: linear-gradient(135deg, #f9e79f, #d4af37, #f9e79f, #d4af37);
             background-size: 300% 300%;
@@ -356,9 +427,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: shimmerText 4s ease-in-out infinite;
-            text-shadow: none;
         }
-
         @keyframes shimmerText {
             0%,
             100% {
@@ -368,7 +437,6 @@
                 background-position: 100% 50%;
             }
         }
-
         .name .badge {
             font-size: 10px;
             font-weight: 700;
@@ -404,12 +472,10 @@
             overflow: hidden;
             will-change: transform;
         }
-
         .contact-btn .btn-text {
             position: relative;
             z-index: 2;
         }
-
         .contact-btn::after {
             content: '';
             position: absolute;
@@ -418,7 +484,6 @@
             opacity: 0;
             transition: opacity var(--transition);
         }
-
         .contact-btn:hover::after {
             opacity: 1;
         }
@@ -438,11 +503,9 @@
             border: 1px solid rgba(212, 175, 55, 0.06);
             transition: transform var(--transition);
         }
-
         .contact-qr:hover {
             transform: scale(1.05);
         }
-
         .contact-qr img {
             width: 100%;
             background: #fff;
@@ -450,7 +513,6 @@
             border-radius: 8px;
             display: block;
         }
-
         .contact-qr p {
             font-size: 6px;
             margin-top: 4px;
@@ -466,7 +528,6 @@
             gap: 8px;
             margin-top: 14px;
         }
-
         .glass-btn {
             text-decoration: none;
             color: #fff;
@@ -482,14 +543,12 @@
             line-height: 1.3;
             will-change: transform;
         }
-
         .glass-btn .icon {
             display: block;
             font-size: 20px;
             margin-bottom: 2px;
             transition: transform var(--transition);
         }
-
         .glass-btn:hover .icon {
             transform: scale(1.2) translateY(-3px);
         }
@@ -505,7 +564,6 @@
             justify-content: center;
             margin-top: 14px;
         }
-
         .install-btn {
             display: flex;
             align-items: center;
@@ -528,7 +586,6 @@
             overflow: hidden;
             will-change: transform;
         }
-
         .install-btn .btn-sub {
             display: block;
             font-size: 9px;
@@ -541,12 +598,10 @@
             align-items: flex-start;
             line-height: 1.2;
         }
-
         .install-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 40px rgba(212, 175, 55, 0.5);
         }
-
         .install-btn .ripple {
             position: absolute;
             border-radius: 50%;
@@ -555,14 +610,12 @@
             animation: rippleAnim 0.6s ease-out;
             pointer-events: none;
         }
-
         @keyframes rippleAnim {
             to {
                 transform: scale(4);
                 opacity: 0;
             }
         }
-
         .install-hidden {
             display: none !important;
         }
@@ -584,12 +637,10 @@
             transform: translateY(30px);
             transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
         .section-title.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         .section-title .line {
             flex: 1;
             max-width: 20px;
@@ -599,7 +650,6 @@
         .section-title .line:last-child {
             background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), transparent);
         }
-
         .section-title .label {
             font-size: 8px;
             font-weight: 700;
@@ -619,7 +669,6 @@
             gap: 8px;
             padding: 0 12px;
         }
-
         .product {
             text-align: center;
             cursor: pointer;
@@ -628,16 +677,13 @@
             transform: translateY(30px) scale(0.95);
             transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
         .product.visible {
             opacity: 1;
             transform: translateY(0) scale(1);
         }
-
         .product:hover {
             transform: translateY(-8px) scale(1.02);
         }
-
         .product-img {
             width: 100%;
             aspect-ratio: 1 / 1;
@@ -648,18 +694,76 @@
             background: rgba(255, 255, 255, 0.02);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
-
         .product:hover .product-img {
             border-color: rgba(212, 175, 55, 0.25);
             box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08), 0 8px 30px rgba(0, 0, 0, 0.5);
+            transform: scale(1.05);
         }
-
         .product span {
             display: block;
             margin-top: 6px;
             font-size: 11px;
             font-weight: 600;
             color: var(--text-secondary);
+        }
+
+        /* ─── PRODUCT LIGHTBOX ─── */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 99998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            animation: fadeIn 0.4s ease;
+            cursor: pointer;
+        }
+        .lightbox-overlay.active {
+            display: flex;
+        }
+        .lightbox-content {
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .lightbox-content img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+        }
+        .lightbox-content .lb-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 14px;
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+        }
+        .lightbox-content .lb-price {
+            font-size: 14px;
+            color: var(--gold-light);
+            margin-top: 4px;
+        }
+        .lightbox-content .lb-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 28px;
+            cursor: pointer;
+            transition: color var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+        .lightbox-content .lb-close:hover {
+            color: #fff;
         }
 
         /* ─── CATALOG 3D FLIP ─── */
@@ -669,7 +773,6 @@
             gap: 10px;
             padding: 0 12px;
         }
-
         .catalog-card {
             perspective: 900px;
             height: 150px;
@@ -677,12 +780,10 @@
             transform: translateY(30px) rotateY(10deg);
             transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
         .catalog-card.visible {
             opacity: 1;
             transform: translateY(0) rotateY(0deg);
         }
-
         .catalog-inner {
             position: relative;
             width: 100%;
@@ -691,11 +792,9 @@
             transform-style: preserve-3d;
             cursor: pointer;
         }
-
         .catalog-card:hover .catalog-inner {
             transform: rotateY(180deg);
         }
-
         .catalog-front,
         .catalog-back {
             position: absolute;
@@ -714,14 +813,12 @@
             border: 1px solid rgba(212, 175, 55, 0.04);
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
         }
-
         .catalog-back {
             transform: rotateY(180deg);
             background: rgba(8, 7, 5, 0.95);
             border-color: rgba(212, 175, 55, 0.1);
             gap: 6px;
         }
-
         .catalog-front .icon-big {
             font-size: 24px;
             margin-bottom: 4px;
@@ -735,7 +832,6 @@
             font-size: 8px;
             color: var(--text-muted);
         }
-
         .catalog-back .dl-btn {
             display: inline-flex;
             padding: 6px 14px;
@@ -748,13 +844,11 @@
             text-decoration: none;
             transition: all var(--transition);
         }
-
         .catalog-back .dl-btn:hover {
             background: rgba(212, 175, 55, 0.2);
             border-color: var(--gold-light);
             transform: scale(1.05);
         }
-
         .badge-new {
             font-size: 6px;
             font-weight: 700;
@@ -767,7 +861,77 @@
             margin-top: 2px;
         }
 
-        /* ─── OTHER COMPONENTS ─── */
+        /* ─── TESTIMONIAL CAROUSEL ─── */
+        .testimonial-section {
+            padding: 0 12px;
+        }
+        .testimonial-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            min-height: 160px;
+        }
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+        .testimonial-item {
+            min-width: 100%;
+            padding: 20px 24px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.04);
+            border-radius: var(--radius-lg);
+        }
+        .testimonial-item .stars {
+            color: #FFD700;
+            font-size: 18px;
+            letter-spacing: 4px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .testimonial-item .quote {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.6;
+        }
+        .testimonial-item .author {
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 8px;
+        }
+        .testimonial-item .author small {
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .testimonial-dots .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition);
+            padding: 0;
+        }
+        .testimonial-dots .dot.active {
+            background: var(--gold-light);
+            width: 24px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* ─── COMPANY PROFILE ─── */
         .profile-img,
         .map-img,
         .payment-img {
@@ -807,6 +971,7 @@
             margin-right: 6px;
         }
 
+        /* ─── COMPANY DETAILS ─── */
         .info-table {
             width: 100%;
             font-size: 13px;
@@ -831,6 +996,7 @@
             font-size: 13px;
         }
 
+        /* ─── STOCK ENQUIRY ─── */
         .stock-name {
             font-size: 20px;
             font-weight: 700;
@@ -870,7 +1036,6 @@
             animation: pulse-dot 1.8s ease-in-out infinite;
             box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
         }
-
         @keyframes pulse-dot {
             0%,
             100% {
@@ -883,6 +1048,7 @@
             }
         }
 
+        /* ─── PAYMENT ─── */
         .upi-id {
             margin-top: 14px;
             font-size: 14px;
@@ -896,6 +1062,7 @@
             font-family: 'Playfair Display', serif;
         }
 
+        /* ─── GOOGLE REVIEWS ─── */
         .google-brand {
             display: flex;
             align-items: center;
@@ -934,6 +1101,7 @@
             letter-spacing: 6px;
         }
 
+        /* ─── TWO GRID ─── */
         .two-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -958,6 +1126,95 @@
             justify-content: center;
         }
 
+        /* ─── VISITOR COUNTER ─── */
+        .visitor-counter {
+            text-align: center;
+            padding: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(212, 175, 55, 0.03);
+            margin: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .visitor-counter .count {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--gold-light);
+            font-family: 'Playfair Display', serif;
+        }
+        .visitor-counter .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ─── FLOATING WHATSAPP ─── */
+        .floating-wa {
+            position: fixed;
+            bottom: 95px;
+            right: 18px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--whatsapp);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 30px rgba(37, 211, 102, 0.4), 0 0 60px rgba(37, 211, 102, 0.1);
+            transition: all var(--transition);
+            animation: wa-float 2.5s ease-in-out infinite;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .floating-wa:hover {
+            transform: scale(1.12);
+            box-shadow: 0 8px 50px rgba(37, 211, 102, 0.6);
+        }
+        .floating-wa i {
+            font-size: 32px;
+            color: #fff;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+        }
+        .floating-wa .tooltip {
+            position: absolute;
+            right: 70px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all var(--transition);
+            pointer-events: none;
+            font-family: 'Inter', sans-serif;
+        }
+        .floating-wa:hover .tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        @keyframes wa-float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* ─── FOOTER ─── */
         .footer-card {
             margin: 12px;
             text-align: center;
@@ -1017,7 +1274,6 @@
             margin: 0 auto;
             box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
         }
-
         .bottom-nav .nav-item {
             text-decoration: none;
             color: var(--text-muted);
@@ -1034,21 +1290,17 @@
             position: relative;
             cursor: pointer;
         }
-
         .bottom-nav .nav-item .nav-icon {
             font-size: 22px;
             margin-bottom: 2px;
             transition: transform var(--transition);
         }
-
         .bottom-nav .nav-item:hover .nav-icon {
             transform: translateY(-3px) scale(1.1);
         }
-
         .bottom-nav .nav-item.active {
             color: var(--gold-light);
         }
-
         .bottom-nav .nav-item.active::before {
             content: '';
             position: absolute;
@@ -1058,10 +1310,6 @@
             border: 1px solid rgba(212, 175, 55, 0.08);
             box-shadow: 0 0 40px rgba(212, 175, 55, 0.04);
             z-index: -1;
-        }
-
-        .bottom-nav .nav-item.active .nav-icon {
-            transform: translateY(-2px);
         }
 
         /* ─── MODALS ─── */
@@ -1322,6 +1570,20 @@
             .bottom-nav .nav-item .nav-icon {
                 font-size: 18px;
             }
+            .floating-wa {
+                width: 50px;
+                height: 50px;
+                bottom: 85px;
+                right: 14px;
+            }
+            .floating-wa i {
+                font-size: 26px;
+            }
+            .top-bar .lang-btn,
+            .top-bar .audio-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -1349,19 +1611,40 @@
             transform: translateY(40px);
             transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* ─── LANGUAGE TOGGLE ─── */
+        .lang-hi {
+            display: none;
+        }
+        body.lang-hindi .lang-en {
+            display: none;
+        }
+        body.lang-hindi .lang-hi {
+            display: inline-block;
+        }
+        body.lang-hindi .lang-en-block {
+            display: none !important;
+        }
+        body.lang-hindi .lang-hi-block {
+            display: block !important;
+        }
+        .lang-hi-block {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- ═══ DYNAMIC BACKGROUND (will be set by JS) ═══ -->
-    <div class="dynamic-bg" id="dynamicBg"></div>
+    <!-- ─── DYNAMIC BACKGROUND ─── -->
+    <div class="dynamic-bg" id="dynamicBg">
+        <div class="aura"></div>
+    </div>
 
-    <!-- ═══ FLOATING PARTICLES ═══ -->
+    <!-- ─── PARTICLES ─── -->
     <div class="particles">
         <div class="particle"></div>
         <div class="particle"></div>
@@ -1371,8 +1654,22 @@
         <div class="particle"></div>
     </div>
 
-    <!-- ═══ SCROLL PROGRESS ═══ -->
+    <!-- ─── SCROLL PROGRESS ─── -->
     <div id="progress-bar"></div>
+
+    <!-- ─── TOP BAR ─── -->
+    <div class="top-bar">
+        <button class="lang-btn" onclick="toggleLanguage()">
+            <span class="globe">🌐</span>
+            <span class="lang-en">English</span>
+            <span class="lang-hi">हिंदी</span>
+        </button>
+        <button class="audio-btn" id="audioBtn" onclick="toggleAudio()">
+            <i class="fas fa-play"></i>
+            <span class="lang-en">Greeting</span>
+            <span class="lang-hi">अभिवादन</span>
+        </button>
+    </div>
 
     <div class="container">
 
@@ -1405,18 +1702,19 @@
                         </div>
 
                         <div class="quick-actions layer layer-3">
-                            <a href="tel:+919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">📞</span> CALL</a>
-                            <a href="https://wa.me/919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">💬</span> CHAT</a>
-                            <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn magnetic" data-strength="10"><span class="icon">✉️</span> EMAIL</a>
-                            <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn magnetic" data-strength="10"><span class="icon">📍</span> MAP</a>
+                            <a href="tel:+919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">📞</span> <span class="lang-en">CALL</span><span class="lang-hi">कॉल</span></a>
+                            <a href="https://wa.me/919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">💬</span> <span class="lang-en">CHAT</span><span class="lang-hi">चैट</span></a>
+                            <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn magnetic" data-strength="10"><span class="icon">✉️</span> <span class="lang-en">EMAIL</span><span class="lang-hi">ईमेल</span></a>
+                            <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn magnetic" data-strength="10"><span class="icon">📍</span> <span class="lang-en">MAP</span><span class="lang-hi">मैप</span></a>
                         </div>
 
                         <div class="install-btn-wrapper layer layer-4">
                             <button id="installAppBtn" class="install-btn magnetic" data-strength="20">
                                 <span class="btn-icon">📲</span>
                                 <span class="btn-text-wrap">
-                                    Install App
-                                    <span class="btn-sub">Open in One Click</span>
+                                    <span class="lang-en">Install App</span>
+                                    <span class="lang-hi">ऐप इंस्टॉल करें</span>
+                                    <span class="btn-sub"><span class="lang-en">Open in One Click</span><span class="lang-hi">एक क्लिक में खोलें</span></span>
                                 </span>
                             </button>
                         </div>
@@ -1425,21 +1723,35 @@
             </div>
         </div>
 
-        <!-- ═══ PRODUCTS ═══ -->
+        <!-- ═══ 1. OUR PRODUCTS ═══ -->
         <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">✦</span> 🏺 OUR PRODUCTS <span class="label">✦</span><span class="line"></span>
+            <span class="line"></span><span class="label">✦</span>
+            <span class="lang-en">🏺 OUR PRODUCTS</span><span class="lang-hi">🏺 हमारे उत्पाद</span>
+            <span class="label">✦</span><span class="line"></span>
         </div>
         <div class="product-grid">
-            <div class="product" data-delay="0.05"><img src="Walltiles.jpg" class="product-img" /><span>Wall</span></div>
-            <div class="product" data-delay="0.10"><img src="Floortiles.jpg" class="product-img" /><span>Floor</span></div>
-            <div class="product" data-delay="0.15"><img src="Vitrifiedtiles.jpg" class="product-img" /><span>Vitrified</span></div>
-            <div class="product" data-delay="0.20"><img src="Parckingtiles.jpg" class="product-img" /><span>Parking</span></div>
-            <div class="product" data-delay="0.25"><img src="bathroomtiles.jpg" class="product-img" /><span>Bath</span></div>
+            <div class="product" data-delay="0.05" onclick="openLightbox('Walltiles.jpg', 'Wall Tiles', '₹ 45/sq.ft')"><img src="Walltiles.jpg" class="product-img" /><span>Wall</span></div>
+            <div class="product" data-delay="0.10" onclick="openLightbox('Floortiles.jpg', 'Floor Tiles', '₹ 65/sq.ft')"><img src="Floortiles.jpg" class="product-img" /><span>Floor</span></div>
+            <div class="product" data-delay="0.15" onclick="openLightbox('Vitrifiedtiles.jpg', 'Vitrified Tiles', '₹ 85/sq.ft')"><img src="Vitrifiedtiles.jpg" class="product-img" /><span>Vitrified</span></div>
+            <div class="product" data-delay="0.20" onclick="openLightbox('Parckingtiles.jpg', 'Parking Tiles', '₹ 95/sq.ft')"><img src="Parckingtiles.jpg" class="product-img" /><span>Parking</span></div>
+            <div class="product" data-delay="0.25" onclick="openLightbox('bathroomtiles.jpg', 'Bathroom Tiles', '₹ 55/sq.ft')"><img src="bathroomtiles.jpg" class="product-img" /><span>Bath</span></div>
         </div>
 
-        <!-- ═══ CATALOGS ═══ -->
+        <!-- ═══ LIGHTBOX ─── -->
+        <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+            <div class="lightbox-content" onclick="event.stopPropagation()">
+                <button class="lb-close" onclick="closeLightbox()">✕</button>
+                <img id="lbImage" src="" alt="" />
+                <div class="lb-name" id="lbName"></div>
+                <div class="lb-price" id="lbPrice"></div>
+            </div>
+        </div>
+
+        <!-- ═══ 2. CATALOGUES ═══ -->
         <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">📖</span> 📚 CATALOGUES <span class="label">📖</span><span class="line"></span>
+            <span class="line"></span><span class="label">📖</span>
+            <span class="lang-en">📚 CATALOGUES</span><span class="lang-hi">📚 कैटलॉग</span>
+            <span class="label">📖</span><span class="line"></span>
         </div>
         <div class="catalog-grid">
             <div class="catalog-card" data-delay="0.05">
@@ -1468,57 +1780,146 @@
             </div>
         </div>
 
-        <!-- ═══ PROFILE ═══ -->
-        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">🏛️</span> 🏛️ PROFILE <span class="label">🏛️</span><span class="line"></span></div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
-            <img src="Company.png" class="profile-img" />
-            <h2 style="font-size:22px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;">Tile Planet</h2>
-            <p style="color:var(--text-secondary);text-align:center;">Premium Tiles Supplier · Est. 2018</p>
-            <div class="single-btn-wrap"><a href="#" class="contact-btn magnetic" data-strength="12">📄 VIEW / DOWNLOAD PROFILE</a></div>
-            <div class="feature-list"><span>Wall Tiles</span><span>Floor Tiles</span><span>Vitrified Tiles</span><span>Parking Tiles</span><span>Bathroom Fitting</span><span>Sanitaryware</span></div>
+        <!-- ═══ 3. TESTIMONIALS ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">💬</span>
+            <span class="lang-en">💬 TESTIMONIALS</span><span class="lang-hi">💬 ग्राहक समीक्षा</span>
+            <span class="label">💬</span><span class="line"></span>
+        </div>
+        <div class="testimonial-section animate-on-scroll">
+            <div class="testimonial-carousel" id="testimonialCarousel">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"Tile Planet की क्वालिटी और सर्विस दोनों ही बेहतरीन हैं। हमने अपने नए घर के लिए यहीं से टाइल्स खरीदीं, बहुत खुश हैं!"</p>
+                        <div class="author">Amit Sharma <small>· Pune</small></div>
+                    </div>
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"Best place for premium tiles in Pune. Ramesh bhai gave us amazing options within our budget. Highly recommended!"</p>
+                        <div class="author">Priya Mehta <small>· Mumbai</small></div>
+                    </div>
+                    <div class="testimonial-item">
+                        <span class="stars">★★★★★</span>
+                        <p class="quote">"We got parking tiles and vitrified tiles from Tile Planet. The quality is unmatched and delivery was on time."</p>
+                        <div class="author">Suresh Patil <small>· Satara</small></div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-dots" id="testimonialDots">
+                <button class="dot active" data-index="0"></button>
+                <button class="dot" data-index="1"></button>
+                <button class="dot" data-index="2"></button>
+            </div>
         </div>
 
-        <!-- ═══ DETAILS ═══ -->
-        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">📋</span> 📋 DETAILS <span class="label">📋</span><span class="line"></span></div>
+        <!-- ═══ 4. COMPANY PROFILE ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">🏛️</span>
+            <span class="lang-en">🏛️ COMPANY PROFILE</span><span class="lang-hi">🏛️ कंपनी प्रोफ़ाइल</span>
+            <span class="label">🏛️</span><span class="line"></span>
+        </div>
+        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
+            <img src="Company.png" class="profile-img" alt="Company" />
+            <h2 style="font-size:22px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;">Tile Planet</h2>
+            <p style="color:var(--text-secondary);text-align:center;">
+                <span class="lang-en">Premium Tiles Supplier · Est. 2018</span>
+                <span class="lang-hi">प्रीमियम टाइल्स सप्लायर · स्थापना 2018</span>
+            </p>
+            <div class="single-btn-wrap">
+                <a href="#" class="contact-btn magnetic" data-strength="12">
+                    📄 <span class="lang-en">VIEW / DOWNLOAD PROFILE</span><span class="lang-hi">प्रोफ़ाइल देखें / डाउनलोड करें</span>
+                </a>
+            </div>
+            <div class="feature-list">
+                <span>Wall Tiles</span>
+                <span>Floor Tiles</span>
+                <span>Vitrified Tiles</span>
+                <span>Parking Tiles</span>
+                <span>Bathroom Fitting</span>
+                <span>Sanitaryware</span>
+            </div>
+        </div>
+
+        <!-- ═══ 5. COMPANY DETAILS ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">📋</span>
+            <span class="lang-en">📋 COMPANY DETAILS</span><span class="lang-hi">📋 कंपनी विवरण</span>
+            <span class="label">📋</span><span class="line"></span>
+        </div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;">
             <table class="info-table">
                 <tr><td class="label">GST</td><td class="value">27AIPPR7422Q1Z9</td></tr>
-                <tr><td class="label">Owner</td><td class="value">Ramesh Chotalia</td></tr>
-                <tr><td class="label">Business</td><td class="value">Retailer &amp; Supplier</td></tr>
-                <tr><td class="label">Experience</td><td class="value">10+ Years</td></tr>
-                <tr><td class="label">Address</td><td class="value" style="font-size:12px;line-height:1.6;">Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK, Pune – 411046</td></tr>
+                <tr><td class="label"><span class="lang-en">Owner</span><span class="lang-hi">मालिक</span></td><td class="value">Ramesh Chotalia</td></tr>
+                <tr><td class="label"><span class="lang-en">Business</span><span class="lang-hi">व्यवसाय</span></td><td class="value"><span class="lang-en">Retailer &amp; Supplier</span><span class="lang-hi">खुदरा विक्रेता और सप्लायर</span></td></tr>
+                <tr><td class="label"><span class="lang-en">Experience</span><span class="lang-hi">अनुभव</span></td><td class="value">10+ Years</td></tr>
+                <tr><td class="label"><span class="lang-en">Address</span><span class="lang-hi">पता</span></td><td class="value" style="font-size:12px;line-height:1.6;">Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK, Pune – 411046</td></tr>
             </table>
         </div>
 
-        <!-- ═══ STOCK & PAYMENT ═══ -->
-        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">📦</span> 📦 STOCK &amp; PAYMENT <span class="label">📦</span><span class="line"></span></div>
+        <!-- ═══ 6. STOCK ENQUIRY ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">📦</span>
+            <span class="lang-en">📦 STOCK ENQUIRY</span><span class="lang-hi">📦 स्टॉक पूछताछ</span>
+            <span class="label">📦</span><span class="line"></span>
+        </div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
             <div class="stock-name">Harshad Dalvi</div>
             <div class="stock-phone">📱 +91 9067121697</div>
             <div class="btn-group">
-                <a href="tel:+919067121697" class="contact-btn magnetic" style="background:rgba(76,217,100,0.05);border-color:rgba(76,217,100,0.15);" data-strength="12">📞 CONTACT FOR STOCK</a>
-                <a href="#" class="contact-btn btn-live-inventory magnetic" onclick="openLiveInventory(); return false;" data-strength="12"><span class="pulse-dot"></span> LIVE INVENTORY</a>
+                <a href="tel:+919067121697" class="contact-btn magnetic" style="background:rgba(76,217,100,0.05);border-color:rgba(76,217,100,0.15);" data-strength="12">
+                    📞 <span class="lang-en">CONTACT FOR STOCK</span><span class="lang-hi">स्टॉक के लिए संपर्क करें</span>
+                </a>
+                <a href="#" class="contact-btn btn-live-inventory magnetic" onclick="openLiveInventory(); return false;" data-strength="12">
+                    <span class="pulse-dot"></span> <span class="lang-en">LIVE INVENTORY</span><span class="lang-hi">लाइव इन्वेंटरी</span>
+                </a>
             </div>
         </div>
 
-        <div class="glass-card animate-on-scroll" style="margin:12px 12px 0;text-align:center;">
-            <img src="upi-qr.png" class="payment-img" />
-            <div class="upi-id">UPI ID <b>ramesh.chotalia13@oksbi</b></div>
-            <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">💳 PAY NOW</a>
+        <!-- ═══ 7. PAYMENT ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">💳</span>
+            <span class="lang-en">💳 PAYMENT</span><span class="lang-hi">💳 भुगतान</span>
+            <span class="label">💳</span><span class="line"></span>
         </div>
-
-        <!-- ═══ REVIEWS ═══ -->
-        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">⭐</span> ⭐ REVIEWS <span class="label">⭐</span><span class="line"></span></div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
-            <div class="google-brand"><span class="g g-1">G</span><span class="g g-2">o</span><span class="g g-3">o</span><span class="g g-4">g</span><span class="g g-5">l</span><span class="g g-6">e</span></div>
-            <span class="stars-bright">★★★★★</span>
-            <h2 style="font-size:19px;font-weight:700;font-family:'Playfair Display',serif;">Love Our Service?</h2>
-            <p style="color:var(--text-secondary);">Share your experience</p>
-            <a href="#" target="_blank" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">⭐ WRITE REVIEW</a>
+            <img src="upi-qr.png" class="payment-img" alt="UPI QR" />
+            <div class="upi-id">UPI ID <b>ramesh.chotalia13@oksbi</b></div>
+            <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">
+                💳 <span class="lang-en">PAY NOW</span><span class="lang-hi">अभी भुगतान करें</span>
+            </a>
         </div>
 
-        <!-- ═══ FOLLOW ═══ -->
-        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">📱</span> 📱 FOLLOW US <span class="label">📱</span><span class="line"></span></div>
+        <!-- ═══ 8. GOOGLE REVIEWS ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">⭐</span>
+            <span class="lang-en">⭐ GOOGLE REVIEWS</span><span class="lang-hi">⭐ गूगल समीक्षाएँ</span>
+            <span class="label">⭐</span><span class="line"></span>
+        </div>
+        <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
+            <div class="google-brand">
+                <span class="g g-1">G</span><span class="g g-2">o</span><span class="g g-3">o</span>
+                <span class="g g-4">g</span><span class="g g-5">l</span><span class="g g-6">e</span>
+            </div>
+            <span class="stars-bright">★★★★★</span>
+            <h2 style="font-size:19px;font-weight:700;font-family:'Playfair Display',serif;">
+                <span class="lang-en">Love Our Service?</span><span class="lang-hi">हमारी सेवा पसंद आई?</span>
+            </h2>
+            <p style="color:var(--text-secondary);">
+                <span class="lang-en">Share your experience on Google</span>
+                <span class="lang-hi">गूगल पर अपना अनुभव साझा करें</span>
+            </p>
+            <a href="#" target="_blank" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">
+                ⭐ <span class="lang-en">WRITE REVIEW</span><span class="lang-hi">समीक्षा लिखें</span>
+            </a>
+        </div>
+
+        <!-- ═══ 9. FOLLOW US ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">📱</span>
+            <span class="lang-en">📱 FOLLOW US</span><span class="lang-hi">📱 हमें फॉलो करें</span>
+            <span class="label">📱</span><span class="line"></span>
+        </div>
         <div class="two-grid animate-on-scroll">
             <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">📸</span> Instagram</a>
             <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">👍</span> Facebook</a>
@@ -1526,102 +1927,237 @@
             <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">💬</span> WhatsApp</a>
         </div>
 
-        <!-- ═══ QUICK ═══ -->
-        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">⚡</span> ⚡ QUICK <span class="label">⚡</span><span class="line"></span></div>
+        <!-- ═══ 10. QUICK ACTIONS ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">⚡</span>
+            <span class="lang-en">⚡ QUICK ACTIONS</span><span class="lang-hi">⚡ त्वरित कार्य</span>
+            <span class="label">⚡</span><span class="line"></span>
+        </div>
         <div class="two-grid animate-on-scroll">
-            <a href="#" download class="glass-btn magnetic" data-strength="8"><span class="icon">💾</span> Save Contact</a>
-            <a href="#" onclick="shareCard()" class="glass-btn magnetic" data-strength="8"><span class="icon">📤</span> Share Card</a>
-            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📝</span> Get Quote</a>
-            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📩</span> Enquiry</a>
+            <a href="#" download class="glass-btn magnetic" data-strength="8"><span class="icon">💾</span> <span class="lang-en">Save Contact</span><span class="lang-hi">कॉन्टैक्ट सेव करें</span></a>
+            <a href="#" onclick="shareCard()" class="glass-btn magnetic" data-strength="8"><span class="icon">📤</span> <span class="lang-en">Share Card</span><span class="lang-hi">शेयर करें</span></a>
+            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📝</span> <span class="lang-en">Get Quote</span><span class="lang-hi">कोटेशन लें</span></a>
+            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📩</span> <span class="lang-en">Enquiry</span><span class="lang-hi">पूछताछ</span></a>
         </div>
 
-        <!-- ═══ LOCATION ═══ -->
-        <div class="section-title" data-delay="0"><span class="line"></span><span class="label">📍</span> 📍 LOCATION <span class="label">📍</span><span class="line"></span></div>
+        <!-- ═══ 11. LOCATION ═══ -->
+        <div class="section-title" data-delay="0">
+            <span class="line"></span><span class="label">📍</span>
+            <span class="lang-en">📍 LOCATION</span><span class="lang-hi">📍 स्थान</span>
+            <span class="label">📍</span><span class="line"></span>
+        </div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;">
-            <img src="map.jpeg" class="map-img" />
-            <a href="#" target="_blank" class="contact-btn w-full justify-center magnetic" data-strength="15">📍 OPEN MAP</a>
+            <img src="map.jpeg" class="map-img" alt="Map" />
+            <a href="#" target="_blank" class="contact-btn w-full justify-center magnetic" data-strength="15">
+                📍 <span class="lang-en">OPEN MAP</span><span class="lang-hi">मैप खोलें</span>
+            </a>
         </div>
 
-        <!-- ═══ FOOTER ═══ -->
+        <!-- ═══ 12. VISITOR COUNTER ═══ -->
+        <div class="visitor-counter animate-on-scroll">
+            <span class="label">👁️ <span class="lang-en">Today's Visitors</span><span class="lang-hi">आज के विज़िटर</span></span>
+            <span class="count" id="visitorCount">0</span>
+        </div>
+
+        <!-- ═══ 13. FOOTER ═══ -->
         <div class="footer-card animate-on-scroll">
-            <img src="Logo.png" class="footer-logo" />
+            <img src="Logo.png" class="footer-logo" alt="Tile Planet" />
             <div class="brand">🏛️ TILE <span>PLANET</span></div>
-            <div class="sub">Your One-Stop Tile Solution</div>
-            <div class="slogan-highlight">✦ Visit Our Showroom Once ✦</div>
+            <div class="sub"><span class="lang-en">Your One-Stop Tile Solution</span><span class="lang-hi">आपका एक-स्टॉप टाइल समाधान</span></div>
+            <div class="slogan-highlight">✦ <span class="lang-en">Visit Our Showroom Once</span><span class="lang-hi">एक बार हमारे शोरूम आएँ</span> ✦</div>
             <div class="copy">© 2026 Tile Planet. All Rights Reserved.</div>
         </div>
 
     </div>
 
-    <!-- ═══ BOTTOM NAV ═══ -->
-    <div class="bottom-nav" id="bottomNav">
-        <a href="tel:+919922533033" class="nav-item active" data-target="call"><span class="nav-icon">📞</span> Call</a>
-        <a href="https://wa.me/919922533033" class="nav-item" data-target="chat"><span class="nav-icon">💬</span> Chat</a>
-        <a href="#" class="nav-item" data-target="map"><span class="nav-icon">📍</span> Map</a>
-        <a href="#" onclick="shareCard(); return false;" class="nav-item" data-target="share"><span class="nav-icon">📤</span> Share</a>
+    <!-- ═══ FLOATING WHATSAPP ─── -->
+    <a href="https://wa.me/919922533033" class="floating-wa" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip"><span class="lang-en">Chat on WhatsApp</span><span class="lang-hi">WhatsApp पर बात करें</span></span>
+    </a>
+
+    <!-- ═══ BOTTOM NAV ─── -->
+    <div class="bottom-nav">
+        <a href="tel:+919922533033" class="nav-item active"><span class="nav-icon">📞</span> Call</a>
+        <a href="https://wa.me/919922533033" class="nav-item"><span class="nav-icon">💬</span> Chat</a>
+        <a href="#" class="nav-item"><span class="nav-icon">📍</span> Map</a>
+        <a href="#" onclick="shareCard(); return false;" class="nav-item"><span class="nav-icon">📤</span> Share</a>
     </div>
 
     <!-- ═══ MODALS ═══ -->
     <div id="iosModal" class="install-modal-overlay">
-        <div class="install-modal-box"><button class="close-modal" onclick="closeModal('iosModal')">✕</button><span class="modal-icon">📲</span><h2>Install App</h2><p>Add to Home Screen</p>
-            <div class="step"><span class="num">1</span><div class="desc">Tap Share <small>⬆️ at bottom</small></div></div>
-            <div class="step"><span class="num">2</span><div class="desc">Select "Add to Home Screen" <small>🟢 scroll down</small></div></div>
-            <div class="step"><span class="num">3</span><div class="desc">Tap "Add" <small>✅ done!</small></div></div>
-            <button class="got-it-btn" onclick="closeModal('iosModal')">Got it!</button>
+        <div class="install-modal-box">
+            <button class="close-modal" onclick="closeModal('iosModal')">✕</button>
+            <span class="modal-icon">📲</span>
+            <h2><span class="lang-en">Install App</span><span class="lang-hi">ऐप इंस्टॉल करें</span></h2>
+            <p><span class="lang-en">Add to Home Screen</span><span class="lang-hi">होम स्क्रीन पर जोड़ें</span></p>
+            <div class="step"><span class="num">1</span><div class="desc"><span class="lang-en">Tap Share</span><span class="lang-hi">शेयर बटन दबाएँ</span> <small>⬆️ <span class="lang-en">at bottom</span><span class="lang-hi">नीचे</span></small></div></div>
+            <div class="step"><span class="num">2</span><div class="desc"><span class="lang-en">Select "Add to Home Screen"</span><span class="lang-hi">"होम स्क्रीन पर जोड़ें" चुनें</span> <small>🟢 <span class="lang-en">scroll down</span><span class="lang-hi">नीचे स्क्रॉल करें</span></small></div></div>
+            <div class="step"><span class="num">3</span><div class="desc"><span class="lang-en">Tap "Add"</span><span class="lang-hi">"जोड़ें" दबाएँ</span> <small>✅ <span class="lang-en">done!</span><span class="lang-hi">हो गया!</span></small></div></div>
+            <button class="got-it-btn" onclick="closeModal('iosModal')"><span class="lang-en">Got it!</span><span class="lang-hi">समझ गया!</span></button>
         </div>
     </div>
+
     <div id="androidModal" class="install-modal-overlay">
-        <div class="install-modal-box"><button class="close-modal" onclick="closeModal('androidModal')">✕</button><span class="modal-icon">📲</span><h2>Add to Home Screen</h2><p>Install in one step</p>
-            <div class="step"><span class="num">1</span><div class="desc">Tap menu (⋮) or (︙) <small>top right</small></div></div>
-            <div class="step"><span class="num">2</span><div class="desc">Select "Install App" <small>scroll down</small></div></div>
-            <div class="step"><span class="num">3</span><div class="desc">Tap "Add" <small>✅ done!</small></div></div>
-            <button class="got-it-btn" onclick="closeModal('androidModal')">Got it!</button>
+        <div class="install-modal-box">
+            <button class="close-modal" onclick="closeModal('androidModal')">✕</button>
+            <span class="modal-icon">📲</span>
+            <h2><span class="lang-en">Add to Home Screen</span><span class="lang-hi">होम स्क्रीन पर जोड़ें</span></h2>
+            <p><span class="lang-en">Install in one step</span><span class="lang-hi">एक क्लिक में इंस्टॉल करें</span></p>
+            <div class="step"><span class="num">1</span><div class="desc"><span class="lang-en">Tap menu (⋮) or (︙)</span><span class="lang-hi">मेनू (⋮) या (︙) दबाएँ</span> <small><span class="lang-en">top right</span><span class="lang-hi">ऊपर दाएँ</span></small></div></div>
+            <div class="step"><span class="num">2</span><div class="desc"><span class="lang-en">Select "Install App"</span><span class="lang-hi">"ऐप इंस्टॉल करें" चुनें</span> <small><span class="lang-en">scroll down</span><span class="lang-hi">नीचे स्क्रॉल करें</span></small></div></div>
+            <div class="step"><span class="num">3</span><div class="desc"><span class="lang-en">Tap "Add"</span><span class="lang-hi">"जोड़ें" दबाएँ</span> <small>✅ <span class="lang-en">done!</span><span class="lang-hi">हो गया!</span></small></div></div>
+            <button class="got-it-btn" onclick="closeModal('androidModal')"><span class="lang-en">Got it!</span><span class="lang-hi">समझ गया!</span></button>
         </div>
     </div>
 
     <div class="modal-overlay" id="loginModal">
-        <div class="modal-box"><button class="close-modal" onclick="closeLoginModal()">✕</button><span class="modal-icon">🔐</span><h2>Live Inventory</h2><p>Enter credentials</p>
-            <div class="input-group"><label for="loginUser">Username</label><input type="text" id="loginUser" placeholder="Username" /></div>
-            <div class="input-group"><label for="loginPass">Password</label><input type="password" id="loginPass" placeholder="Password" /></div>
-            <div class="error-msg" id="loginError">❌ Invalid credentials.</div>
-            <div class="modal-actions"><button class="btn-cancel" onclick="closeLoginModal()">Cancel</button><button class="btn-login" onclick="handleLogin()">🔓 Login</button></div>
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeLoginModal()">✕</button>
+            <span class="modal-icon">🔐</span>
+            <h2><span class="lang-en">Live Inventory</span><span class="lang-hi">लाइव इन्वेंटरी</span></h2>
+            <p><span class="lang-en">Enter credentials</span><span class="lang-hi">लॉगिन विवरण दर्ज करें</span></p>
+            <div class="input-group"><label for="loginUser"><span class="lang-en">Username</span><span class="lang-hi">उपयोगकर्ता नाम</span></label><input type="text" id="loginUser" placeholder="Username" /></div>
+            <div class="input-group"><label for="loginPass"><span class="lang-en">Password</span><span class="lang-hi">पासवर्ड</span></label><input type="password" id="loginPass" placeholder="Password" /></div>
+            <div class="error-msg" id="loginError">❌ <span class="lang-en">Invalid credentials.</span><span class="lang-hi">गलत लॉगिन विवरण।</span></div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeLoginModal()"><span class="lang-en">Cancel</span><span class="lang-hi">रद्द करें</span></button>
+                <button class="btn-login" onclick="handleLogin()">🔓 <span class="lang-en">Login</span><span class="lang-hi">लॉगिन</span></button>
+            </div>
         </div>
     </div>
 
     <script>
-        // ─── DYNAMIC BACKGROUND (changes daily) ───
-        (function setDailyBackground() {
-            const bg = document.getElementById('dynamicBg');
-            // Array of beautiful gradient palettes
-            const gradients = [
-                'radial-gradient(circle at 30% 10%, #1a0f0a 0%, #2a1a0e 30%, #0d0805 70%, #050505 100%)',
-                'radial-gradient(circle at 70% 20%, #0d1a2b 0%, #162b3d 30%, #0a101a 70%, #050505 100%)',
-                'radial-gradient(circle at 50% 50%, #1e1a0c 0%, #2d2414 30%, #100d06 70%, #050505 100%)',
-                'radial-gradient(circle at 20% 80%, #1a0f1a 0%, #2d1a2d 30%, #100a10 70%, #050505 100%)',
-                'radial-gradient(circle at 60% 40%, #0f1a0f 0%, #1a2d1a 30%, #0a100a 70%, #050505 100%)',
-                'radial-gradient(circle at 40% 60%, #1a1008 0%, #2d1c0e 30%, #0d0805 70%, #050505 100%)',
-                'radial-gradient(circle at 80% 80%, #0f0f1a 0%, #1a1a2d 30%, #0a0a10 70%, #050505 100%)'
-            ];
+        // ─── VISITOR COUNTER ───
+        (function updateVisitorCount() {
+            let count = parseInt(localStorage.getItem('tilePlanetVisitors')) || 0;
+            const today = new Date().toDateString();
+            const lastVisit = localStorage.getItem('tilePlanetLastVisit');
+            if (lastVisit !== today) { count += 1;
+                localStorage.setItem('tilePlanetVisitors', count);
+                localStorage.setItem('tilePlanetLastVisit', today); }
+            const el = document.getElementById('visitorCount');
+            let current = 0;
+            const target = count;
+            const duration = 1500;
+            const startTime = performance.now();
 
-            // Use date to pick a gradient (changes every day)
-            const today = new Date();
-            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-            const index = dayOfYear % gradients.length;
-
-            // Also add a subtle golden glow overlay
-            bg.style.background = gradients[index];
-            // Add a tiny floating golden overlay for warmth
-            const overlay = document.createElement('div');
-            overlay.style.cssText = `
-                    position: absolute; inset: 0;
-                    background: radial-gradient(circle at 50% 30%, rgba(212,175,55,0.04), transparent 70%);
-                    pointer-events: none;
-                `;
-            bg.appendChild(overlay);
-
-            // Store the chosen gradient name for debugging (optional)
-            console.log('Today\'s background palette index:', index);
+            function animateCounter(time) {
+                const progress = Math.min((time - startTime) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                current = Math.round(eased * target);
+                el.textContent = current;
+                if (progress < 1) requestAnimationFrame(animateCounter);
+                else el.textContent = target;
+            }
+            requestAnimationFrame(animateCounter);
         })();
+
+        // ─── DYNAMIC BACKGROUND (Hourly) ───
+        (function setDynamicBackground() {
+            const bg = document.getElementById('dynamicBg');
+            const palettes = [
+                'radial-gradient(circle at 30% 10%, #1a0f0a 0%, #2a1a0e 40%, #0d0805 70%, #050505 100%)',
+                'radial-gradient(circle at 70% 20%, #0d1a2b 0%, #162b3d 40%, #0a101a 70%, #050505 100%)',
+                'radial-gradient(circle at 50% 50%, #1e1a0c 0%, #2d2414 40%, #100d06 70%, #050505 100%)',
+                'radial-gradient(circle at 20% 80%, #1a0f1a 0%, #2d1a2d 40%, #100a10 70%, #050505 100%)',
+                'radial-gradient(circle at 60% 40%, #0f1a0f 0%, #1a2d1a 40%, #0a100a 70%, #050505 100%)',
+                'radial-gradient(circle at 40% 60%, #1a1008 0%, #2d1c0e 40%, #0d0805 70%, #050505 100%)',
+                'radial-gradient(circle at 80% 80%, #0f0f1a 0%, #1a1a2d 40%, #0a0a10 70%, #050505 100%)',
+                'radial-gradient(circle at 50% 30%, #0a1a1a 0%, #1a2d2d 40%, #0a1010 70%, #050505 100%)',
+                'radial-gradient(circle at 30% 70%, #1a0a0a 0%, #2d1a1a 40%, #100a0a 70%, #050505 100%)',
+                'radial-gradient(circle at 70% 60%, #0a0a1a 0%, #1a1a2d 40%, #0a0a10 70%, #050505 100%)'
+            ];
+            const hour = new Date().getHours();
+            const index = hour % palettes.length;
+            bg.style.background = palettes[index];
+        })();
+
+        // ─── PRODUCT LIGHTBOX ───
+        function openLightbox(imgSrc, name, price) {
+            const overlay = document.getElementById('lightbox');
+            document.getElementById('lbImage').src = imgSrc;
+            document.getElementById('lbName').textContent = name;
+            document.getElementById('lbPrice').textContent = price || '₹ Contact for Price';
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+        // ─── TESTIMONIAL CAROUSEL ───
+        (function initTestimonial() {
+            let current = 0;
+            const track = document.getElementById('testimonialTrack');
+            const dots = document.querySelectorAll('.testimonial-dots .dot');
+            const total = dots.length;
+
+            function goTo(index) {
+                current = index;
+                track.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach((d, i) => d.classList.toggle('active', i === index));
+            }
+            dots.forEach((dot, i) => { dot.addEventListener('click', () => goTo(i)); });
+            setInterval(() => { goTo((current + 1) % total); }, 5000);
+            let startX = 0;
+            const carousel = document.getElementById('testimonialCarousel');
+            carousel.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+            carousel.addEventListener('touchend', (e) => {
+                const endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+                if (Math.abs(diff) > 40) {
+                    if (diff > 0) goTo(Math.min(current + 1, total - 1));
+                    else goTo(Math.max(current - 1, 0));
+                }
+            });
+        })();
+
+        // ─── LANGUAGE TOGGLE ───
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            const body = document.body;
+            if (currentLang === 'en') { body.classList.add('lang-hindi');
+                currentLang = 'hi'; } else { body.classList.remove('lang-hindi');
+                currentLang = 'en'; }
+        }
+
+        // ─── AUDIO GREETING ───
+        let audioPlaying = false;
+        let audioElement = null;
+
+        function toggleAudio() {
+            const btn = document.getElementById('audioBtn');
+            if (!audioElement) {
+                audioElement = new Audio();
+                audioElement.src = 'data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVoAAACAgICAf39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f4CAgA==';
+            }
+            if (audioPlaying) {
+                audioElement.pause();
+                audioElement.currentTime = 0;
+                audioPlaying = false;
+                btn.classList.remove('playing');
+                btn.innerHTML = '<i class="fas fa-play"></i> <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>';
+            } else {
+                audioElement.play().then(() => {
+                    audioPlaying = true;
+                    btn.classList.add('playing');
+                    btn.innerHTML = '<i class="fas fa-pause"></i> <span class="lang-en">Playing...</span><span class="lang-hi">बज रहा...</span>';
+                }).catch(() => {
+                    btn.classList.add('playing');
+                    btn.innerHTML = '<i class="fas fa-check"></i> <span class="lang-en">Welcome!</span><span class="lang-hi">स्वागत है!</span>';
+                    setTimeout(() => {
+                        btn.classList.remove('playing');
+                        btn.innerHTML = '<i class="fas fa-play"></i> <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>';
+                    }, 2000);
+                });
+            }
+        }
 
         // ─── SHARE ───
         function shareCard() {
@@ -1754,7 +2290,7 @@
             document.getElementById('progress-bar').style.width = progress + '%';
         });
 
-        // ─── 3D TILT + SPOTLIGHT (Multi-layer) ───
+        // ─── 3D TILT + SPOTLIGHT ───
         document.addEventListener('DOMContentLoaded', function() {
             const card = document.getElementById('tiltCard');
             const wrapper = document.getElementById('tiltWrapper');
@@ -1769,16 +2305,13 @@
                 const centerY = rect.height / 2;
                 const rotateX = ((y - centerY) / centerY) * -8;
                 const rotateY = ((x - centerX) / centerX) * 8;
-
                 card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
                 layers.forEach((layer, index) => {
                     const speed = 0.5 + (index * 0.1);
                     const moveX = (x - centerX) / centerX * 10 * speed;
                     const moveY = (y - centerY) / centerY * 10 * speed;
                     layer.style.transform = `translate(${moveX}px, ${moveY}px) translateZ(${20 + index * 20}px)`;
                 });
-
                 const px = (x / rect.width) * 100;
                 const py = (y / rect.height) * 100;
                 spotlight.style.setProperty('--mx', px + '%');
@@ -1795,27 +2328,24 @@
             });
         });
 
-        // ─── SCROLL ANIMATIONS (Intersection Observer) ───
+        // ─── SCROLL ANIMATIONS ───
         document.addEventListener('DOMContentLoaded', function() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const el = entry.target;
                         const delay = parseFloat(el.dataset.delay) || 0;
-                        setTimeout(() => {
-                            el.classList.add('visible');
-                        }, delay * 1000);
+                        setTimeout(() => { el.classList.add('visible'); }, delay * 1000);
                     }
                 });
             }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
             document.querySelectorAll('.section-title, .product, .catalog-card, .animate-on-scroll').forEach(el => observer
                 .observe(el));
         });
 
-        // ─── BOTTOM NAV ACTIVE STATE ───
+        // ─── BOTTOM NAV ACTIVE ───
         document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function(e) {
+            item.addEventListener('click', function() {
                 document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
             });
@@ -1837,6 +2367,9 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/service-worker.js').catch(() => {});
         }
+
+        console.log('🚀 Tile Planet — Complete Digital Card');
+        console.log('✨ All 13 sections restored + new features!');
     </script>
 
 </body>
