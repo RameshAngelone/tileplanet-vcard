@@ -67,8 +67,14 @@
             animation: auraPulse 6s ease-in-out infinite alternate;
         }
         @keyframes auraPulse {
-            0% { opacity: 0.4; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
+            0% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
         }
 
         /* ─── FLOATING PARTICLES ─── */
@@ -88,18 +94,65 @@
             animation: floatParticle linear infinite;
             opacity: 0.2;
         }
-        .particle:nth-child(1) { left: 10%; animation-duration: 18s; width: 8px; height: 8px; }
-        .particle:nth-child(2) { left: 25%; animation-duration: 22s; animation-delay: 2s; width: 4px; height: 4px; }
-        .particle:nth-child(3) { left: 50%; animation-duration: 20s; animation-delay: 4s; width: 10px; height: 10px; opacity: 0.1; }
-        .particle:nth-child(4) { left: 75%; animation-duration: 25s; animation-delay: 1s; width: 5px; height: 5px; }
-        .particle:nth-child(5) { left: 90%; animation-duration: 19s; animation-delay: 3s; width: 7px; height: 7px; }
-        .particle:nth-child(6) { left: 40%; animation-duration: 23s; animation-delay: 5s; width: 12px; height: 12px; opacity: 0.08; }
+        .particle:nth-child(1) {
+            left: 10%;
+            animation-duration: 18s;
+            width: 8px;
+            height: 8px;
+        }
+        .particle:nth-child(2) {
+            left: 25%;
+            animation-duration: 22s;
+            animation-delay: 2s;
+            width: 4px;
+            height: 4px;
+        }
+        .particle:nth-child(3) {
+            left: 50%;
+            animation-duration: 20s;
+            animation-delay: 4s;
+            width: 10px;
+            height: 10px;
+            opacity: 0.1;
+        }
+        .particle:nth-child(4) {
+            left: 75%;
+            animation-duration: 25s;
+            animation-delay: 1s;
+            width: 5px;
+            height: 5px;
+        }
+        .particle:nth-child(5) {
+            left: 90%;
+            animation-duration: 19s;
+            animation-delay: 3s;
+            width: 7px;
+            height: 7px;
+        }
+        .particle:nth-child(6) {
+            left: 40%;
+            animation-duration: 23s;
+            animation-delay: 5s;
+            width: 12px;
+            height: 12px;
+            opacity: 0.08;
+        }
 
         @keyframes floatParticle {
-            0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-10vh) rotate(720deg) scale(1); opacity: 0; }
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(720deg) scale(1);
+                opacity: 0;
+            }
         }
 
         /* ─── SCROLL PROGRESS ─── */
@@ -175,8 +228,13 @@
             animation: pulse-audio 1s ease-in-out infinite;
         }
         @keyframes pulse-audio {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.2); }
-            50% { box-shadow: 0 0 20px 4px rgba(76, 217, 100, 0.1); }
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px 4px rgba(76, 217, 100, 0.1);
+            }
         }
 
         /* ─── CONTAINER ─── */
@@ -308,9 +366,15 @@
             z-index: 0;
         }
         @keyframes shimmerBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .layer {
@@ -318,11 +382,21 @@
             z-index: 1;
             transform-style: preserve-3d;
         }
-        .layer-1 { transform: translateZ(20px); }
-        .layer-2 { transform: translateZ(40px); }
-        .layer-3 { transform: translateZ(60px); }
-        .layer-4 { transform: translateZ(80px); }
-        .layer-5 { transform: translateZ(100px); }
+        .layer-1 {
+            transform: translateZ(20px);
+        }
+        .layer-2 {
+            transform: translateZ(40px);
+        }
+        .layer-3 {
+            transform: translateZ(60px);
+        }
+        .layer-4 {
+            transform: translateZ(80px);
+        }
+        .layer-5 {
+            transform: translateZ(100px);
+        }
 
         .top-row {
             display: flex;
@@ -353,8 +427,13 @@
             animation: shimmerText 4s ease-in-out infinite;
         }
         @keyframes shimmerText {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
         }
         .name .badge {
             font-size: 10px;
@@ -626,7 +705,7 @@
             color: var(--text-secondary);
         }
 
-        /* ─── CATALOG 3D FLIP ─── */
+        /* ─── CATALOG 3D FLIP — FIXED ─── */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -639,6 +718,8 @@
             opacity: 0;
             transform: translateY(30px) rotateY(10deg);
             transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+            /* make entire card clickable */;
         }
         .catalog-card.visible {
             opacity: 1;
@@ -651,8 +732,15 @@
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
             transform-style: preserve-3d;
             cursor: pointer;
+            pointer-events: auto;
+            /* allow clicks */;
         }
+        /* Desktop hover — still works */
         .catalog-card:hover .catalog-inner {
+            transform: rotateY(180deg);
+        }
+        /* Mobile / click toggle via JS */
+        .catalog-inner.flipped {
             transform: rotateY(180deg);
         }
         .catalog-front,
@@ -672,6 +760,13 @@
             backdrop-filter: blur(16px);
             border: 1px solid rgba(212, 175, 55, 0.04);
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            /* children can be clicked */;
+        }
+        .catalog-front *,
+        .catalog-back * {
+            pointer-events: auto;
+            /* allow clicking on buttons */;
         }
         .catalog-back {
             transform: rotateY(180deg);
@@ -703,6 +798,9 @@
             font-weight: 600;
             text-decoration: none;
             transition: all var(--transition);
+            cursor: pointer;
+            pointer-events: auto;
+            /* ensure clickable */;
         }
         .catalog-back .dl-btn:hover {
             background: rgba(212, 175, 55, 0.2);
@@ -721,7 +819,7 @@
             margin-top: 2px;
         }
 
-        /* ─── TESTIMONIAL CAROUSEL (10 ITEMS) ─── */
+        /* ─── TESTIMONIAL CAROUSEL ─── */
         .testimonial-section {
             padding: 0 12px;
         }
@@ -1058,7 +1156,7 @@
             padding-top: 14px;
         }
 
-        /* ─── SCROLLING TICKER (HIGHLIGHTED) ─── */
+        /* ─── SCROLLING TICKER ─── */
         .ticker-bar {
             position: fixed;
             bottom: 70px;
@@ -1420,6 +1518,35 @@
         .lang-hi-block {
             display: none;
         }
+
+        /* ─── TOAST NOTIFICATION ─── */
+        .toast {
+            position: fixed;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(10, 8, 6, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 999999;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+            white-space: nowrap;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast .toast-icon {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -1441,6 +1568,9 @@
 
     <!-- ─── SCROLL PROGRESS ─── -->
     <div id="progress-bar"></div>
+
+    <!-- ─── TOAST ─── -->
+    <div id="toast" class="toast"><span class="toast-icon">📦</span> <span id="toastMsg">Opening catalog…</span></div>
 
     <!-- ─── TOP BAR ─── -->
     <div class="top-bar">
@@ -1522,40 +1652,44 @@
             <div class="product" data-delay="0.25"><img src="bathroomtiles.jpg" class="product-img" /><span>Bath</span></div>
         </div>
 
-        <!-- ═══ 2. CATALOGUES ═══ -->
+        <!-- ═══ 2. CATALOGUES — FIXED ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">📖</span>
             <span class="lang-en">📚 CATALOGUES</span><span class="lang-hi">📚 कैटलॉग</span>
             <span class="label">📖</span><span class="line"></span>
         </div>
-        <div class="catalog-grid">
-            <div class="catalog-card" data-delay="0.05">
+        <div class="catalog-grid" id="catalogGrid">
+            <!-- Card 1 -->
+            <div class="catalog-card" data-delay="0.05" data-catalog="wall">
                 <div class="catalog-inner">
                     <div class="catalog-front"><span class="icon-big">🧱</span><h3>Wall Tiles</h3><p>Premium</p></div>
-                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Collection</p><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
+                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Collection</p><a href="#" class="dl-btn" data-catalog="wall">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
-            <div class="catalog-card" data-delay="0.10">
+            <!-- Card 2 -->
+            <div class="catalog-card" data-delay="0.10" data-catalog="floor">
                 <div class="catalog-inner">
                     <div class="catalog-front"><span class="icon-big">🟫</span><h3>Floor Tiles</h3><p>600×600</p></div>
-                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Collection</p><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
+                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Collection</p><a href="#" class="dl-btn" data-catalog="floor">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
-            <div class="catalog-card" data-delay="0.15">
+            <!-- Card 3 -->
+            <div class="catalog-card" data-delay="0.15" data-catalog="modern" style="border-color:rgba(212,175,55,0.3);">
                 <div class="catalog-inner" style="border-color:rgba(212,175,55,0.3);">
                     <div class="catalog-front" style="background:rgba(212,175,55,0.05);border-color:rgba(212,175,55,0.1);"><span class="icon-big">📐</span><h3 style="color:var(--gold-light);">300×600mm</h3><p>Modern</p><span class="badge-new">✦ New</span></div>
-                    <div class="catalog-back"><span class="badge-new">✦ New</span><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
+                    <div class="catalog-back"><span class="badge-new">✦ New</span><a href="#" class="dl-btn" data-catalog="modern">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
-            <div class="catalog-card" data-delay="0.20">
+            <!-- Card 4 -->
+            <div class="catalog-card" data-delay="0.20" data-catalog="matt" style="border-color:rgba(76,217,100,0.2);">
                 <div class="catalog-inner" style="border-color:rgba(76,217,100,0.2);">
                     <div class="catalog-front" style="background:rgba(76,217,100,0.03);"><span class="icon-big">🔲</span><h3 style="color:#4cd964;">600×600 Matt</h3><p>Matt Finish</p><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span></div>
-                    <div class="catalog-back"><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
+                    <div class="catalog-back"><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span><a href="#" class="dl-btn" data-catalog="matt">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
         </div>
 
-        <!-- ═══ 3. TESTIMONIALS (10 Items) ═══ -->
+        <!-- ═══ 3. TESTIMONIALS ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">💬</span>
             <span class="lang-en">💬 TESTIMONIALS</span><span class="lang-hi">💬 ग्राहक समीक्षा</span>
@@ -1564,7 +1698,6 @@
         <div class="testimonial-section animate-on-scroll">
             <div class="testimonial-carousel" id="testimonialCarousel">
                 <div class="testimonial-track" id="testimonialTrack">
-                    <!-- 10 Unique Testimonials -->
                     <div class="testimonial-item">
                         <span class="stars">★★★★★</span>
                         <p class="quote">"Tile Planet की क्वालिटी और सर्विस दोनों ही बेहतरीन हैं। हमने अपने नए घर के लिए यहीं से टाइल्स खरीदीं, बहुत खुश हैं!"</p>
@@ -1618,7 +1751,6 @@
                 </div>
             </div>
             <div class="testimonial-dots" id="testimonialDots">
-                <!-- 10 dots generated dynamically or manually (manually added for 10) -->
                 <button class="dot active" data-index="0"></button>
                 <button class="dot" data-index="1"></button>
                 <button class="dot" data-index="2"></button>
@@ -1789,7 +1921,7 @@
 
     </div>
 
-    <!-- ═══ SCROLLING TICKER (HIGHLIGHTED + BIGGER FONT) ═══ -->
+    <!-- ═══ SCROLLING TICKER ═══ -->
     <div class="ticker-bar">
         <div class="ticker-track">
             <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: 10/07/2026 – Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">📢 ऑफर: 10/07/2026 – टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
@@ -1833,13 +1965,76 @@
     </div>
 
     <script>
-        // ─── LIVE INVENTORY — DIRECT OPEN (NO LOGIN) ───
+        // ─── INVENTORY URL ───
         const INVENTORY_URL =
             'https://script.google.com/macros/s/AKfycbzEcPAx1wREVuF6LzgPke9BlSf5tBTuA23cyO0-9JDHPcwSFL2prjjOBeZBgMOqLzzqjA/exec';
 
         function openLiveInventory() {
             window.open(INVENTORY_URL, '_blank');
+            showToast('📦 Opening live inventory…');
         }
+
+        // ─── TOAST ───
+        let toastTimer = null;
+
+        function showToast(msg) {
+            const el = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMsg');
+            msgEl.textContent = msg;
+            el.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { el.classList.remove('show'); }, 2800);
+        }
+
+        // ─── CATALOG FIX ───
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.catalog-card');
+
+            cards.forEach(card => {
+                const inner = card.querySelector('.catalog-inner');
+
+                // ---- Click on card: toggle flip on mobile, or open catalog ----
+                card.addEventListener('click', function(e) {
+                    // If user clicked on the download button, let the button handle it
+                    if (e.target.closest('.dl-btn')) return;
+
+                    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+                    if (isTouch) {
+                        // On mobile: toggle flip so user can see the download button
+                        inner.classList.toggle('flipped');
+                    } else {
+                        // On desktop: just open the catalog directly (since hover already shows back)
+                        openCatalogForCard(card);
+                    }
+                });
+
+                // ---- Download button: open catalog ----
+                const btn = card.querySelector('.dl-btn');
+                if (btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openCatalogForCard(card);
+                    });
+                }
+            });
+
+            // ---- Helper: open catalog based on card's data-catalog ----
+            function openCatalogForCard(card) {
+                const type = card.dataset.catalog || 'general';
+                const names = {
+                    wall: '🧱 Wall Tiles',
+                    floor: '🟫 Floor Tiles',
+                    modern: '📐 300×600mm Modern',
+                    matt: '🔲 600×600 Matt'
+                };
+                const label = names[type] || '📚 Catalog';
+                showToast(`📖 Opening ${label}…`);
+                // Open the live inventory URL (or you can change to per-catalog PDFs)
+                openLiveInventory();
+            }
+        });
 
         // ─── VISITOR COUNTER ───
         (function updateVisitorCount() {
@@ -1868,7 +2063,7 @@
             requestAnimationFrame(animateCounter);
         })();
 
-        // ─── DYNAMIC BACKGROUND (Hourly) ───
+        // ─── DYNAMIC BACKGROUND ───
         (function setDynamicBackground() {
             const bg = document.getElementById('dynamicBg');
             const palettes = [
@@ -1888,12 +2083,12 @@
             bg.style.background = palettes[index];
         })();
 
-        // ─── TESTIMONIAL CAROUSEL (10 items) ───
+        // ─── TESTIMONIAL CAROUSEL ───
         (function initTestimonial() {
             let current = 0;
             const track = document.getElementById('testimonialTrack');
             const dots = document.querySelectorAll('.testimonial-dots .dot');
-            const total = dots.length; // 10
+            const total = dots.length;
 
             function goTo(index) {
                 current = index;
@@ -1945,7 +2140,7 @@
                 audioElement.play().then(() => {
                     audioPlaying = true;
                     btn.classList.add('playing');
-                    btn.innerHTML = '<i class="fas fa-pause"></i> <span class="lang-en">Playing...</span><span class="lang-hi">बज रहा...</span>';
+                    btn.innerHTML = '<i class="fas fa-pause"></i> <span class="lang-en">Playing…</span><span class="lang-hi">बज रहा…</span>';
                 }).catch(() => {
                     btn.classList.add('playing');
                     btn.innerHTML = '<i class="fas fa-check"></i> <span class="lang-en">Welcome!</span><span class="lang-hi">स्वागत है!</span>';
@@ -1964,8 +2159,8 @@
                     .catch(() => {});
             } else {
                 navigator.clipboard.writeText(window.location.href)
-                    .then(() => alert('✅ Link Copied'))
-                    .catch(() => alert('📋 Copy: ' + window.location.href));
+                    .then(() => showToast('✅ Link copied!'))
+                    .catch(() => showToast('📋 Copy: ' + window.location.href));
             }
         }
 
@@ -2121,7 +2316,7 @@
             navigator.serviceWorker.register('/service-worker.js').catch(() => {});
         }
 
-        console.log('🚀 Tile Planet — Live Inventory button now opens URL directly (no login)');
+        console.log('✅ Tile Planet — Catalog cards fixed! Click any card or DOWNLOAD button to open inventory.');
     </script>
 
 </body>
