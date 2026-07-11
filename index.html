@@ -1,2128 +1,902 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Tile Planet · Premium Digital Card</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Tile Planet · Ramesh Chotalia</title>
 
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#D4AF37" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<!-- PWA -->
+<link rel="manifest" href="/manifest.json" />
+<meta name="theme-color" content="#13100C" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=Mukta:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <style>
-        /* ─── RESET & ROOT ─── */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+/* ─────────────────────────────────────────────
+   TILE PLANET — "Sample Board" edition
+   A tile-showroom, not a luxury-gold template.
+   ───────────────────────────────────────────── */
+*{margin:0;padding:0;box-sizing:border-box}
 
-        :root {
-            --gold: #d4af37;
-            --gold-light: #f5d76e;
-            --gold-neon: #f9e79f;
-            --dark-bg: #050505;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(212, 175, 55, 0.08);
-            --text-primary: #f5f0eb;
-            --text-secondary: rgba(245, 240, 235, 0.75);
-            --text-muted: rgba(245, 240, 235, 0.35);
-            --radius-xl: 32px;
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-sm: 12px;
-            --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
+:root{
+  /* stone + porcelain + brass */
+  --stone:#13100C;
+  --stone-2:#1B1712;
+  --stone-3:#241F18;
+  --porcelain:#EDE6D8;
+  --brass:#C89B4A;
+  --brass-hi:#E7CB84;
+  --brass-deep:#8F6B28;
+  --ink:#100D0A;
 
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            font-family: 'Inter', -apple-system, sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            padding-bottom: 130px;
-            min-height: 100vh;
-        }
+  --text:#F2ECE1;
+  --text-2:rgba(242,236,225,.60);
+  --text-3:rgba(242,236,225,.32);
 
-        /* ─── DYNAMIC BACKGROUND ─── */
-        .dynamic-bg {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            transition: background 1.5s ease;
-            will-change: background;
-        }
-        .dynamic-bg .aura {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.05), transparent 70%);
-            pointer-events: none;
-            animation: auraPulse 6s ease-in-out infinite alternate;
-        }
-        @keyframes auraPulse {
-            0% { opacity: 0.4; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
-        }
+  --line:rgba(200,155,74,.16);
+  --line-soft:rgba(255,255,255,.06);
+  --grout:rgba(0,0,0,.55);
 
-        /* ─── FLOATING PARTICLES ─── */
-        .particles {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, var(--gold-light), transparent);
-            border-radius: 50%;
-            animation: floatParticle linear infinite;
-            opacity: 0.2;
-        }
-        .particle:nth-child(1) { left: 10%; animation-duration: 18s; width: 8px; height: 8px; }
-        .particle:nth-child(2) { left: 25%; animation-duration: 22s; animation-delay: 2s; width: 4px; height: 4px; }
-        .particle:nth-child(3) { left: 50%; animation-duration: 20s; animation-delay: 4s; width: 10px; height: 10px; opacity: 0.1; }
-        .particle:nth-child(4) { left: 75%; animation-duration: 25s; animation-delay: 1s; width: 5px; height: 5px; }
-        .particle:nth-child(5) { left: 90%; animation-duration: 19s; animation-delay: 3s; width: 7px; height: 7px; }
-        .particle:nth-child(6) { left: 40%; animation-duration: 23s; animation-delay: 5s; width: 12px; height: 12px; opacity: 0.08; }
+  --r-lg:20px;
+  --r-md:14px;
+  --r-sm:10px;
+  --ease:cubic-bezier(.22,1,.36,1);
 
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-10vh) rotate(720deg) scale(1); opacity: 0; }
-        }
+  --maxw:440px;
+}
 
-        /* ─── SCROLL PROGRESS ─── */
-        #progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
-            z-index: 99999;
-            width: 0%;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            transition: width 0.1s linear;
-        }
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--stone);
+  color:var(--text);
+  font-family:'Manrope',-apple-system,sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:132px;
+  min-height:100vh;
+  line-height:1.45;
+}
+/* Devanagari gets its own face so Hindi never looks like an afterthought */
+.lang-hi{font-family:'Mukta','Manrope',sans-serif}
 
-        /* ─── TOP BAR ─── */
-        .top-bar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 8px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(5, 5, 5, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.04);
-        }
-        .top-bar .lang-btn {
-            background: none;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            color: var(--text-secondary);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition);
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .top-bar .lang-btn:hover {
-            border-color: var(--gold-light);
-            color: #fff;
-            background: rgba(212, 175, 55, 0.06);
-        }
-        .top-bar .audio-btn {
-            background: none;
-            border: 1px solid rgba(212, 175, 55, 0.12);
-            color: var(--gold-light);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition);
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .top-bar .audio-btn:hover {
-            border-color: var(--gold-light);
-            background: rgba(212, 175, 55, 0.06);
-            transform: scale(1.04);
-        }
-        .top-bar .audio-btn.playing {
-            border-color: #4cd964;
-            color: #4cd964;
-            animation: pulse-audio 1s ease-in-out infinite;
-        }
-        @keyframes pulse-audio {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.2); }
-            50% { box-shadow: 0 0 20px 4px rgba(76, 217, 100, 0.1); }
-        }
+/* faint porcelain-grid / grout texture behind everything */
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(var(--line-soft) 1px,transparent 1px) 0 0/64px 64px,
+    linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/64px 64px,
+    radial-gradient(120% 90% at 50% -10%, rgba(200,155,74,.06), transparent 55%);
+  mask-image:radial-gradient(130% 100% at 50% 0%, #000 40%, transparent 92%);
+  opacity:.5;
+}
 
-        /* ─── CONTAINER ─── */
-        .container {
-            max-width: 440px;
-            margin: 0 auto;
-            padding: 0 0 20px 0;
-            position: relative;
-            z-index: 1;
-        }
+/* scroll progress — a thin brass seam */
+#seam{position:fixed;top:0;left:0;height:2px;width:0;z-index:9999;
+  background:linear-gradient(90deg,var(--brass-deep),var(--brass-hi));
+  box-shadow:0 0 12px rgba(200,155,74,.4)}
 
-        /* ─── GLASS CARD ─── */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(40px) saturate(1.4);
-            -webkit-backdrop-filter: blur(40px) saturate(1.4);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: 20px 22px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(212, 175, 55, 0.04);
-            transition: all var(--transition);
-            position: relative;
-            z-index: 1;
-            will-change: transform;
-        }
-        .glass-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(212, 175, 55, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 80px rgba(212, 175, 55, 0.03);
-        }
+/* ─── TOP BAR ─── */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:9px 16px;
+  background:rgba(19,16,12,.72);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line-soft);
+}
+.pill{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:5px 13px;border-radius:40px;cursor:pointer;
+  font:600 11px/1 'Manrope',sans-serif;letter-spacing:.3px;
+  color:var(--text-2);background:transparent;
+  border:1px solid var(--line);
+  transition:.4s var(--ease);
+}
+.pill:hover{color:var(--text);border-color:var(--brass);background:rgba(200,155,74,.06)}
+.pill.audio{color:var(--brass-hi)}
+.pill.audio.playing{color:#7CE0A0;border-color:rgba(124,224,160,.4)}
 
-        /* ─── HERO ─── */
-        .hero {
-            position: relative;
-            padding: 12px 12px 24px;
-            border-radius: 0 0 40px 40px;
-            overflow: hidden;
-            background: url('showroom.jpg') center center / cover no-repeat;
-            min-height: 360px;
-            display: flex;
-            align-items: flex-end;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(165deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.75) 100%);
-            z-index: 0;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 60%;
-            background: linear-gradient(to top, rgba(5, 5, 5, 0.7), transparent);
-            z-index: 0;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-        }
-        .logo-wrap {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2px;
-        }
-        .logo {
-            width: 170px;
-            filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.9)) brightness(1.08);
-            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .logo:hover {
-            transform: scale(1.04) rotate(-1deg);
-        }
-        .tagline {
-            text-align: center;
-            font-size: 9px;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            font-weight: 700;
-            margin-bottom: 16px;
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
-            opacity: 0.9;
-        }
+.wrap{max-width:var(--maxw);margin:0 auto;position:relative;z-index:1}
 
-        /* ─── 3D HERO CARD ─── */
-        .tilt-wrapper {
-            perspective: 1400px;
-            transform-style: preserve-3d;
-        }
-        .hero-card {
-            background: rgba(10, 8, 6, 0.65);
-            backdrop-filter: blur(50px) saturate(1.5);
-            -webkit-backdrop-filter: blur(50px) saturate(1.5);
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            border-radius: var(--radius-lg);
-            padding: 22px 22px 18px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(212, 175, 55, 0.05);
-            transform-style: preserve-3d;
-            will-change: transform;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-card .layer-bg-glow {
-            position: absolute;
-            inset: -50%;
-            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(212, 175, 55, 0.12), transparent 60%);
-            pointer-events: none;
-            z-index: 0;
-            transition: background 0.1s ease;
-        }
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 26px;
-            padding: 2px;
-            background: conic-gradient(from 0deg, #d4af37, #f9e79f, #d4af37, #b8860b, #d4af37, #f9e79f, #d4af37);
-            background-size: 300% 300%;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: shimmerBorder 6s linear infinite;
-            opacity: 0.5;
-            z-index: 0;
-        }
-        @keyframes shimmerBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+/* ─── HERO ─── */
+.hero{position:relative;padding:16px 14px 22px;overflow:hidden}
+.hero-photo{
+  position:absolute;inset:0;
+  background:var(--stone-3) url('showroom.jpg') center/cover no-repeat;
+  z-index:0;
+}
+.hero-photo::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(19,16,12,.55) 0%,rgba(19,16,12,.30) 34%,rgba(19,16,12,.88) 100%);
+}
+.hero-inner{position:relative;z-index:2}
 
-        .layer {
-            position: relative;
-            z-index: 1;
-            transform-style: preserve-3d;
-        }
-        .layer-1 { transform: translateZ(20px); }
-        .layer-2 { transform: translateZ(40px); }
-        .layer-3 { transform: translateZ(60px); }
-        .layer-4 { transform: translateZ(80px); }
-        .layer-5 { transform: translateZ(100px); }
+.brand-row{display:flex;align-items:center;justify-content:center;gap:10px;margin:4px 0 14px}
+.brand-row img{width:132px;filter:drop-shadow(0 6px 24px rgba(0,0,0,.7))}
+.brand-row .est{
+  font:700 8.5px/1 'Space Mono',monospace;letter-spacing:2px;
+  color:var(--brass-hi);border:1px solid var(--line);
+  padding:4px 8px;border-radius:6px;white-space:nowrap;text-transform:uppercase;
+}
 
-        .top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 14px;
-        }
-        .name-box {
-            flex: 1;
-        }
-        .name {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            line-height: 1;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .gold-shimmer-text {
-            background: linear-gradient(135deg, #f9e79f, #d4af37, #f9e79f, #d4af37);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmerText 4s ease-in-out infinite;
-        }
-        @keyframes shimmerText {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        .name .badge {
-            font-size: 10px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--gold-light), #d4a017);
-            color: #0a0806;
-            padding: 2px 14px;
-            border-radius: 50px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-            display: inline-block;
-            font-family: 'Inter', sans-serif;
-            -webkit-text-fill-color: #0a0806;
-        }
+/* ── engraved brass NAMEPLATE (the signature) ── */
+.plate{
+  position:relative;border-radius:var(--r-lg);
+  background:
+    linear-gradient(180deg,rgba(36,31,24,.86),rgba(20,17,13,.9));
+  backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);
+  padding:2px;
+  box-shadow:0 26px 60px rgba(0,0,0,.6);
+  will-change:transform;transition:transform .5s var(--ease);
+}
+/* thin brass bevel frame like an engraved plaque */
+.plate::before{
+  content:"";position:absolute;inset:0;border-radius:var(--r-lg);padding:1px;
+  background:linear-gradient(150deg,var(--brass-hi),rgba(143,107,40,.2) 45%,var(--brass) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.9;
+}
+.plate-body{
+  position:relative;border-radius:calc(var(--r-lg) - 2px);
+  padding:18px 18px 16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.03),transparent 40%);
+}
+.plate-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.owner-eyebrow{
+  font:700 8.5px/1 'Space Mono',monospace;letter-spacing:3px;
+  color:var(--brass);text-transform:uppercase;margin-bottom:7px;
+}
+.owner-name{
+  font-family:'Fraunces',serif;font-weight:600;font-size:30px;line-height:1;
+  letter-spacing:-.4px;color:var(--porcelain);
+  text-shadow:0 1px 0 rgba(0,0,0,.4);
+}
+.phone-line{
+  display:inline-flex;align-items:center;gap:10px;margin-top:14px;
+  padding:11px 18px 11px 14px;border-radius:40px;text-decoration:none;
+  background:linear-gradient(135deg,var(--brass-hi),var(--brass) 55%,var(--brass-deep));
+  color:var(--ink);font:700 15px/1 'Manrope',sans-serif;letter-spacing:.2px;
+  box-shadow:0 8px 22px rgba(200,155,74,.24),inset 0 1px 0 rgba(255,255,255,.4);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.phone-line i{font-size:13px}
+.phone-line:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(200,155,74,.34)}
 
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 10px;
-            padding: 11px 22px;
-            border-radius: 60px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.02));
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            text-decoration: none;
-            color: #fff;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all var(--transition);
-            letter-spacing: 0.3px;
-            backdrop-filter: blur(8px);
-            position: relative;
-            overflow: hidden;
-            will-change: transform;
-        }
-        .contact-btn .btn-text {
-            position: relative;
-            z-index: 2;
-        }
-        .contact-btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), transparent);
-            opacity: 0;
-            transition: opacity var(--transition);
-        }
-        .contact-btn:hover::after {
-            opacity: 1;
-        }
-        .contact-btn:hover {
-            border-color: var(--gold-light);
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), inset 0 0 30px rgba(212, 175, 55, 0.04);
-            transform: scale(1.03);
-        }
+.qr{
+  width:70px;min-width:70px;text-align:center;flex-shrink:0;
+}
+.qr img{width:100%;background:#fff;padding:5px;border-radius:10px;display:block;
+  border:1px solid var(--line)}
+.qr span{display:block;margin-top:5px;font:700 7px/1 'Space Mono',monospace;
+  letter-spacing:1px;color:var(--text-3);text-transform:uppercase}
 
-        .contact-qr {
-            width: 64px;
-            min-width: 64px;
-            padding: 4px;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.03);
-            text-align: center;
-            border: 1px solid rgba(212, 175, 55, 0.06);
-            transition: transform var(--transition);
-        }
-        .contact-qr:hover {
-            transform: scale(1.05);
-        }
-        .contact-qr img {
-            width: 100%;
-            background: #fff;
-            padding: 3px;
-            border-radius: 8px;
-            display: block;
-        }
-        .contact-qr p {
-            font-size: 6px;
-            margin-top: 4px;
-            color: var(--text-muted);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+/* quick action tiles under the plate */
+.qa{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:14px}
+.qa a{
+  text-decoration:none;text-align:center;color:var(--text);
+  padding:11px 4px 9px;border-radius:var(--r-md);
+  background:rgba(255,255,255,.04);border:1px solid var(--line-soft);
+  font:600 9.5px/1.2 'Manrope',sans-serif;letter-spacing:.3px;
+  transition:.4s var(--ease);
+}
+.qa a i{display:block;font-size:17px;margin-bottom:6px;color:var(--brass-hi)}
+.qa a:hover{transform:translateY(-3px);border-color:var(--brass);background:rgba(200,155,74,.08)}
 
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-top: 14px;
-        }
-        .glass-btn {
-            text-decoration: none;
-            color: #fff;
-            padding: 10px 4px;
-            border-radius: var(--radius-md);
-            text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 10px;
-            font-weight: 600;
-            transition: all var(--transition);
-            line-height: 1.3;
-            will-change: transform;
-        }
-        .glass-btn .icon {
-            display: block;
-            font-size: 20px;
-            margin-bottom: 2px;
-            transition: transform var(--transition);
-        }
-        .glass-btn:hover .icon {
-            transform: scale(1.2) translateY(-3px);
-        }
-        .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(212, 175, 55, 0.2);
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-        }
+.install-row{display:flex;justify-content:center;margin-top:14px}
+.install-btn{
+  display:inline-flex;align-items:center;gap:11px;
+  padding:13px 26px;border:none;border-radius:40px;cursor:pointer;
+  background:transparent;color:var(--brass-hi);
+  border:1px dashed var(--line);
+  font:700 13px/1 'Manrope',sans-serif;letter-spacing:.3px;
+  transition:.4s var(--ease);position:relative;overflow:hidden;
+}
+.install-btn i{font-size:15px}
+.install-btn small{display:block;font-weight:500;font-size:9px;color:var(--text-3);letter-spacing:.5px}
+.install-btn .txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.25;text-align:left}
+.install-btn:hover{border-style:solid;border-color:var(--brass);color:var(--brass-hi);background:rgba(200,155,74,.05)}
+.install-btn .ripple{position:absolute;border-radius:50%;background:rgba(200,155,74,.4);
+  transform:scale(0);animation:rip .6s ease-out;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+.hidden{display:none!important}
 
-        .install-btn-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-top: 14px;
-        }
-        .install-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 240px;
-            height: 50px;
-            border: none;
-            border-radius: 30px;
-            background: linear-gradient(135deg, #ffd700, #d4a017);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 4px 30px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            color: #0a0806;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all var(--transition);
-            position: relative;
-            overflow: hidden;
-            will-change: transform;
-        }
-        .install-btn .btn-sub {
-            display: block;
-            font-size: 9px;
-            font-weight: 500;
-            opacity: 0.7;
-        }
-        .install-btn .btn-text-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1.2;
-        }
-        .install-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.5);
-        }
-        .install-btn .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            transform: scale(0);
-            animation: rippleAnim 0.6s ease-out;
-            pointer-events: none;
-        }
-        @keyframes rippleAnim {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-        .install-hidden {
-            display: none !important;
-        }
+/* ─── SECTION SCAFFOLD ─── */
+.sec{padding:34px 14px 0}
+.sec-head{margin-bottom:16px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font:700 9px/1 'Space Mono',monospace;letter-spacing:3px;
+  color:var(--brass);text-transform:uppercase;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:linear-gradient(90deg,var(--brass),transparent)}
+.sec-title{
+  font-family:'Fraunces',serif;font-weight:600;font-size:22px;line-height:1.1;
+  letter-spacing:-.3px;color:var(--text);margin-top:9px;
+}
+.sec-note{font-size:12px;color:var(--text-2);margin-top:4px}
 
-        /* ─── SECTION TITLE ─── */
-        .section-title {
-            text-align: center;
-            font-size: 15px;
-            font-weight: 700;
-            color: #fff;
-            margin-top: 34px;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 0 12px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .section-title.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .section-title .line {
-            flex: 1;
-            max-width: 20px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2));
-        }
-        .section-title .line:last-child {
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), transparent);
-        }
-        .section-title .label {
-            font-size: 8px;
-            font-weight: 700;
-            color: var(--gold-light);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: rgba(212, 175, 55, 0.05);
-            padding: 2px 12px;
-            border-radius: 50px;
-            border: 1px solid rgba(212, 175, 55, 0.04);
-        }
+/* ─── PRODUCTS · SAMPLE BOARD ─── */
+.board{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  background:var(--grout);padding:2px;border-radius:var(--r-md);
+  border:1px solid var(--line);overflow:hidden;
+  box-shadow:0 18px 40px rgba(0,0,0,.45);
+}
+.sample{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--stone-3);cursor:default}
+.sample:nth-child(4),.sample:nth-child(5){aspect-ratio:auto}
+.sample img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s var(--ease),filter .6s var(--ease);filter:saturate(1.02)}
+.sample::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 30%,rgba(0,0,0,.35));pointer-events:none}
+.sample .tag{
+  position:absolute;left:8px;bottom:8px;z-index:2;
+  font:700 8px/1 'Space Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--porcelain);background:rgba(19,16,12,.6);
+  padding:5px 8px;border-radius:6px;backdrop-filter:blur(4px);
+  border:1px solid var(--line-soft);
+}
+.sample:hover img{transform:scale(1.06);filter:saturate(1.12)}
+/* bottom row: two wide samples */
+.board .wide{grid-column:span 1}
+.sample-wide{grid-column:span 3;aspect-ratio:auto;height:96px}
 
-        /* ─── PRODUCT GRID ─── */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            padding: 0 12px;
-        }
-        .product {
-            text-align: center;
-            cursor: default;
-            transition: all var(--transition);
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-            transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .product.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-        .product:hover {
-            transform: translateY(-4px);
-        }
-        .product-img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            transition: all var(--transition);
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
-        .product:hover .product-img {
-            border-color: rgba(212, 175, 55, 0.25);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08), 0 8px 30px rgba(0, 0, 0, 0.5);
-            transform: scale(1.03);
-        }
-        .product span {
-            display: block;
-            margin-top: 6px;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
+/* ─── CATALOGUES · SPEC CARDS ─── */
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cat{
+  display:flex;align-items:center;gap:13px;
+  padding:14px;border-radius:var(--r-md);text-decoration:none;
+  background:var(--stone-2);border:1px solid var(--line-soft);
+  transition:.4s var(--ease);position:relative;overflow:hidden;
+}
+.cat .swatch{
+  width:42px;height:42px;flex-shrink:0;border-radius:9px;
+  border:1px solid var(--line);display:grid;place-items:center;
+  font-size:17px;color:var(--brass-hi);
+  background:linear-gradient(135deg,rgba(200,155,74,.14),rgba(200,155,74,.02));
+}
+.cat .meta{min-width:0}
+.cat .meta h3{font:700 12px/1.15 'Manrope',sans-serif;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cat .meta .dim{font:400 10px/1.3 'Space Mono',monospace;color:var(--text-3);margin-top:3px}
+.cat .go{margin-left:auto;color:var(--text-3);font-size:12px;transition:.4s var(--ease)}
+.cat:hover{border-color:var(--brass);transform:translateY(-3px);background:var(--stone-3)}
+.cat:hover .go{color:var(--brass-hi);transform:translateX(3px)}
+.cat .new{position:absolute;top:8px;right:8px;font:700 6.5px/1 'Space Mono',monospace;
+  letter-spacing:1px;color:var(--ink);background:var(--brass-hi);padding:3px 6px;border-radius:20px}
 
-        /* ─── CATALOG 3D FLIP ─── */
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            padding: 0 12px;
-        }
-        .catalog-card {
-            perspective: 900px;
-            height: 150px;
-            opacity: 0;
-            transform: translateY(30px) rotateY(10deg);
-            transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .catalog-card.visible {
-            opacity: 1;
-            transform: translateY(0) rotateY(0deg);
-        }
-        .catalog-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-        .catalog-card:hover .catalog-inner {
-            transform: rotateY(180deg);
-        }
-        .catalog-front,
-        .catalog-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: var(--radius-md);
-            padding: 16px 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-        }
-        .catalog-back {
-            transform: rotateY(180deg);
-            background: rgba(8, 7, 5, 0.95);
-            border-color: rgba(212, 175, 55, 0.1);
-            gap: 6px;
-        }
-        .catalog-front .icon-big {
-            font-size: 24px;
-            margin-bottom: 4px;
-        }
-        .catalog-front h3 {
-            font-size: 11px;
-            font-weight: 700;
-            color: #fff;
-        }
-        .catalog-front p {
-            font-size: 8px;
-            color: var(--text-muted);
-        }
-        .catalog-back .dl-btn {
-            display: inline-flex;
-            padding: 6px 14px;
-            border-radius: 60px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            color: #fff;
-            font-size: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all var(--transition);
-        }
-        .catalog-back .dl-btn:hover {
-            background: rgba(212, 175, 55, 0.2);
-            border-color: var(--gold-light);
-            transform: scale(1.05);
-        }
-        .badge-new {
-            font-size: 6px;
-            font-weight: 700;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, var(--gold-light), #d4a017);
-            color: #0a0806;
-            padding: 1px 8px;
-            border-radius: 50px;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
-        }
+/* ─── TESTIMONIALS ─── */
+.tcar{position:relative;overflow:hidden;border-radius:var(--r-lg)}
+.ttrack{display:flex;transition:transform .7s var(--ease);will-change:transform}
+.tcard{
+  min-width:100%;padding:22px 22px 20px;
+  background:var(--stone-2);border:1px solid var(--line-soft);border-radius:var(--r-lg);
+}
+.tcard .st{color:var(--brass-hi);font-size:14px;letter-spacing:3px;display:block;margin-bottom:12px}
+.tcard .qt{font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+  font-size:15px;line-height:1.55;color:var(--text)}
+.tcard .qt.lang-hi{font-family:'Mukta',sans-serif;font-style:normal}
+.tcard .au{margin-top:14px;font:700 12px/1 'Manrope',sans-serif;color:var(--brass-hi)}
+.tcard .au small{font-weight:500;color:var(--text-3);font-family:'Space Mono',monospace;font-size:10px}
+.tdots{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:14px}
+.tdots .d{width:7px;height:7px;border-radius:50%;background:var(--text-3);border:none;cursor:pointer;padding:0;transition:.4s var(--ease)}
+.tdots .d.on{background:var(--brass-hi);width:22px;border-radius:8px}
 
-        /* ─── TESTIMONIAL CAROUSEL (10 ITEMS) ─── */
-        .testimonial-section {
-            padding: 0 12px;
-        }
-        .testimonial-carousel {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--radius-lg);
-            min-height: 170px;
-        }
-        .testimonial-track {
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform;
-        }
-        .testimonial-item {
-            min-width: 100%;
-            padding: 20px 24px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            border-radius: var(--radius-lg);
-        }
-        .testimonial-item .stars {
-            color: #FFD700;
-            font-size: 18px;
-            letter-spacing: 4px;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .testimonial-item .quote {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-style: italic;
-            line-height: 1.6;
-        }
-        .testimonial-item .author {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--gold-light);
-            margin-top: 8px;
-        }
-        .testimonial-item .author small {
-            font-weight: 400;
-            color: var(--text-muted);
-            font-size: 11px;
-        }
-        .testimonial-dots {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 14px;
-            padding: 0 4px;
-        }
-        .testimonial-dots .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--text-muted);
-            border: none;
-            cursor: pointer;
-            transition: all var(--transition);
-            padding: 0;
-        }
-        .testimonial-dots .dot.active {
-            background: var(--gold-light);
-            width: 28px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
+/* ─── PANELS (profile/details/stock/pay/etc) ─── */
+.panel{
+  background:var(--stone-2);border:1px solid var(--line-soft);
+  border-radius:var(--r-lg);padding:18px;
+}
+.panel .img-frame{border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);background:var(--stone-3)}
+.panel .img-frame img{width:100%;display:block}
+.center{text-align:center}
 
-        /* ─── COMPANY PROFILE ─── */
-        .profile-img,
-        .map-img,
-        .payment-img {
-            width: 100%;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            transition: all var(--transition);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-        }
-        .profile-img:hover,
-        .map-img:hover,
-        .payment-img:hover {
-            transform: scale(1.01);
-            border-color: rgba(212, 175, 55, 0.15);
-        }
-        .payment-img {
-            max-width: 200px;
-            display: block;
-            margin: 0 auto;
-            background: #fff;
-            padding: 10px;
-        }
+.p-title{font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--text);margin-top:14px}
+.p-sub{font-size:12px;color:var(--text-2);margin-top:3px}
 
-        .feature-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 14px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-top: 14px;
-        }
-        .feature-list span::before {
-            content: '◆';
-            color: var(--gold-light);
-            font-size: 7px;
-            margin-right: 6px;
-        }
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tags span{font:600 10.5px/1 'Manrope',sans-serif;color:var(--text-2);
+  padding:6px 11px;border-radius:30px;background:rgba(255,255,255,.03);border:1px solid var(--line-soft)}
+.tags span::before{content:"◆";color:var(--brass);font-size:6px;margin-right:6px;vertical-align:middle}
 
-        /* ─── COMPANY DETAILS ─── */
-        .info-table {
-            width: 100%;
-            font-size: 13px;
-            line-height: 2.2;
-            border-collapse: collapse;
-        }
-        .info-table td {
-            padding: 4px 0;
-            color: var(--text-secondary);
-        }
-        .info-table .label {
-            color: var(--gold-light);
-            font-weight: 600;
-            width: 34%;
-            font-size: 10px;
-            text-transform: uppercase;
-            opacity: 0.7;
-        }
-        .info-table .value {
-            color: #fff;
-            font-weight: 500;
-            font-size: 13px;
-        }
+/* action button (outline brass) */
+.act{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
+  margin-top:15px;padding:13px 18px;border-radius:40px;text-decoration:none;cursor:pointer;
+  font:700 13px/1 'Manrope',sans-serif;letter-spacing:.2px;color:var(--text);
+  background:rgba(200,155,74,.06);border:1px solid var(--line);
+  transition:.4s var(--ease);
+}
+.act i{color:var(--brass-hi)}
+.act:hover{border-color:var(--brass);background:rgba(200,155,74,.12);transform:translateY(-2px)}
+.act.solid{background:linear-gradient(135deg,var(--brass-hi),var(--brass) 60%,var(--brass-deep));
+  color:var(--ink);border-color:transparent;box-shadow:0 8px 22px rgba(200,155,74,.22)}
+.act.solid i{color:var(--ink)}
+.act.green{background:rgba(124,224,160,.06);border-color:rgba(124,224,160,.28)}
+.act.green i{color:#7CE0A0}
+.act.green:hover{background:rgba(124,224,160,.12);border-color:#7CE0A0}
+.act.live{border-color:rgba(90,200,255,.28);background:rgba(90,200,255,.05)}
+.act.live:hover{border-color:#5AC8FF;background:rgba(90,200,255,.1)}
+.dot-live{width:8px;height:8px;border-radius:50%;background:#39E08A;
+  box-shadow:0 0 12px rgba(57,224,138,.5);animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
 
-        /* ─── STOCK ENQUIRY ─── */
-        .stock-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: #4cd964;
-        }
-        .stock-phone {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .btn-group .contact-btn {
-            width: 100%;
-            justify-content: center;
-            margin-top: 0;
-        }
+/* spec sheet (company details) */
+.spec{width:100%;border-collapse:collapse}
+.spec tr{border-bottom:1px solid var(--line-soft)}
+.spec tr:last-child{border-bottom:none}
+.spec td{padding:11px 0;vertical-align:top}
+.spec .k{width:38%;font:700 8.5px/1.5 'Space Mono',monospace;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--brass);opacity:.85}
+.spec .v{color:var(--text);font-size:13px;font-weight:500}
+.spec .v.mono{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3px}
 
-        .btn-live-inventory {
-            background: linear-gradient(135deg, rgba(0, 200, 255, 0.08), rgba(0, 200, 255, 0.01)) !important;
-            border-color: rgba(0, 200, 255, 0.15) !important;
-        }
-        .btn-live-inventory:hover {
-            border-color: #00c8ff !important;
-            box-shadow: 0 0 60px rgba(0, 200, 255, 0.08) !important;
-        }
-        .btn-live-inventory .pulse-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #00e676;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse-dot 1.8s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
-        }
-        @keyframes pulse-dot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.3;
-                transform: scale(0.7);
-            }
-        }
+.stock-name{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--text)}
+.stock-role{font:400 10px/1 'Space Mono',monospace;letter-spacing:2px;color:var(--brass);text-transform:uppercase;margin-top:6px}
+.stock-phone{font-family:'Space Mono',monospace;font-size:14px;color:var(--text-2);margin:8px 0 4px}
+.stack{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.stack .act{margin-top:0}
 
-        /* ─── PAYMENT ─── */
-        .upi-id {
-            margin-top: 14px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-        .upi-id b {
-            color: #fff;
-            font-weight: 700;
-            display: block;
-            font-size: 17px;
-            font-family: 'Playfair Display', serif;
-        }
+.upi-box{margin-top:15px;font-size:12px;color:var(--text-2)}
+.upi-box b{display:block;font-family:'Space Mono',monospace;font-size:15px;color:var(--text);font-weight:700;margin-top:3px;letter-spacing:.3px}
+.payimg{max-width:190px;margin:0 auto;background:#fff;padding:10px;border-radius:var(--r-md)}
 
-        /* ─── GOOGLE REVIEWS ─── */
-        .google-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            margin-bottom: 4px;
-        }
-        .google-brand .g {
-            font-size: 26px;
-            font-weight: 800;
-        }
-        .g-1 {
-            color: #4285F4;
-        }
-        .g-2 {
-            color: #EA4335;
-        }
-        .g-3 {
-            color: #FBBC05;
-        }
-        .g-4 {
-            color: #4285F4;
-        }
-        .g-5 {
-            color: #34A853;
-        }
-        .g-6 {
-            color: #EA4335;
-        }
+/* google reviews */
+.gword{font-family:'Manrope',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.5px;margin-bottom:6px}
+.gword b:nth-child(1){color:#4285F4}.gword b:nth-child(2){color:#EA4335}.gword b:nth-child(3){color:#FBBC05}
+.gword b:nth-child(4){color:#4285F4}.gword b:nth-child(5){color:#34A853}.gword b:nth-child(6){color:#EA4335}
+.gstars{font-size:32px;color:var(--brass-hi);letter-spacing:5px;display:block;margin-bottom:6px}
 
-        .stars-bright {
-            font-size: 44px;
-            color: #FFD700;
-            text-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
-            display: block;
-            letter-spacing: 6px;
-        }
+/* two-column link grids */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.gbtn{
+  display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--text);
+  padding:14px 15px;border-radius:var(--r-md);
+  background:var(--stone-2);border:1px solid var(--line-soft);
+  font:600 12.5px/1 'Manrope',sans-serif;transition:.4s var(--ease);
+}
+.gbtn i{font-size:17px;color:var(--brass-hi);width:20px;text-align:center}
+.gbtn:hover{border-color:var(--brass);transform:translateY(-3px);background:var(--stone-3)}
 
-        /* ─── TWO GRID ─── */
-        .two-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            padding: 0 12px;
-        }
-        .two-grid .glass-btn {
-            padding: 16px 8px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .two-grid .glass-btn .icon {
-            font-size: 22px;
-        }
+/* visitor counter */
+.visitor{
+  margin:26px 14px 0;padding:14px 16px;border-radius:var(--r-md);
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--stone-2);border:1px solid var(--line-soft);
+}
+.visitor .lab{font:700 8.5px/1.4 'Space Mono',monospace;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--text-3)}
+.visitor .num{font-family:'Fraunces',serif;font-weight:600;font-size:26px;color:var(--brass-hi)}
 
-        .single-btn-wrap {
-            margin-top: 14px;
-            text-align: center;
-        }
-        .single-btn-wrap .contact-btn {
-            width: 100%;
-            justify-content: center;
-        }
+/* footer */
+.footer{margin:26px 14px 0;text-align:center;padding:26px 16px 8px}
+.footer img{width:108px;margin:0 auto 12px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.6))}
+.footer .fbrand{font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--text)}
+.footer .fbrand span{color:var(--brass-hi)}
+.footer .fsub{font-size:12px;color:var(--text-2);margin-top:4px}
+.footer .fslo{font:700 11px/1.4 'Space Mono',monospace;letter-spacing:1px;color:var(--brass);margin:14px 0;text-transform:uppercase}
+.footer .fcopy{margin-top:10px;padding-top:14px;border-top:1px solid var(--line-soft);
+  font-size:10.5px;color:var(--text-3);font-family:'Space Mono',monospace}
 
-        /* ─── VISITOR COUNTER ─── */
-        .visitor-counter {
-            text-align: center;
-            padding: 12px;
-            font-size: 12px;
-            color: var(--text-muted);
-            letter-spacing: 0.5px;
-            background: rgba(255, 255, 255, 0.01);
-            border-radius: var(--radius-sm);
-            border: 1px solid rgba(212, 175, 55, 0.03);
-            margin: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .visitor-counter .count {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--gold-light);
-            font-family: 'Playfair Display', serif;
-        }
-        .visitor-counter .label {
-            font-size: 10px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-        }
+/* ─── TICKER ─── */
+.ticker{
+  position:fixed;bottom:66px;left:0;right:0;z-index:998;max-width:var(--maxw);margin:0 auto;
+  background:rgba(27,23,18,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line-soft);
+  padding:9px 0;overflow:hidden;
+}
+.ttrk{display:flex;white-space:nowrap;animation:tick 26s linear infinite}
+.ttrk span{display:inline-flex;align-items:center;gap:9px;padding:0 34px;
+  font:700 12.5px/1 'Manrope',sans-serif;letter-spacing:.2px;color:var(--text)}
+.ttrk i{color:var(--brass-hi);font-size:12px}
+.ttrk .dot{width:5px;height:5px;border-radius:50%;background:var(--brass);margin:0 4px}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-        /* ─── FOOTER ─── */
-        .footer-card {
-            margin: 12px;
-            text-align: center;
-            padding: 28px 16px 20px;
-            border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(212, 175, 55, 0.03);
-        }
-        .footer-logo {
-            width: 130px;
-            display: block;
-            margin: 0 auto 10px;
-            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
-        }
-        .footer-card .brand {
-            font-size: 20px;
-            font-weight: 800;
-            color: #fff;
-        }
-        .footer-card .brand span {
-            color: var(--gold-light);
-        }
-        .footer-card .sub {
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-        .footer-card .slogan-highlight {
-            color: var(--gold-light);
-            font-weight: 600;
-            font-size: 14px;
-            margin: 6px 0 12px;
-        }
-        .footer-card .copy {
-            margin-top: 14px;
-            color: var(--text-muted);
-            font-size: 11px;
-            border-top: 1px solid rgba(212, 175, 55, 0.03);
-            padding-top: 14px;
-        }
+/* ─── BOTTOM NAV ─── */
+.nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:999;max-width:var(--maxw);margin:0 auto;
+  display:flex;justify-content:space-around;align-items:center;
+  padding:8px 0 calc(8px + env(safe-area-inset-bottom));
+  background:rgba(19,16,12,.82);backdrop-filter:blur(26px) saturate(1.4);-webkit-backdrop-filter:blur(26px) saturate(1.4);
+  border-top:1px solid var(--line-soft);
+}
+.nav a{position:relative;text-decoration:none;color:var(--text-3);
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:6px 18px;border-radius:30px;
+  font:700 8px/1 'Space Mono',monospace;letter-spacing:1px;text-transform:uppercase;
+  transition:.4s var(--ease);cursor:pointer}
+.nav a i{font-size:17px;transition:transform .4s var(--ease)}
+.nav a:hover i{transform:translateY(-2px)}
+.nav a.on{color:var(--brass-hi)}
+.nav a.on::before{content:"";position:absolute;inset:0;border-radius:30px;
+  background:rgba(200,155,74,.08);border:1px solid var(--line);z-index:-1}
 
-        /* ─── SCROLLING TICKER (HIGHLIGHTED) ─── */
-        .ticker-bar {
-            position: fixed;
-            bottom: 70px;
-            left: 0;
-            right: 0;
-            z-index: 998;
-            background: linear-gradient(90deg, rgba(20, 15, 10, 0.95), rgba(30, 22, 12, 0.95));
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-top: 2px solid var(--gold-light);
-            border-bottom: 2px solid var(--gold-light);
-            padding: 10px 0;
-            overflow: hidden;
-            max-width: 440px;
-            margin: 0 auto;
-            box-shadow: 0 -8px 40px rgba(212, 175, 55, 0.15), inset 0 0 60px rgba(212, 175, 55, 0.02);
-        }
-        .ticker-track {
-            display: flex;
-            white-space: nowrap;
-            animation: tickerScroll 30s linear infinite;
-        }
-        .ticker-track span {
-            display: inline-block;
-            padding: 0 50px;
-            font-size: 18px;
-            font-weight: 800;
-            color: #fff;
-            text-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.1);
-            letter-spacing: 0.8px;
-            background: linear-gradient(90deg, var(--gold-light), #fff, var(--gold-light));
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmerTextTicker 3s linear infinite;
-        }
-        .ticker-track i {
-            margin-right: 12px;
-            color: #ff6b6b;
-            -webkit-text-fill-color: #ff6b6b;
-            font-size: 20px;
-            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
-        }
-        @keyframes tickerScroll {
-            0% {
-                transform: translateX(0%);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-        @keyframes shimmerTextTicker {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 200% 50%;
-            }
-        }
+/* ─── MODALS ─── */
+.ov{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;
+  background:rgba(8,6,4,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:fade .3s ease}
+.ov.on{display:flex}
+.modal{background:var(--stone-2);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:28px 24px 24px;max-width:360px;width:100%;text-align:center;position:relative;
+  box-shadow:0 40px 90px rgba(0,0,0,.8);animation:pop .45s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal .x{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-3);
+  font-size:18px;cursor:pointer;font-family:'Manrope'}
+.modal .x:hover{color:var(--text)}
+.modal .mi{font-size:38px;margin-bottom:6px}
+.modal h2{font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--text);margin-bottom:4px}
+.modal p{color:var(--text-3);font-size:12.5px;margin-bottom:18px}
+.step{display:flex;align-items:center;gap:13px;text-align:left;
+  background:rgba(255,255,255,.02);border:1px solid var(--line-soft);border-radius:var(--r-sm);
+  padding:11px 13px;margin-bottom:9px}
+.step .n{font-family:'Space Mono',monospace;font-weight:700;font-size:16px;color:var(--brass-hi);min-width:24px}
+.step .t{font-size:12.5px;color:var(--text-2);font-weight:500}
+.step .t small{display:block;color:var(--text-3);font-weight:400;font-size:11px;margin-top:2px}
+.okbtn{width:100%;margin-top:8px;padding:13px;border:none;border-radius:40px;cursor:pointer;
+  background:linear-gradient(135deg,var(--brass-hi),var(--brass) 60%,var(--brass-deep));
+  color:var(--ink);font:700 15px/1 'Manrope';}
+.okbtn:hover{transform:translateY(-1px)}
 
-        /* ─── BOTTOM NAV ─── */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 999;
-            background: rgba(8, 7, 5, 0.7);
-            backdrop-filter: blur(30px) saturate(1.6);
-            -webkit-backdrop-filter: blur(30px) saturate(1.6);
-            border-top: 1px solid rgba(212, 175, 55, 0.05);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 6px 0 env(safe-area-inset-bottom);
-            max-width: 440px;
-            margin: 0 auto;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
-        }
-        .bottom-nav .nav-item {
-            text-decoration: none;
-            color: var(--text-muted);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 8px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all var(--transition);
-            padding: 6px 16px;
-            border-radius: 30px;
-            position: relative;
-            cursor: pointer;
-        }
-        .bottom-nav .nav-item .nav-icon {
-            font-size: 22px;
-            margin-bottom: 2px;
-            transition: transform var(--transition);
-        }
-        .bottom-nav .nav-item:hover .nav-icon {
-            transform: translateY(-3px) scale(1.1);
-        }
-        .bottom-nav .nav-item.active {
-            color: var(--gold-light);
-        }
-        .bottom-nav .nav-item.active::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 30px;
-            background: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.04);
-            z-index: -1;
-        }
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
 
-        /* ─── INSTALL MODALS ─── */
-        .install-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999;
-            padding: 20px;
-            animation: fadeIn 0.4s ease;
-        }
-        .install-modal-overlay.active {
-            display: flex;
-        }
+/* ─── LANGUAGE TOGGLE ─── */
+.lang-hi{display:none}
+body.hi .lang-en{display:none}
+body.hi .lang-hi{display:inline}
+body.hi .lang-en-block{display:none!important}
+body.hi .lang-hi-block{display:block!important}
+.lang-hi-block{display:none}
 
-        .install-modal-box {
-            background: rgba(12, 10, 8, 0.98);
-            backdrop-filter: blur(40px);
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            border-radius: var(--radius-lg);
-            padding: 32px 28px 28px;
-            max-width: 380px;
-            width: 100%;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
-            text-align: center;
-            position: relative;
-            animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
+/* ─── RESPONSIVE ─── */
+@media(max-width:390px){
+  .owner-name{font-size:26px}
+  .sec-title{font-size:20px}
+  .qa a{font-size:8.5px}
+  .qr{width:58px;min-width:58px}
+  .board{grid-template-columns:repeat(3,1fr)}
+  .ttrk span{font-size:11px;padding:0 22px}
+}
+@media(max-width:340px){
+  .cats{grid-template-columns:1fr}
+}
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .install-modal-box .close-modal {
-            position: absolute;
-            top: 14px;
-            right: 18px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 20px;
-            cursor: pointer;
-            transition: color var(--transition);
-            font-family: 'Inter', sans-serif;
-        }
-        .install-modal-box .close-modal:hover {
-            color: #fff;
-        }
-
-        .install-modal-box .modal-icon {
-            font-size: 44px;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .install-modal-box h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-        .install-modal-box p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .install-modal-box .step {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-align: left;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: var(--radius-sm);
-            padding: 10px 14px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(212, 175, 55, 0.03);
-        }
-        .install-modal-box .step .num {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--gold-light);
-            min-width: 28px;
-        }
-        .install-modal-box .step .desc {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-        .install-modal-box .step .desc small {
-            display: block;
-            color: var(--text-muted);
-            font-weight: 400;
-            font-size: 12px;
-        }
-        .install-modal-box .got-it-btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 60px;
-            background: linear-gradient(135deg, #ffd700, #d4a017);
-            color: #0a0806;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all var(--transition);
-            font-family: 'Inter', sans-serif;
-        }
-        .install-modal-box .got-it-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.2);
-        }
-
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 400px) {
-            .name {
-                font-size: 26px;
-            }
-            .hero-card {
-                padding: 16px;
-            }
-            .catalog-card {
-                height: 130px;
-            }
-            .catalog-front h3 {
-                font-size: 9px;
-            }
-            .catalog-front .icon-big {
-                font-size: 18px;
-            }
-            .product-grid {
-                gap: 6px;
-                padding: 0 8px;
-            }
-            .two-grid {
-                gap: 8px;
-                padding: 0 8px;
-            }
-            .two-grid .glass-btn {
-                font-size: 11px;
-                padding: 12px 6px;
-            }
-            .contact-btn {
-                font-size: 12px;
-                padding: 10px 16px;
-            }
-            .section-title {
-                font-size: 13px;
-            }
-            .stars-bright {
-                font-size: 36px;
-            }
-            .bottom-nav .nav-item {
-                padding: 4px 10px;
-                font-size: 7px;
-            }
-            .bottom-nav .nav-item .nav-icon {
-                font-size: 18px;
-            }
-            .top-bar .lang-btn,
-            .top-bar .audio-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .ticker-track span {
-                font-size: 15px;
-                padding: 0 20px;
-            }
-            .ticker-bar {
-                bottom: 60px;
-                padding: 8px 0;
-            }
-            .testimonial-item .quote {
-                font-size: 13px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .name {
-                font-size: 22px;
-            }
-            .contact-qr {
-                width: 48px;
-                min-width: 48px;
-            }
-            .quick-actions .glass-btn {
-                font-size: 8px;
-                padding: 6px 2px;
-            }
-            .quick-actions .glass-btn .icon {
-                font-size: 16px;
-            }
-            .catalog-card {
-                height: 110px;
-            }
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ─── LANGUAGE TOGGLE ─── */
-        .lang-hi {
-            display: none;
-        }
-        body.lang-hindi .lang-en {
-            display: none;
-        }
-        body.lang-hindi .lang-hi {
-            display: inline-block;
-        }
-        body.lang-hindi .lang-en-block {
-            display: none !important;
-        }
-        body.lang-hindi .lang-hi-block {
-            display: block !important;
-        }
-        .lang-hi-block {
-            display: none;
-        }
-    </style>
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
 
-    <!-- ─── DYNAMIC BACKGROUND ─── -->
-    <div class="dynamic-bg" id="dynamicBg">
-        <div class="aura"></div>
+<div class="bg-grid"></div>
+<div id="seam"></div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <button class="pill" onclick="toggleLang()">
+    <i class="fas fa-globe"></i>
+    <span class="lang-en">English</span><span class="lang-hi">हिंदी</span>
+  </button>
+  <button class="pill audio" id="audioBtn" onclick="toggleAudio()">
+    <i class="fas fa-play"></i>
+    <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>
+  </button>
+</div>
+
+<div class="wrap">
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="hero-photo"></div>
+    <div class="hero-inner">
+      <div class="brand-row">
+        <img src="Logo.png" alt="Tile Planet" />
+        <span class="est">EST · 2018</span>
+      </div>
+
+      <div class="plate" id="plate">
+        <div class="plate-body">
+          <div class="plate-top">
+            <div>
+              <div class="owner-eyebrow">Proprietor</div>
+              <div class="owner-name">Ramesh Chotalia</div>
+              <a href="tel:+919922533033" class="phone-line">
+                <i class="fas fa-phone"></i> +91 99225 33033
+              </a>
+            </div>
+            <div class="qr">
+              <img src="contact-qr.jpg" alt="Contact QR" />
+              <span class="lang-en">Save</span><span class="lang-hi">सेव</span>
+            </div>
+          </div>
+
+          <div class="qa">
+            <a href="tel:+919922533033"><i class="fas fa-phone"></i><span class="lang-en">Call</span><span class="lang-hi">कॉल</span></a>
+            <a href="https://wa.me/919922533033"><i class="fab fa-whatsapp"></i><span class="lang-en">Chat</span><span class="lang-hi">चैट</span></a>
+            <a href="mailto:ramesh.chotalia13@gmail.com"><i class="fas fa-envelope"></i><span class="lang-en">Email</span><span class="lang-hi">ईमेल</span></a>
+            <a href="https://www.google.com/maps?q=18.452656,73.832591"><i class="fas fa-location-dot"></i><span class="lang-en">Map</span><span class="lang-hi">मैप</span></a>
+          </div>
+
+          <div class="install-row">
+            <button class="install-btn" id="installBtn">
+              <i class="fas fa-mobile-screen-button"></i>
+              <span class="txt">
+                <span><span class="lang-en">Install App</span><span class="lang-hi">ऐप इंस्टॉल करें</span></span>
+                <small><span class="lang-en">Open in one tap</span><span class="lang-hi">एक टैप में खोलें</span></small>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- ─── PARTICLES ─── -->
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+  <!-- ═══ PRODUCTS ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">The Collection</span><span class="lang-hi">कलेक्शन</span></span>
+      <h2 class="sec-title"><span class="lang-en">Sample Board</span><span class="lang-hi">हमारे उत्पाद</span></h2>
+      <p class="sec-note"><span class="lang-en">Every surface we supply, in one place.</span><span class="lang-hi">हर सतह जो हम सप्लाई करते हैं, एक जगह।</span></p>
     </div>
-
-    <!-- ─── SCROLL PROGRESS ─── -->
-    <div id="progress-bar"></div>
-
-    <!-- ─── TOP BAR ─── -->
-    <div class="top-bar">
-        <button class="lang-btn" onclick="toggleLanguage()">
-            <span class="globe">🌐</span>
-            <span class="lang-en">English</span>
-            <span class="lang-hi">हिंदी</span>
-        </button>
-        <button class="audio-btn" id="audioBtn" onclick="toggleAudio()">
-            <i class="fas fa-play"></i>
-            <span class="lang-en">Greeting</span>
-            <span class="lang-hi">अभिवादन</span>
-        </button>
+    <div class="board reveal">
+      <div class="sample"><img src="Walltiles.jpg" alt="Wall tiles" /><span class="tag">Wall</span></div>
+      <div class="sample"><img src="Floortiles.jpg" alt="Floor tiles" /><span class="tag">Floor</span></div>
+      <div class="sample"><img src="Vitrifiedtiles.jpg" alt="Vitrified tiles" /><span class="tag">Vitrified</span></div>
+      <div class="sample sample-wide"><img src="Parckingtiles.jpg" alt="Parking tiles" /><span class="tag">Parking</span></div>
+      <div class="sample sample-wide"><img src="bathroomtiles.jpg" alt="Bathroom tiles" /><span class="tag">Bathroom</span></div>
     </div>
+  </section>
 
-    <div class="container">
-
-        <!-- ═══ HERO ═══ -->
-        <div class="hero">
-            <div class="hero-content">
-                <div class="logo-wrap">
-                    <img src="Logo.png" class="logo" alt="Tile Planet" />
-                </div>
-                <div class="tagline">✦ Premium Tiles · Perfect Spaces ✦</div>
-
-                <div class="tilt-wrapper" id="tiltWrapper">
-                    <div class="hero-card" id="tiltCard">
-                        <div class="layer-bg-glow" id="spotlight"></div>
-
-                        <div class="top-row layer layer-2">
-                            <div class="name-box">
-                                <div class="name">
-                                    <span class="gold-shimmer-text">Ramesh Chotalia</span>
-                                    <span class="badge">PROP.</span>
-                                </div>
-                                <a href="tel:+919922533033" class="contact-btn magnetic" data-strength="15">
-                                    <span class="btn-text">📞 +91 9922533033</span>
-                                </a>
-                            </div>
-                            <div class="contact-qr layer layer-4">
-                                <img src="contact-qr.jpg" alt="QR" />
-                                <p>Save Contact</p>
-                            </div>
-                        </div>
-
-                        <div class="quick-actions layer layer-3">
-                            <a href="tel:+919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">📞</span> <span class="lang-en">CALL</span><span class="lang-hi">कॉल</span></a>
-                            <a href="https://wa.me/919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">💬</span> <span class="lang-en">CHAT</span><span class="lang-hi">चैट</span></a>
-                            <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn magnetic" data-strength="10"><span class="icon">✉️</span> <span class="lang-en">EMAIL</span><span class="lang-hi">ईमेल</span></a>
-                            <a href="https://www.google.com/maps?q=18.452656,73.832591" class="glass-btn magnetic" data-strength="10"><span class="icon">📍</span> <span class="lang-en">MAP</span><span class="lang-hi">मैप</span></a>
-                        </div>
-
-                        <div class="install-btn-wrapper layer layer-4">
-                            <button id="installAppBtn" class="install-btn magnetic" data-strength="20">
-                                <span class="btn-icon">📲</span>
-                                <span class="btn-text-wrap">
-                                    <span class="lang-en">Install App</span>
-                                    <span class="lang-hi">ऐप इंस्टॉल करें</span>
-                                    <span class="btn-sub"><span class="lang-en">Open in One Click</span><span class="lang-hi">एक क्लिक में खोलें</span></span>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ═══ 1. OUR PRODUCTS ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">✦</span>
-            <span class="lang-en">🏺 OUR PRODUCTS</span><span class="lang-hi">🏺 हमारे उत्पाद</span>
-            <span class="label">✦</span><span class="line"></span>
-        </div>
-        <div class="product-grid">
-            <div class="product" data-delay="0.05"><img src="Walltiles.jpg" class="product-img" /><span>Wall</span></div>
-            <div class="product" data-delay="0.10"><img src="Floortiles.jpg" class="product-img" /><span>Floor</span></div>
-            <div class="product" data-delay="0.15"><img src="Vitrifiedtiles.jpg" class="product-img" /><span>Vitrified</span></div>
-            <div class="product" data-delay="0.20"><img src="Parckingtiles.jpg" class="product-img" /><span>Parking</span></div>
-            <div class="product" data-delay="0.25"><img src="bathroomtiles.jpg" class="product-img" /><span>Bath</span></div>
-        </div>
-
-        <!-- ═══ 2. CATALOGUES ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">📖</span>
-            <span class="lang-en">📚 CATALOGUES</span><span class="lang-hi">📚 कैटलॉग</span>
-            <span class="label">📖</span><span class="line"></span>
-        </div>
-        <div class="catalog-grid">
-            <div class="catalog-card" data-delay="0.05">
-                <div class="catalog-inner">
-                    <div class="catalog-front"><span class="icon-big">🧱</span><h3>Wall Tiles</h3><p>Premium</p></div>
-                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Collection</p><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
-                </div>
-            </div>
-            <div class="catalog-card" data-delay="0.10">
-                <div class="catalog-inner">
-                    <div class="catalog-front"><span class="icon-big">🟫</span><h3>Floor Tiles</h3><p>600×600</p></div>
-                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Collection</p><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
-                </div>
-            </div>
-            <div class="catalog-card" data-delay="0.15">
-                <div class="catalog-inner" style="border-color:rgba(212,175,55,0.3);">
-                    <div class="catalog-front" style="background:rgba(212,175,55,0.05);border-color:rgba(212,175,55,0.1);"><span class="icon-big">📐</span><h3 style="color:var(--gold-light);">300×600mm</h3><p>Modern</p><span class="badge-new">✦ New</span></div>
-                    <div class="catalog-back"><span class="badge-new">✦ New</span><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
-                </div>
-            </div>
-            <div class="catalog-card" data-delay="0.20">
-                <div class="catalog-inner" style="border-color:rgba(76,217,100,0.2);">
-                    <div class="catalog-front" style="background:rgba(76,217,100,0.03);"><span class="icon-big">🔲</span><h3 style="color:#4cd964;">600×600 Matt</h3><p>Matt Finish</p><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span></div>
-                    <div class="catalog-back"><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span><a href="#" class="dl-btn">⬇ DOWNLOAD</a></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ═══ 3. TESTIMONIALS (10 Items) ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">💬</span>
-            <span class="lang-en">💬 TESTIMONIALS</span><span class="lang-hi">💬 ग्राहक समीक्षा</span>
-            <span class="label">💬</span><span class="line"></span>
-        </div>
-        <div class="testimonial-section animate-on-scroll">
-            <div class="testimonial-carousel" id="testimonialCarousel">
-                <div class="testimonial-track" id="testimonialTrack">
-                    <!-- 10 Unique Testimonials -->
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Tile Planet की क्वालिटी और सर्विस दोनों ही बेहतरीन हैं। हमने अपने नए घर के लिए यहीं से टाइल्स खरीदीं, बहुत खुश हैं!"</p>
-                        <div class="author">Amit Sharma <small>· Pune</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Best place for premium tiles in Pune. Ramesh bhai gave us amazing options within our budget. Highly recommended!"</p>
-                        <div class="author">Priya Mehta <small>· Mumbai</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"We got parking tiles and vitrified tiles from Tile Planet. The quality is unmatched and delivery was on time."</p>
-                        <div class="author">Suresh Patil <small>· Satara</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Tile Planet gave us the best deal on vitrified tiles. The collection is huge and the pricing is very competitive!"</p>
-                        <div class="author">Rajesh K. <small>· Nashik</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Excellent variety and great customer service. They guided us perfectly for our home renovation project."</p>
-                        <div class="author">Sneha P. <small>· Mumbai</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"We used their parking tiles for our commercial project. Very durable, stylish, and reasonably priced."</p>
-                        <div class="author">Vikram S. <small>· Pune</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Ramesh bhai guided us perfectly on which tiles to choose for our bathroom. Superb experience overall!"</p>
-                        <div class="author">Anita D. <small>· Kolhapur</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Best tile shop in Pune. Huge collection of 600x600 matt finish tiles. We found exactly what we wanted."</p>
-                        <div class="author">Manoj R. <small>· Pimpri</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Fast delivery and great pricing. Tile Planet is our go-to supplier for all our construction projects."</p>
-                        <div class="author">Sunil G. <small>· Sangli</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Amazing quality and a very professional team. We are completely satisfied with the service and products."</p>
-                        <div class="author">Pooja M. <small>· Solapur</small></div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-dots" id="testimonialDots">
-                <!-- 10 dots generated dynamically or manually (manually added for 10) -->
-                <button class="dot active" data-index="0"></button>
-                <button class="dot" data-index="1"></button>
-                <button class="dot" data-index="2"></button>
-                <button class="dot" data-index="3"></button>
-                <button class="dot" data-index="4"></button>
-                <button class="dot" data-index="5"></button>
-                <button class="dot" data-index="6"></button>
-                <button class="dot" data-index="7"></button>
-                <button class="dot" data-index="8"></button>
-                <button class="dot" data-index="9"></button>
-            </div>
-        </div>
-
-        <!-- ═══ 4. COMPANY PROFILE ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">🏛️</span>
-            <span class="lang-en">🏛️ COMPANY PROFILE</span><span class="lang-hi">🏛️ कंपनी प्रोफ़ाइल</span>
-            <span class="label">🏛️</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
-            <img src="Company.png" class="profile-img" alt="Company" />
-            <h2 style="font-size:22px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;">Tile Planet</h2>
-            <p style="color:var(--text-secondary);text-align:center;">
-                <span class="lang-en">Premium Tiles Supplier · Est. 2018</span>
-                <span class="lang-hi">प्रीमियम टाइल्स सप्लायर · स्थापना 2018</span>
-            </p>
-            <div class="single-btn-wrap">
-                <a href="#" class="contact-btn magnetic" data-strength="12">
-                    📄 <span class="lang-en">VIEW / DOWNLOAD PROFILE</span><span class="lang-hi">प्रोफ़ाइल देखें / डाउनलोड करें</span>
-                </a>
-            </div>
-            <div class="feature-list">
-                <span>Wall Tiles</span>
-                <span>Floor Tiles</span>
-                <span>Vitrified Tiles</span>
-                <span>Parking Tiles</span>
-                <span>Bathroom Fitting</span>
-                <span>Sanitaryware</span>
-            </div>
-        </div>
-
-        <!-- ═══ 5. COMPANY DETAILS ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">📋</span>
-            <span class="lang-en">📋 COMPANY DETAILS</span><span class="lang-hi">📋 कंपनी विवरण</span>
-            <span class="label">📋</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
-            <table class="info-table">
-                <tr><td class="label">GST</td><td class="value">27AIPPR7422Q1Z9</td></tr>
-                <tr><td class="label"><span class="lang-en">Owner</span><span class="lang-hi">मालिक</span></td><td class="value">Ramesh Chotalia</td></tr>
-                <tr><td class="label"><span class="lang-en">Business</span><span class="lang-hi">व्यवसाय</span></td><td class="value"><span class="lang-en">Retailer &amp; Supplier</span><span class="lang-hi">खुदरा विक्रेता और सप्लायर</span></td></tr>
-                <tr><td class="label"><span class="lang-en">Experience</span><span class="lang-hi">अनुभव</span></td><td class="value">10+ Years</td></tr>
-                <tr><td class="label"><span class="lang-en">Address</span><span class="lang-hi">पता</span></td><td class="value" style="font-size:12px;line-height:1.6;">Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK, Pune – 411046</td></tr>
-            </table>
-        </div>
-
-        <!-- ═══ 6. STOCK ENQUIRY ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">📦</span>
-            <span class="lang-en">📦 STOCK ENQUIRY</span><span class="lang-hi">📦 स्टॉक पूछताछ</span>
-            <span class="label">📦</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
-            <div class="stock-name">Harshad Dalvi</div>
-            <div class="stock-phone">📱 +91 9067121697</div>
-            <div class="btn-group">
-                <a href="tel:+919067121697" class="contact-btn magnetic" style="background:rgba(76,217,100,0.05);border-color:rgba(76,217,100,0.15);" data-strength="12">
-                    📞 <span class="lang-en">CONTACT FOR STOCK</span><span class="lang-hi">स्टॉक के लिए संपर्क करें</span>
-                </a>
-                <a href="#" class="contact-btn btn-live-inventory magnetic" onclick="openLiveInventory(); return false;" data-strength="12">
-                    <span class="pulse-dot"></span> <span class="lang-en">LIVE INVENTORY</span><span class="lang-hi">लाइव इन्वेंटरी</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- ═══ 7. PAYMENT ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">💳</span>
-            <span class="lang-en">💳 PAYMENT</span><span class="lang-hi">💳 भुगतान</span>
-            <span class="label">💳</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
-            <img src="upi-qr.png" class="payment-img" alt="UPI QR" />
-            <div class="upi-id">UPI ID <b>ramesh.chotalia13@oksbi</b></div>
-            <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">
-                💳 <span class="lang-en">PAY NOW</span><span class="lang-hi">अभी भुगतान करें</span>
-            </a>
-        </div>
-
-        <!-- ═══ 8. GOOGLE REVIEWS ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">⭐</span>
-            <span class="lang-en">⭐ GOOGLE REVIEWS</span><span class="lang-hi">⭐ गूगल समीक्षाएँ</span>
-            <span class="label">⭐</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
-            <div class="google-brand">
-                <span class="g g-1">G</span><span class="g g-2">o</span><span class="g g-3">o</span>
-                <span class="g g-4">g</span><span class="g g-5">l</span><span class="g g-6">e</span>
-            </div>
-            <span class="stars-bright">★★★★★</span>
-            <h2 style="font-size:19px;font-weight:700;font-family:'Playfair Display',serif;">
-                <span class="lang-en">Love Our Service?</span><span class="lang-hi">हमारी सेवा पसंद आई?</span>
-            </h2>
-            <p style="color:var(--text-secondary);">
-                <span class="lang-en">Share your experience on Google</span>
-                <span class="lang-hi">गूगल पर अपना अनुभव साझा करें</span>
-            </p>
-            <a href="#" target="_blank" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">
-                ⭐ <span class="lang-en">WRITE REVIEW</span><span class="lang-hi">समीक्षा लिखें</span>
-            </a>
-        </div>
-
-        <!-- ═══ 9. FOLLOW US ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">📱</span>
-            <span class="lang-en">📱 FOLLOW US</span><span class="lang-hi">📱 हमें फॉलो करें</span>
-            <span class="label">📱</span><span class="line"></span>
-        </div>
-        <div class="two-grid animate-on-scroll">
-            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">📸</span> Instagram</a>
-            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">👍</span> Facebook</a>
-            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">▶️</span> YouTube</a>
-            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">💬</span> WhatsApp</a>
-        </div>
-
-        <!-- ═══ 10. QUICK ACTIONS ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">⚡</span>
-            <span class="lang-en">⚡ QUICK ACTIONS</span><span class="lang-hi">⚡ त्वरित कार्य</span>
-            <span class="label">⚡</span><span class="line"></span>
-        </div>
-        <div class="two-grid animate-on-scroll">
-            <a href="#" download class="glass-btn magnetic" data-strength="8"><span class="icon">💾</span> <span class="lang-en">Save Contact</span><span class="lang-hi">कॉन्टैक्ट सेव करें</span></a>
-            <a href="#" onclick="shareCard()" class="glass-btn magnetic" data-strength="8"><span class="icon">📤</span> <span class="lang-en">Share Card</span><span class="lang-hi">शेयर करें</span></a>
-            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📝</span> <span class="lang-en">Get Quote</span><span class="lang-hi">कोटेशन लें</span></a>
-            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📩</span> <span class="lang-en">Enquiry</span><span class="lang-hi">पूछताछ</span></a>
-        </div>
-
-        <!-- ═══ 11. LOCATION ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">📍</span>
-            <span class="lang-en">📍 LOCATION</span><span class="lang-hi">📍 स्थान</span>
-            <span class="label">📍</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
-            <img src="map.jpeg" class="map-img" alt="Map" />
-            <a href="#" target="_blank" class="contact-btn w-full justify-center magnetic" data-strength="15">
-                📍 <span class="lang-en">OPEN MAP</span><span class="lang-hi">मैप खोलें</span>
-            </a>
-        </div>
-
-        <!-- ═══ 12. VISITOR COUNTER ═══ -->
-        <div class="visitor-counter animate-on-scroll">
-            <span class="label">👁️ <span class="lang-en">Today's Visitors</span><span class="lang-hi">आज के विज़िटर</span></span>
-            <span class="count" id="visitorCount">0</span>
-        </div>
-
-        <!-- ═══ 13. FOOTER ═══ -->
-        <div class="footer-card animate-on-scroll">
-            <img src="Logo.png" class="footer-logo" alt="Tile Planet" />
-            <div class="brand">🏛️ TILE <span>PLANET</span></div>
-            <div class="sub"><span class="lang-en">Your One-Stop Tile Solution</span><span class="lang-hi">आपका एक-स्टॉप टाइल समाधान</span></div>
-            <div class="slogan-highlight">✦ <span class="lang-en">Visit Our Showroom Once</span><span class="lang-hi">एक बार हमारे शोरूम आएँ</span> ✦</div>
-            <div class="copy">© 2026 Tile Planet. All Rights Reserved.</div>
-        </div>
-
+  <!-- ═══ CATALOGUES ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">Downloads</span><span class="lang-hi">डाउनलोड</span></span>
+      <h2 class="sec-title"><span class="lang-en">Catalogues</span><span class="lang-hi">कैटलॉग</span></h2>
     </div>
+    <div class="cats">
+      <a href="#" class="cat reveal">
+        <div class="swatch"><i class="fas fa-th-large"></i></div>
+        <div class="meta"><h3>Wall Tiles</h3><div class="dim">Premium series</div></div>
+        <i class="fas fa-arrow-down go"></i>
+      </a>
+      <a href="#" class="cat reveal">
+        <div class="swatch"><i class="fas fa-border-all"></i></div>
+        <div class="meta"><h3>Floor Tiles</h3><div class="dim">600 × 600 mm</div></div>
+        <i class="fas fa-arrow-down go"></i>
+      </a>
+      <a href="#" class="cat reveal">
+        <span class="new">NEW</span>
+        <div class="swatch"><i class="fas fa-ruler-combined"></i></div>
+        <div class="meta"><h3>Modern Wall</h3><div class="dim">300 × 600 mm</div></div>
+        <i class="fas fa-arrow-down go"></i>
+      </a>
+      <a href="#" class="cat reveal">
+        <span class="new">NEW</span>
+        <div class="swatch"><i class="fas fa-square"></i></div>
+        <div class="meta"><h3>Matt Floor</h3><div class="dim">600 × 600 · Matt</div></div>
+        <i class="fas fa-arrow-down go"></i>
+      </a>
+    </div>
+  </section>
 
-    <!-- ═══ SCROLLING TICKER (HIGHLIGHTED + BIGGER FONT) ═══ -->
-    <div class="ticker-bar">
-        <div class="ticker-track">
-            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: 10/07/2026 – Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">📢 ऑफर: 10/07/2026 – टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
-            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: 10/07/2026 – Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">📢 ऑफर: 10/07/2026 – टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">Word of mouth</span><span class="lang-hi">ग्राहक</span></span>
+      <h2 class="sec-title"><span class="lang-en">What Buyers Say</span><span class="lang-hi">ग्राहक समीक्षा</span></h2>
+    </div>
+    <div class="reveal">
+      <div class="tcar" id="tcar">
+        <div class="ttrack" id="ttrack">
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt lang-hi" style="display:block">Tile Planet की क्वालिटी और सर्विस दोनों बेहतरीन हैं। नए घर के लिए यहीं से टाइल्स लीं, बहुत खुश हैं!</p><p class="qt lang-en">Quality and service both excellent. Bought tiles for our new home from here — very happy!</p><div class="au">Amit Sharma <small>· Pune</small></div></div>
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt">Best place for premium tiles in Pune. Ramesh bhai gave us amazing options within our budget.</p><div class="au">Priya Mehta <small>· Mumbai</small></div></div>
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt">Got parking and vitrified tiles here. Quality is unmatched and delivery was right on time.</p><div class="au">Suresh Patil <small>· Satara</small></div></div>
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt">Best deal on vitrified tiles. The collection is huge and pricing is very competitive.</p><div class="au">Rajesh K. <small>· Nashik</small></div></div>
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt">Excellent variety and great service. Guided us perfectly for our home renovation.</p><div class="au">Sneha P. <small>· Mumbai</small></div></div>
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt">Used their parking tiles for a commercial project. Durable, stylish, reasonably priced.</p><div class="au">Vikram S. <small>· Pune</small></div></div>
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt">Ramesh bhai guided us perfectly on tiles for our bathroom. Superb experience overall.</p><div class="au">Anita D. <small>· Kolhapur</small></div></div>
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt">Best tile shop in Pune. Huge range of 600×600 matt tiles — found exactly what we wanted.</p><div class="au">Manoj R. <small>· Pimpri</small></div></div>
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt">Fast delivery and great pricing. Our go-to supplier for every construction project.</p><div class="au">Sunil G. <small>· Sangli</small></div></div>
+          <div class="tcard"><span class="st">★★★★★</span><p class="qt">Amazing quality and a very professional team. Completely satisfied with everything.</p><div class="au">Pooja M. <small>· Solapur</small></div></div>
         </div>
+      </div>
+      <div class="tdots" id="tdots"></div>
     </div>
+  </section>
 
-    <!-- ═══ BOTTOM NAV ═══ -->
-    <div class="bottom-nav">
-        <a href="tel:+919922533033" class="nav-item active"><span class="nav-icon">📞</span> Call</a>
-        <a href="https://wa.me/919922533033" class="nav-item"><span class="nav-icon">💬</span> Chat</a>
-        <a href="#" class="nav-item"><span class="nav-icon">📍</span> Map</a>
-        <a href="#" onclick="shareCard(); return false;" class="nav-item"><span class="nav-icon">📤</span> Share</a>
+  <!-- ═══ COMPANY PROFILE ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">About</span><span class="lang-hi">परिचय</span></span>
+      <h2 class="sec-title"><span class="lang-en">The Showroom</span><span class="lang-hi">कंपनी प्रोफ़ाइल</span></h2>
     </div>
-
-    <!-- ═══ INSTALL MODALS ═══ -->
-    <div id="iosModal" class="install-modal-overlay">
-        <div class="install-modal-box">
-            <button class="close-modal" onclick="closeModal('iosModal')">✕</button>
-            <span class="modal-icon">📲</span>
-            <h2><span class="lang-en">Install App</span><span class="lang-hi">ऐप इंस्टॉल करें</span></h2>
-            <p><span class="lang-en">Add to Home Screen</span><span class="lang-hi">होम स्क्रीन पर जोड़ें</span></p>
-            <div class="step"><span class="num">1</span><div class="desc"><span class="lang-en">Tap Share</span><span class="lang-hi">शेयर बटन दबाएँ</span> <small>⬆️ <span class="lang-en">at bottom</span><span class="lang-hi">नीचे</span></small></div></div>
-            <div class="step"><span class="num">2</span><div class="desc"><span class="lang-en">Select "Add to Home Screen"</span><span class="lang-hi">"होम स्क्रीन पर जोड़ें" चुनें</span> <small>🟢 <span class="lang-en">scroll down</span><span class="lang-hi">नीचे स्क्रॉल करें</span></small></div></div>
-            <div class="step"><span class="num">3</span><div class="desc"><span class="lang-en">Tap "Add"</span><span class="lang-hi">"जोड़ें" दबाएँ</span> <small>✅ <span class="lang-en">done!</span><span class="lang-hi">हो गया!</span></small></div></div>
-            <button class="got-it-btn" onclick="closeModal('iosModal')"><span class="lang-en">Got it!</span><span class="lang-hi">समझ गया!</span></button>
-        </div>
+    <div class="panel reveal">
+      <div class="img-frame"><img src="Company.png" alt="Tile Planet showroom" /></div>
+      <h3 class="p-title center">Tile Planet</h3>
+      <p class="p-sub center"><span class="lang-en">Premium Tiles Supplier · Since 2018</span><span class="lang-hi">प्रीमियम टाइल्स सप्लायर · 2018 से</span></p>
+      <div class="tags">
+        <span>Wall Tiles</span><span>Floor Tiles</span><span>Vitrified</span>
+        <span>Parking</span><span>Bathroom Fitting</span><span>Sanitaryware</span>
+      </div>
+      <a href="#" class="act"><i class="fas fa-file-lines"></i><span class="lang-en">View / Download Profile</span><span class="lang-hi">प्रोफ़ाइल देखें / डाउनलोड करें</span></a>
     </div>
+  </section>
 
-    <div id="androidModal" class="install-modal-overlay">
-        <div class="install-modal-box">
-            <button class="close-modal" onclick="closeModal('androidModal')">✕</button>
-            <span class="modal-icon">📲</span>
-            <h2><span class="lang-en">Add to Home Screen</span><span class="lang-hi">होम स्क्रीन पर जोड़ें</span></h2>
-            <p><span class="lang-en">Install in one step</span><span class="lang-hi">एक क्लिक में इंस्टॉल करें</span></p>
-            <div class="step"><span class="num">1</span><div class="desc"><span class="lang-en">Tap menu (⋮) or (︙)</span><span class="lang-hi">मेनू (⋮) या (︙) दबाएँ</span> <small><span class="lang-en">top right</span><span class="lang-hi">ऊपर दाएँ</span></small></div></div>
-            <div class="step"><span class="num">2</span><div class="desc"><span class="lang-en">Select "Install App"</span><span class="lang-hi">"ऐप इंस्टॉल करें" चुनें</span> <small><span class="lang-en">scroll down</span><span class="lang-hi">नीचे स्क्रॉल करें</span></small></div></div>
-            <div class="step"><span class="num">3</span><div class="desc"><span class="lang-en">Tap "Add"</span><span class="lang-hi">"जोड़ें" दबाएँ</span> <small>✅ <span class="lang-en">done!</span><span class="lang-hi">हो गया!</span></small></div></div>
-            <button class="got-it-btn" onclick="closeModal('androidModal')"><span class="lang-en">Got it!</span><span class="lang-hi">समझ गया!</span></button>
-        </div>
+  <!-- ═══ COMPANY DETAILS ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">On record</span><span class="lang-hi">विवरण</span></span>
+      <h2 class="sec-title"><span class="lang-en">Company Details</span><span class="lang-hi">कंपनी विवरण</span></h2>
     </div>
+    <div class="panel reveal">
+      <table class="spec">
+        <tr><td class="k">GST</td><td class="v mono">27AIPPR7422Q1Z9</td></tr>
+        <tr><td class="k"><span class="lang-en">Owner</span><span class="lang-hi">मालिक</span></td><td class="v">Ramesh Chotalia</td></tr>
+        <tr><td class="k"><span class="lang-en">Business</span><span class="lang-hi">व्यवसाय</span></td><td class="v"><span class="lang-en">Retailer &amp; Supplier</span><span class="lang-hi">खुदरा विक्रेता व सप्लायर</span></td></tr>
+        <tr><td class="k"><span class="lang-en">Experience</span><span class="lang-hi">अनुभव</span></td><td class="v mono">10+ Years</td></tr>
+        <tr><td class="k"><span class="lang-en">Address</span><span class="lang-hi">पता</span></td><td class="v" style="font-size:12px;line-height:1.6">Sr. No. 60, Opp. Ashok Leyland,<br/>Katraj–Mumbai Road, Ambegaon BK,<br/>Pune – 411046</td></tr>
+      </table>
+    </div>
+  </section>
 
-    <script>
-        // ─── LIVE INVENTORY — DIRECT OPEN (NO LOGIN) ───
-        const INVENTORY_URL =
-            'https://script.google.com/macros/s/AKfycbzEcPAx1wREVuF6LzgPke9BlSf5tBTuA23cyO0-9JDHPcwSFL2prjjOBeZBgMOqLzzqjA/exec';
+  <!-- ═══ STOCK ENQUIRY ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">Availability</span><span class="lang-hi">उपलब्धता</span></span>
+      <h2 class="sec-title"><span class="lang-en">Stock Enquiry</span><span class="lang-hi">स्टॉक पूछताछ</span></h2>
+    </div>
+    <div class="panel reveal center">
+      <div class="stock-name">Harshad Dalvi</div>
+      <div class="stock-role"><span class="lang-en">Stock Desk</span><span class="lang-hi">स्टॉक डेस्क</span></div>
+      <div class="stock-phone">+91 90671 21697</div>
+      <div class="stack">
+        <a href="tel:+919067121697" class="act green"><i class="fas fa-phone"></i><span class="lang-en">Contact for Stock</span><span class="lang-hi">स्टॉक के लिए संपर्क करें</span></a>
+        <a href="#" class="act live" onclick="openLiveInventory();return false;"><span class="dot-live"></span><span class="lang-en">Live Inventory</span><span class="lang-hi">लाइव इन्वेंटरी</span></a>
+      </div>
+    </div>
+  </section>
 
-        function openLiveInventory() {
-            window.open(INVENTORY_URL, '_blank');
-        }
+  <!-- ═══ PAYMENT ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">Pay</span><span class="lang-hi">भुगतान</span></span>
+      <h2 class="sec-title"><span class="lang-en">UPI Payment</span><span class="lang-hi">भुगतान</span></h2>
+    </div>
+    <div class="panel reveal center">
+      <div class="img-frame payimg"><img src="upi-qr.png" alt="UPI QR" /></div>
+      <div class="upi-box"><span class="lang-en">UPI ID</span><span class="lang-hi">यूपीआई आईडी</span><b>ramesh.chotalia13@oksbi</b></div>
+      <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="act solid"><i class="fas fa-indian-rupee-sign"></i><span class="lang-en">Pay Now</span><span class="lang-hi">अभी भुगतान करें</span></a>
+    </div>
+  </section>
 
-        // ─── VISITOR COUNTER ───
-        (function updateVisitorCount() {
-            let count = parseInt(localStorage.getItem('tilePlanetVisitors')) || 0;
-            const today = new Date().toDateString();
-            const lastVisit = localStorage.getItem('tilePlanetLastVisit');
-            if (lastVisit !== today) {
-                count += 1;
-                localStorage.setItem('tilePlanetVisitors', count);
-                localStorage.setItem('tilePlanetLastVisit', today);
-            }
-            const el = document.getElementById('visitorCount');
-            let current = 0;
-            const target = count;
-            const duration = 1500;
-            const startTime = performance.now();
+  <!-- ═══ GOOGLE REVIEWS ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">Rate us</span><span class="lang-hi">रेटिंग</span></span>
+      <h2 class="sec-title"><span class="lang-en">Google Reviews</span><span class="lang-hi">गूगल समीक्षाएँ</span></h2>
+    </div>
+    <div class="panel reveal center">
+      <div class="gword"><b>G</b><b>o</b><b>o</b><b>g</b><b>l</b><b>e</b></div>
+      <span class="gstars">★★★★★</span>
+      <h3 class="p-title"><span class="lang-en">Loved our service?</span><span class="lang-hi">हमारी सेवा पसंद आई?</span></h3>
+      <p class="p-sub"><span class="lang-en">Share your experience on Google</span><span class="lang-hi">गूगल पर अपना अनुभव साझा करें</span></p>
+      <a href="#" target="_blank" class="act"><i class="fas fa-star"></i><span class="lang-en">Write a Review</span><span class="lang-hi">समीक्षा लिखें</span></a>
+    </div>
+  </section>
 
-            function animateCounter(time) {
-                const progress = Math.min((time - startTime) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                current = Math.round(eased * target);
-                el.textContent = current;
-                if (progress < 1) requestAnimationFrame(animateCounter);
-                else el.textContent = target;
-            }
-            requestAnimationFrame(animateCounter);
-        })();
+  <!-- ═══ FOLLOW US ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">Social</span><span class="lang-hi">सोशल</span></span>
+      <h2 class="sec-title"><span class="lang-en">Follow Us</span><span class="lang-hi">हमें फॉलो करें</span></h2>
+    </div>
+    <div class="grid2 reveal">
+      <a href="#" class="gbtn"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="#" class="gbtn"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="#" class="gbtn"><i class="fab fa-youtube"></i> YouTube</a>
+      <a href="https://wa.me/919922533033" class="gbtn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+  </section>
 
-        // ─── DYNAMIC BACKGROUND (Hourly) ───
-        (function setDynamicBackground() {
-            const bg = document.getElementById('dynamicBg');
-            const palettes = [
-                'radial-gradient(circle at 30% 10%, #1a0f0a 0%, #2a1a0e 40%, #0d0805 70%, #050505 100%)',
-                'radial-gradient(circle at 70% 20%, #0d1a2b 0%, #162b3d 40%, #0a101a 70%, #050505 100%)',
-                'radial-gradient(circle at 50% 50%, #1e1a0c 0%, #2d2414 40%, #100d06 70%, #050505 100%)',
-                'radial-gradient(circle at 20% 80%, #1a0f1a 0%, #2d1a2d 40%, #100a10 70%, #050505 100%)',
-                'radial-gradient(circle at 60% 40%, #0f1a0f 0%, #1a2d1a 40%, #0a100a 70%, #050505 100%)',
-                'radial-gradient(circle at 40% 60%, #1a1008 0%, #2d1c0e 40%, #0d0805 70%, #050505 100%)',
-                'radial-gradient(circle at 80% 80%, #0f0f1a 0%, #1a1a2d 40%, #0a0a10 70%, #050505 100%)',
-                'radial-gradient(circle at 50% 30%, #0a1a1a 0%, #1a2d2d 40%, #0a1010 70%, #050505 100%)',
-                'radial-gradient(circle at 30% 70%, #1a0a0a 0%, #2d1a1a 40%, #100a0a 70%, #050505 100%)',
-                'radial-gradient(circle at 70% 60%, #0a0a1a 0%, #1a1a2d 40%, #0a0a10 70%, #050505 100%)'
-            ];
-            const hour = new Date().getHours();
-            const index = hour % palettes.length;
-            bg.style.background = palettes[index];
-        })();
+  <!-- ═══ QUICK ACTIONS ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">Shortcuts</span><span class="lang-hi">शॉर्टकट</span></span>
+      <h2 class="sec-title"><span class="lang-en">Quick Actions</span><span class="lang-hi">त्वरित कार्य</span></h2>
+    </div>
+    <div class="grid2 reveal">
+      <a href="#" download class="gbtn"><i class="fas fa-address-card"></i><span class="lang-en">Save Contact</span><span class="lang-hi">कॉन्टैक्ट सेव करें</span></a>
+      <a href="#" onclick="shareCard();return false;" class="gbtn"><i class="fas fa-share-nodes"></i><span class="lang-en">Share Card</span><span class="lang-hi">शेयर करें</span></a>
+      <a href="#" class="gbtn"><i class="fas fa-file-invoice"></i><span class="lang-en">Get Quote</span><span class="lang-hi">कोटेशन लें</span></a>
+      <a href="#" class="gbtn"><i class="fas fa-paper-plane"></i><span class="lang-en">Enquiry</span><span class="lang-hi">पूछताछ</span></a>
+    </div>
+  </section>
 
-        // ─── TESTIMONIAL CAROUSEL (10 items) ───
-        (function initTestimonial() {
-            let current = 0;
-            const track = document.getElementById('testimonialTrack');
-            const dots = document.querySelectorAll('.testimonial-dots .dot');
-            const total = dots.length; // 10
+  <!-- ═══ LOCATION ═══ -->
+  <section class="sec">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="lang-en">Visit</span><span class="lang-hi">पहुँचें</span></span>
+      <h2 class="sec-title"><span class="lang-en">Location</span><span class="lang-hi">स्थान</span></h2>
+    </div>
+    <div class="panel reveal">
+      <div class="img-frame"><img src="map.jpeg" alt="Map" /></div>
+      <a href="https://www.google.com/maps?q=18.452656,73.832591" target="_blank" class="act"><i class="fas fa-location-dot"></i><span class="lang-en">Open in Maps</span><span class="lang-hi">मैप खोलें</span></a>
+    </div>
+  </section>
 
-            function goTo(index) {
-                current = index;
-                track.style.transform = `translateX(-${index * 100}%)`;
-                dots.forEach((d, i) => d.classList.toggle('active', i === index));
-            }
-            dots.forEach((dot, i) => { dot.addEventListener('click', () => goTo(i)); });
-            setInterval(() => { goTo((current + 1) % total); }, 6000);
-            let startX = 0;
-            const carousel = document.getElementById('testimonialCarousel');
-            carousel.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
-            carousel.addEventListener('touchend', (e) => {
-                const endX = e.changedTouches[0].clientX;
-                const diff = startX - endX;
-                if (Math.abs(diff) > 40) {
-                    if (diff > 0) goTo(Math.min(current + 1, total - 1));
-                    else goTo(Math.max(current - 1, 0));
-                }
-            });
-        })();
+  <!-- ═══ VISITOR COUNTER ═══ -->
+  <div class="visitor reveal">
+    <span class="lab"><i class="fas fa-eye"></i> <span class="lang-en">Today's Visitors</span><span class="lang-hi">आज के विज़िटर</span></span>
+    <span class="num" id="vcount">0</span>
+  </div>
 
-        // ─── LANGUAGE TOGGLE ───
-        let currentLang = 'en';
+  <!-- ═══ FOOTER ═══ -->
+  <div class="footer reveal">
+    <img src="Logo.png" alt="Tile Planet" />
+    <div class="fbrand">Tile <span>Planet</span></div>
+    <div class="fsub"><span class="lang-en">Your one-stop tile solution</span><span class="lang-hi">आपका एक-स्टॉप टाइल समाधान</span></div>
+    <div class="fslo"><span class="lang-en">Visit our showroom once</span><span class="lang-hi">एक बार शोरूम आएँ</span></div>
+    <div class="fcopy">© 2026 Tile Planet · All rights reserved</div>
+  </div>
 
-        function toggleLanguage() {
-            const body = document.body;
-            if (currentLang === 'en') { body.classList.add('lang-hindi');
-                currentLang = 'hi'; } else { body.classList.remove('lang-hindi');
-                currentLang = 'en'; }
-        }
+</div>
 
-        // ─── AUDIO GREETING ───
-        let audioPlaying = false;
-        let audioElement = null;
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ttrk">
+    <span><i class="fas fa-bullhorn"></i> <span class="lang-en">10 Jul 2026 — Tile rates revised. Contact Tile Planet for best prices.</span><span class="lang-hi">10 जुलाई 2026 — टाइल के दर संशोधित। बेस्ट रेट के लिए संपर्क करें।</span> <span class="dot"></span></span>
+    <span><i class="fas fa-bullhorn"></i> <span class="lang-en">10 Jul 2026 — Tile rates revised. Contact Tile Planet for best prices.</span><span class="lang-hi">10 जुलाई 2026 — टाइल के दर संशोधित। बेस्ट रेट के लिए संपर्क करें।</span> <span class="dot"></span></span>
+  </div>
+</div>
 
-        function toggleAudio() {
-            const btn = document.getElementById('audioBtn');
-            if (!audioElement) {
-                audioElement = new Audio();
-                audioElement.src = 'data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVoAAACAgICAf39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f4CAgA==';
-            }
-            if (audioPlaying) {
-                audioElement.pause();
-                audioElement.currentTime = 0;
-                audioPlaying = false;
-                btn.classList.remove('playing');
-                btn.innerHTML = '<i class="fas fa-play"></i> <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>';
-            } else {
-                audioElement.play().then(() => {
-                    audioPlaying = true;
-                    btn.classList.add('playing');
-                    btn.innerHTML = '<i class="fas fa-pause"></i> <span class="lang-en">Playing...</span><span class="lang-hi">बज रहा...</span>';
-                }).catch(() => {
-                    btn.classList.add('playing');
-                    btn.innerHTML = '<i class="fas fa-check"></i> <span class="lang-en">Welcome!</span><span class="lang-hi">स्वागत है!</span>';
-                    setTimeout(() => {
-                        btn.classList.remove('playing');
-                        btn.innerHTML = '<i class="fas fa-play"></i> <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>';
-                    }, 2000);
-                });
-            }
-        }
+<!-- BOTTOM NAV -->
+<div class="nav">
+  <a href="tel:+919922533033" class="on"><i class="fas fa-phone"></i> Call</a>
+  <a href="https://wa.me/919922533033"><i class="fab fa-whatsapp"></i> Chat</a>
+  <a href="https://www.google.com/maps?q=18.452656,73.832591"><i class="fas fa-location-dot"></i> Map</a>
+  <a href="#" onclick="shareCard();return false;"><i class="fas fa-share-nodes"></i> Share</a>
+</div>
 
-        // ─── SHARE ───
-        function shareCard() {
-            if (navigator.share) {
-                navigator.share({ title: 'Tile Planet', text: 'Tile Planet — Premium Tiles', url: window.location.href })
-                    .catch(() => {});
-            } else {
-                navigator.clipboard.writeText(window.location.href)
-                    .then(() => alert('✅ Link Copied'))
-                    .catch(() => alert('📋 Copy: ' + window.location.href));
-            }
-        }
+<!-- MODALS -->
+<div class="ov" id="iosModal">
+  <div class="modal">
+    <button class="x" onclick="closeModal('iosModal')">✕</button>
+    <span class="mi">📲</span>
+    <h2><span class="lang-en">Install App</span><span class="lang-hi">ऐप इंस्टॉल करें</span></h2>
+    <p><span class="lang-en">Add to your Home Screen</span><span class="lang-hi">होम स्क्रीन पर जोड़ें</span></p>
+    <div class="step"><span class="n">1</span><div class="t"><span class="lang-en">Tap Share</span><span class="lang-hi">शेयर बटन दबाएँ</span><small>⬆️ <span class="lang-en">bottom bar</span><span class="lang-hi">नीचे</span></small></div></div>
+    <div class="step"><span class="n">2</span><div class="t"><span class="lang-en">Choose “Add to Home Screen”</span><span class="lang-hi">"होम स्क्रीन पर जोड़ें" चुनें</span><small><span class="lang-en">scroll down</span><span class="lang-hi">नीचे स्क्रॉल करें</span></small></div></div>
+    <div class="step"><span class="n">3</span><div class="t"><span class="lang-en">Tap “Add”</span><span class="lang-hi">"जोड़ें" दबाएँ</span><small>✅ <span class="lang-en">done</span><span class="lang-hi">हो गया</span></small></div></div>
+    <button class="okbtn" onclick="closeModal('iosModal')"><span class="lang-en">Got it</span><span class="lang-hi">समझ गया</span></button>
+  </div>
+</div>
 
-        // ─── PWA INSTALL ───
-        let deferredPrompt = null;
-        let isAppInstalled = false;
-        const installBtn = document.getElementById('installAppBtn');
+<div class="ov" id="androidModal">
+  <div class="modal">
+    <button class="x" onclick="closeModal('androidModal')">✕</button>
+    <span class="mi">📲</span>
+    <h2><span class="lang-en">Add to Home Screen</span><span class="lang-hi">होम स्क्रीन पर जोड़ें</span></h2>
+    <p><span class="lang-en">Install in one step</span><span class="lang-hi">एक क्लिक में इंस्टॉल करें</span></p>
+    <div class="step"><span class="n">1</span><div class="t"><span class="lang-en">Tap menu ⋮</span><span class="lang-hi">मेनू ⋮ दबाएँ</span><small><span class="lang-en">top right</span><span class="lang-hi">ऊपर दाएँ</span></small></div></div>
+    <div class="step"><span class="n">2</span><div class="t"><span class="lang-en">Choose “Install App”</span><span class="lang-hi">"ऐप इंस्टॉल करें" चुनें</span><small><span class="lang-en">scroll down</span><span class="lang-hi">नीचे स्क्रॉल करें</span></small></div></div>
+    <div class="step"><span class="n">3</span><div class="t"><span class="lang-en">Tap “Add”</span><span class="lang-hi">"जोड़ें" दबाएँ</span><small>✅ <span class="lang-en">done</span><span class="lang-hi">हो गया</span></small></div></div>
+    <button class="okbtn" onclick="closeModal('androidModal')"><span class="lang-en">Got it</span><span class="lang-hi">समझ गया</span></button>
+  </div>
+</div>
 
-        function checkIfInstalled() {
-            if (window.navigator.standalone === true) isAppInstalled = true;
-            if (window.matchMedia('(display-mode: standalone)').matches) isAppInstalled = true;
-            return isAppInstalled;
-        }
+<script>
+/* ── LIVE INVENTORY ── */
+const INVENTORY_URL='https://script.google.com/macros/s/AKfycbzEcPAx1wREVuF6LzgPke9BlSf5tBTuA23cyO0-9JDHPcwSFL2prjjOBeZBgMOqLzzqjA/exec';
+function openLiveInventory(){window.open(INVENTORY_URL,'_blank');}
 
-        function hideInstallButton() {
-            if (isAppInstalled) installBtn.classList.add('install-hidden');
-            else installBtn.classList.remove('install-hidden');
-        }
+/* ── LANGUAGE ── */
+let lang='en';
+function toggleLang(){document.body.classList.toggle('hi');lang=lang==='en'?'hi':'en';}
 
-        function openModal(id) { document.getElementById(id).classList.add('active'); }
+/* ── AUDIO GREETING ── */
+let playing=false,audio=null;
+function toggleAudio(){
+  const b=document.getElementById('audioBtn');
+  if(!audio){audio=new Audio('data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVoAAACAgICAf39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f4CAgA==');}
+  if(playing){audio.pause();audio.currentTime=0;playing=false;b.classList.remove('playing');
+    b.innerHTML='<i class="fas fa-play"></i> <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>';}
+  else{audio.play().then(()=>{playing=true;b.classList.add('playing');
+    b.innerHTML='<i class="fas fa-pause"></i> <span class="lang-en">Playing…</span><span class="lang-hi">बज रहा…</span>';})
+    .catch(()=>{b.classList.add('playing');
+    b.innerHTML='<i class="fas fa-check"></i> <span class="lang-en">Welcome!</span><span class="lang-hi">स्वागत है!</span>';
+    setTimeout(()=>{b.classList.remove('playing');b.innerHTML='<i class="fas fa-play"></i> <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>';},2000);});}
+}
 
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+/* ── SHARE ── */
+function shareCard(){
+  if(navigator.share){navigator.share({title:'Tile Planet',text:'Tile Planet — Premium Tiles',url:location.href}).catch(()=>{});}
+  else{navigator.clipboard.writeText(location.href).then(()=>alert('✅ Link copied')).catch(()=>alert('Copy: '+location.href));}
+}
 
-        function handleInstallClick(e) {
-            e.preventDefault();
-            if (isAppInstalled) return;
-            const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            if (isIos) { openModal('iosModal'); return; }
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') { isAppInstalled = true;
-                        hideInstallButton(); }
-                    deferredPrompt = null;
-                });
-                return;
-            }
-            openModal('androidModal');
-        }
+/* ── VISITOR COUNTER ── */
+(function(){
+  let c=parseInt(localStorage.getItem('tpVisitors'))||0;
+  const today=new Date().toDateString();
+  if(localStorage.getItem('tpLast')!==today){c++;localStorage.setItem('tpVisitors',c);localStorage.setItem('tpLast',today);}
+  const el=document.getElementById('vcount');const target=c,dur=1400,t0=performance.now();
+  (function anim(t){const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(e*target);if(p<1)requestAnimationFrame(anim);else el.textContent=target;})(t0);
+})();
 
-        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault();
-            deferredPrompt = e; if (!isAppInstalled) installBtn.classList.remove('install-hidden'); });
-        window.addEventListener('appinstalled', () => { isAppInstalled = true;
-            hideInstallButton(); });
-        window.addEventListener('load', () => { if (checkIfInstalled()) hideInstallButton(); else installBtn.classList.remove(
-                'install-hidden'); });
+/* ── TESTIMONIAL CAROUSEL ── */
+(function(){
+  const track=document.getElementById('ttrack');
+  const dotsWrap=document.getElementById('tdots');
+  const total=track.children.length;let cur=0;
+  for(let i=0;i<total;i++){const d=document.createElement('button');d.className='d'+(i===0?' on':'');
+    d.onclick=()=>go(i);dotsWrap.appendChild(d);}
+  const dots=dotsWrap.children;
+  function go(i){cur=i;track.style.transform=`translateX(-${i*100}%)`;
+    for(let j=0;j<dots.length;j++)dots[j].classList.toggle('on',j===i);}
+  let timer=setInterval(()=>go((cur+1)%total),6000);
+  const car=document.getElementById('tcar');let sx=0;
+  car.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;clearInterval(timer);},{passive:true});
+  car.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;
+    if(Math.abs(d)>40)go(d>0?Math.min(cur+1,total-1):Math.max(cur-1,0));
+    timer=setInterval(()=>go((cur+1)%total),6000);},{passive:true});
+})();
 
-        installBtn.addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            ripple.className = 'ripple';
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-            this.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-            handleInstallClick(e);
-        });
+/* ── SCROLL SEAM ── */
+addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;
+  document.getElementById('seam').style.width=(scrollY/h*100)+'%';},{passive:true});
 
-        document.querySelectorAll('.install-modal-overlay, .modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); });
-        });
+/* ── GENTLE PLATE TILT (desktop, motion-safe) ── */
+(function(){
+  if(!matchMedia('(hover:hover)').matches)return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const p=document.getElementById('plate');
+  p.addEventListener('mousemove',e=>{const r=p.getBoundingClientRect();
+    const rx=((e.clientY-r.top)/r.height-.5)*-4,ry=((e.clientX-r.left)/r.width-.5)*4;
+    p.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;});
+  p.addEventListener('mouseleave',()=>{p.style.transform='';});
+})();
 
-        // ─── MAGNETIC BUTTONS ───
-        document.querySelectorAll('.magnetic').forEach(btn => {
-            if (window.matchMedia('(hover: hover)').matches) {
-                btn.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    const strength = parseFloat(this.dataset.strength) || 10;
-                    this.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
-                });
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translate(0, 0)';
-                });
-            }
-        });
+/* ── PWA INSTALL ── */
+let deferred=null,installed=false;
+const installBtn=document.getElementById('installBtn');
+function checkInstalled(){if(navigator.standalone===true)installed=true;
+  if(matchMedia('(display-mode: standalone)').matches)installed=true;return installed;}
+function updateBtn(){installBtn.classList.toggle('hidden',installed);}
+function openModal(id){document.getElementById(id).classList.add('on');}
+function closeModal(id){document.getElementById(id).classList.remove('on');}
+function handleInstall(e){e.preventDefault();if(installed)return;
+  const ios=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
+  if(ios){openModal('iosModal');return;}
+  if(deferred){deferred.prompt();deferred.userChoice.then(c=>{if(c.outcome==='accepted'){installed=true;updateBtn();}deferred=null;});return;}
+  openModal('androidModal');}
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;if(!installed)installBtn.classList.remove('hidden');});
+addEventListener('appinstalled',()=>{installed=true;updateBtn();});
+addEventListener('load',()=>{checkInstalled();updateBtn();});
+installBtn.addEventListener('click',function(e){
+  const rp=document.createElement('span');rp.className='ripple';
+  const r=this.getBoundingClientRect(),s=Math.max(r.width,r.height);
+  rp.style.width=rp.style.height=s+'px';rp.style.left=(e.clientX-r.left-s/2)+'px';rp.style.top=(e.clientY-r.top-s/2)+'px';
+  this.appendChild(rp);setTimeout(()=>rp.remove(),600);handleInstall(e);});
+document.querySelectorAll('.ov').forEach(o=>o.addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');}));
 
-        // ─── SCROLL PROGRESS ───
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (scrollTop / docHeight) * 100;
-            document.getElementById('progress-bar').style.width = progress + '%';
-        });
+/* ── REVEAL ── */
+(function(){
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},
+    {threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
 
-        // ─── 3D TILT + SPOTLIGHT ───
-        document.addEventListener('DOMContentLoaded', function() {
-            const card = document.getElementById('tiltCard');
-            const wrapper = document.getElementById('tiltWrapper');
-            const spotlight = document.getElementById('spotlight');
-            const layers = card.querySelectorAll('.layer');
+/* ── BOTTOM NAV active ── */
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',function(){
+  document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('on'));this.classList.add('on');}));
 
-            wrapper.addEventListener('mousemove', function(e) {
-                const rect = wrapper.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -8;
-                const rotateY = ((x - centerX) / centerX) * 8;
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                layers.forEach((layer, index) => {
-                    const speed = 0.5 + (index * 0.1);
-                    const moveX = (x - centerX) / centerX * 10 * speed;
-                    const moveY = (y - centerY) / centerY * 10 * speed;
-                    layer.style.transform = `translate(${moveX}px, ${moveY}px) translateZ(${20 + index * 20}px)`;
-                });
-                const px = (x / rect.width) * 100;
-                const py = (y / rect.height) * 100;
-                spotlight.style.setProperty('--mx', px + '%');
-                spotlight.style.setProperty('--my', py + '%');
-            });
-
-            wrapper.addEventListener('mouseleave', function() {
-                card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-                layers.forEach(layer => {
-                    layer.style.transform =
-                        `translate(0, 0) translateZ(${parseInt(layer.style.transform?.match(/translateZ\((\d+)px\)/)?.[1] || 20)}px)`;
-                });
-                spotlight.style.setProperty('--mx', '50%');
-                spotlight.style.setProperty('--my', '50%');
-            });
-        });
-
-        // ─── SCROLL ANIMATIONS ───
-        document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        const delay = parseFloat(el.dataset.delay) || 0;
-                        setTimeout(() => { el.classList.add('visible'); }, delay * 1000);
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-            document.querySelectorAll('.section-title, .product, .catalog-card, .animate-on-scroll').forEach(el => observer
-                .observe(el));
-        });
-
-        // ─── BOTTOM NAV ACTIVE ───
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // ─── SERVICE WORKER ───
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js').catch(() => {});
-        }
-
-        console.log('🚀 Tile Planet — Live Inventory button now opens URL directly (no login)');
-    </script>
-
+/* ── SERVICE WORKER ── */
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/service-worker.js').catch(()=>{});}
+</script>
 </body>
 </html>
