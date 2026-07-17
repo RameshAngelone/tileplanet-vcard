@@ -469,6 +469,7 @@
             position: relative;
             overflow: hidden;
             will-change: transform;
+            cursor: pointer;
         }
         .contact-btn .btn-text {
             position: relative;
@@ -540,6 +541,7 @@
             transition: all var(--transition);
             line-height: 1.3;
             will-change: transform;
+            cursor: pointer;
         }
         .glass-btn .icon {
             display: block;
@@ -719,7 +721,6 @@
             transform: translateY(30px) rotateY(10deg);
             transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
             cursor: pointer;
-            /* make entire card clickable */;
         }
         .catalog-card.visible {
             opacity: 1;
@@ -733,13 +734,10 @@
             transform-style: preserve-3d;
             cursor: pointer;
             pointer-events: auto;
-            /* allow clicks */;
         }
-        /* Desktop hover — still works */
         .catalog-card:hover .catalog-inner {
             transform: rotateY(180deg);
         }
-        /* Mobile / click toggle via JS */
         .catalog-inner.flipped {
             transform: rotateY(180deg);
         }
@@ -761,12 +759,10 @@
             border: 1px solid rgba(212, 175, 55, 0.04);
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
             pointer-events: none;
-            /* children can be clicked */;
         }
         .catalog-front *,
         .catalog-back * {
             pointer-events: auto;
-            /* allow clicking on buttons */;
         }
         .catalog-back {
             transform: rotateY(180deg);
@@ -800,7 +796,6 @@
             transition: all var(--transition);
             cursor: pointer;
             pointer-events: auto;
-            /* ensure clickable */;
         }
         .catalog-back .dl-btn:hover {
             background: rgba(212, 175, 55, 0.2);
@@ -1547,6 +1542,52 @@
         .toast .toast-icon {
             margin-right: 10px;
         }
+
+        /* ─── LIVE INVENTORY BADGE ─── */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 230, 118, 0.12);
+            border: 1px solid rgba(0, 230, 118, 0.2);
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-size: 9px;
+            font-weight: 700;
+            color: #4cd964;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .live-badge .pulse-dot-sm {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #00e676;
+            border-radius: 50%;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+            box-shadow: 0 0 12px rgba(0, 230, 118, 0.3);
+        }
+        .btn-live-inventory .pulse-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #00e676;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+        }
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(0.7);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1652,7 +1693,7 @@
             <div class="product" data-delay="0.25"><img src="bathroomtiles.jpg" class="product-img" /><span>Bath</span></div>
         </div>
 
-        <!-- ═══ 2. CATALOGUES — UPDATED LINKS ═══ -->
+        <!-- ═══ 2. CATALOGUES ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">📖</span>
             <span class="lang-en">📚 CATALOGUES</span><span class="lang-hi">📚 कैटलॉग</span>
@@ -1821,8 +1862,14 @@
                 <a href="tel:+919067121697" class="contact-btn magnetic" style="background:rgba(76,217,100,0.05);border-color:rgba(76,217,100,0.15);" data-strength="12">
                     📞 <span class="lang-en">CONTACT FOR STOCK</span><span class="lang-hi">स्टॉक के लिए संपर्क करें</span>
                 </a>
+                <!-- ═══ LIVE INVENTORY BUTTON — LINKED TO URL ═══ -->
                 <a href="#" class="contact-btn btn-live-inventory magnetic" onclick="openLiveInventory(); return false;" data-strength="12">
-                    <span class="pulse-dot"></span> <span class="lang-en">LIVE INVENTORY</span><span class="lang-hi">लाइव इन्वेंटरी</span>
+                    <span class="pulse-dot"></span>
+                    <span class="lang-en">LIVE INVENTORY</span>
+                    <span class="lang-hi">लाइव इन्वेंटरी</span>
+                    <span class="live-badge" style="margin-left:4px;">
+                        <span class="pulse-dot-sm"></span> LIVE
+                    </span>
                 </a>
             </div>
         </div>
@@ -1965,10 +2012,13 @@
     </div>
 
     <script>
-        // ─── INVENTORY URL ───
+        // ─── INVENTORY URL (LIVE INVENTORY) ───
+        // This is the URL from the "upper wali" (the Google Apps Script web app)
+        // It is now properly linked to the Live Inventory button below.
         const INVENTORY_URL =
             'https://script.google.com/macros/s/AKfycbzEcPAx1wREVuF6LzgPke9BlSf5tBTuA23cyO0-9JDHPcwSFL2prjjOBeZBgMOqLzzqjA/exec';
 
+        // ─── OPEN LIVE INVENTORY ───
         function openLiveInventory() {
             window.open(INVENTORY_URL, '_blank');
             showToast('📦 Opening live inventory…');
@@ -1986,25 +2036,19 @@
             toastTimer = setTimeout(() => { el.classList.remove('show'); }, 2800);
         }
 
-        // ─── CATALOG FIX — now uses direct links ───
+        // ─── CATALOG FIX ───
         document.addEventListener('DOMContentLoaded', function() {
             const cards = document.querySelectorAll('.catalog-card');
 
             cards.forEach(card => {
                 const inner = card.querySelector('.catalog-inner');
 
-                // ---- Click on card: toggle flip on mobile ----
                 card.addEventListener('click', function(e) {
-                    // If user clicked on the download button, let the button handle it
                     if (e.target.closest('.dl-btn')) return;
-
                     const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
                     if (isTouch) {
-                        // On mobile: toggle flip so user can see the download button
                         inner.classList.toggle('flipped');
                     } else {
-                        // On desktop: open the catalog directly
                         const btn = card.querySelector('.dl-btn');
                         if (btn) {
                             window.open(btn.href, '_blank');
@@ -2013,7 +2057,6 @@
                     }
                 });
 
-                // ---- Download button: open link ----
                 const btn = card.querySelector('.dl-btn');
                 if (btn) {
                     btn.addEventListener('click', function(e) {
@@ -2306,7 +2349,7 @@
             navigator.serviceWorker.register('/service-worker.js').catch(() => {});
         }
 
-        console.log('✅ Tile Planet — Catalog links updated with Google Drive URLs.');
+        console.log('✅ Tile Planet — Live Inventory button linked to: ' + INVENTORY_URL);
     </script>
 
 </body>
