@@ -269,7 +269,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #0a0806, #1a1008);
             border: 1px solid rgba(212, 175, 55, 0.08);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
             transition: all var(--transition);
@@ -287,17 +286,6 @@
             z-index: 2;
         }
 
-        /* Banner Background Overlay */
-        .event-banner .banner-bg-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            opacity: 0.15;
-            background-size: cover;
-            background-position: center;
-            filter: blur(4px);
-        }
-
         /* Banner Emoji / Icon */
         .event-banner .banner-icon {
             font-size: 48px;
@@ -310,15 +298,17 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* Banner Title */
+        /* Banner Title - FIXED visibility */
         .event-banner .banner-title {
             font-family: 'Playfair Display', serif;
             font-size: 28px;
             font-weight: 700;
             letter-spacing: 1px;
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 80px rgba(0, 0, 0, 0.5);
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            color: #FFFFFF !important;
+            text-align: center;
         }
         .event-banner .banner-title .highlight {
             background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light), var(--gold-light));
@@ -332,50 +322,37 @@
         /* Banner Subtitle */
         .event-banner .banner-sub {
             font-size: 14px;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.9) !important;
             margin-top: 4px;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            text-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
         }
 
         /* Banner Offer Text */
         .event-banner .banner-offer {
             font-size: 13px;
-            color: var(--gold-light);
+            color: #FFFFFF !important;
             margin-top: 8px;
             font-weight: 600;
-            background: rgba(212, 175, 55, 0.08);
+            background: rgba(0, 0, 0, 0.5);
             display: inline-block;
             padding: 4px 18px;
             border-radius: 50px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             position: relative;
-            z-index: 1;
+            z-index: 2;
             backdrop-filter: blur(8px);
-        }
-
-        /* ─── FIREWORKS FOR INDEPENDENCE DAY ─── */
-        .firework {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            animation: fireworkBurst 1.5s ease-out forwards;
-            pointer-events: none;
-            z-index: 1;
-        }
-        @keyframes fireworkBurst {
-            0% { transform: translate(0, 0) scale(0); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         /* ─── TRI-COLOR STRIPES ─── */
         .tricolor-stripes {
             display: flex;
-            height: 4px;
+            height: 6px;
             width: 100%;
             position: absolute;
             bottom: 0;
@@ -390,7 +367,30 @@
         .tricolor-stripes .white { background: #FFFFFF; }
         .tricolor-stripes .green { background: #138808; }
 
-        /* ════════════════════════════════════════════ */
+        /* ─── FIREWORKS ─── */
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: fireworkBurst 1.5s ease-out forwards;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes fireworkBurst {
+            0% { transform: translate(0, 0) scale(0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
+        }
+
+        /* ─── OVERLAY FOR BETTER TEXT VISIBILITY ─── */
+        .event-banner .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            pointer-events: none;
+        }
+
         /* ─── GLASS CARD ─── */
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
@@ -2114,64 +2114,81 @@
         function getEventBanner() {
             const now = new Date();
             const day = now.getDate();
-            const month = now.getMonth() + 1; // Jan = 1
+            const month = now.getMonth() + 1;
             const dateStr = `${day}/${month}`;
+            const year = now.getFullYear();
 
-            // Define events (day/month)
+            // ─── ALL EVENTS (Add new events here) ───
             const events = {
                 '15/8': {
                     icon: '🇮🇳',
                     title: '🇮🇳 Happy Independence Day!',
-                    sub: '15 August 2026',
+                    sub: `15 August ${year}`,
                     offer: '🎉 Special Discount on All Tiles!',
                     bg: 'linear-gradient(135deg, #FF9933, #FFFFFF, #138808)',
                     triColor: true,
-                    fireworks: true
+                    fireworks: true,
+                    textColor: '#FFFFFF'
                 },
                 '26/1': {
                     icon: '🇮🇳',
                     title: '🇮🇳 Happy Republic Day!',
-                    sub: '26 January 2026',
+                    sub: `26 January ${year}`,
                     offer: '🎉 Special Republic Day Offer!',
                     bg: 'linear-gradient(135deg, #FF9933, #FFFFFF, #138808)',
                     triColor: true,
-                    fireworks: true
+                    fireworks: true,
+                    textColor: '#FFFFFF'
                 },
                 '25/12': {
                     icon: '🎄',
                     title: '🎄 Merry Christmas!',
-                    sub: '25 December 2026',
+                    sub: `25 December ${year}`,
                     offer: '🎁 Christmas Special Discount!',
                     bg: 'linear-gradient(135deg, #0a2f1f, #1a4a2a, #0a2f1f)',
                     triColor: false,
-                    fireworks: false
+                    fireworks: false,
+                    textColor: '#FFFFFF'
                 },
                 '1/1': {
                     icon: '🎆',
-                    title: '🎆 Happy New Year 2027!',
-                    sub: '1 January 2027',
+                    title: `🎆 Happy New Year ${year+1}!`,
+                    sub: `1 January ${year+1}`,
                     offer: '🎉 New Year Special Offer!',
                     bg: 'linear-gradient(135deg, #1a0a2a, #2a1a4a, #1a0a2a)',
                     triColor: false,
-                    fireworks: true
+                    fireworks: true,
+                    textColor: '#FFFFFF'
                 },
                 '14/11': {
                     icon: '🪔',
                     title: '🪔 Happy Diwali!',
-                    sub: '14 November 2026',
+                    sub: `14 November ${year}`,
                     offer: '✨ Diwali Special Discount on All Tiles!',
                     bg: 'linear-gradient(135deg, #1a0a0a, #2a1a0a, #1a0a0a)',
                     triColor: false,
-                    fireworks: false
+                    fireworks: false,
+                    textColor: '#FFD700'
                 },
                 '14/3': {
                     icon: '🌈',
                     title: '🌈 Happy Holi!',
-                    sub: '14 March 2026',
+                    sub: `14 March ${year}`,
                     offer: '🎨 Holi Special Offer!',
                     bg: 'linear-gradient(135deg, #FF6B6B, #4ECDC4, #FFE66D, #A8E6CF)',
                     triColor: false,
-                    fireworks: false
+                    fireworks: false,
+                    textColor: '#FFFFFF'
+                },
+                '10/10': {
+                    icon: '🎃',
+                    title: '🎃 Happy Halloween!',
+                    sub: `10 October ${year}`,
+                    offer: '🎃 Spooky Halloween Offer!',
+                    bg: 'linear-gradient(135deg, #1a0a0a, #2a1a0a, #1a0a0a)',
+                    triColor: false,
+                    fireworks: false,
+                    textColor: '#FF6B00'
                 }
             };
 
@@ -2181,7 +2198,7 @@
                 return event;
             }
 
-            // Check for upcoming events within 7 days (show teaser)
+            // Check for upcoming events within 7 days
             for (const [key, value] of Object.entries(events)) {
                 const [eventDay, eventMonth] = key.split('/').map(Number);
                 const eventDate = new Date(now.getFullYear(), eventMonth - 1, eventDay);
@@ -2195,7 +2212,8 @@
                         bg: 'linear-gradient(135deg, #1a1008, #2a1a0e, #1a1008)',
                         triColor: false,
                         fireworks: false,
-                        isTeaser: true
+                        isTeaser: true,
+                        textColor: '#FFFFFF'
                     };
                 }
             }
@@ -2208,13 +2226,14 @@
                 offer: '📞 Contact Us for Best Prices!',
                 bg: 'linear-gradient(135deg, #0a0806, #1a1008, #0a0806)',
                 triColor: false,
-                fireworks: false
+                fireworks: false,
+                textColor: '#FFFFFF'
             };
         }
 
         function createFireworks(container) {
             if (!container) return;
-            const colors = ['#FF9933', '#FFFFFF', '#138808', '#FFD700', '#FF6B6B', '#4ECDC4'];
+            const colors = ['#FF9933', '#FFFFFF', '#138808', '#FFD700', '#FF6B6B', '#4ECDC4', '#FFE66D'];
             for (let i = 0; i < 30; i++) {
                 const fw = document.createElement('div');
                 fw.className = 'firework';
@@ -2255,11 +2274,12 @@
 
             container.innerHTML = `
                 <div class="event-banner" style="background: ${event.bg};">
+                    <div class="banner-overlay"></div>
                     <div class="event-banner-inner">
                         <span class="banner-icon">${event.icon}</span>
-                        <div class="banner-title">${event.title}</div>
-                        <div class="banner-sub">${event.sub}</div>
-                        <div class="banner-offer">${event.offer}</div>
+                        <div class="banner-title" style="color: ${event.textColor} !important;">${event.title}</div>
+                        <div class="banner-sub" style="color: ${event.textColor} !important;">${event.sub}</div>
+                        <div class="banner-offer" style="color: #FFFFFF !important;">${event.offer}</div>
                     </div>
                     ${triColorHTML}
                     ${fireworksHTML}
@@ -2271,11 +2291,9 @@
                 setTimeout(() => {
                     const fwContainer = document.getElementById('fireworksContainer');
                     if (fwContainer) {
-                        // Create multiple bursts
                         for (let i = 0; i < 3; i++) {
                             setTimeout(() => createFireworks(fwContainer), i * 500);
                         }
-                        // Repeat every 3 seconds
                         setInterval(() => {
                             const fwC = document.getElementById('fireworksContainer');
                             if (fwC) createFireworks(fwC);
@@ -2308,7 +2326,9 @@
 
         // ─── CONFETTI ───
         document.addEventListener('click', function(e) {
-            const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FFE66D', '#A8E6CF', '#FF8A5C', '#E8A87C', '#F5CBA7'];
+            const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FFE66D', '#A8E6CF', '#FF8A5C', '#E8A87C', '#F5CBA7', '#FF9933',
+                '#FFFFFF', '#138808'
+            ];
             for (let i = 0; i < 8; i++) {
                 const piece = document.createElement('div');
                 piece.className = 'confetti-piece';
@@ -2350,7 +2370,6 @@
 
         // ─── CATALOG FIX ───
         document.addEventListener('DOMContentLoaded', function() {
-            // Render event banner
             renderEventBanner();
 
             const cards = document.querySelectorAll('.catalog-card');
