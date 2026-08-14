@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
@@ -26,6 +26,8 @@
             --gold: #d4af37;
             --gold-light: #f5d76e;
             --gold-neon: #f9e79f;
+            --rose-gold: #e8a87c;
+            --rose-gold-light: #f5cba7;
             --dark-bg: #050505;
             --glass-bg: rgba(255, 255, 255, 0.02);
             --glass-border: rgba(212, 175, 55, 0.08);
@@ -45,7 +47,7 @@
         body {
             background: var(--dark-bg);
             color: var(--text-primary);
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             padding-bottom: 130px;
@@ -73,6 +75,35 @@
             border-color: var(--gold-light);
         }
 
+        /* ─── ANIMATED GRADIENT BACKGROUND ─── */
+        .animated-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: linear-gradient(135deg, #0a0806, #1a1008, #0d0a15, #1a0f0a);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease-in-out infinite alternate;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 0%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animated-bg .aura {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.05), transparent 70%);
+            pointer-events: none;
+            animation: auraPulse 6s ease-in-out infinite alternate;
+        }
+        @keyframes auraPulse {
+            0% { opacity: 0.4; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.1); }
+        }
+
         /* ─── SHOOTING STARS ─── */
         .shooting-stars {
             position: fixed;
@@ -91,46 +122,10 @@
             opacity: 0;
         }
         @keyframes shoot {
-            0% {
-                transform: translate(0, 0) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-400px, 400px) scale(1);
-                opacity: 0;
-            }
-        }
-
-        /* ─── DYNAMIC BACKGROUND ─── */
-        .dynamic-bg {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            transition: background 1.5s ease;
-            will-change: background;
-        }
-        .dynamic-bg .aura {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.05), transparent 70%);
-            pointer-events: none;
-            animation: auraPulse 6s ease-in-out infinite alternate;
-        }
-        @keyframes auraPulse {
-            0% {
-                opacity: 0.4;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0.8;
-                transform: scale(1.1);
-            }
+            0% { transform: translate(0, 0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(-400px, 400px) scale(1); opacity: 0; }
         }
 
         /* ─── FLOATING PARTICLES ─── */
@@ -150,65 +145,18 @@
             animation: floatParticle linear infinite;
             opacity: 0.2;
         }
-        .particle:nth-child(1) {
-            left: 10%;
-            animation-duration: 18s;
-            width: 8px;
-            height: 8px;
-        }
-        .particle:nth-child(2) {
-            left: 25%;
-            animation-duration: 22s;
-            animation-delay: 2s;
-            width: 4px;
-            height: 4px;
-        }
-        .particle:nth-child(3) {
-            left: 50%;
-            animation-duration: 20s;
-            animation-delay: 4s;
-            width: 10px;
-            height: 10px;
-            opacity: 0.1;
-        }
-        .particle:nth-child(4) {
-            left: 75%;
-            animation-duration: 25s;
-            animation-delay: 1s;
-            width: 5px;
-            height: 5px;
-        }
-        .particle:nth-child(5) {
-            left: 90%;
-            animation-duration: 19s;
-            animation-delay: 3s;
-            width: 7px;
-            height: 7px;
-        }
-        .particle:nth-child(6) {
-            left: 40%;
-            animation-duration: 23s;
-            animation-delay: 5s;
-            width: 12px;
-            height: 12px;
-            opacity: 0.08;
-        }
+        .particle:nth-child(1) { left: 10%; animation-duration: 18s; width: 8px; height: 8px; }
+        .particle:nth-child(2) { left: 25%; animation-duration: 22s; animation-delay: 2s; width: 4px; height: 4px; }
+        .particle:nth-child(3) { left: 50%; animation-duration: 20s; animation-delay: 4s; width: 10px; height: 10px; opacity: 0.1; }
+        .particle:nth-child(4) { left: 75%; animation-duration: 25s; animation-delay: 1s; width: 5px; height: 5px; }
+        .particle:nth-child(5) { left: 90%; animation-duration: 19s; animation-delay: 3s; width: 7px; height: 7px; }
+        .particle:nth-child(6) { left: 40%; animation-duration: 23s; animation-delay: 5s; width: 12px; height: 12px; opacity: 0.08; }
 
         @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) rotate(0deg) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-10vh) rotate(720deg) scale(1);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) rotate(720deg) scale(1); opacity: 0; }
         }
 
         /* ─── SCROLL PROGRESS ─── */
@@ -217,7 +165,7 @@
             top: 0;
             left: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            background: linear-gradient(90deg, var(--rose-gold), var(--gold-light), var(--rose-gold));
             z-index: 99999;
             width: 0%;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
@@ -248,7 +196,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all var(--transition);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -268,7 +216,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all var(--transition);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -284,13 +232,8 @@
             animation: pulse-audio 1s ease-in-out infinite;
         }
         @keyframes pulse-audio {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.2);
-            }
-            50% {
-                box-shadow: 0 0 20px 4px rgba(76, 217, 100, 0.1);
-            }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.2); }
+            50% { box-shadow: 0 0 20px 4px rgba(76, 217, 100, 0.1); }
         }
 
         /* ─── VIDEO HERO BACKGROUND ─── */
@@ -314,7 +257,7 @@
             z-index: 1;
         }
 
-        /* ─── GLASS CARD ─── */
+        /* ─── GLASS CARD (DEEP GLASSMORPHISM) ─── */
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(40px) saturate(1.6);
@@ -329,9 +272,9 @@
             will-change: transform;
         }
         .glass-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.01);
             border-color: rgba(212, 175, 55, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 80px rgba(212, 175, 55, 0.03);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 80px rgba(212, 175, 55, 0.05);
         }
 
         /* ─── HERO ─── */
@@ -384,14 +327,15 @@
             font-size: 9px;
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: var(--gold-light);
+            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-weight: 700;
             margin-bottom: 16px;
             text-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
-            opacity: 0.9;
         }
 
-        /* ─── 3D/5D HERO CARD ─── */
+        /* ─── 5D HERO CARD ─── */
         .tilt-wrapper {
             perspective: 1400px;
             transform-style: preserve-3d;
@@ -423,7 +367,7 @@
             inset: -2px;
             border-radius: 26px;
             padding: 2px;
-            background: conic-gradient(from 0deg, #d4af37, #f9e79f, #d4af37, #b8860b, #d4af37, #f9e79f, #d4af37);
+            background: conic-gradient(from 0deg, #d4af37, #f5cba7, #d4af37, #e8a87c, #d4af37, #f5cba7, #d4af37);
             background-size: 300% 300%;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -433,15 +377,9 @@
             z-index: 0;
         }
         @keyframes shimmerBorder {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .layer {
@@ -449,21 +387,11 @@
             z-index: 1;
             transform-style: preserve-3d;
         }
-        .layer-1 {
-            transform: translateZ(20px);
-        }
-        .layer-2 {
-            transform: translateZ(40px);
-        }
-        .layer-3 {
-            transform: translateZ(60px);
-        }
-        .layer-4 {
-            transform: translateZ(80px);
-        }
-        .layer-5 {
-            transform: translateZ(100px);
-        }
+        .layer-1 { transform: translateZ(20px); }
+        .layer-2 { transform: translateZ(40px); }
+        .layer-3 { transform: translateZ(60px); }
+        .layer-4 { transform: translateZ(80px); }
+        .layer-5 { transform: translateZ(100px); }
 
         /* ─── 5D HOLOGRAPHIC IMAGE EFFECT ─── */
         .holographic-img {
@@ -476,19 +404,15 @@
             content: '';
             position: absolute;
             inset: -50%;
-            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.1), transparent, rgba(255, 255, 255, 0.05), transparent);
+            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.15), transparent, rgba(255, 255, 255, 0.08), transparent);
             background-size: 200% 200%;
             animation: holographicShine 4s linear infinite;
             pointer-events: none;
             mix-blend-mode: overlay;
         }
         @keyframes holographicShine {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .product-img {
@@ -529,7 +453,7 @@
             flex-wrap: wrap;
         }
         .gold-shimmer-text {
-            background: linear-gradient(135deg, #f9e79f, #d4af37, #f9e79f, #d4af37);
+            background: linear-gradient(135deg, #f9e79f, #d4af37, #f5cba7, #e8a87c, #f9e79f);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -537,28 +461,24 @@
             animation: shimmerText 4s ease-in-out infinite;
         }
         @keyframes shimmerText {
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         .name .badge {
             font-size: 10px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--gold-light), #d4a017);
+            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
             color: #0a0806;
             padding: 2px 14px;
             border-radius: 50px;
             letter-spacing: 0.5px;
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
             display: inline-block;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             -webkit-text-fill-color: #0a0806;
         }
 
+        /* ─── 3D NEON BUTTONS ─── */
         .contact-btn {
             display: inline-flex;
             align-items: center;
@@ -567,7 +487,7 @@
             margin-top: 10px;
             padding: 11px 22px;
             border-radius: 60px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.02));
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(232, 168, 124, 0.05));
             border: 1px solid rgba(212, 175, 55, 0.2);
             text-decoration: none;
             color: #fff;
@@ -580,6 +500,7 @@
             overflow: hidden;
             will-change: transform;
             cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .contact-btn .btn-text {
             position: relative;
@@ -589,7 +510,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), transparent);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(232, 168, 124, 0.1));
             opacity: 0;
             transition: opacity var(--transition);
         }
@@ -598,8 +519,8 @@
         }
         .contact-btn:hover {
             border-color: var(--gold-light);
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), inset 0 0 30px rgba(212, 175, 55, 0.04);
-            transform: scale(1.03);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.2), inset 0 0 30px rgba(212, 175, 55, 0.04);
+            transform: scale(1.03) translateY(-2px);
         }
 
         .contact-qr {
@@ -652,6 +573,7 @@
             line-height: 1.3;
             will-change: transform;
             cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .glass-btn .icon {
             display: block;
@@ -684,18 +606,24 @@
             height: 50px;
             border: none;
             border-radius: 30px;
-            background: linear-gradient(135deg, #ffd700, #d4a017);
+            background: linear-gradient(135deg, #ffd700, #d4a017, #e8a87c);
+            background-size: 200% 200%;
+            animation: gradientBtn 3s ease-in-out infinite alternate;
             border: 1px solid rgba(212, 175, 55, 0.3);
             box-shadow: 0 4px 30px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
             color: #0a0806;
             font-size: 14px;
             font-weight: 700;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             cursor: pointer;
             transition: all var(--transition);
             position: relative;
             overflow: hidden;
             will-change: transform;
+        }
+        @keyframes gradientBtn {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         .install-btn .btn-sub {
             display: block;
@@ -722,10 +650,7 @@
             pointer-events: none;
         }
         @keyframes rippleAnim {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
+            to { transform: scale(4); opacity: 0; }
         }
         .install-hidden {
             display: none !important;
@@ -747,6 +672,7 @@
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            font-family: 'Space Grotesk', sans-serif;
         }
         .section-title.visible {
             opacity: 1;
@@ -755,19 +681,20 @@
         .section-title .line {
             flex: 1;
             max-width: 20px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2));
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3));
         }
         .section-title .line:last-child {
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), transparent);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.3), transparent);
         }
         .section-title .label {
             font-size: 8px;
             font-weight: 700;
-            color: var(--gold-light);
+            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
             text-transform: uppercase;
-            background: rgba(212, 175, 55, 0.05);
             padding: 2px 12px;
             border-radius: 50px;
             border: 1px solid rgba(212, 175, 55, 0.04);
@@ -801,6 +728,7 @@
             font-size: 11px;
             font-weight: 600;
             color: var(--text-secondary);
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         /* ─── CATALOG 3D FLIP ─── */
@@ -874,10 +802,12 @@
             font-size: 11px;
             font-weight: 700;
             color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .catalog-front p {
             font-size: 8px;
             color: var(--text-muted);
+            font-family: 'Space Grotesk', sans-serif;
         }
         .catalog-back .dl-btn {
             display: inline-flex;
@@ -892,6 +822,7 @@
             transition: all var(--transition);
             cursor: pointer;
             pointer-events: auto;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .catalog-back .dl-btn:hover {
             background: rgba(212, 175, 55, 0.2);
@@ -902,12 +833,13 @@
             font-size: 6px;
             font-weight: 700;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--gold-light), #d4a017);
+            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
             color: #0a0806;
             padding: 1px 8px;
             border-radius: 50px;
             letter-spacing: 0.5px;
             margin-top: 2px;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         /* ─── TESTIMONIAL CAROUSEL ─── */
@@ -946,12 +878,14 @@
             color: var(--text-secondary);
             font-style: italic;
             line-height: 1.6;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .testimonial-item .author {
             font-size: 13px;
             font-weight: 700;
             color: var(--gold-light);
             margin-top: 8px;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .testimonial-item .author small {
             font-weight: 400;
@@ -1015,6 +949,7 @@
             font-weight: 500;
             color: var(--text-secondary);
             margin-top: 14px;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .feature-list span::before {
             content: '◆';
@@ -1029,6 +964,7 @@
             font-size: 13px;
             line-height: 2.2;
             border-collapse: collapse;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .info-table td {
             padding: 4px 0;
@@ -1053,11 +989,13 @@
             font-size: 20px;
             font-weight: 700;
             color: #4cd964;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .stock-phone {
             font-size: 16px;
             color: var(--text-secondary);
             margin-bottom: 12px;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .btn-group {
             display: flex;
@@ -1089,15 +1027,8 @@
             box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
         }
         @keyframes pulse-dot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.3;
-                transform: scale(0.7);
-            }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.7); }
         }
 
         /* ─── PAYMENT ─── */
@@ -1105,6 +1036,7 @@
             margin-top: 14px;
             font-size: 14px;
             color: var(--text-secondary);
+            font-family: 'Space Grotesk', sans-serif;
         }
         .upi-id b {
             color: #fff;
@@ -1126,24 +1058,12 @@
             font-size: 26px;
             font-weight: 800;
         }
-        .g-1 {
-            color: #4285F4;
-        }
-        .g-2 {
-            color: #EA4335;
-        }
-        .g-3 {
-            color: #FBBC05;
-        }
-        .g-4 {
-            color: #4285F4;
-        }
-        .g-5 {
-            color: #34A853;
-        }
-        .g-6 {
-            color: #EA4335;
-        }
+        .g-1 { color: #4285F4; }
+        .g-2 { color: #EA4335; }
+        .g-3 { color: #FBBC05; }
+        .g-4 { color: #4285F4; }
+        .g-5 { color: #34A853; }
+        .g-6 { color: #EA4335; }
 
         .stars-bright {
             font-size: 44px;
@@ -1164,6 +1084,7 @@
             padding: 16px 8px;
             font-size: 13px;
             font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .two-grid .glass-btn .icon {
             font-size: 22px;
@@ -1193,6 +1114,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .visitor-counter .count {
             font-weight: 700;
@@ -1225,6 +1147,7 @@
             font-size: 20px;
             font-weight: 800;
             color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .footer-card .brand span {
             color: var(--gold-light);
@@ -1232,12 +1155,16 @@
         .footer-card .sub {
             color: var(--text-secondary);
             font-size: 13px;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .footer-card .slogan-highlight {
-            color: var(--gold-light);
+            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-weight: 600;
             font-size: 14px;
             margin: 6px 0 12px;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .footer-card .copy {
             margin-top: 14px;
@@ -1245,6 +1172,7 @@
             font-size: 11px;
             border-top: 1px solid rgba(212, 175, 55, 0.03);
             padding-top: 14px;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         /* ─── SCROLLING TICKER ─── */
@@ -1278,7 +1206,7 @@
             color: #fff;
             text-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.1);
             letter-spacing: 0.8px;
-            background: linear-gradient(90deg, var(--gold-light), #fff, var(--gold-light));
+            background: linear-gradient(90deg, var(--gold-light), var(--rose-gold-light), var(--gold-light));
             background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1293,20 +1221,12 @@
             filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
         }
         @keyframes tickerScroll {
-            0% {
-                transform: translateX(0%);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
         }
         @keyframes shimmerTextTicker {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 200% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
         /* ─── BOTTOM NAV ─── */
@@ -1343,6 +1263,7 @@
             border-radius: 30px;
             position: relative;
             cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .bottom-nav .nav-item .nav-icon {
             font-size: 22px;
@@ -1399,22 +1320,12 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .install-modal-box .close-modal {
@@ -1427,7 +1338,7 @@
             font-size: 20px;
             cursor: pointer;
             transition: color var(--transition);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .install-modal-box .close-modal:hover {
             color: #fff;
@@ -1443,11 +1354,13 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 4px;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .install-modal-box p {
             color: var(--text-muted);
             font-size: 14px;
             margin-bottom: 20px;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .install-modal-box .step {
@@ -1466,11 +1379,13 @@
             font-weight: 800;
             color: var(--gold-light);
             min-width: 28px;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .install-modal-box .step .desc {
             font-size: 14px;
             color: var(--text-secondary);
             font-weight: 500;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .install-modal-box .step .desc small {
             display: block;
@@ -1489,7 +1404,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: all var(--transition);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .install-modal-box .got-it-btn:hover {
             transform: scale(1.02);
@@ -1506,98 +1421,37 @@
             animation: confettiFall 1.5s ease-out forwards;
         }
         @keyframes confettiFall {
-            0% {
-                opacity: 1;
-                transform: translateY(0) rotate(0deg) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(100vh) rotate(720deg) scale(0);
-            }
+            0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0); }
         }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 400px) {
-            .name {
-                font-size: 26px;
-            }
-            .hero-card {
-                padding: 16px;
-            }
-            .catalog-card {
-                height: 130px;
-            }
-            .catalog-front h3 {
-                font-size: 9px;
-            }
-            .catalog-front .icon-big {
-                font-size: 18px;
-            }
-            .product-grid {
-                gap: 6px;
-                padding: 0 8px;
-            }
-            .two-grid {
-                gap: 8px;
-                padding: 0 8px;
-            }
-            .two-grid .glass-btn {
-                font-size: 11px;
-                padding: 12px 6px;
-            }
-            .contact-btn {
-                font-size: 12px;
-                padding: 10px 16px;
-            }
-            .section-title {
-                font-size: 13px;
-            }
-            .stars-bright {
-                font-size: 36px;
-            }
-            .bottom-nav .nav-item {
-                padding: 4px 10px;
-                font-size: 7px;
-            }
-            .bottom-nav .nav-item .nav-icon {
-                font-size: 18px;
-            }
-            .top-bar .lang-btn,
-            .top-bar .audio-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .ticker-track span {
-                font-size: 15px;
-                padding: 0 20px;
-            }
-            .ticker-bar {
-                bottom: 60px;
-                padding: 8px 0;
-            }
-            .testimonial-item .quote {
-                font-size: 13px;
-            }
+            .name { font-size: 26px; }
+            .hero-card { padding: 16px; }
+            .catalog-card { height: 130px; }
+            .catalog-front h3 { font-size: 9px; }
+            .catalog-front .icon-big { font-size: 18px; }
+            .product-grid { gap: 6px; padding: 0 8px; }
+            .two-grid { gap: 8px; padding: 0 8px; }
+            .two-grid .glass-btn { font-size: 11px; padding: 12px 6px; }
+            .contact-btn { font-size: 12px; padding: 10px 16px; }
+            .section-title { font-size: 13px; }
+            .stars-bright { font-size: 36px; }
+            .bottom-nav .nav-item { padding: 4px 10px; font-size: 7px; }
+            .bottom-nav .nav-item .nav-icon { font-size: 18px; }
+            .top-bar .lang-btn, .top-bar .audio-btn { font-size: 10px; padding: 3px 10px; }
+            .ticker-track span { font-size: 15px; padding: 0 20px; }
+            .ticker-bar { bottom: 60px; padding: 8px 0; }
+            .testimonial-item .quote { font-size: 13px; }
         }
 
         @media (max-width: 360px) {
-            .name {
-                font-size: 22px;
-            }
-            .contact-qr {
-                width: 48px;
-                min-width: 48px;
-            }
-            .quick-actions .glass-btn {
-                font-size: 8px;
-                padding: 6px 2px;
-            }
-            .quick-actions .glass-btn .icon {
-                font-size: 16px;
-            }
-            .catalog-card {
-                height: 110px;
-            }
+            .name { font-size: 22px; }
+            .contact-qr { width: 48px; min-width: 48px; }
+            .quick-actions .glass-btn { font-size: 8px; padding: 6px 2px; }
+            .quick-actions .glass-btn .icon { font-size: 16px; }
+            .catalog-card { height: 110px; }
         }
 
         .animate-on-scroll {
@@ -1611,24 +1465,12 @@
         }
 
         /* ─── LANGUAGE TOGGLE ─── */
-        .lang-hi {
-            display: none;
-        }
-        body.lang-hindi .lang-en {
-            display: none;
-        }
-        body.lang-hindi .lang-hi {
-            display: inline-block;
-        }
-        body.lang-hindi .lang-en-block {
-            display: none !important;
-        }
-        body.lang-hindi .lang-hi-block {
-            display: block !important;
-        }
-        .lang-hi-block {
-            display: none;
-        }
+        .lang-hi { display: none; }
+        body.lang-hindi .lang-en { display: none; }
+        body.lang-hindi .lang-hi { display: inline-block; }
+        body.lang-hindi .lang-en-block { display: none !important; }
+        body.lang-hindi .lang-hi-block { display: block !important; }
+        .lang-hi-block { display: none; }
 
         /* ─── TOAST NOTIFICATION ─── */
         .toast {
@@ -1650,6 +1492,7 @@
             pointer-events: none;
             white-space: nowrap;
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+            font-family: 'Space Grotesk', sans-serif;
         }
         .toast.show {
             opacity: 1;
@@ -1673,6 +1516,7 @@
             color: #4cd964;
             letter-spacing: 0.3px;
             text-transform: uppercase;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .live-badge .pulse-dot-sm {
             display: inline-block;
@@ -1694,15 +1538,8 @@
             box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
         }
         @keyframes pulse-dot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.3;
-                transform: scale(0.7);
-            }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.7); }
         }
     </style>
 </head>
@@ -1714,8 +1551,8 @@
     <!-- ─── SHOOTING STARS ─── -->
     <div class="shooting-stars" id="shootingStars"></div>
 
-    <!-- ─── DYNAMIC BACKGROUND ─── -->
-    <div class="dynamic-bg" id="dynamicBg">
+    <!-- ─── ANIMATED BACKGROUND ─── -->
+    <div class="animated-bg" id="animatedBg">
         <div class="aura"></div>
     </div>
 
@@ -1753,7 +1590,6 @@
 
         <!-- ═══ HERO ═══ -->
         <div class="hero">
-            <!-- VIDEO BACKGROUND (Auto-play loop) -->
             <video class="hero-video-bg" autoplay muted loop playsinline>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-white-marble-texture-5615-large.mp4" type="video/mp4">
             </video>
@@ -1826,28 +1662,24 @@
             <span class="label">📖</span><span class="line"></span>
         </div>
         <div class="catalog-grid" id="catalogGrid">
-            <!-- Card 1: 300x450 -->
             <div class="catalog-card" data-delay="0.05" data-catalog="300x450">
                 <div class="catalog-inner">
                     <div class="catalog-front"><span class="icon-big">📐</span><h3>300×450</h3><p>Wall Tiles</p></div>
                     <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Catalog</p><a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="300x450">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
-            <!-- Card 2: 600x600 Old -->
             <div class="catalog-card" data-delay="0.10" data-catalog="600x600-old">
                 <div class="catalog-inner">
                     <div class="catalog-front"><span class="icon-big">🔲</span><h3>600×600</h3><p>Matt (Old)</p></div>
                     <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Catalog</p><a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="600x600-old">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
-            <!-- Card 3: 300x600 -->
             <div class="catalog-card" data-delay="0.15" data-catalog="300x600" style="border-color:rgba(212,175,55,0.3);">
                 <div class="catalog-inner" style="border-color:rgba(212,175,55,0.3);">
                     <div class="catalog-front" style="background:rgba(212,175,55,0.05);border-color:rgba(212,175,55,0.1);"><span class="icon-big">📐</span><h3 style="color:var(--gold-light);">300×600</h3><p>Modern</p><span class="badge-new">✦ New</span></div>
                     <div class="catalog-back"><span class="badge-new">✦ New</span><a href="https://drive.google.com/file/d/1OoOO2rFnY4Bw6tkv5vGwYsrAz4bSGLU6/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="300x600">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
-            <!-- Card 4: 600x600 New -->
             <div class="catalog-card" data-delay="0.20" data-catalog="600x600-new" style="border-color:rgba(76,217,100,0.2);">
                 <div class="catalog-inner" style="border-color:rgba(76,217,100,0.2);">
                     <div class="catalog-front" style="background:rgba(76,217,100,0.03);"><span class="icon-big">🔲</span><h3 style="color:#4cd964;">600×600</h3><p>Matt (New)</p><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span></div>
@@ -1940,7 +1772,7 @@
         <div class="glass-card animate-on-scroll" style="margin:0 12px;">
             <img src="Company.png" class="profile-img" alt="Company" />
             <h2 style="font-size:22px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;">Tile Planet</h2>
-            <p style="color:var(--text-secondary);text-align:center;">
+            <p style="color:var(--text-secondary);text-align:center;font-family:'Space Grotesk',sans-serif;">
                 <span class="lang-en">Premium Tiles Supplier · Est. 2018</span>
                 <span class="lang-hi">प्रीमियम टाइल्स सप्लायर · स्थापना 2018</span>
             </p>
@@ -1988,7 +1820,6 @@
                 <a href="tel:+919922533033" class="contact-btn magnetic" style="background:rgba(76,217,100,0.05);border-color:rgba(76,217,100,0.15);" data-strength="12">
                     📞 <span class="lang-en">CONTACT FOR STOCK</span><span class="lang-hi">स्टॉक के लिए संपर्क करें</span>
                 </a>
-                <!-- ═══ LIVE INVENTORY BUTTON — LINKED TO URL ═══ -->
                 <a href="#" class="contact-btn btn-live-inventory magnetic" onclick="openLiveInventory(); return false;" data-strength="12">
                     <span class="pulse-dot"></span>
                     <span class="lang-en">LIVE INVENTORY</span>
@@ -2029,7 +1860,7 @@
             <h2 style="font-size:19px;font-weight:700;font-family:'Playfair Display',serif;">
                 <span class="lang-en">Love Our Service?</span><span class="lang-hi">हमारी सेवा पसंद आई?</span>
             </h2>
-            <p style="color:var(--text-secondary);">
+            <p style="color:var(--text-secondary);font-family:'Space Grotesk',sans-serif;">
                 <span class="lang-en">Share your experience on Google</span>
                 <span class="lang-hi">गूगल पर अपना अनुभव साझा करें</span>
             </p>
@@ -2138,11 +1969,10 @@
     </div>
 
     <script>
-        // ─── INVENTORY URL (LIVE INVENTORY) ───
+        // ─── INVENTORY URL ───
         const INVENTORY_URL =
             'https://script.google.com/macros/s/AKfycbzKWq9Ll8BhLMReIRbgBafyHkbhr9YklavRyQvimovn9hEO1F8IwADfNeEemrG6YG-eOg/exec';
 
-        // ─── OPEN LIVE INVENTORY ───
         function openLiveInventory() {
             window.open(INVENTORY_URL, '_blank');
             showToast('📦 Opening live inventory…');
@@ -2160,9 +1990,9 @@
             toastTimer = setTimeout(() => { el.classList.remove('show'); }, 2800);
         }
 
-        // ─── CONFETTI (Click/Tap effect) ───
+        // ─── CONFETTI ───
         document.addEventListener('click', function(e) {
-            const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FFE66D', '#A8E6CF', '#FF8A5C'];
+            const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FFE66D', '#A8E6CF', '#FF8A5C', '#E8A87C', '#F5CBA7'];
             for (let i = 0; i < 8; i++) {
                 const piece = document.createElement('div');
                 piece.className = 'confetti-piece';
@@ -2259,25 +2089,7 @@
             requestAnimationFrame(animateCounter);
         })();
 
-        // ─── DYNAMIC BACKGROUND ───
-        (function setDynamicBackground() {
-            const bg = document.getElementById('dynamicBg');
-            const palettes = [
-                'radial-gradient(circle at 30% 10%, #1a0f0a 0%, #2a1a0e 40%, #0d0805 70%, #050505 100%)',
-                'radial-gradient(circle at 70% 20%, #0d1a2b 0%, #162b3d 40%, #0a101a 70%, #050505 100%)',
-                'radial-gradient(circle at 50% 50%, #1e1a0c 0%, #2d2414 40%, #100d06 70%, #050505 100%)',
-                'radial-gradient(circle at 20% 80%, #1a0f1a 0%, #2d1a2d 40%, #100a10 70%, #050505 100%)',
-                'radial-gradient(circle at 60% 40%, #0f1a0f 0%, #1a2d1a 40%, #0a100a 70%, #050505 100%)',
-                'radial-gradient(circle at 40% 60%, #1a1008 0%, #2d1c0e 40%, #0d0805 70%, #050505 100%)',
-                'radial-gradient(circle at 80% 80%, #0f0f1a 0%, #1a1a2d 40%, #0a0a10 70%, #050505 100%)',
-                'radial-gradient(circle at 50% 30%, #0a1a1a 0%, #1a2d2d 40%, #0a1010 70%, #050505 100%)',
-                'radial-gradient(circle at 30% 70%, #1a0a0a 0%, #2d1a1a 40%, #100a0a 70%, #050505 100%)',
-                'radial-gradient(circle at 70% 60%, #0a0a1a 0%, #1a1a2d 40%, #0a0a10 70%, #050505 100%)'
-            ];
-            const hour = new Date().getHours();
-            const index = hour % palettes.length;
-            bg.style.background = palettes[index];
-        })();
+        // ─── DYNAMIC BACKGROUND ─── (already using animated-bg)
 
         // ─── TESTIMONIAL CAROUSEL ───
         (function initTestimonial() {
@@ -2512,7 +2324,7 @@
             navigator.serviceWorker.register('/service-worker.js').catch(() => {});
         }
 
-        console.log('✅ Tile Planet — 5D Premium Digital Card Loaded!');
+        console.log('✅ Tile Planet — 5D Premium Digital Card Loaded with New Design!');
     </script>
 
 </body>
