@@ -257,7 +257,141 @@
             z-index: 1;
         }
 
-        /* ─── GLASS CARD (DEEP GLASSMORPHISM) ─── */
+        /* ════════════════════════════════════════════ */
+        /* ─── EVENT BANNER / POSTER SYSTEM ─── */
+        /* ════════════════════════════════════════════ */
+        .event-banner {
+            margin: 12px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0806, #1a1008);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            transition: all var(--transition);
+        }
+        .event-banner:hover {
+            transform: scale(1.01);
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        .event-banner-inner {
+            padding: 24px 20px;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Banner Background Overlay */
+        .event-banner .banner-bg-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.15;
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px);
+        }
+
+        /* Banner Emoji / Icon */
+        .event-banner .banner-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 4px;
+            animation: bounceIcon 2s ease-in-out infinite;
+        }
+        @keyframes bounceIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Banner Title */
+        .event-banner .banner-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        .event-banner .banner-title .highlight {
+            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light), var(--gold-light));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 3s ease-in-out infinite;
+        }
+
+        /* Banner Subtitle */
+        .event-banner .banner-sub {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Banner Offer Text */
+        .event-banner .banner-offer {
+            font-size: 13px;
+            color: var(--gold-light);
+            margin-top: 8px;
+            font-weight: 600;
+            background: rgba(212, 175, 55, 0.08);
+            display: inline-block;
+            padding: 4px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(8px);
+        }
+
+        /* ─── FIREWORKS FOR INDEPENDENCE DAY ─── */
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: fireworkBurst 1.5s ease-out forwards;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes fireworkBurst {
+            0% { transform: translate(0, 0) scale(0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
+        }
+
+        /* ─── TRI-COLOR STRIPES ─── */
+        .tricolor-stripes {
+            display: flex;
+            height: 4px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 3;
+        }
+        .tricolor-stripes span {
+            flex: 1;
+            height: 100%;
+        }
+        .tricolor-stripes .saffron { background: #FF9933; }
+        .tricolor-stripes .white { background: #FFFFFF; }
+        .tricolor-stripes .green { background: #138808; }
+
+        /* ════════════════════════════════════════════ */
+        /* ─── GLASS CARD ─── */
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(40px) saturate(1.6);
@@ -478,7 +612,6 @@
             -webkit-text-fill-color: #0a0806;
         }
 
-        /* ─── 3D NEON BUTTONS ─── */
         .contact-btn {
             display: inline-flex;
             align-items: center;
@@ -1444,6 +1577,8 @@
             .ticker-track span { font-size: 15px; padding: 0 20px; }
             .ticker-bar { bottom: 60px; padding: 8px 0; }
             .testimonial-item .quote { font-size: 13px; }
+            .event-banner .banner-title { font-size: 22px; }
+            .event-banner .banner-icon { font-size: 36px; }
         }
 
         @media (max-width: 360px) {
@@ -1587,6 +1722,9 @@
     </div>
 
     <div class="container">
+
+        <!-- ═══ EVENT BANNER (Auto-detects date) ═══ -->
+        <div id="eventBannerContainer"></div>
 
         <!-- ═══ HERO ═══ -->
         <div class="hero">
@@ -1969,6 +2107,184 @@
     </div>
 
     <script>
+        // ═══════════════════════════════════════════════
+        // ─── EVENT BANNER SYSTEM ───
+        // ═══════════════════════════════════════════════
+
+        function getEventBanner() {
+            const now = new Date();
+            const day = now.getDate();
+            const month = now.getMonth() + 1; // Jan = 1
+            const dateStr = `${day}/${month}`;
+
+            // Define events (day/month)
+            const events = {
+                '15/8': {
+                    icon: '🇮🇳',
+                    title: '🇮🇳 Happy Independence Day!',
+                    sub: '15 August 2026',
+                    offer: '🎉 Special Discount on All Tiles!',
+                    bg: 'linear-gradient(135deg, #FF9933, #FFFFFF, #138808)',
+                    triColor: true,
+                    fireworks: true
+                },
+                '26/1': {
+                    icon: '🇮🇳',
+                    title: '🇮🇳 Happy Republic Day!',
+                    sub: '26 January 2026',
+                    offer: '🎉 Special Republic Day Offer!',
+                    bg: 'linear-gradient(135deg, #FF9933, #FFFFFF, #138808)',
+                    triColor: true,
+                    fireworks: true
+                },
+                '25/12': {
+                    icon: '🎄',
+                    title: '🎄 Merry Christmas!',
+                    sub: '25 December 2026',
+                    offer: '🎁 Christmas Special Discount!',
+                    bg: 'linear-gradient(135deg, #0a2f1f, #1a4a2a, #0a2f1f)',
+                    triColor: false,
+                    fireworks: false
+                },
+                '1/1': {
+                    icon: '🎆',
+                    title: '🎆 Happy New Year 2027!',
+                    sub: '1 January 2027',
+                    offer: '🎉 New Year Special Offer!',
+                    bg: 'linear-gradient(135deg, #1a0a2a, #2a1a4a, #1a0a2a)',
+                    triColor: false,
+                    fireworks: true
+                },
+                '14/11': {
+                    icon: '🪔',
+                    title: '🪔 Happy Diwali!',
+                    sub: '14 November 2026',
+                    offer: '✨ Diwali Special Discount on All Tiles!',
+                    bg: 'linear-gradient(135deg, #1a0a0a, #2a1a0a, #1a0a0a)',
+                    triColor: false,
+                    fireworks: false
+                },
+                '14/3': {
+                    icon: '🌈',
+                    title: '🌈 Happy Holi!',
+                    sub: '14 March 2026',
+                    offer: '🎨 Holi Special Offer!',
+                    bg: 'linear-gradient(135deg, #FF6B6B, #4ECDC4, #FFE66D, #A8E6CF)',
+                    triColor: false,
+                    fireworks: false
+                }
+            };
+
+            // Check if today is an event
+            const event = events[dateStr];
+            if (event) {
+                return event;
+            }
+
+            // Check for upcoming events within 7 days (show teaser)
+            for (const [key, value] of Object.entries(events)) {
+                const [eventDay, eventMonth] = key.split('/').map(Number);
+                const eventDate = new Date(now.getFullYear(), eventMonth - 1, eventDay);
+                const diffDays = Math.ceil((eventDate - now) / (1000 * 60 * 60 * 24));
+                if (diffDays > 0 && diffDays <= 7) {
+                    return {
+                        icon: '📅',
+                        title: `🎉 Coming Soon: ${value.title.replace(/[^\w\s]/g, '').trim()}`,
+                        sub: `In ${diffDays} days`,
+                        offer: `🔔 ${value.offer}`,
+                        bg: 'linear-gradient(135deg, #1a1008, #2a1a0e, #1a1008)',
+                        triColor: false,
+                        fireworks: false,
+                        isTeaser: true
+                    };
+                }
+            }
+
+            // Default banner
+            return {
+                icon: '🏛️',
+                title: '✨ Welcome to <span class="highlight">Tile Planet</span>',
+                sub: 'Premium Tiles · Perfect Spaces',
+                offer: '📞 Contact Us for Best Prices!',
+                bg: 'linear-gradient(135deg, #0a0806, #1a1008, #0a0806)',
+                triColor: false,
+                fireworks: false
+            };
+        }
+
+        function createFireworks(container) {
+            if (!container) return;
+            const colors = ['#FF9933', '#FFFFFF', '#138808', '#FFD700', '#FF6B6B', '#4ECDC4'];
+            for (let i = 0; i < 30; i++) {
+                const fw = document.createElement('div');
+                fw.className = 'firework';
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 50 + Math.random() * 80;
+                fw.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                fw.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+                fw.style.background = colors[Math.floor(Math.random() * colors.length)];
+                fw.style.left = (20 + Math.random() * 60) + '%';
+                fw.style.top = (20 + Math.random() * 40) + '%';
+                fw.style.animationDelay = (Math.random() * 0.8) + 's';
+                fw.style.width = (2 + Math.random() * 4) + 'px';
+                fw.style.height = fw.style.width;
+                container.appendChild(fw);
+                setTimeout(() => fw.remove(), 2000);
+            }
+        }
+
+        function renderEventBanner() {
+            const container = document.getElementById('eventBannerContainer');
+            const event = getEventBanner();
+
+            let triColorHTML = '';
+            if (event.triColor) {
+                triColorHTML = `
+                    <div class="tricolor-stripes">
+                        <span class="saffron"></span>
+                        <span class="white"></span>
+                        <span class="green"></span>
+                    </div>
+                `;
+            }
+
+            let fireworksHTML = '';
+            if (event.fireworks) {
+                fireworksHTML = `<div class="fireworks-container" id="fireworksContainer"></div>`;
+            }
+
+            container.innerHTML = `
+                <div class="event-banner" style="background: ${event.bg};">
+                    <div class="event-banner-inner">
+                        <span class="banner-icon">${event.icon}</span>
+                        <div class="banner-title">${event.title}</div>
+                        <div class="banner-sub">${event.sub}</div>
+                        <div class="banner-offer">${event.offer}</div>
+                    </div>
+                    ${triColorHTML}
+                    ${fireworksHTML}
+                </div>
+            `;
+
+            // Trigger fireworks after render
+            if (event.fireworks) {
+                setTimeout(() => {
+                    const fwContainer = document.getElementById('fireworksContainer');
+                    if (fwContainer) {
+                        // Create multiple bursts
+                        for (let i = 0; i < 3; i++) {
+                            setTimeout(() => createFireworks(fwContainer), i * 500);
+                        }
+                        // Repeat every 3 seconds
+                        setInterval(() => {
+                            const fwC = document.getElementById('fireworksContainer');
+                            if (fwC) createFireworks(fwC);
+                        }, 3000);
+                    }
+                }, 500);
+            }
+        }
+
         // ─── INVENTORY URL ───
         const INVENTORY_URL =
             'https://script.google.com/macros/s/AKfycbzKWq9Ll8BhLMReIRbgBafyHkbhr9YklavRyQvimovn9hEO1F8IwADfNeEemrG6YG-eOg/exec';
@@ -2034,6 +2350,9 @@
 
         // ─── CATALOG FIX ───
         document.addEventListener('DOMContentLoaded', function() {
+            // Render event banner
+            renderEventBanner();
+
             const cards = document.querySelectorAll('.catalog-card');
             cards.forEach(card => {
                 const inner = card.querySelector('.catalog-inner');
@@ -2088,8 +2407,6 @@
             }
             requestAnimationFrame(animateCounter);
         })();
-
-        // ─── DYNAMIC BACKGROUND ─── (already using animated-bg)
 
         // ─── TESTIMONIAL CAROUSEL ───
         (function initTestimonial() {
@@ -2324,7 +2641,7 @@
             navigator.serviceWorker.register('/service-worker.js').catch(() => {});
         }
 
-        console.log('✅ Tile Planet — 5D Premium Digital Card Loaded with New Design!');
+        console.log('✅ Tile Planet — 5D Premium Digital Card with Event Banner System Loaded!');
     </script>
 
 </body>
