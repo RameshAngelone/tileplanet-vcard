@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Tile Planet · Premium Digital Card</title>
+    <title>Tile Planet · 5D Premium Digital Card</title>
 
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#D4AF37" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
@@ -26,7 +27,7 @@
             --gold-light: #f5d76e;
             --gold-neon: #f9e79f;
             --dark-bg: #050505;
-            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-bg: rgba(255, 255, 255, 0.02);
             --glass-border: rgba(212, 175, 55, 0.08);
             --text-primary: #f5f0eb;
             --text-secondary: rgba(245, 240, 235, 0.75);
@@ -49,6 +50,61 @@
             -webkit-font-smoothing: antialiased;
             padding-bottom: 130px;
             min-height: 100vh;
+            cursor: none; /* Custom cursor */
+        }
+
+        /* ─── CUSTOM CURSOR ─── */
+        .custom-cursor {
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background 0.2s;
+            mix-blend-mode: difference;
+        }
+        .custom-cursor.active {
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold-light);
+        }
+
+        /* ─── SHOOTING STARS ─── */
+        .shooting-stars {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            animation: shoot linear infinite;
+            opacity: 0;
+        }
+        @keyframes shoot {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-400px, 400px) scale(1);
+                opacity: 0;
+            }
         }
 
         /* ─── DYNAMIC BACKGROUND ─── */
@@ -237,6 +293,18 @@
             }
         }
 
+        /* ─── VIDEO HERO BACKGROUND ─── */
+        .hero-video-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+            filter: blur(2px) brightness(0.7);
+        }
+
         /* ─── CONTAINER ─── */
         .container {
             max-width: 440px;
@@ -246,15 +314,15 @@
             z-index: 1;
         }
 
-        /* ─── GLASS CARD ─── */
+        /* ─── GLASS CARD (GLASSMORPHISM) ─── */
         .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(40px) saturate(1.4);
-            -webkit-backdrop-filter: blur(40px) saturate(1.4);
-            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(40px) saturate(1.6);
+            -webkit-backdrop-filter: blur(40px) saturate(1.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: var(--radius-lg);
             padding: 20px 22px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(212, 175, 55, 0.04);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.03);
             transition: all var(--transition);
             position: relative;
             z-index: 1;
@@ -272,8 +340,7 @@
             padding: 12px 12px 24px;
             border-radius: 0 0 40px 40px;
             overflow: hidden;
-            background: url('showroom.jpg') center center / cover no-repeat;
-            min-height: 360px;
+            min-height: 400px;
             display: flex;
             align-items: flex-end;
         }
@@ -324,7 +391,7 @@
             opacity: 0.9;
         }
 
-        /* ─── 3D HERO CARD ─── */
+        /* ─── 3D/5D HERO CARD ─── */
         .tilt-wrapper {
             perspective: 1400px;
             transform-style: preserve-3d;
@@ -398,6 +465,49 @@
             transform: translateZ(100px);
         }
 
+        /* ─── 5D HOLOGRAPHIC IMAGE EFFECT ─── */
+        .holographic-img {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            transition: all var(--transition);
+        }
+        .holographic-img::after {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.1), transparent, rgba(255, 255, 255, 0.05), transparent);
+            background-size: 200% 200%;
+            animation: holographicShine 4s linear infinite;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        @keyframes holographicShine {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(212, 175, 55, 0.04);
+            transition: all var(--transition);
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        .product:hover .product-img {
+            border-color: rgba(212, 175, 55, 0.25);
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08), 0 8px 30px rgba(0, 0, 0, 0.5);
+            transform: scale(1.03);
+        }
+
+        /* ─── TOP ROW ─── */
         .top-row {
             display: flex;
             justify-content: space-between;
@@ -559,6 +669,7 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
         }
 
+        /* ─── INSTALL BUTTON ─── */
         .install-btn-wrapper {
             display: flex;
             justify-content: center;
@@ -684,21 +795,6 @@
         .product:hover {
             transform: translateY(-4px);
         }
-        .product-img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            transition: all var(--transition);
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
-        .product:hover .product-img {
-            border-color: rgba(212, 175, 55, 0.25);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08), 0 8px 30px rgba(0, 0, 0, 0.5);
-            transform: scale(1.03);
-        }
         .product span {
             display: block;
             margin-top: 6px;
@@ -707,7 +803,7 @@
             color: var(--text-secondary);
         }
 
-        /* ─── CATALOG 3D FLIP — FIXED ─── */
+        /* ─── CATALOG 3D FLIP ─── */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1400,6 +1496,26 @@
             box-shadow: 0 8px 40px rgba(212, 175, 55, 0.2);
         }
 
+        /* ─── CONFETTI ─── */
+        .confetti-piece {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 999999;
+            pointer-events: none;
+            animation: confettiFall 1.5s ease-out forwards;
+        }
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg) scale(0);
+            }
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 400px) {
             .name {
@@ -1592,6 +1708,12 @@
 </head>
 <body>
 
+    <!-- ─── CUSTOM CURSOR ─── -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- ─── SHOOTING STARS ─── -->
+    <div class="shooting-stars" id="shootingStars"></div>
+
     <!-- ─── DYNAMIC BACKGROUND ─── -->
     <div class="dynamic-bg" id="dynamicBg">
         <div class="aura"></div>
@@ -1631,6 +1753,10 @@
 
         <!-- ═══ HERO ═══ -->
         <div class="hero">
+            <!-- VIDEO BACKGROUND (Auto-play loop) -->
+            <video class="hero-video-bg" autoplay muted loop playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-white-marble-texture-5615-large.mp4" type="video/mp4">
+            </video>
             <div class="hero-content">
                 <div class="logo-wrap">
                     <img src="Logo.png" class="logo" alt="Tile Planet" />
@@ -1686,11 +1812,11 @@
             <span class="label">✦</span><span class="line"></span>
         </div>
         <div class="product-grid">
-            <div class="product" data-delay="0.05"><img src="Walltiles.jpg" class="product-img" /><span>Wall</span></div>
-            <div class="product" data-delay="0.10"><img src="Floortiles.jpg" class="product-img" /><span>Floor</span></div>
-            <div class="product" data-delay="0.15"><img src="Vitrifiedtiles.jpg" class="product-img" /><span>Vitrified</span></div>
-            <div class="product" data-delay="0.20"><img src="Parckingtiles.jpg" class="product-img" /><span>Parking</span></div>
-            <div class="product" data-delay="0.25"><img src="bathroomtiles.jpg" class="product-img" /><span>Bath</span></div>
+            <div class="product" data-delay="0.05"><div class="holographic-img"><img src="Walltiles.jpg" class="product-img" /></div><span>Wall</span></div>
+            <div class="product" data-delay="0.10"><div class="holographic-img"><img src="Floortiles.jpg" class="product-img" /></div><span>Floor</span></div>
+            <div class="product" data-delay="0.15"><div class="holographic-img"><img src="Vitrifiedtiles.jpg" class="product-img" /></div><span>Vitrified</span></div>
+            <div class="product" data-delay="0.20"><div class="holographic-img"><img src="Parckingtiles.jpg" class="product-img" /></div><span>Parking</span></div>
+            <div class="product" data-delay="0.25"><div class="holographic-img"><img src="bathroomtiles.jpg" class="product-img" /></div><span>Bath</span></div>
         </div>
 
         <!-- ═══ 2. CATALOGUES ═══ -->
@@ -2013,8 +2139,6 @@
 
     <script>
         // ─── INVENTORY URL (LIVE INVENTORY) ───
-        // This is the URL from the "upper wali" (the Google Apps Script web app)
-        // It is now properly linked to the Live Inventory button below.
         const INVENTORY_URL =
             'https://script.google.com/macros/s/AKfycbzKWq9Ll8BhLMReIRbgBafyHkbhr9YklavRyQvimovn9hEO1F8IwADfNeEemrG6YG-eOg/exec';
 
@@ -2036,13 +2160,53 @@
             toastTimer = setTimeout(() => { el.classList.remove('show'); }, 2800);
         }
 
+        // ─── CONFETTI (Click/Tap effect) ───
+        document.addEventListener('click', function(e) {
+            const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FFE66D', '#A8E6CF', '#FF8A5C'];
+            for (let i = 0; i < 8; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                const size = Math.random() * 10 + 5;
+                piece.style.width = size + 'px';
+                piece.style.height = size + 'px';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.left = (e.clientX + (Math.random() - 0.5) * 100) + 'px';
+                piece.style.top = (e.clientY + (Math.random() - 0.5) * 100) + 'px';
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                piece.style.animationDuration = (Math.random() * 1.2 + 0.8) + 's';
+                document.body.appendChild(piece);
+                setTimeout(() => piece.remove(), 2000);
+            }
+        });
+
+        // ─── SHOOTING STARS ───
+        (function createShootingStars() {
+            const container = document.getElementById('shootingStars');
+            for (let i = 0; i < 6; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = (Math.random() * 10 + 2) + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(star);
+            }
+        })();
+
+        // ─── CUSTOM CURSOR ───
+        const cursor = document.getElementById('customCursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.addEventListener('mousedown', () => cursor.classList.add('active'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+
         // ─── CATALOG FIX ───
         document.addEventListener('DOMContentLoaded', function() {
             const cards = document.querySelectorAll('.catalog-card');
-
             cards.forEach(card => {
                 const inner = card.querySelector('.catalog-inner');
-
                 card.addEventListener('click', function(e) {
                     if (e.target.closest('.dl-btn')) return;
                     const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -2056,7 +2220,6 @@
                         }
                     }
                 });
-
                 const btn = card.querySelector('.dl-btn');
                 if (btn) {
                     btn.addEventListener('click', function(e) {
@@ -2349,7 +2512,7 @@
             navigator.serviceWorker.register('/service-worker.js').catch(() => {});
         }
 
-        console.log('✅ Tile Planet — Live Inventory button linked to: ' + INVENTORY_URL);
+        console.log('✅ Tile Planet — 5D Premium Digital Card Loaded!');
     </script>
 
 </body>
