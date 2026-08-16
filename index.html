@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Tile Planet · 5D Premium Digital Card</title>
+    <title>Tile Planet · 5D Ultra Luxury Digital Card</title>
 
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#D4AF37" />
+    <meta name="theme-color" content="#E5C07B" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Fonts & Icons -->
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
-        /* ─── RESET & ROOT ─── */
+        /* ─── RESET & ROOT (24K LUXURY ONYX PALETTE) ─── */
         * {
             margin: 0;
             padding: 0;
@@ -23,17 +23,22 @@
         }
 
         :root {
-            --gold: #d4af37;
-            --gold-light: #f5d76e;
-            --gold-neon: #f9e79f;
-            --rose-gold: #e8a87c;
-            --rose-gold-light: #f5cba7;
-            --dark-bg: #050505;
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(212, 175, 55, 0.08);
-            --text-primary: #f5f0eb;
-            --text-secondary: rgba(245, 240, 235, 0.75);
-            --text-muted: rgba(245, 240, 235, 0.35);
+            --gold: #e5c07b;
+            --gold-light: #ffd700;
+            --gold-neon: #fff275;
+            --gold-glow: rgba(229, 192, 123, 0.35);
+            --gold-border: rgba(229, 192, 123, 0.22);
+            --rose-gold: #f4a261;
+            --rose-gold-light: #fcd5ce;
+            --dark-bg: #07090e;
+            --card-surface: rgba(15, 20, 30, 0.75);
+            --glass-bg: rgba(255, 255, 255, 0.035);
+            --glass-border: rgba(229, 192, 123, 0.14);
+            --accent-green: #00e676;
+            --accent-green-glow: rgba(0, 230, 118, 0.3);
+            --text-primary: #faf8f5;
+            --text-secondary: rgba(250, 248, 245, 0.82);
+            --text-muted: rgba(250, 248, 245, 0.48);
             --radius-xl: 32px;
             --radius-lg: 24px;
             --radius-md: 16px;
@@ -59,7 +64,8 @@
         .custom-cursor {
             width: 30px;
             height: 30px;
-            border: 2px solid rgba(212, 175, 55, 0.6);
+            border: 2px solid var(--gold-light);
+            box-shadow: 0 0 15px var(--gold-glow);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
@@ -71,37 +77,36 @@
         .custom-cursor.active {
             width: 60px;
             height: 60px;
-            background: rgba(212, 175, 55, 0.1);
-            border-color: var(--gold-light);
+            background: rgba(255, 215, 0, 0.15);
+            border-color: var(--gold-neon);
+            box-shadow: 0 0 30px var(--gold-glow);
         }
 
-        /* ─── ANIMATED GRADIENT BACKGROUND ─── */
+        /* ─── RICH GRADIENT ONYX BACKGROUND ─── */
         .animated-bg {
             position: fixed;
             inset: 0;
             z-index: 0;
-            background: linear-gradient(135deg, #0a0806, #1a1008, #0d0a15, #1a0f0a);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease-in-out infinite alternate;
+            background: radial-gradient(circle at 50% 10%, #151b28 0%, #0a0d14 50%, #050608 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 18s ease-in-out infinite alternate;
         }
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            25% { background-position: 50% 0%; }
-            50% { background-position: 100% 50%; }
-            75% { background-position: 50% 100%; }
-            100% { background-position: 0% 50%; }
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
         }
 
         .animated-bg .aura {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.05), transparent 70%);
+            background: radial-gradient(circle at 50% 25%, rgba(229, 192, 123, 0.08), transparent 70%);
             pointer-events: none;
-            animation: auraPulse 6s ease-in-out infinite alternate;
+            animation: auraPulse 7s ease-in-out infinite alternate;
         }
         @keyframes auraPulse {
-            0% { opacity: 0.4; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0.9; transform: scale(1.15); }
         }
 
         /* ─── SHOOTING STARS ─── */
@@ -117,6 +122,7 @@
             width: 3px;
             height: 3px;
             background: #fff;
+            box-shadow: 0 0 10px #fff, 0 0 20px var(--gold-light);
             border-radius: 50%;
             animation: shoot linear infinite;
             opacity: 0;
@@ -141,21 +147,22 @@
             width: 6px;
             height: 6px;
             background: radial-gradient(circle, var(--gold-light), transparent);
+            box-shadow: 0 0 12px var(--gold-glow);
             border-radius: 50%;
             animation: floatParticle linear infinite;
-            opacity: 0.2;
+            opacity: 0.25;
         }
         .particle:nth-child(1) { left: 10%; animation-duration: 18s; width: 8px; height: 8px; }
         .particle:nth-child(2) { left: 25%; animation-duration: 22s; animation-delay: 2s; width: 4px; height: 4px; }
-        .particle:nth-child(3) { left: 50%; animation-duration: 20s; animation-delay: 4s; width: 10px; height: 10px; opacity: 0.1; }
+        .particle:nth-child(3) { left: 50%; animation-duration: 20s; animation-delay: 4s; width: 10px; height: 10px; opacity: 0.15; }
         .particle:nth-child(4) { left: 75%; animation-duration: 25s; animation-delay: 1s; width: 5px; height: 5px; }
         .particle:nth-child(5) { left: 90%; animation-duration: 19s; animation-delay: 3s; width: 7px; height: 7px; }
-        .particle:nth-child(6) { left: 40%; animation-duration: 23s; animation-delay: 5s; width: 12px; height: 12px; opacity: 0.08; }
+        .particle:nth-child(6) { left: 40%; animation-duration: 23s; animation-delay: 5s; width: 12px; height: 12px; opacity: 0.1; }
 
         @keyframes floatParticle {
             0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
+            10% { opacity: 0.35; }
+            90% { opacity: 0.35; }
             100% { transform: translateY(-10vh) rotate(720deg) scale(1); opacity: 0; }
         }
 
@@ -165,10 +172,10 @@
             top: 0;
             left: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--rose-gold), var(--gold-light), var(--rose-gold));
+            background: linear-gradient(90deg, var(--rose-gold), var(--gold-light), var(--gold-neon), var(--rose-gold));
             z-index: 99999;
             width: 0%;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 25px var(--gold-glow);
             transition: width 0.1s linear;
         }
 
@@ -177,20 +184,20 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 8px 16px;
+            padding: 10px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5, 5, 5, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.04);
+            background: rgba(7, 9, 14, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--gold-border);
         }
-        .top-bar .lang-btn {
-            background: none;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            color: var(--text-secondary);
-            padding: 4px 12px;
+        .top-bar .lang-btn, .top-bar .audio-btn {
+            background: rgba(229, 192, 123, 0.05);
+            border: 1px solid var(--gold-border);
+            color: var(--text-primary);
+            padding: 5px 14px;
             border-radius: 30px;
             font-size: 11px;
             font-weight: 600;
@@ -201,51 +208,21 @@
             align-items: center;
             gap: 6px;
         }
-        .top-bar .lang-btn:hover {
+        .top-bar .lang-btn:hover, .top-bar .audio-btn:hover {
             border-color: var(--gold-light);
             color: #fff;
-            background: rgba(212, 175, 55, 0.06);
-        }
-        .top-bar .audio-btn {
-            background: none;
-            border: 1px solid rgba(212, 175, 55, 0.12);
-            color: var(--gold-light);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition);
-            font-family: 'Space Grotesk', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .top-bar .audio-btn:hover {
-            border-color: var(--gold-light);
-            background: rgba(212, 175, 55, 0.06);
-            transform: scale(1.04);
+            background: rgba(229, 192, 123, 0.15);
+            box-shadow: 0 0 15px var(--gold-glow);
         }
         .top-bar .audio-btn.playing {
-            border-color: #4cd964;
-            color: #4cd964;
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            background: rgba(0, 230, 118, 0.1);
             animation: pulse-audio 1s ease-in-out infinite;
         }
         @keyframes pulse-audio {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.2); }
-            50% { box-shadow: 0 0 20px 4px rgba(76, 217, 100, 0.1); }
-        }
-
-        /* ─── VIDEO HERO BACKGROUND ─── */
-        .hero-video-bg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            opacity: 0.4;
-            filter: blur(2px) brightness(0.7);
+            0%, 100% { box-shadow: 0 0 0 0 var(--accent-green-glow); }
+            50% { box-shadow: 0 0 20px 4px var(--accent-green-glow); }
         }
 
         /* ─── CONTAINER ─── */
@@ -257,9 +234,9 @@
             z-index: 1;
         }
 
-        /* ─── EVENT BANNER / POSTER SYSTEM ─── */
+        /* ─── EVENT BANNER ─── */
         .event-banner {
-            margin: 12px;
+            margin: 14px 12px;
             border-radius: var(--radius-lg);
             overflow: hidden;
             position: relative;
@@ -267,16 +244,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--gold-border);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(229, 192, 123, 0.08);
             transition: all var(--transition);
         }
         .event-banner:hover {
             transform: scale(1.01);
-            border-color: rgba(212, 175, 55, 0.15);
+            border-color: var(--gold-light);
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.8), 0 0 45px var(--gold-glow);
         }
         .event-banner-inner {
-            padding: 24px 20px;
+            padding: 26px 20px;
             text-align: center;
             width: 100%;
             position: relative;
@@ -297,14 +275,12 @@
             font-size: 28px;
             font-weight: 700;
             letter-spacing: 1px;
-            text-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 80px rgba(0, 0, 0, 0.5);
-            position: relative;
-            z-index: 2;
+            text-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
             color: #FFFFFF !important;
             text-align: center;
         }
         .event-banner .banner-title .highlight {
-            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light), var(--gold-light));
+            background: linear-gradient(135deg, var(--gold-neon), var(--gold-light), var(--rose-gold));
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -312,29 +288,24 @@
         }
         .event-banner .banner-sub {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.9) !important;
+            color: rgba(255, 255, 255, 0.95) !important;
             margin-top: 4px;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
         }
         .event-banner .banner-offer {
             font-size: 13px;
             color: #FFFFFF !important;
-            margin-top: 8px;
-            font-weight: 600;
-            background: rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+            font-weight: 700;
+            background: rgba(0, 0, 0, 0.6);
             display: inline-block;
-            padding: 4px 18px;
+            padding: 5px 20px;
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(8px);
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
         .tricolor-stripes {
             display: flex;
@@ -365,32 +336,31 @@
         .event-banner .banner-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(7, 9, 14, 0.45);
             z-index: 1;
             pointer-events: none;
         }
 
-        /* ─── GLASS CARD ─── */
+        /* ─── GLASS CARD 2.0 ─── */
         .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(40px) saturate(1.6);
-            -webkit-backdrop-filter: blur(40px) saturate(1.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--card-surface);
+            backdrop-filter: blur(40px) saturate(1.8);
+            -webkit-backdrop-filter: blur(40px) saturate(1.8);
+            border: 1px solid var(--glass-border);
             border-radius: var(--radius-lg);
-            padding: 20px 22px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            padding: 22px 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.08);
             transition: all var(--transition);
             position: relative;
             z-index: 1;
-            will-change: transform;
         }
         .glass-card:hover {
             transform: translateY(-4px) scale(1.01);
-            border-color: rgba(212, 175, 55, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 80px rgba(212, 175, 55, 0.05);
+            border-color: var(--gold-border);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 50px rgba(229, 192, 123, 0.1);
         }
 
-        /* ─── HERO ─── */
+        /* ─── HERO & 5D CARD ─── */
         .hero {
             position: relative;
             padding: 12px 12px 24px;
@@ -404,18 +374,18 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(165deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.75) 100%);
+            background: linear-gradient(165deg, rgba(7, 9, 14, 0.9) 0%, rgba(7, 9, 14, 0.45) 50%, rgba(7, 9, 14, 0.85) 100%);
             z-index: 0;
         }
-        .hero::after {
-            content: '';
+        .hero-video-bg {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 60%;
-            background: linear-gradient(to top, rgba(5, 5, 5, 0.7), transparent);
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             z-index: 0;
+            opacity: 0.35;
+            filter: blur(2px) brightness(0.65);
         }
         .hero-content {
             position: relative;
@@ -429,7 +399,7 @@
         }
         .logo {
             width: 170px;
-            filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.9)) brightness(1.08);
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px var(--gold-glow));
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .logo:hover {
@@ -437,42 +407,39 @@
         }
         .tagline {
             text-align: center;
-            font-size: 9px;
+            font-size: 10px;
             letter-spacing: 5px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
+            background: linear-gradient(135deg, var(--gold-neon), var(--gold-light), var(--rose-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 16px;
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            text-shadow: 0 0 35px var(--gold-glow);
         }
 
-        /* ─── 5D HERO CARD ─── */
         .tilt-wrapper {
             perspective: 1400px;
             transform-style: preserve-3d;
         }
         .hero-card {
-            background: rgba(10, 8, 6, 0.65);
-            backdrop-filter: blur(50px) saturate(1.5);
-            -webkit-backdrop-filter: blur(50px) saturate(1.5);
-            border: 1px solid rgba(212, 175, 55, 0.08);
+            background: rgba(15, 20, 32, 0.82);
+            backdrop-filter: blur(50px) saturate(1.8);
+            -webkit-backdrop-filter: blur(50px) saturate(1.8);
+            border: 1px solid var(--gold-border);
             border-radius: var(--radius-lg);
             padding: 22px 22px 18px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(212, 175, 55, 0.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(229, 192, 123, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transform-style: preserve-3d;
-            will-change: transform;
             position: relative;
             overflow: hidden;
         }
         .hero-card .layer-bg-glow {
             position: absolute;
             inset: -50%;
-            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(212, 175, 55, 0.12), transparent 60%);
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 215, 0, 0.16), transparent 60%);
             pointer-events: none;
             z-index: 0;
-            transition: background 0.1s ease;
         }
         .hero-card::before {
             content: '';
@@ -480,13 +447,13 @@
             inset: -2px;
             border-radius: 26px;
             padding: 2px;
-            background: conic-gradient(from 0deg, #d4af37, #f5cba7, #d4af37, #e8a87c, #d4af37, #f5cba7, #d4af37);
+            background: conic-gradient(from 0deg, var(--gold-light), var(--rose-gold), var(--gold-neon), var(--gold-light));
             background-size: 300% 300%;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             animation: shimmerBorder 6s linear infinite;
-            opacity: 0.5;
+            opacity: 0.65;
             z-index: 0;
         }
         @keyframes shimmerBorder {
@@ -504,48 +471,7 @@
         .layer-2 { transform: translateZ(40px); }
         .layer-3 { transform: translateZ(60px); }
         .layer-4 { transform: translateZ(80px); }
-        .layer-5 { transform: translateZ(100px); }
 
-        /* ─── 5D HOLOGRAPHIC IMAGE EFFECT ─── */
-        .holographic-img {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--radius-md);
-            transition: all var(--transition);
-        }
-        .holographic-img::after {
-            content: '';
-            position: absolute;
-            inset: -50%;
-            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.15), transparent, rgba(255, 255, 255, 0.08), transparent);
-            background-size: 200% 200%;
-            animation: holographicShine 4s linear infinite;
-            pointer-events: none;
-            mix-blend-mode: overlay;
-        }
-        @keyframes holographicShine {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .product-img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            transition: all var(--transition);
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            cursor: pointer;
-        }
-        .product:hover .product-img {
-            border-color: rgba(212, 175, 55, 0.25);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08), 0 8px 30px rgba(0, 0, 0, 0.5);
-            transform: scale(1.03);
-        }
-
-        /* ─── TOP ROW ─── */
         .top-row {
             display: flex;
             justify-content: space-between;
@@ -565,11 +491,12 @@
             flex-wrap: wrap;
         }
         .gold-shimmer-text {
-            background: linear-gradient(135deg, #f9e79f, #d4af37, #f5cba7, #e8a87c, #f9e79f);
+            background: linear-gradient(135deg, #fff275, #ffd700, #f4a261, #ffd700);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shimmerText 4s ease-in-out infinite;
+            filter: drop-shadow(0 2px 10px rgba(229,192,123,0.3));
         }
         @keyframes shimmerText {
             0%, 100% { background-position: 0% 50%; }
@@ -577,57 +504,44 @@
         }
         .name .badge {
             font-size: 10px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
-            color: #0a0806;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold-neon), var(--gold-light));
+            color: #07090e;
             padding: 2px 14px;
             border-radius: 50px;
             letter-spacing: 0.5px;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 25px var(--gold-glow);
             display: inline-block;
             font-family: 'Space Grotesk', sans-serif;
-            -webkit-text-fill-color: #0a0806;
+            -webkit-text-fill-color: #07090e;
         }
 
+        /* ─── GOLD FOIL BUTTONS ─── */
         .contact-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             margin-top: 10px;
-            padding: 11px 22px;
+            padding: 12px 22px;
             border-radius: 60px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(232, 168, 124, 0.05));
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: linear-gradient(135deg, rgba(229, 192, 123, 0.18), rgba(244, 162, 97, 0.08));
+            border: 1px solid var(--gold-border);
             text-decoration: none;
             color: #fff;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             transition: all var(--transition);
-            letter-spacing: 0.3px;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
-            will-change: transform;
             cursor: pointer;
             font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
-        .contact-btn .btn-text {
-            position: relative;
-            z-index: 2;
-        }
-        .contact-btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(232, 168, 124, 0.1));
-            opacity: 0;
-            transition: opacity var(--transition);
-        }
-        .contact-btn:hover::after { opacity: 1; }
         .contact-btn:hover {
             border-color: var(--gold-light);
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.2), inset 0 0 30px rgba(212, 175, 55, 0.04);
+            box-shadow: 0 0 35px var(--gold-glow), inset 0 0 20px rgba(255, 215, 0, 0.15);
             transform: scale(1.03) translateY(-2px);
         }
 
@@ -636,13 +550,18 @@
             min-width: 64px;
             padding: 4px;
             border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.05);
             text-align: center;
-            border: 1px solid rgba(212, 175, 55, 0.06);
+            border: 1px solid var(--gold-border);
             transition: transform var(--transition);
             cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
-        .contact-qr:hover { transform: scale(1.05); }
+        .contact-qr:hover {
+            transform: scale(1.08);
+            border-color: var(--gold-light);
+            box-shadow: 0 0 25px var(--gold-glow);
+        }
         .contact-qr img {
             width: 100%;
             background: #fff;
@@ -653,8 +572,8 @@
         .contact-qr p {
             font-size: 6px;
             margin-top: 4px;
-            color: var(--text-muted);
-            font-weight: 600;
+            color: var(--gold-light);
+            font-weight: 700;
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
@@ -668,17 +587,15 @@
         .glass-btn {
             text-decoration: none;
             color: #fff;
-            padding: 10px 4px;
+            padding: 11px 4px;
             border-radius: var(--radius-md);
             text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--gold-border);
             font-size: 10px;
-            font-weight: 600;
+            font-weight: 700;
             transition: all var(--transition);
-            line-height: 1.3;
-            will-change: transform;
             cursor: pointer;
             font-family: 'Space Grotesk', sans-serif;
         }
@@ -690,17 +607,17 @@
         }
         .glass-btn:hover .icon { transform: scale(1.2) translateY(-3px); }
         .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(212, 175, 55, 0.2);
+            background: rgba(229, 192, 123, 0.12);
+            border-color: var(--gold-light);
             transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--gold-glow);
         }
 
-        /* ─── INSTALL BUTTON ─── */
+        /* ─── METALLIC INSTALL BUTTON ─── */
         .install-btn-wrapper {
             display: flex;
             justify-content: center;
-            margin-top: 14px;
+            margin-top: 16px;
         }
         .install-btn {
             display: flex;
@@ -708,23 +625,22 @@
             justify-content: center;
             gap: 10px;
             width: 240px;
-            height: 50px;
+            height: 52px;
             border: none;
             border-radius: 30px;
-            background: linear-gradient(135deg, #ffd700, #d4a017, #e8a87c);
+            background: linear-gradient(135deg, #fff275, #ffd700, #f4a261);
             background-size: 200% 200%;
             animation: gradientBtn 3s ease-in-out infinite alternate;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 4px 30px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            color: #0a0806;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 35px var(--gold-glow), inset 0 2px 0 rgba(255, 255, 255, 0.6);
+            color: #07090e;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 800;
             font-family: 'Space Grotesk', sans-serif;
             cursor: pointer;
             transition: all var(--transition);
             position: relative;
             overflow: hidden;
-            will-change: transform;
         }
         @keyframes gradientBtn {
             0% { background-position: 0% 50%; }
@@ -733,8 +649,8 @@
         .install-btn .btn-sub {
             display: block;
             font-size: 9px;
-            font-weight: 500;
-            opacity: 0.7;
+            font-weight: 600;
+            opacity: 0.85;
         }
         .install-btn .btn-text-wrap {
             display: flex;
@@ -744,7 +660,7 @@
         }
         .install-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 10px 45px rgba(255, 215, 0, 0.6);
         }
         .install-btn .ripple {
             position: absolute;
@@ -759,14 +675,14 @@
         }
         .install-hidden { display: none !important; }
 
-        /* ─── SECTION TITLE ─── */
+        /* ─── DUAL-TONE SECTION TITLE ─── */
         .section-title {
             text-align: center;
             font-size: 15px;
-            font-weight: 700;
+            font-weight: 800;
             color: #fff;
-            margin-top: 34px;
-            margin-bottom: 16px;
+            margin-top: 36px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -776,31 +692,36 @@
             transform: translateY(30px);
             transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
             font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.5px;
         }
         .section-title.visible {
             opacity: 1;
             transform: translateY(0);
         }
+        .section-title .title-accent {
+            color: var(--gold-light);
+            text-shadow: 0 0 20px var(--gold-glow);
+        }
         .section-title .line {
             flex: 1;
-            max-width: 20px;
+            max-width: 25px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3));
+            background: linear-gradient(90deg, transparent, var(--gold-light));
         }
         .section-title .line:last-child {
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.3), transparent);
+            background: linear-gradient(90deg, var(--gold-light), transparent);
         }
         .section-title .label {
             font-size: 8px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
+            background: linear-gradient(135deg, var(--gold-neon), var(--gold-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 2px 12px;
+            padding: 3px 12px;
             border-radius: 50px;
-            border: 1px solid rgba(212, 175, 55, 0.04);
+            border: 1px solid var(--gold-border);
+            box-shadow: 0 0 15px var(--gold-glow);
         }
 
         /* ─── PRODUCT GRID ─── */
@@ -813,7 +734,6 @@
         .product {
             text-align: center;
             cursor: pointer;
-            transition: all var(--transition);
             opacity: 0;
             transform: translateY(30px) scale(0.95);
             transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -823,13 +743,27 @@
             transform: translateY(0) scale(1);
         }
         .product:hover { transform: translateY(-4px); }
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gold-border);
+            transition: all var(--transition);
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+        }
+        .product:hover .product-img {
+            border-color: var(--gold-light);
+            box-shadow: 0 10px 35px var(--gold-glow);
+            transform: scale(1.04);
+        }
         .product span {
             display: block;
             margin-top: 6px;
             font-size: 11px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
         /* ─── CALCULATOR INPUTS ─── */
@@ -837,18 +771,19 @@
             width: 100%;
             padding: 12px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(15, 20, 32, 0.85);
+            border: 1px solid var(--gold-border);
             color: #fff;
             font-size: 13px;
             font-family: 'Space Grotesk', sans-serif;
             outline: none;
             text-align: center;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
         .calc-input:focus {
             border-color: var(--gold-light);
-            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px var(--gold-glow);
+            background: rgba(20, 26, 40, 0.95);
         }
 
         /* ─── CATALOG 3D FLIP ─── */
@@ -877,10 +812,10 @@
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
             transform-style: preserve-3d;
             cursor: pointer;
-            pointer-events: auto;
         }
-        .catalog-card:hover .catalog-inner { transform: rotateY(180deg); }
-        .catalog-inner.flipped { transform: rotateY(180deg); }
+        .catalog-card:hover .catalog-inner, .catalog-inner.flipped {
+            transform: rotateY(180deg);
+        }
         .catalog-front, .catalog-back {
             position: absolute;
             width: 100%;
@@ -893,17 +828,17 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(15, 20, 32, 0.75);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--gold-border);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
             pointer-events: none;
         }
         .catalog-front *, .catalog-back * { pointer-events: auto; }
         .catalog-back {
             transform: rotateY(180deg);
-            background: rgba(8, 7, 5, 0.95);
-            border-color: rgba(212, 175, 55, 0.1);
+            background: rgba(7, 9, 14, 0.98);
+            border-color: var(--gold-light);
             gap: 6px;
         }
         .catalog-front .icon-big { font-size: 24px; margin-bottom: 4px; }
@@ -911,47 +846,43 @@
             font-size: 11px;
             font-weight: 700;
             color: #fff;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .catalog-front p {
             font-size: 8px;
             color: var(--text-muted);
-            font-family: 'Space Grotesk', sans-serif;
         }
         .catalog-back .dl-btn {
             display: inline-flex;
             padding: 6px 14px;
             border-radius: 60px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            background: rgba(229, 192, 123, 0.15);
+            border: 1px solid var(--gold-light);
             color: #fff;
             font-size: 8px;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
             transition: all var(--transition);
             cursor: pointer;
-            pointer-events: auto;
-            font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 0 15px var(--gold-glow);
         }
         .catalog-back .dl-btn:hover {
-            background: rgba(212, 175, 55, 0.2);
-            border-color: var(--gold-light);
+            background: var(--gold-light);
+            color: #07090e;
             transform: scale(1.05);
         }
         .badge-new {
             font-size: 6px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
-            color: #0a0806;
-            padding: 1px 8px;
+            background: linear-gradient(135deg, var(--gold-neon), var(--gold-light));
+            color: #07090e;
+            padding: 2px 8px;
             border-radius: 50px;
             letter-spacing: 0.5px;
-            margin-top: 2px;
-            font-family: 'Space Grotesk', sans-serif;
+            margin-top: 3px;
         }
 
-        /* ─── TESTIMONIAL CAROUSEL ─── */
+        /* ─── TESTIMONIALS ─── */
         .testimonial-section { padding: 0 12px; }
         .testimonial-carousel {
             position: relative;
@@ -968,13 +899,14 @@
             min-width: 100%;
             padding: 20px 24px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(212, 175, 55, 0.04);
+            background: rgba(15, 20, 32, 0.75);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--gold-border);
             border-radius: var(--radius-lg);
         }
         .testimonial-item .stars {
-            color: #FFD700;
+            color: var(--gold-light);
+            text-shadow: 0 0 15px var(--gold-glow);
             font-size: 18px;
             letter-spacing: 4px;
             display: block;
@@ -985,14 +917,12 @@
             color: var(--text-secondary);
             font-style: italic;
             line-height: 1.6;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .testimonial-item .author {
             font-size: 13px;
             font-weight: 700;
             color: var(--gold-light);
             margin-top: 8px;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .testimonial-item .author small {
             font-weight: 400;
@@ -1011,30 +941,30 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: var(--text-muted);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             cursor: pointer;
             transition: all var(--transition);
-            padding: 0;
         }
         .testimonial-dots .dot.active {
             background: var(--gold-light);
             width: 28px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 20px var(--gold-glow);
         }
 
-        /* ─── COMPANY PROFILE ─── */
+        /* ─── COMPANY PROFILE & DETAILS ─── */
         .profile-img, .map-img, .payment-img {
             width: 100%;
             border-radius: var(--radius-md);
-            border: 1px solid rgba(212, 175, 55, 0.04);
+            border: 1px solid var(--gold-border);
             transition: all var(--transition);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
         }
         .profile-img:hover, .map-img:hover, .payment-img:hover {
             transform: scale(1.01);
-            border-color: rgba(212, 175, 55, 0.15);
+            border-color: var(--gold-light);
+            box-shadow: 0 10px 40px var(--gold-glow);
         }
         .payment-img {
             max-width: 200px;
@@ -1046,51 +976,48 @@
         .feature-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4px 14px;
+            gap: 6px 14px;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--text-secondary);
-            margin-top: 14px;
-            font-family: 'Space Grotesk', sans-serif;
+            margin-top: 16px;
         }
         .feature-list span::before {
             content: '◆';
             color: var(--gold-light);
-            font-size: 7px;
+            font-size: 8px;
             margin-right: 6px;
+            text-shadow: 0 0 10px var(--gold-glow);
         }
-
-        /* ─── COMPANY DETAILS ─── */
         .info-table {
             width: 100%;
             font-size: 13px;
             line-height: 2.2;
             border-collapse: collapse;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .info-table td { padding: 4px 0; color: var(--text-secondary); }
         .info-table .label {
             color: var(--gold-light);
-            font-weight: 600;
+            font-weight: 700;
             width: 34%;
             font-size: 10px;
             text-transform: uppercase;
-            opacity: 0.7;
+            letter-spacing: 0.5px;
         }
-        .info-table .value { color: #fff; font-weight: 500; font-size: 13px; }
+        .info-table .value { color: #fff; font-weight: 600; font-size: 13px; }
 
         /* ─── STOCK ENQUIRY ─── */
         .stock-name {
             font-size: 20px;
-            font-weight: 700;
-            color: #4cd964;
-            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            color: var(--accent-green);
+            text-shadow: 0 0 20px var(--accent-green-glow);
         }
         .stock-phone {
             font-size: 16px;
             color: var(--text-secondary);
             margin-bottom: 12px;
-            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
         }
         .btn-group {
             display: flex;
@@ -1103,34 +1030,33 @@
             margin-top: 0;
         }
         .btn-live-inventory {
-            background: linear-gradient(135deg, rgba(0, 200, 255, 0.08), rgba(0, 200, 255, 0.01)) !important;
-            border-color: rgba(0, 200, 255, 0.15) !important;
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.12), rgba(0, 200, 255, 0.04)) !important;
+            border-color: var(--accent-green) !important;
         }
         .btn-live-inventory:hover {
-            border-color: #00c8ff !important;
-            box-shadow: 0 0 60px rgba(0, 200, 255, 0.08) !important;
+            border-color: #00ff88 !important;
+            box-shadow: 0 0 40px var(--accent-green-glow) !important;
         }
         .btn-live-inventory .pulse-dot {
             display: inline-block;
             width: 8px;
             height: 8px;
-            background: #00e676;
+            background: var(--accent-green);
             border-radius: 50%;
             margin-right: 6px;
             animation: pulse-dot 1.8s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+            box-shadow: 0 0 20px var(--accent-green);
         }
         @keyframes pulse-dot {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.3; transform: scale(0.7); }
         }
 
-        /* ─── PAYMENT ─── */
+        /* ─── PAYMENT & GOOGLE REVIEWS ─── */
         .upi-id {
             margin-top: 14px;
             font-size: 14px;
             color: var(--text-secondary);
-            font-family: 'Space Grotesk', sans-serif;
         }
         .upi-id b {
             color: #fff;
@@ -1138,9 +1064,8 @@
             display: block;
             font-size: 17px;
             font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
         }
-
-        /* ─── GOOGLE REVIEWS ─── */
         .google-brand {
             display: flex;
             align-items: center;
@@ -1157,8 +1082,8 @@
         .g-6 { color: #EA4335; }
         .stars-bright {
             font-size: 44px;
-            color: #FFD700;
-            text-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
+            color: var(--gold-light);
+            text-shadow: 0 0 35px var(--gold-glow);
             display: block;
             letter-spacing: 6px;
         }
@@ -1173,8 +1098,7 @@
         .two-grid .glass-btn {
             padding: 16px 8px;
             font-size: 13px;
-            font-weight: 600;
-            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
         }
         .two-grid .glass-btn .icon { font-size: 22px; }
         .single-btn-wrap { margin-top: 14px; text-align: center; }
@@ -1183,75 +1107,73 @@
         /* ─── VISITOR COUNTER ─── */
         .visitor-counter {
             text-align: center;
-            padding: 12px;
+            padding: 14px;
             font-size: 12px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             letter-spacing: 0.5px;
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(15, 20, 32, 0.7);
             border-radius: var(--radius-sm);
-            border: 1px solid rgba(212, 175, 55, 0.03);
+            border: 1px solid var(--gold-border);
             margin: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
         .visitor-counter .count {
             font-weight: 700;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--gold-light);
             font-family: 'Playfair Display', serif;
+            text-shadow: 0 0 15px var(--gold-glow);
         }
         .visitor-counter .label {
             font-size: 10px;
             text-transform: uppercase;
             color: var(--text-muted);
+            font-weight: 700;
         }
 
         /* ─── FOOTER ─── */
         .footer-card {
             margin: 12px;
             text-align: center;
-            padding: 28px 16px 20px;
+            padding: 30px 16px 22px;
             border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(212, 175, 55, 0.03);
+            background: rgba(15, 20, 32, 0.7);
+            border: 1px solid var(--gold-border);
         }
         .footer-logo {
             width: 130px;
             display: block;
             margin: 0 auto 10px;
-            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px var(--gold-glow));
         }
         .footer-card .brand {
             font-size: 20px;
             font-weight: 800;
             color: #fff;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .footer-card .brand span { color: var(--gold-light); }
         .footer-card .sub {
             color: var(--text-secondary);
             font-size: 13px;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .footer-card .slogan-highlight {
-            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
+            background: linear-gradient(135deg, var(--gold-neon), var(--gold-light), var(--rose-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 14px;
-            margin: 6px 0 12px;
-            font-family: 'Space Grotesk', sans-serif;
+            margin: 8px 0 14px;
         }
         .footer-card .copy {
             margin-top: 14px;
             color: var(--text-muted);
             font-size: 11px;
-            border-top: 1px solid rgba(212, 175, 55, 0.03);
+            border-top: 1px solid var(--gold-border);
             padding-top: 14px;
-            font-family: 'Space Grotesk', sans-serif;
         }
 
         /* ─── SCROLLING TICKER ─── */
@@ -1261,41 +1183,38 @@
             left: 0;
             right: 0;
             z-index: 998;
-            background: linear-gradient(90deg, rgba(20, 15, 10, 0.95), rgba(30, 22, 12, 0.95));
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(7, 9, 14, 0.95);
+            backdrop-filter: blur(15px);
             border-top: 2px solid var(--gold-light);
             border-bottom: 2px solid var(--gold-light);
             padding: 10px 0;
             overflow: hidden;
             max-width: 440px;
             margin: 0 auto;
-            box-shadow: 0 -8px 40px rgba(212, 175, 55, 0.15), inset 0 0 60px rgba(212, 175, 55, 0.02);
+            box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.8), 0 0 25px var(--gold-glow);
         }
         .ticker-track {
             display: flex;
             white-space: nowrap;
-            animation: tickerScroll 30s linear infinite;
+            animation: tickerScroll 25s linear infinite;
         }
         .ticker-track span {
             display: inline-block;
-            padding: 0 50px;
-            font-size: 18px;
+            padding: 0 45px;
+            font-size: 16px;
             font-weight: 800;
             color: #fff;
-            text-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.1);
             letter-spacing: 0.8px;
-            background: linear-gradient(90deg, var(--gold-light), var(--rose-gold-light), var(--gold-light));
+            background: linear-gradient(90deg, var(--gold-neon), var(--gold-light), var(--rose-gold), var(--gold-neon));
             background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shimmerTextTicker 3s linear infinite;
         }
         .ticker-track i {
-            margin-right: 12px;
+            margin-right: 10px;
             color: #ff6b6b;
-            font-size: 20px;
-            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
+            font-size: 18px;
         }
         @keyframes tickerScroll {
             0% { transform: translateX(0%); }
@@ -1313,17 +1232,17 @@
             left: 0;
             right: 0;
             z-index: 999;
-            background: rgba(8, 7, 5, 0.7);
-            backdrop-filter: blur(30px) saturate(1.6);
-            -webkit-backdrop-filter: blur(30px) saturate(1.6);
-            border-top: 1px solid rgba(212, 175, 55, 0.05);
+            background: rgba(7, 9, 14, 0.88);
+            backdrop-filter: blur(30px) saturate(1.8);
+            -webkit-backdrop-filter: blur(30px) saturate(1.8);
+            border-top: 1px solid var(--gold-border);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 6px 0 env(safe-area-inset-bottom);
+            padding: 8px 0 env(safe-area-inset-bottom);
             max-width: 440px;
             margin: 0 auto;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
         }
         .bottom-nav .nav-item {
             text-decoration: none;
@@ -1332,7 +1251,7 @@
             flex-direction: column;
             align-items: center;
             font-size: 8px;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             transition: all var(--transition);
@@ -1340,7 +1259,6 @@
             border-radius: 30px;
             position: relative;
             cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .bottom-nav .nav-item .nav-icon {
             font-size: 22px;
@@ -1348,15 +1266,18 @@
             transition: transform var(--transition);
         }
         .bottom-nav .nav-item:hover .nav-icon { transform: translateY(-3px) scale(1.1); }
-        .bottom-nav .nav-item.active { color: var(--gold-light); }
+        .bottom-nav .nav-item.active {
+            color: var(--gold-light);
+            text-shadow: 0 0 15px var(--gold-glow);
+        }
         .bottom-nav .nav-item.active::before {
             content: '';
             position: absolute;
             inset: 0;
             border-radius: 30px;
-            background: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.04);
+            background: rgba(229, 192, 123, 0.12);
+            border: 1px solid var(--gold-border);
+            box-shadow: 0 0 30px var(--gold-glow);
             z-index: -1;
         }
 
@@ -1364,9 +1285,8 @@
         .install-modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
             backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
             display: none;
             align-items: center;
             justify-content: center;
@@ -1376,14 +1296,14 @@
         }
         .install-modal-overlay.active { display: flex; }
         .install-modal-box {
-            background: rgba(12, 10, 8, 0.98);
+            background: rgba(15, 20, 32, 0.98);
             backdrop-filter: blur(40px);
-            border: 1px solid rgba(212, 175, 55, 0.08);
+            border: 1px solid var(--gold-border);
             border-radius: var(--radius-lg);
             padding: 32px 28px 28px;
             max-width: 380px;
             width: 100%;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95), 0 0 50px var(--gold-glow);
             text-align: center;
             position: relative;
             animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1406,7 +1326,6 @@
             font-size: 20px;
             cursor: pointer;
             transition: color var(--transition);
-            font-family: 'Space Grotesk', sans-serif;
         }
         .install-modal-box .close-modal:hover { color: #fff; }
         .install-modal-box .modal-icon { font-size: 44px; display: block; margin-bottom: 6px; }
@@ -1415,37 +1334,33 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 4px;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .install-modal-box p {
             color: var(--text-muted);
             font-size: 14px;
             margin-bottom: 20px;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .install-modal-box .step {
             display: flex;
             align-items: center;
             gap: 14px;
             text-align: left;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: var(--radius-sm);
             padding: 10px 14px;
             margin-bottom: 10px;
-            border: 1px solid rgba(212, 175, 55, 0.03);
+            border: 1px solid var(--gold-border);
         }
         .install-modal-box .step .num {
             font-size: 18px;
             font-weight: 800;
             color: var(--gold-light);
             min-width: 28px;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .install-modal-box .step .desc {
             font-size: 14px;
             color: var(--text-secondary);
-            font-weight: 500;
-            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
         }
         .install-modal-box .step .desc small {
             display: block;
@@ -1458,17 +1373,17 @@
             padding: 14px;
             border: none;
             border-radius: 60px;
-            background: linear-gradient(135deg, #ffd700, #d4a017);
-            color: #0a0806;
-            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold-neon), var(--gold-light));
+            color: #07090e;
+            font-weight: 800;
             font-size: 16px;
             cursor: pointer;
             transition: all var(--transition);
-            font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 4px 25px var(--gold-glow);
         }
         .install-modal-box .got-it-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 8px 35px var(--gold-glow);
         }
 
         /* ─── CONFETTI ─── */
@@ -1485,13 +1400,12 @@
             100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0); }
         }
 
-        /* ─── LIGHTBOX MODAL (IMAGE ZOOM) ─── */
+        /* ─── LIGHTBOX MODAL ─── */
         .lightbox-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.94);
+            background: rgba(7, 9, 14, 0.95);
             backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
             display: none;
             align-items: center;
             justify-content: center;
@@ -1505,14 +1419,13 @@
             max-height: 75vh;
             border-radius: var(--radius-md);
             border: 1px solid var(--gold-light);
-            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.95), 0 0 50px var(--gold-glow);
         }
         .lightbox-title {
             color: #fff;
             margin-top: 14px;
             font-size: 16px;
             font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .lightbox-close {
             position: absolute;
@@ -1523,7 +1436,6 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .lightbox-close:hover { color: #fff; }
 
@@ -1582,21 +1494,20 @@
             bottom: 140px;
             left: 50%;
             transform: translateX(-50%) translateY(20px);
-            background: rgba(10, 8, 6, 0.95);
+            background: rgba(15, 20, 32, 0.95);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold-border);
             color: #fff;
             padding: 12px 24px;
             border-radius: 60px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             z-index: 999999;
             opacity: 0;
             transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
             pointer-events: none;
             white-space: nowrap;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
-            font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 25px var(--gold-glow);
         }
         .toast.show {
             opacity: 1;
@@ -1609,25 +1520,24 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(0, 230, 118, 0.12);
-            border: 1px solid rgba(0, 230, 118, 0.2);
+            background: rgba(0, 230, 118, 0.15);
+            border: 1px solid var(--accent-green);
             padding: 2px 10px;
             border-radius: 50px;
             font-size: 9px;
-            font-weight: 700;
-            color: #4cd964;
+            font-weight: 800;
+            color: var(--accent-green);
             letter-spacing: 0.3px;
             text-transform: uppercase;
-            font-family: 'Space Grotesk', sans-serif;
         }
         .live-badge .pulse-dot-sm {
             display: inline-block;
             width: 6px;
             height: 6px;
-            background: #00e676;
+            background: var(--accent-green);
             border-radius: 50%;
             animation: pulse-dot 1.8s ease-in-out infinite;
-            box-shadow: 0 0 12px rgba(0, 230, 118, 0.3);
+            box-shadow: 0 0 12px var(--accent-green);
         }
     </style>
 </head>
@@ -1732,10 +1642,10 @@
             </div>
         </div>
 
-        <!-- ═══ 1. OUR PRODUCTS (Clickable HD Zoom View) ═══ -->
+        <!-- ═══ 1. OUR PRODUCTS ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">✦</span>
-            <span class="lang-en">🏺 OUR PRODUCTS</span><span class="lang-hi">🏺 हमारे उत्पाद</span>
+            <span><span class="lang-en">OUR</span><span class="lang-hi">हमारे</span> <span class="title-accent"><span class="lang-en">PRODUCTS</span><span class="lang-hi">उत्पाद</span></span></span>
             <span class="label">✦</span><span class="line"></span>
         </div>
         <div class="product-grid">
@@ -1746,22 +1656,22 @@
             <div class="product" data-delay="0.25" onclick="openLightbox('bathroomtiles.jpg', 'Bathroom Tiles')"><div class="holographic-img"><img src="bathroomtiles.jpg" class="product-img" alt="Bathroom Tiles" /></div><span>Bath</span></div>
         </div>
 
-        <!-- ═══ 2. TILE BOX CALCULATOR (NEW SMART TOOL) ═══ -->
+        <!-- ═══ 2. TILE BOX CALCULATOR ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">🧮</span>
-            <span class="lang-en">TILE CALCULATOR</span><span class="lang-hi">टाइल कैलकुलेटर</span>
+            <span><span class="lang-en">TILE</span><span class="lang-hi">टाइल</span> <span class="title-accent"><span class="lang-en">CALCULATOR</span><span class="lang-hi">कैलकुलेटर</span></span></span>
             <span class="label">🧮</span><span class="line"></span>
         </div>
         <div class="glass-card animate-on-scroll" style="margin: 0 12px; text-align: center;">
-            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
-                <span class="lang-en">Calculate total boxes needed (+10% Wastage):</span>
-                <span class="lang-hi">कमरे की लंबाई और चौड़ाई (Feet) दर्ज करें:</span>
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; font-weight: 500;">
+                <span class="lang-en">Calculate total boxes needed with +10% Wastage:</span>
+                <span class="lang-hi">कमरे की लंबाई और चौड़ाई (Feet) दर्ज करें (+10% वेस्टेज):</span>
             </p>
             <div style="display: flex; gap: 8px; margin-bottom: 10px;">
                 <input id="roomL" type="number" placeholder="Length (Ft)" class="calc-input">
                 <input id="roomW" type="number" placeholder="Width (Ft)" class="calc-input">
             </div>
-            <select id="tileSize" class="calc-input" style="background:#111; margin-bottom: 12px;">
+            <select id="tileSize" class="calc-input" style="margin-bottom: 12px;">
                 <option value="16">600 × 600 mm (4 Tiles/Box ≈ 16 Sq.Ft)</option>
                 <option value="14.5">300 × 600 mm (8 Tiles/Box ≈ 14.5 Sq.Ft)</option>
                 <option value="12">300 × 450 mm (8 Tiles/Box ≈ 12 Sq.Ft)</option>
@@ -1775,7 +1685,7 @@
         <!-- ═══ 3. CATALOGUES ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">📖</span>
-            <span class="lang-en">📚 CATALOGUES</span><span class="lang-hi">📚 कैटलॉग</span>
+            <span><span class="lang-en">TILE</span><span class="lang-hi">टाइल</span> <span class="title-accent"><span class="lang-en">CATALOGUES</span><span class="lang-hi">कैटलॉग</span></span></span>
             <span class="label">📖</span><span class="line"></span>
         </div>
         <div class="catalog-grid" id="catalogGrid">
@@ -1791,16 +1701,16 @@
                     <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Catalog</p><a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="600x600-old">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
-            <div class="catalog-card" data-delay="0.15" data-catalog="300x600" style="border-color:rgba(212,175,55,0.3);">
-                <div class="catalog-inner" style="border-color:rgba(212,175,55,0.3);">
-                    <div class="catalog-front" style="background:rgba(212,175,55,0.05);border-color:rgba(212,175,55,0.1);"><span class="icon-big">📐</span><h3 style="color:var(--gold-light);">300×600</h3><p>Modern</p><span class="badge-new">✦ New</span></div>
+            <div class="catalog-card" data-delay="0.15" data-catalog="300x600" style="border-color:var(--gold-border);">
+                <div class="catalog-inner" style="border-color:var(--gold-border);">
+                    <div class="catalog-front" style="background:rgba(229,192,123,0.06);border-color:var(--gold-border);"><span class="icon-big">📐</span><h3 style="color:var(--gold-light);">300×600</h3><p>Modern</p><span class="badge-new">✦ New</span></div>
                     <div class="catalog-back"><span class="badge-new">✦ New</span><a href="https://drive.google.com/file/d/1OoOO2rFnY4Bw6tkv5vGwYsrAz4bSGLU6/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="300x600">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
-            <div class="catalog-card" data-delay="0.20" data-catalog="600x600-new" style="border-color:rgba(76,217,100,0.2);">
-                <div class="catalog-inner" style="border-color:rgba(76,217,100,0.2);">
-                    <div class="catalog-front" style="background:rgba(76,217,100,0.03);"><span class="icon-big">🔲</span><h3 style="color:#4cd964;">600×600</h3><p>Matt (New)</p><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span></div>
-                    <div class="catalog-back"><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span><a href="https://drive.google.com/file/d/1mbzMv5LI4UY3YTGXxXRWoE81Y_6w5j7g/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="600x600-new">⬇ DOWNLOAD</a></div>
+            <div class="catalog-card" data-delay="0.20" data-catalog="600x600-new" style="border-color:rgba(0,230,118,0.3);">
+                <div class="catalog-inner" style="border-color:rgba(0,230,118,0.3);">
+                    <div class="catalog-front" style="background:rgba(0,230,118,0.05);"><span class="icon-big">🔲</span><h3 style="color:var(--accent-green);">600×600</h3><p>Matt (New)</p><span class="badge-new" style="background:linear-gradient(135deg,var(--accent-green),#00c853);color:#07090e;">✦ New</span></div>
+                    <div class="catalog-back"><span class="badge-new" style="background:linear-gradient(135deg,var(--accent-green),#00c853);color:#07090e;">✦ New</span><a href="https://drive.google.com/file/d/1mbzMv5LI4UY3YTGXxXRWoE81Y_6w5j7g/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="600x600-new">⬇ DOWNLOAD</a></div>
                 </div>
             </div>
         </div>
@@ -1808,7 +1718,7 @@
         <!-- ═══ 4. TESTIMONIALS ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">💬</span>
-            <span class="lang-en">💬 TESTIMONIALS</span><span class="lang-hi">💬 ग्राहक समीक्षा</span>
+            <span><span class="lang-en">CLIENT</span><span class="lang-hi">ग्राहक</span> <span class="title-accent"><span class="lang-en">REVIEWS</span><span class="lang-hi">समीक्षा</span></span></span>
             <span class="label">💬</span><span class="line"></span>
         </div>
         <div class="testimonial-section animate-on-scroll">
@@ -1883,12 +1793,12 @@
         <!-- ═══ 5. COMPANY PROFILE ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">🏛️</span>
-            <span class="lang-en">🏛️ COMPANY PROFILE</span><span class="lang-hi">🏛️ कंपनी प्रोफ़ाइल</span>
+            <span><span class="lang-en">COMPANY</span><span class="lang-hi">कंपनी</span> <span class="title-accent"><span class="lang-en">PROFILE</span><span class="lang-hi">प्रोफ़ाइल</span></span></span>
             <span class="label">🏛️</span><span class="line"></span>
         </div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;">
             <img src="Company.png" class="profile-img" alt="Company" />
-            <h2 style="font-size:22px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;">Tile Planet</h2>
+            <h2 style="font-size:22px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;margin-top:10px;">Tile Planet</h2>
             <p style="color:var(--text-secondary);text-align:center;font-family:'Space Grotesk',sans-serif;">
                 <span class="lang-en">Premium Tiles Supplier · Est. 2018</span>
                 <span class="lang-hi">प्रीमियम टाइल्स सप्लायर · स्थापना 2018</span>
@@ -1911,7 +1821,7 @@
         <!-- ═══ 6. COMPANY DETAILS ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">📋</span>
-            <span class="lang-en">📋 COMPANY DETAILS</span><span class="lang-hi">📋 कंपनी विवरण</span>
+            <span><span class="lang-en">BUSINESS</span><span class="lang-hi">व्यवसाय</span> <span class="title-accent"><span class="lang-en">DETAILS</span><span class="lang-hi">विवरण</span></span></span>
             <span class="label">📋</span><span class="line"></span>
         </div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;">
@@ -1927,14 +1837,14 @@
         <!-- ═══ 7. STOCK ENQUIRY ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">📦</span>
-            <span class="lang-en">📦 STOCK ENQUIRY</span><span class="lang-hi">📦 स्टॉक पूछताछ</span>
+            <span><span class="lang-en">STOCK</span><span class="lang-hi">स्टॉक</span> <span class="title-accent"><span class="lang-en">ENQUIRY</span><span class="lang-hi">पूछताछ</span></span></span>
             <span class="label">📦</span><span class="line"></span>
         </div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
-            <div class="stock-name"> Mayuresh Adagle  </div>
+            <div class="stock-name"> Mayuresh Adagle </div>
             <div class="stock-phone">📱 +91 7071503503</div>
             <div class="btn-group">
-                <a href="tel:+917071503503" class="contact-btn magnetic" style="background:rgba(76,217,100,0.05);border-color:rgba(76,217,100,0.15);" data-strength="12">
+                <a href="tel:+917071503503" class="contact-btn magnetic" style="background:rgba(0,230,118,0.1);border-color:var(--accent-green);" data-strength="12">
                     📞 <span class="lang-en">CONTACT FOR STOCK</span><span class="lang-hi">स्टॉक के लिए संपर्क करें</span>
                 </a>
                 <a href="#" class="contact-btn btn-live-inventory magnetic" onclick="openLiveInventory(); return false;" data-strength="12">
@@ -1951,13 +1861,13 @@
         <!-- ═══ 8. PAYMENT ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">💳</span>
-            <span class="lang-en">💳 PAYMENT</span><span class="lang-hi">💳 भुगतान</span>
+            <span><span class="lang-en">INSTANT</span><span class="lang-hi">त्वरित</span> <span class="title-accent"><span class="lang-en">PAYMENT</span><span class="lang-hi">भुगतान</span></span></span>
             <span class="label">💳</span><span class="line"></span>
         </div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
             <img src="upi-qr.png" class="payment-img" alt="UPI QR" />
             <div class="upi-id">UPI ID <b>ramesh.chotalia13@oksbi</b></div>
-            <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">
+            <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;background:linear-gradient(135deg,var(--gold-neon),var(--gold-light));color:#07090e;" data-strength="15">
                 💳 <span class="lang-en">PAY NOW</span><span class="lang-hi">अभी भुगतान करें</span>
             </a>
         </div>
@@ -1965,7 +1875,7 @@
         <!-- ═══ 9. GOOGLE REVIEWS ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">⭐</span>
-            <span class="lang-en">⭐ GOOGLE REVIEWS</span><span class="lang-hi">⭐ गूगल समीक्षाएँ</span>
+            <span><span class="lang-en">GOOGLE</span><span class="lang-hi">गूगल</span> <span class="title-accent"><span class="lang-en">REVIEWS</span><span class="lang-hi">समीक्षाएँ</span></span></span>
             <span class="label">⭐</span><span class="line"></span>
         </div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
@@ -1989,7 +1899,7 @@
         <!-- ═══ 10. FOLLOW US ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">📱</span>
-            <span class="lang-en">📱 FOLLOW US</span><span class="lang-hi">📱 हमें फॉलो करें</span>
+            <span><span class="lang-en">FOLLOW</span><span class="lang-hi">हमें फॉलो</span> <span class="title-accent"><span class="lang-en">US</span><span class="lang-hi">करें</span></span></span>
             <span class="label">📱</span><span class="line"></span>
         </div>
         <div class="two-grid animate-on-scroll">
@@ -1999,10 +1909,10 @@
             <a href="https://wa.me/919922533033" class="glass-btn magnetic" data-strength="8"><span class="icon">💬</span> WhatsApp</a>
         </div>
 
-        <!-- ═══ 11. QUICK ACTIONS (Real Download & Share) ═══ -->
+        <!-- ═══ 11. QUICK ACTIONS ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">⚡</span>
-            <span class="lang-en">⚡ QUICK ACTIONS</span><span class="lang-hi">⚡ त्वरित कार्य</span>
+            <span><span class="lang-en">QUICK</span><span class="lang-hi">त्वरित</span> <span class="title-accent"><span class="lang-en">ACTIONS</span><span class="lang-hi">कार्य</span></span></span>
             <span class="label">⚡</span><span class="line"></span>
         </div>
         <div class="two-grid animate-on-scroll">
@@ -2015,7 +1925,7 @@
         <!-- ═══ 12. LOCATION ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">📍</span>
-            <span class="lang-en">📍 LOCATION</span><span class="lang-hi">📍 स्थान</span>
+            <span><span class="lang-en">SHOWROOM</span><span class="lang-hi">शोरूम</span> <span class="title-accent"><span class="lang-en">LOCATION</span><span class="lang-hi">स्थान</span></span></span>
             <span class="label">📍</span><span class="line"></span>
         </div>
         <div class="glass-card animate-on-scroll" style="margin:0 12px;">
@@ -2045,8 +1955,8 @@
     <!-- ═══ SCROLLING TICKER ═══ -->
     <div class="ticker-bar">
         <div class="ticker-track">
-            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">📢 ऑफर: टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
-            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">📢 ऑफर: टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
+            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: Premium tiles at revised direct-factory rates. Contact Tile Planet today!</span><span class="lang-hi">📢 ऑफर: प्रीमियम टाइल्स डायरेक्ट फैक्ट्री रेट पर उपलब्ध। आज ही संपर्क करें!</span></span>
+            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: Premium tiles at revised direct-factory rates. Contact Tile Planet today!</span><span class="lang-hi">📢 ऑफर: प्रीमियम टाइल्स डायरेक्ट फैक्ट्री रेट पर उपलब्ध। आज ही संपर्क करें!</span></span>
         </div>
     </div>
 
@@ -2094,7 +2004,7 @@
 
     <script>
         // ═══════════════════════════════════════════════
-        // ─── EVENT BANNER SYSTEM ───
+        // ─── EVENT BANNER SYSTEM (AUTO DATE) ───
         // ═══════════════════════════════════════════════
         function getEventBanner() {
             const now = new Date();
@@ -2203,7 +2113,7 @@
                 title: '✨ Welcome to <span class="highlight">Tile Planet</span>',
                 sub: 'Premium Tiles · Perfect Spaces',
                 offer: '📞 Contact Us for Best Prices!',
-                bg: 'linear-gradient(135deg, #0a0806, #1a1008, #0a0806)',
+                bg: 'linear-gradient(135deg, #0f1420, #151b28, #0a0d14)',
                 triColor: false,
                 fireworks: false,
                 textColor: '#FFFFFF'
@@ -2281,7 +2191,7 @@
             }
         }
 
-        // ─── INVENTORY URL ───
+        // ─── LIVE INVENTORY URL ───
         const INVENTORY_URL =
             'https://script.google.com/macros/s/AKfycbzKWq9Ll8BhLMReIRbgBafyHkbhr9YklavRyQvimovn9hEO1F8IwADfNeEemrG6YG-eOg/exec';
 
@@ -2290,7 +2200,7 @@
             showToast('📦 Opening live inventory…');
         }
 
-        // ─── TOAST ───
+        // ─── TOAST NOTIFICATION ───
         let toastTimer = null;
         function showToast(msg) {
             const el = document.getElementById('toast');
@@ -2301,7 +2211,7 @@
             toastTimer = setTimeout(() => { el.classList.remove('show'); }, 2800);
         }
 
-        // ─── CONFETTI ───
+        // ─── CONFETTI EFFECT ───
         document.addEventListener('click', function(e) {
             if ('vibrate' in navigator) navigator.vibrate(15);
             const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FFE66D', '#A8E6CF', '#FF8A5C', '#E8A87C', '#F5CBA7', '#FF9933', '#FFFFFF', '#138808'];
@@ -2392,7 +2302,7 @@
             
             const res = document.getElementById('calcResult');
             res.style.display = 'block';
-            res.innerHTML = `कुल एरिया: <b>${sqFt} Sq.Ft</b> (+10% वेस्टेज)<br>ज़रूरी बॉक्सेस: <span style="font-size:18px; color:#4cd964;">${boxes} Boxes</span>`;
+            res.innerHTML = `कुल एरिया: <b>${sqFt} Sq.Ft</b> (+10% वेस्टेज)<br>ज़रूरी बॉक्सेस: <span style="font-size:18px; color:var(--accent-green);">${boxes} Boxes</span>`;
             showToast('✅ कैलकुलेशन पूरा हुआ!');
         }
 
@@ -2692,7 +2602,7 @@
             navigator.serviceWorker.register('/service-worker.js').catch(() => {});
         }
 
-        console.log('✅ Tile Planet — 5D Premium Digital Card with Full Enhancements Loaded!');
+        console.log('✅ Tile Planet — 5D Ultra Luxury Digital Card Loaded!');
     </script>
 </body>
 </html>
