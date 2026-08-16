@@ -52,7 +52,7 @@
             -webkit-font-smoothing: antialiased;
             padding-bottom: 130px;
             min-height: 100vh;
-            cursor: none;
+            cursor: default;
         }
 
         /* ─── CUSTOM CURSOR ─── */
@@ -75,7 +75,7 @@
             border-color: var(--gold-light);
         }
 
-        /* ─── ANIMATED GRADIENT BACKGROUND ─── */
+        /* ─── ANIMATED BACKGROUND ─── */
         .animated-bg {
             position: fixed;
             inset: 0;
@@ -128,7 +128,7 @@
             100% { transform: translate(-400px, 400px) scale(1); opacity: 0; }
         }
 
-        /* ─── FLOATING PARTICLES ─── */
+        /* ─── PARTICLES ─── */
         .particles {
             position: fixed;
             inset: 0;
@@ -186,7 +186,7 @@
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(212, 175, 55, 0.04);
         }
-        .top-bar .lang-btn {
+        .top-bar .lang-btn, .top-bar .audio-btn {
             background: none;
             border: 1px solid rgba(212, 175, 55, 0.15);
             color: var(--text-secondary);
@@ -201,54 +201,13 @@
             align-items: center;
             gap: 6px;
         }
-        .top-bar .lang-btn:hover {
+        .top-bar .lang-btn:hover, .top-bar .audio-btn:hover {
             border-color: var(--gold-light);
             color: #fff;
             background: rgba(212, 175, 55, 0.06);
         }
-        .top-bar .audio-btn {
-            background: none;
-            border: 1px solid rgba(212, 175, 55, 0.12);
-            color: var(--gold-light);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition);
-            font-family: 'Space Grotesk', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .top-bar .audio-btn:hover {
-            border-color: var(--gold-light);
-            background: rgba(212, 175, 55, 0.06);
-            transform: scale(1.04);
-        }
-        .top-bar .audio-btn.playing {
-            border-color: #4cd964;
-            color: #4cd964;
-            animation: pulse-audio 1s ease-in-out infinite;
-        }
-        @keyframes pulse-audio {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.2); }
-            50% { box-shadow: 0 0 20px 4px rgba(76, 217, 100, 0.1); }
-        }
 
-        /* ─── VIDEO HERO BACKGROUND ─── */
-        .hero-video-bg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            opacity: 0.4;
-            filter: blur(2px) brightness(0.7);
-        }
-
-        /* ─── CONTAINER ─── */
+        /* ─── HERO & 5D CARD ─── */
         .container {
             max-width: 440px;
             margin: 0 auto;
@@ -256,162 +215,6 @@
             position: relative;
             z-index: 1;
         }
-
-        /* ════════════════════════════════════════════ */
-        /* ─── EVENT BANNER / POSTER SYSTEM ─── */
-        /* ════════════════════════════════════════════ */
-        .event-banner {
-            margin: 12px;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            position: relative;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            transition: all var(--transition);
-        }
-        .event-banner:hover {
-            transform: scale(1.01);
-            border-color: rgba(212, 175, 55, 0.15);
-        }
-
-        .event-banner-inner {
-            padding: 24px 20px;
-            text-align: center;
-            width: 100%;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Banner Emoji / Icon */
-        .event-banner .banner-icon {
-            font-size: 48px;
-            display: block;
-            margin-bottom: 4px;
-            animation: bounceIcon 2s ease-in-out infinite;
-        }
-        @keyframes bounceIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Banner Title - FIXED visibility */
-        .event-banner .banner-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 80px rgba(0, 0, 0, 0.5);
-            position: relative;
-            z-index: 2;
-            color: #FFFFFF !important;
-            text-align: center;
-        }
-        .event-banner .banner-title .highlight {
-            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light), var(--gold-light));
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmerText 3s ease-in-out infinite;
-        }
-
-        /* Banner Subtitle */
-        .event-banner .banner-sub {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.9) !important;
-            margin-top: 4px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Banner Offer Text */
-        .event-banner .banner-offer {
-            font-size: 13px;
-            color: #FFFFFF !important;
-            margin-top: 8px;
-            font-weight: 600;
-            background: rgba(0, 0, 0, 0.5);
-            display: inline-block;
-            padding: 4px 18px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(8px);
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-
-        /* ─── TRI-COLOR STRIPES ─── */
-        .tricolor-stripes {
-            display: flex;
-            height: 6px;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            z-index: 3;
-        }
-        .tricolor-stripes span {
-            flex: 1;
-            height: 100%;
-        }
-        .tricolor-stripes .saffron { background: #FF9933; }
-        .tricolor-stripes .white { background: #FFFFFF; }
-        .tricolor-stripes .green { background: #138808; }
-
-        /* ─── FIREWORKS ─── */
-        .firework {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            animation: fireworkBurst 1.5s ease-out forwards;
-            pointer-events: none;
-            z-index: 1;
-        }
-        @keyframes fireworkBurst {
-            0% { transform: translate(0, 0) scale(0); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
-        }
-
-        /* ─── OVERLAY FOR BETTER TEXT VISIBILITY ─── */
-        .event-banner .banner-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* ─── GLASS CARD ─── */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(40px) saturate(1.6);
-            -webkit-backdrop-filter: blur(40px) saturate(1.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-lg);
-            padding: 20px 22px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.03);
-            transition: all var(--transition);
-            position: relative;
-            z-index: 1;
-            will-change: transform;
-        }
-        .glass-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            border-color: rgba(212, 175, 55, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 80px rgba(212, 175, 55, 0.05);
-        }
-
-        /* ─── HERO ─── */
         .hero {
             position: relative;
             padding: 12px 12px 24px;
@@ -421,22 +224,15 @@
             display: flex;
             align-items: flex-end;
         }
-        .hero::before {
-            content: '';
+        .hero-video-bg {
             position: absolute;
             inset: 0;
-            background: linear-gradient(165deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.75) 100%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             z-index: 0;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 60%;
-            background: linear-gradient(to top, rgba(5, 5, 5, 0.7), transparent);
-            z-index: 0;
+            opacity: 0.4;
+            filter: blur(2px) brightness(0.7);
         }
         .hero-content {
             position: relative;
@@ -453,9 +249,6 @@
             filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.9)) brightness(1.08);
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .logo:hover {
-            transform: scale(1.04) rotate(-1deg);
-        }
         .tagline {
             text-align: center;
             font-size: 9px;
@@ -466,10 +259,8 @@
             -webkit-text-fill-color: transparent;
             font-weight: 700;
             margin-bottom: 16px;
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
         }
 
-        /* ─── 5D HERO CARD ─── */
         .tilt-wrapper {
             perspective: 1400px;
             transform-style: preserve-3d;
@@ -483,7 +274,6 @@
             padding: 22px 22px 18px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(212, 175, 55, 0.05);
             transform-style: preserve-3d;
-            will-change: transform;
             position: relative;
             overflow: hidden;
         }
@@ -493,29 +283,7 @@
             background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(212, 175, 55, 0.12), transparent 60%);
             pointer-events: none;
             z-index: 0;
-            transition: background 0.1s ease;
         }
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 26px;
-            padding: 2px;
-            background: conic-gradient(from 0deg, #d4af37, #f5cba7, #d4af37, #e8a87c, #d4af37, #f5cba7, #d4af37);
-            background-size: 300% 300%;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: shimmerBorder 6s linear infinite;
-            opacity: 0.5;
-            z-index: 0;
-        }
-        @keyframes shimmerBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         .layer {
             position: relative;
             z-index: 1;
@@ -525,65 +293,21 @@
         .layer-2 { transform: translateZ(40px); }
         .layer-3 { transform: translateZ(60px); }
         .layer-4 { transform: translateZ(80px); }
-        .layer-5 { transform: translateZ(100px); }
 
-        /* ─── 5D HOLOGRAPHIC IMAGE EFFECT ─── */
-        .holographic-img {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--radius-md);
-            transition: all var(--transition);
-        }
-        .holographic-img::after {
-            content: '';
-            position: absolute;
-            inset: -50%;
-            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.15), transparent, rgba(255, 255, 255, 0.08), transparent);
-            background-size: 200% 200%;
-            animation: holographicShine 4s linear infinite;
-            pointer-events: none;
-            mix-blend-mode: overlay;
-        }
-        @keyframes holographicShine {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .product-img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            transition: all var(--transition);
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
-        .product:hover .product-img {
-            border-color: rgba(212, 175, 55, 0.25);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08), 0 8px 30px rgba(0, 0, 0, 0.5);
-            transform: scale(1.03);
-        }
-
-        /* ─── TOP ROW ─── */
         .top-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             gap: 14px;
         }
-        .name-box {
-            flex: 1;
-        }
+        .name-box { flex: 1; }
         .name {
             font-family: 'Playfair Display', serif;
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            line-height: 1;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .gold-shimmer-text {
@@ -591,7 +315,6 @@
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             animation: shimmerText 4s ease-in-out infinite;
         }
         @keyframes shimmerText {
@@ -603,11 +326,8 @@
             font-weight: 700;
             background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
             color: #0a0806;
-            padding: 2px 14px;
+            padding: 2px 12px;
             border-radius: 50px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-            display: inline-block;
             font-family: 'Space Grotesk', sans-serif;
             -webkit-text-fill-color: #0a0806;
         }
@@ -618,7 +338,7 @@
             justify-content: center;
             gap: 8px;
             margin-top: 10px;
-            padding: 11px 22px;
+            padding: 11px 20px;
             border-radius: 60px;
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(232, 168, 124, 0.05));
             border: 1px solid rgba(212, 175, 55, 0.2);
@@ -627,33 +347,14 @@
             font-size: 13px;
             font-weight: 600;
             transition: all var(--transition);
-            letter-spacing: 0.3px;
             backdrop-filter: blur(8px);
-            position: relative;
-            overflow: hidden;
-            will-change: transform;
             cursor: pointer;
             font-family: 'Space Grotesk', sans-serif;
         }
-        .contact-btn .btn-text {
-            position: relative;
-            z-index: 2;
-        }
-        .contact-btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(232, 168, 124, 0.1));
-            opacity: 0;
-            transition: opacity var(--transition);
-        }
-        .contact-btn:hover::after {
-            opacity: 1;
-        }
         .contact-btn:hover {
             border-color: var(--gold-light);
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.2), inset 0 0 30px rgba(212, 175, 55, 0.04);
-            transform: scale(1.03) translateY(-2px);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            transform: scale(1.02);
         }
 
         .contact-qr {
@@ -664,10 +365,7 @@
             background: rgba(255, 255, 255, 0.03);
             text-align: center;
             border: 1px solid rgba(212, 175, 55, 0.06);
-            transition: transform var(--transition);
-        }
-        .contact-qr:hover {
-            transform: scale(1.05);
+            cursor: pointer;
         }
         .contact-qr img {
             width: 100%;
@@ -703,108 +401,37 @@
             font-size: 10px;
             font-weight: 600;
             transition: all var(--transition);
-            line-height: 1.3;
-            will-change: transform;
             cursor: pointer;
             font-family: 'Space Grotesk', sans-serif;
+            display: block;
         }
         .glass-btn .icon {
             display: block;
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 2px;
-            transition: transform var(--transition);
-        }
-        .glass-btn:hover .icon {
-            transform: scale(1.2) translateY(-3px);
         }
         .glass-btn:hover {
             background: rgba(255, 255, 255, 0.06);
             border-color: rgba(212, 175, 55, 0.2);
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+            transform: translateY(-3px);
         }
 
-        /* ─── INSTALL BUTTON ─── */
-        .install-btn-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-top: 14px;
-        }
-        .install-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 240px;
-            height: 50px;
-            border: none;
-            border-radius: 30px;
-            background: linear-gradient(135deg, #ffd700, #d4a017, #e8a87c);
-            background-size: 200% 200%;
-            animation: gradientBtn 3s ease-in-out infinite alternate;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 4px 30px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            color: #0a0806;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
-            cursor: pointer;
-            transition: all var(--transition);
-            position: relative;
-            overflow: hidden;
-            will-change: transform;
-        }
-        @keyframes gradientBtn {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        .install-btn .btn-sub {
-            display: block;
-            font-size: 9px;
-            font-weight: 500;
-            opacity: 0.7;
-        }
-        .install-btn .btn-text-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1.2;
-        }
-        .install-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.5);
-        }
-        .install-btn .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            transform: scale(0);
-            animation: rippleAnim 0.6s ease-out;
-            pointer-events: none;
-        }
-        @keyframes rippleAnim {
-            to { transform: scale(4); opacity: 0; }
-        }
-        .install-hidden {
-            display: none !important;
-        }
-
-        /* ─── SECTION TITLE ─── */
+        /* ─── SECTION TITLES & GLASS CARDS ─── */
         .section-title {
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #fff;
-            margin-top: 34px;
-            margin-bottom: 16px;
+            margin-top: 32px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
             padding: 0 12px;
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
             font-family: 'Space Grotesk', sans-serif;
         }
         .section-title.visible {
@@ -827,10 +454,20 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 50px;
             border: 1px solid rgba(212, 175, 55, 0.04);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(40px) saturate(1.6);
+            -webkit-backdrop-filter: blur(40px) saturate(1.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 20px 22px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            transition: all var(--transition);
         }
 
         /* ─── PRODUCT GRID ─── */
@@ -842,18 +479,26 @@
         }
         .product {
             text-align: center;
-            cursor: default;
-            transition: all var(--transition);
+            cursor: pointer;
             opacity: 0;
-            transform: translateY(30px) scale(0.95);
-            transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .product.visible {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
-        .product:hover {
-            transform: translateY(-4px);
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            transition: transform 0.4s ease;
+        }
+        .product:hover .product-img {
+            transform: scale(1.05);
+            border-color: var(--gold-light);
         }
         .product span {
             display: block;
@@ -861,7 +506,6 @@
             font-size: 11px;
             font-weight: 600;
             color: var(--text-secondary);
-            font-family: 'Space Grotesk', sans-serif;
         }
 
         /* ─── CATALOG 3D FLIP ─── */
@@ -875,13 +519,13 @@
             perspective: 900px;
             height: 150px;
             opacity: 0;
-            transform: translateY(30px) rotateY(10deg);
-            transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
             cursor: pointer;
         }
         .catalog-card.visible {
             opacity: 1;
-            transform: translateY(0) rotateY(0deg);
+            transform: translateY(0);
         }
         .catalog-inner {
             position: relative;
@@ -889,17 +533,11 @@
             height: 100%;
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
             transform-style: preserve-3d;
-            cursor: pointer;
-            pointer-events: auto;
         }
-        .catalog-card:hover .catalog-inner {
+        .catalog-card:hover .catalog-inner, .catalog-inner.flipped {
             transform: rotateY(180deg);
         }
-        .catalog-inner.flipped {
-            transform: rotateY(180deg);
-        }
-        .catalog-front,
-        .catalog-back {
+        .catalog-front, .catalog-back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -912,474 +550,185 @@
             justify-content: center;
             text-align: center;
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-            pointer-events: none;
-        }
-        .catalog-front *,
-        .catalog-back * {
-            pointer-events: auto;
+            border: 1px solid rgba(212, 175, 55, 0.08);
         }
         .catalog-back {
             transform: rotateY(180deg);
             background: rgba(8, 7, 5, 0.95);
-            border-color: rgba(212, 175, 55, 0.1);
             gap: 6px;
         }
-        .catalog-front .icon-big {
-            font-size: 24px;
-            margin-bottom: 4px;
-        }
-        .catalog-front h3 {
-            font-size: 11px;
-            font-weight: 700;
-            color: #fff;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .catalog-front p {
-            font-size: 8px;
-            color: var(--text-muted);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .catalog-back .dl-btn {
-            display: inline-flex;
-            padding: 6px 14px;
+        .dl-btn {
+            padding: 6px 12px;
             border-radius: 60px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold-light);
             color: #fff;
             font-size: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all var(--transition);
-            cursor: pointer;
-            pointer-events: auto;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .catalog-back .dl-btn:hover {
-            background: rgba(212, 175, 55, 0.2);
-            border-color: var(--gold-light);
-            transform: scale(1.05);
-        }
-        .badge-new {
-            font-size: 6px;
             font-weight: 700;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
-            color: #0a0806;
-            padding: 1px 8px;
-            border-radius: 50px;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
+            text-decoration: none;
+        }
+
+        /* ─── CALCULATOR INPUTS ─── */
+        .calc-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: #fff;
+            font-size: 13px;
             font-family: 'Space Grotesk', sans-serif;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .calc-input:focus {
+            border-color: var(--gold-light);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* ─── TESTIMONIAL CAROUSEL ─── */
-        .testimonial-section {
-            padding: 0 12px;
-        }
         .testimonial-carousel {
             position: relative;
             overflow: hidden;
             border-radius: var(--radius-lg);
-            min-height: 170px;
+            min-height: 160px;
         }
         .testimonial-track {
             display: flex;
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform;
         }
         .testimonial-item {
             min-width: 100%;
-            padding: 20px 24px;
+            padding: 20px;
             text-align: center;
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(16px);
             border: 1px solid rgba(212, 175, 55, 0.04);
             border-radius: var(--radius-lg);
         }
-        .testimonial-item .stars {
-            color: #FFD700;
-            font-size: 18px;
-            letter-spacing: 4px;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .testimonial-item .quote {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-style: italic;
-            line-height: 1.6;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .testimonial-item .author {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--gold-light);
-            margin-top: 8px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .testimonial-item .author small {
-            font-weight: 400;
-            color: var(--text-muted);
-            font-size: 11px;
-        }
         .testimonial-dots {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
-            margin-top: 14px;
-            padding: 0 4px;
+            gap: 6px;
+            margin-top: 10px;
         }
         .testimonial-dots .dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--text-muted);
             border: none;
             cursor: pointer;
-            transition: all var(--transition);
-            padding: 0;
         }
         .testimonial-dots .dot.active {
             background: var(--gold-light);
-            width: 28px;
+            width: 24px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
 
-        /* ─── COMPANY PROFILE ─── */
-        .profile-img,
-        .map-img,
-        .payment-img {
-            width: 100%;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(212, 175, 55, 0.04);
-            transition: all var(--transition);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-        }
-        .profile-img:hover,
-        .map-img:hover,
-        .payment-img:hover {
-            transform: scale(1.01);
-            border-color: rgba(212, 175, 55, 0.15);
-        }
-        .payment-img {
-            max-width: 200px;
-            display: block;
-            margin: 0 auto;
-            background: #fff;
-            padding: 10px;
-        }
-
-        .feature-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 14px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-top: 14px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .feature-list span::before {
-            content: '◆';
-            color: var(--gold-light);
-            font-size: 7px;
-            margin-right: 6px;
-        }
-
-        /* ─── COMPANY DETAILS ─── */
-        .info-table {
-            width: 100%;
-            font-size: 13px;
-            line-height: 2.2;
-            border-collapse: collapse;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .info-table td {
-            padding: 4px 0;
-            color: var(--text-secondary);
-        }
-        .info-table .label {
-            color: var(--gold-light);
-            font-weight: 600;
-            width: 34%;
-            font-size: 10px;
-            text-transform: uppercase;
-            opacity: 0.7;
-        }
-        .info-table .value {
-            color: #fff;
-            font-weight: 500;
-            font-size: 13px;
-        }
-
-        /* ─── STOCK ENQUIRY ─── */
-        .stock-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: #4cd964;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .stock-phone {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .btn-group .contact-btn {
-            width: 100%;
-            justify-content: center;
-            margin-top: 0;
-        }
-
-        .btn-live-inventory {
-            background: linear-gradient(135deg, rgba(0, 200, 255, 0.08), rgba(0, 200, 255, 0.01)) !important;
-            border-color: rgba(0, 200, 255, 0.15) !important;
-        }
-        .btn-live-inventory:hover {
-            border-color: #00c8ff !important;
-            box-shadow: 0 0 60px rgba(0, 200, 255, 0.08) !important;
-        }
-        .btn-live-inventory .pulse-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #00e676;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse-dot 1.8s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
-        }
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(0.7); }
-        }
-
-        /* ─── PAYMENT ─── */
-        .upi-id {
-            margin-top: 14px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .upi-id b {
-            color: #fff;
-            font-weight: 700;
-            display: block;
-            font-size: 17px;
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* ─── GOOGLE REVIEWS ─── */
-        .google-brand {
-            display: flex;
+        /* ─── LIGHTBOX MODAL ─── */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(20px);
+            display: none;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            margin-bottom: 4px;
+            z-index: 100000;
+            padding: 20px;
         }
-        .google-brand .g {
-            font-size: 26px;
-            font-weight: 800;
+        .lightbox-overlay.active { display: flex; }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 16px;
+            border: 1px solid var(--gold-light);
+            box-shadow: 0 10px 50px rgba(0,0,0,0.9);
         }
-        .g-1 { color: #4285F4; }
-        .g-2 { color: #EA4335; }
-        .g-3 { color: #FBBC05; }
-        .g-4 { color: #4285F4; }
-        .g-5 { color: #34A853; }
-        .g-6 { color: #EA4335; }
-
-        .stars-bright {
-            font-size: 44px;
-            color: #FFD700;
-            text-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
-            display: block;
-            letter-spacing: 6px;
-        }
-
-        /* ─── TWO GRID ─── */
-        .two-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            padding: 0 12px;
-        }
-        .two-grid .glass-btn {
-            padding: 16px 8px;
-            font-size: 13px;
-            font-weight: 600;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .two-grid .glass-btn .icon {
-            font-size: 22px;
-        }
-
-        .single-btn-wrap {
-            margin-top: 14px;
-            text-align: center;
-        }
-        .single-btn-wrap .contact-btn {
-            width: 100%;
-            justify-content: center;
-        }
-
-        /* ─── VISITOR COUNTER ─── */
-        .visitor-counter {
-            text-align: center;
-            padding: 12px;
-            font-size: 12px;
-            color: var(--text-muted);
-            letter-spacing: 0.5px;
-            background: rgba(255, 255, 255, 0.01);
-            border-radius: var(--radius-sm);
-            border: 1px solid rgba(212, 175, 55, 0.03);
-            margin: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .visitor-counter .count {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--gold-light);
-            font-family: 'Playfair Display', serif;
-        }
-        .visitor-counter .label {
-            font-size: 10px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-        }
-
-        /* ─── FOOTER ─── */
-        .footer-card {
-            margin: 12px;
-            text-align: center;
-            padding: 28px 16px 20px;
-            border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(212, 175, 55, 0.03);
-        }
-        .footer-logo {
-            width: 130px;
-            display: block;
-            margin: 0 auto 10px;
-            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
-        }
-        .footer-card .brand {
-            font-size: 20px;
-            font-weight: 800;
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             color: #fff;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .footer-card .brand span {
-            color: var(--gold-light);
-        }
-        .footer-card .sub {
-            color: var(--text-secondary);
-            font-size: 13px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .footer-card .slogan-highlight {
-            background: linear-gradient(135deg, var(--gold-light), var(--rose-gold-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
-            font-size: 14px;
-            margin: 6px 0 12px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .footer-card .copy {
-            margin-top: 14px;
-            color: var(--text-muted);
-            font-size: 11px;
-            border-top: 1px solid rgba(212, 175, 55, 0.03);
-            padding-top: 14px;
-            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
 
-        /* ─── SCROLLING TICKER ─── */
+        /* ─── TOAST & TICKER ─── */
+        .toast {
+            position: fixed;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(10, 8, 6, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 999999;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
         .ticker-bar {
             position: fixed;
-            bottom: 70px;
+            bottom: 64px;
             left: 0;
             right: 0;
             z-index: 998;
-            background: linear-gradient(90deg, rgba(20, 15, 10, 0.95), rgba(30, 22, 12, 0.95));
+            background: rgba(20, 15, 10, 0.95);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-top: 2px solid var(--gold-light);
-            border-bottom: 2px solid var(--gold-light);
-            padding: 10px 0;
+            border-top: 1px solid var(--gold-light);
+            border-bottom: 1px solid var(--gold-light);
+            padding: 8px 0;
             overflow: hidden;
             max-width: 440px;
             margin: 0 auto;
-            box-shadow: 0 -8px 40px rgba(212, 175, 55, 0.15), inset 0 0 60px rgba(212, 175, 55, 0.02);
         }
         .ticker-track {
             display: flex;
             white-space: nowrap;
-            animation: tickerScroll 30s linear infinite;
+            animation: tickerScroll 25s linear infinite;
         }
         .ticker-track span {
             display: inline-block;
-            padding: 0 50px;
-            font-size: 18px;
-            font-weight: 800;
-            color: #fff;
-            text-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.1);
-            letter-spacing: 0.8px;
-            background: linear-gradient(90deg, var(--gold-light), var(--rose-gold-light), var(--gold-light));
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmerTextTicker 3s linear infinite;
-        }
-        .ticker-track i {
-            margin-right: 12px;
-            color: #ff6b6b;
-            -webkit-text-fill-color: #ff6b6b;
-            font-size: 20px;
-            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
+            padding: 0 40px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gold-light);
         }
         @keyframes tickerScroll {
             0% { transform: translateX(0%); }
             100% { transform: translateX(-50%); }
         }
-        @keyframes shimmerTextTicker {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
 
-        /* ─── BOTTOM NAV ─── */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             z-index: 999;
-            background: rgba(8, 7, 5, 0.7);
-            backdrop-filter: blur(30px) saturate(1.6);
-            -webkit-backdrop-filter: blur(30px) saturate(1.6);
-            border-top: 1px solid rgba(212, 175, 55, 0.05);
+            background: rgba(8, 7, 5, 0.85);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 6px 0 env(safe-area-inset-bottom);
+            padding: 8px 0;
             max-width: 440px;
             margin: 0 auto;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
         }
         .bottom-nav .nav-item {
             text-decoration: none;
@@ -1390,341 +739,45 @@
             font-size: 8px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all var(--transition);
-            padding: 6px 16px;
-            border-radius: 30px;
-            position: relative;
-            cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif;
         }
-        .bottom-nav .nav-item .nav-icon {
-            font-size: 22px;
-            margin-bottom: 2px;
-            transition: transform var(--transition);
-        }
-        .bottom-nav .nav-item:hover .nav-icon {
-            transform: translateY(-3px) scale(1.1);
-        }
-        .bottom-nav .nav-item.active {
-            color: var(--gold-light);
-        }
-        .bottom-nav .nav-item.active::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 30px;
-            background: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.04);
-            z-index: -1;
+        .bottom-nav .nav-item.active { color: var(--gold-light); }
+
+        .two-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 12px;
         }
 
-        /* ─── INSTALL MODALS ─── */
-        .install-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999;
-            padding: 20px;
-            animation: fadeIn 0.4s ease;
-        }
-        .install-modal-overlay.active {
-            display: flex;
-        }
-
-        .install-modal-box {
-            background: rgba(12, 10, 8, 0.98);
-            backdrop-filter: blur(40px);
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            border-radius: var(--radius-lg);
-            padding: 32px 28px 28px;
-            max-width: 380px;
-            width: 100%;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
-            text-align: center;
-            position: relative;
-            animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .install-modal-box .close-modal {
-            position: absolute;
-            top: 14px;
-            right: 18px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 20px;
-            cursor: pointer;
-            transition: color var(--transition);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .install-modal-box .close-modal:hover {
-            color: #fff;
-        }
-
-        .install-modal-box .modal-icon {
-            font-size: 44px;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .install-modal-box h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .install-modal-box p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 20px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .install-modal-box .step {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-align: left;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: var(--radius-sm);
-            padding: 10px 14px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(212, 175, 55, 0.03);
-        }
-        .install-modal-box .step .num {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--gold-light);
-            min-width: 28px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .install-modal-box .step .desc {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .install-modal-box .step .desc small {
-            display: block;
-            color: var(--text-muted);
-            font-weight: 400;
-            font-size: 12px;
-        }
-        .install-modal-box .got-it-btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 60px;
-            background: linear-gradient(135deg, #ffd700, #d4a017);
-            color: #0a0806;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all var(--transition);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .install-modal-box .got-it-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.2);
-        }
-
-        /* ─── CONFETTI ─── */
-        .confetti-piece {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            z-index: 999999;
-            pointer-events: none;
-            animation: confettiFall 1.5s ease-out forwards;
-        }
-        @keyframes confettiFall {
-            0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
-            100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0); }
-        }
-
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 400px) {
-            .name { font-size: 26px; }
-            .hero-card { padding: 16px; }
-            .catalog-card { height: 130px; }
-            .catalog-front h3 { font-size: 9px; }
-            .catalog-front .icon-big { font-size: 18px; }
-            .product-grid { gap: 6px; padding: 0 8px; }
-            .two-grid { gap: 8px; padding: 0 8px; }
-            .two-grid .glass-btn { font-size: 11px; padding: 12px 6px; }
-            .contact-btn { font-size: 12px; padding: 10px 16px; }
-            .section-title { font-size: 13px; }
-            .stars-bright { font-size: 36px; }
-            .bottom-nav .nav-item { padding: 4px 10px; font-size: 7px; }
-            .bottom-nav .nav-item .nav-icon { font-size: 18px; }
-            .top-bar .lang-btn, .top-bar .audio-btn { font-size: 10px; padding: 3px 10px; }
-            .ticker-track span { font-size: 15px; padding: 0 20px; }
-            .ticker-bar { bottom: 60px; padding: 8px 0; }
-            .testimonial-item .quote { font-size: 13px; }
-            .event-banner .banner-title { font-size: 22px; }
-            .event-banner .banner-icon { font-size: 36px; }
-        }
-
-        @media (max-width: 360px) {
-            .name { font-size: 22px; }
-            .contact-qr { width: 48px; min-width: 48px; }
-            .quick-actions .glass-btn { font-size: 8px; padding: 6px 2px; }
-            .quick-actions .glass-btn .icon { font-size: 16px; }
-            .catalog-card { height: 110px; }
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ─── LANGUAGE TOGGLE ─── */
         .lang-hi { display: none; }
         body.lang-hindi .lang-en { display: none; }
         body.lang-hindi .lang-hi { display: inline-block; }
-        body.lang-hindi .lang-en-block { display: none !important; }
-        body.lang-hindi .lang-hi-block { display: block !important; }
-        .lang-hi-block { display: none; }
-
-        /* ─── TOAST NOTIFICATION ─── */
-        .toast {
-            position: fixed;
-            bottom: 140px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: rgba(10, 8, 6, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 60px;
-            font-size: 13px;
-            font-weight: 600;
-            z-index: 999999;
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-            pointer-events: none;
-            white-space: nowrap;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        .toast .toast-icon {
-            margin-right: 10px;
-        }
-
-        /* ─── LIVE INVENTORY BADGE ─── */
-        .live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(0, 230, 118, 0.12);
-            border: 1px solid rgba(0, 230, 118, 0.2);
-            padding: 2px 10px;
-            border-radius: 50px;
-            font-size: 9px;
-            font-weight: 700;
-            color: #4cd964;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .live-badge .pulse-dot-sm {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: #00e676;
-            border-radius: 50%;
-            animation: pulse-dot 1.8s ease-in-out infinite;
-            box-shadow: 0 0 12px rgba(0, 230, 118, 0.3);
-        }
-        .btn-live-inventory .pulse-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #00e676;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse-dot 1.8s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
-        }
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(0.7); }
-        }
     </style>
 </head>
 <body>
 
-    <!-- ─── CUSTOM CURSOR ─── -->
+    <!-- ─── BACKGROUND FX ─── -->
     <div class="custom-cursor" id="customCursor"></div>
-
-    <!-- ─── SHOOTING STARS ─── -->
     <div class="shooting-stars" id="shootingStars"></div>
-
-    <!-- ─── ANIMATED BACKGROUND ─── -->
-    <div class="animated-bg" id="animatedBg">
-        <div class="aura"></div>
-    </div>
-
-    <!-- ─── PARTICLES ─── -->
+    <div class="animated-bg"><div class="aura"></div></div>
     <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
     </div>
-
-    <!-- ─── SCROLL PROGRESS ─── -->
     <div id="progress-bar"></div>
-
-    <!-- ─── TOAST ─── -->
-    <div id="toast" class="toast"><span class="toast-icon">📦</span> <span id="toastMsg">Opening catalog…</span></div>
+    <div id="toast" class="toast"><span id="toastMsg">Notification</span></div>
 
     <!-- ─── TOP BAR ─── -->
     <div class="top-bar">
         <button class="lang-btn" onclick="toggleLanguage()">
-            <span class="globe">🌐</span>
-            <span class="lang-en">English</span>
-            <span class="lang-hi">हिंदी</span>
+            🌐 <span class="lang-en">English</span><span class="lang-hi">हिंदी</span>
         </button>
         <button class="audio-btn" id="audioBtn" onclick="toggleAudio()">
-            <i class="fas fa-play"></i>
-            <span class="lang-en">Greeting</span>
-            <span class="lang-hi">अभिवादन</span>
+            <i class="fas fa-play"></i> <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>
         </button>
     </div>
 
     <div class="container">
-
-        <!-- ═══ EVENT BANNER (Auto-detects date) ═══ -->
-        <div id="eventBannerContainer"></div>
 
         <!-- ═══ HERO ═══ -->
         <div class="hero">
@@ -1747,318 +800,148 @@
                                     <span class="gold-shimmer-text">Ramesh Chotalia</span>
                                     <span class="badge">PROP.</span>
                                 </div>
-                                <a href="tel:+919922533033" class="contact-btn magnetic" data-strength="15">
-                                    <span class="btn-text">📞 +91 9922533033</span>
+                                <a href="tel:+919922533033" class="contact-btn">
+                                    <span>📞 +91 9922533033</span>
                                 </a>
                             </div>
-                            <div class="contact-qr layer layer-4">
+                            <div class="contact-qr layer layer-4" onclick="downloadVCard()">
                                 <img src="contact-qr.jpg" alt="QR" />
                                 <p>Save Contact</p>
                             </div>
                         </div>
 
                         <div class="quick-actions layer layer-3">
-                            <a href="tel:+919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">📞</span> <span class="lang-en">CALL</span><span class="lang-hi">कॉल</span></a>
-                            <a href="https://wa.me/919922533033" class="glass-btn magnetic" data-strength="10"><span class="icon">💬</span> <span class="lang-en">CHAT</span><span class="lang-hi">चैट</span></a>
-                            <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn magnetic" data-strength="10"><span class="icon">✉️</span> <span class="lang-en">EMAIL</span><span class="lang-hi">ईमेल</span></a>
-                            <a href="https://www.google.com/maps/place/Tile+Planet/@18.452741,73.8325995,3a,75y,225.2h,91.78t/data=!3m7!1e1!3m5!1sznFZvJqmnkeRlSPWsaJAcQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-1.7821103971745913%26panoid%3DznFZvJqmnkeRlSPWsaJAcQ%26yaw%3D225.1950943741403!7i13312!8i6656!4m6!3m5!1s0x3bc295121b067477:0x3783906c9b053079!8m2!3d18.4527376!4d73.8325465!16s%2Fg%2F11fr3q2v90?entry=ttu&g_ep=EgoyMDI2MDgxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="glass-btn magnetic" data-strength="10"><span class="icon">📍</span> <span class="lang-en">MAP</span><span class="lang-hi">मैप</span></a>
-                        </div>
-
-                        <div class="install-btn-wrapper layer layer-4">
-                            <button id="installAppBtn" class="install-btn magnetic" data-strength="20">
-                                <span class="btn-icon">📲</span>
-                                <span class="btn-text-wrap">
-                                    <span class="lang-en">Install App</span>
-                                    <span class="lang-hi">ऐप इंस्टॉल करें</span>
-                                    <span class="btn-sub"><span class="lang-en">Open in One Click</span><span class="lang-hi">एक क्लिक में खोलें</span></span>
-                                </span>
-                            </button>
+                            <a href="tel:+919922533033" class="glass-btn"><span class="icon">📞</span> <span class="lang-en">CALL</span><span class="lang-hi">कॉल</span></a>
+                            <a href="https://wa.me/919922533033?text=Hello%20Tile%20Planet,%20I%20want%20to%20enquire%20about%20tiles." class="glass-btn"><span class="icon">💬</span> <span class="lang-en">CHAT</span><span class="lang-hi">चैट</span></a>
+                            <a href="mailto:ramesh.chotalia13@gmail.com" class="glass-btn"><span class="icon">✉️</span> <span class="lang-en">EMAIL</span><span class="lang-hi">ईमेल</span></a>
+                            <a href="https://www.google.com/maps/place/Tile+Planet/@18.452741,73.8325995,17z" target="_blank" class="glass-btn"><span class="icon">📍</span> <span class="lang-en">MAP</span><span class="lang-hi">मैप</span></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ═══ 1. OUR PRODUCTS ═══ -->
-        <div class="section-title" data-delay="0">
+        <!-- ═══ 1. OUR PRODUCTS (Clickable HD Zoom) ═══ -->
+        <div class="section-title">
             <span class="line"></span><span class="label">✦</span>
             <span class="lang-en">🏺 OUR PRODUCTS</span><span class="lang-hi">🏺 हमारे उत्पाद</span>
             <span class="label">✦</span><span class="line"></span>
         </div>
         <div class="product-grid">
-            <div class="product" data-delay="0.05"><div class="holographic-img"><img src="Walltiles.jpg" class="product-img" /></div><span>Wall</span></div>
-            <div class="product" data-delay="0.10"><div class="holographic-img"><img src="Floortiles.jpg" class="product-img" /></div><span>Floor</span></div>
-            <div class="product" data-delay="0.15"><div class="holographic-img"><img src="Vitrifiedtiles.jpg" class="product-img" /></div><span>Vitrified</span></div>
-            <div class="product" data-delay="0.20"><div class="holographic-img"><img src="Parckingtiles.jpg" class="product-img" /></div><span>Parking</span></div>
-            <div class="product" data-delay="0.25"><div class="holographic-img"><img src="bathroomtiles.jpg" class="product-img" /></div><span>Bath</span></div>
+            <div class="product" onclick="openLightbox('Walltiles.jpg', 'Wall Tiles')"><img src="Walltiles.jpg" class="product-img" /><span>Wall</span></div>
+            <div class="product" onclick="openLightbox('Floortiles.jpg', 'Floor Tiles')"><img src="Floortiles.jpg" class="product-img" /><span>Floor</span></div>
+            <div class="product" onclick="openLightbox('Vitrifiedtiles.jpg', 'Vitrified Tiles')"><img src="Vitrifiedtiles.jpg" class="product-img" /><span>Vitrified</span></div>
+            <div class="product" onclick="openLightbox('Parckingtiles.jpg', 'Parking Tiles')"><img src="Parckingtiles.jpg" class="product-img" /><span>Parking</span></div>
+            <div class="product" onclick="openLightbox('bathroomtiles.jpg', 'Bathroom Tiles')"><img src="bathroomtiles.jpg" class="product-img" /><span>Bath</span></div>
         </div>
 
-        <!-- ═══ 2. CATALOGUES ═══ -->
-        <div class="section-title" data-delay="0">
+        <!-- ═══ 2. TILE ESTIMATOR / CALCULATOR ═══ -->
+        <div class="section-title">
+            <span class="line"></span><span class="label">🧮</span>
+            <span class="lang-en">TILE CALCULATOR</span><span class="lang-hi">टाइल कैलकुलेटर</span>
+            <span class="label">🧮</span><span class="line"></span>
+        </div>
+        <div class="glass-card animate-on-scroll" style="margin: 0 12px; text-align: center;">
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
+                <span class="lang-en">Calculate total boxes needed with 10% wastage:</span>
+                <span class="lang-hi">कमरे की लंबाई और चौड़ाई (Feet) दर्ज करें:</span>
+            </p>
+            <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                <input id="roomL" type="number" placeholder="Length (Ft)" class="calc-input">
+                <input id="roomW" type="number" placeholder="Width (Ft)" class="calc-input">
+            </div>
+            <select id="tileSize" class="calc-input" style="background:#111; margin-bottom: 12px;">
+                <option value="16">600 × 600 mm (4 Tiles/Box ≈ 16 Sq.Ft)</option>
+                <option value="14.5">300 × 600 mm (8 Tiles/Box ≈ 14.5 Sq.Ft)</option>
+                <option value="12">300 × 450 mm (8 Tiles/Box ≈ 12 Sq.Ft)</option>
+            </select>
+            <button onclick="calculateTiles()" class="contact-btn" style="width:100%;">
+                ✨ <span class="lang-en">Calculate Boxes</span><span class="lang-hi">कैलकुलेट करें</span>
+            </button>
+            <div id="calcResult" style="margin-top: 14px; font-size: 14px; font-weight: 700; color: var(--gold-light); display: none;"></div>
+        </div>
+
+        <!-- ═══ 3. CATALOGUES ═══ -->
+        <div class="section-title">
             <span class="line"></span><span class="label">📖</span>
             <span class="lang-en">📚 CATALOGUES</span><span class="lang-hi">📚 कैटलॉग</span>
             <span class="label">📖</span><span class="line"></span>
         </div>
-        <div class="catalog-grid" id="catalogGrid">
-            <div class="catalog-card" data-delay="0.05" data-catalog="300x450">
+        <div class="catalog-grid">
+            <div class="catalog-card">
                 <div class="catalog-inner">
-                    <div class="catalog-front"><span class="icon-big">📐</span><h3>300×450</h3><p>Wall Tiles</p></div>
-                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Catalog</p><a href="https://drive.google.com/file/d/1SHNXkr7ZFkkVJwIOP-fvLyP9X7KBZ-nm/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="300x450">⬇ DOWNLOAD</a></div>
+                    <div class="catalog-front"><h3>300×450</h3><p>Wall Tiles</p></div>
+                    <div class="catalog-back"><a href="https://drive.google.com" target="_blank" class="dl-btn">DOWNLOAD</a></div>
                 </div>
             </div>
-            <div class="catalog-card" data-delay="0.10" data-catalog="600x600-old">
+            <div class="catalog-card">
                 <div class="catalog-inner">
-                    <div class="catalog-front"><span class="icon-big">🔲</span><h3>600×600</h3><p>Matt (Old)</p></div>
-                    <div class="catalog-back"><p style="font-size:10px;color:var(--text-secondary);">Catalog</p><a href="https://drive.google.com/file/d/1HXAog4h8VOUdi7qHaJX-KNy_4jnot4Jx/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="600x600-old">⬇ DOWNLOAD</a></div>
+                    <div class="catalog-front"><h3>600×600</h3><p>Matt (Old)</p></div>
+                    <div class="catalog-back"><a href="https://drive.google.com" target="_blank" class="dl-btn">DOWNLOAD</a></div>
                 </div>
             </div>
-            <div class="catalog-card" data-delay="0.15" data-catalog="300x600" style="border-color:rgba(212,175,55,0.3);">
-                <div class="catalog-inner" style="border-color:rgba(212,175,55,0.3);">
-                    <div class="catalog-front" style="background:rgba(212,175,55,0.05);border-color:rgba(212,175,55,0.1);"><span class="icon-big">📐</span><h3 style="color:var(--gold-light);">300×600</h3><p>Modern</p><span class="badge-new">✦ New</span></div>
-                    <div class="catalog-back"><span class="badge-new">✦ New</span><a href="https://drive.google.com/file/d/1OoOO2rFnY4Bw6tkv5vGwYsrAz4bSGLU6/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="300x600">⬇ DOWNLOAD</a></div>
+            <div class="catalog-card">
+                <div class="catalog-inner">
+                    <div class="catalog-front"><h3 style="color:var(--gold-light);">300×600</h3><p>Modern</p></div>
+                    <div class="catalog-back"><a href="https://drive.google.com" target="_blank" class="dl-btn">DOWNLOAD</a></div>
                 </div>
             </div>
-            <div class="catalog-card" data-delay="0.20" data-catalog="600x600-new" style="border-color:rgba(76,217,100,0.2);">
-                <div class="catalog-inner" style="border-color:rgba(76,217,100,0.2);">
-                    <div class="catalog-front" style="background:rgba(76,217,100,0.03);"><span class="icon-big">🔲</span><h3 style="color:#4cd964;">600×600</h3><p>Matt (New)</p><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span></div>
-                    <div class="catalog-back"><span class="badge-new" style="background:linear-gradient(135deg,#4cd964,#2ecc71);color:#0a0806;">✦ New</span><a href="https://drive.google.com/file/d/1mbzMv5LI4UY3YTGXxXRWoE81Y_6w5j7g/view?usp=sharing" target="_blank" class="dl-btn" data-catalog="600x600-new">⬇ DOWNLOAD</a></div>
+            <div class="catalog-card">
+                <div class="catalog-inner">
+                    <div class="catalog-front"><h3 style="color:#4cd964;">600×600</h3><p>Matt (New)</p></div>
+                    <div class="catalog-back"><a href="https://drive.google.com" target="_blank" class="dl-btn">DOWNLOAD</a></div>
                 </div>
             </div>
         </div>
 
-        <!-- ═══ 3. TESTIMONIALS ═══ -->
-        <div class="section-title" data-delay="0">
+        <!-- ═══ 4. TESTIMONIALS ═══ -->
+        <div class="section-title">
             <span class="line"></span><span class="label">💬</span>
             <span class="lang-en">💬 TESTIMONIALS</span><span class="lang-hi">💬 ग्राहक समीक्षा</span>
             <span class="label">💬</span><span class="line"></span>
         </div>
-        <div class="testimonial-section animate-on-scroll">
-            <div class="testimonial-carousel" id="testimonialCarousel">
+        <div class="glass-card animate-on-scroll" style="margin: 0 12px;">
+            <div class="testimonial-carousel">
                 <div class="testimonial-track" id="testimonialTrack">
                     <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Tile Planet की क्वालिटी और सर्विस दोनों ही बेहतरीन हैं। हमने अपने नए घर के लिए यहीं से टाइल्स खरीदीं, बहुत खुश हैं!"</p>
-                        <div class="author">Amit Sharma <small>· Pune</small></div>
+                        <div style="color:#FFD700;">★★★★★</div>
+                        <p style="font-style:italic; margin: 6px 0;">"Tile Planet की क्वालिटी और सर्विस दोनों बेहतरीन हैं। बेस्ट रेट्स मिले!"</p>
+                        <b style="color:var(--gold-light);">Amit Sharma · Pune</b>
                     </div>
                     <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Best place for premium tiles in Pune. Ramesh bhai gave us amazing options within our budget. Highly recommended!"</p>
-                        <div class="author">Priya Mehta <small>· Mumbai</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"We got parking tiles and vitrified tiles from Tile Planet. The quality is unmatched and delivery was on time."</p>
-                        <div class="author">Suresh Patil <small>· Satara</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Tile Planet gave us the best deal on vitrified tiles. The collection is huge and the pricing is very competitive!"</p>
-                        <div class="author">Rajesh K. <small>· Nashik</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Excellent variety and great customer service. They guided us perfectly for our home renovation project."</p>
-                        <div class="author">Sneha P. <small>· Mumbai</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"We used their parking tiles for our commercial project. Very durable, stylish, and reasonably priced."</p>
-                        <div class="author">Vikram S. <small>· Pune</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Ramesh bhai guided us perfectly on which tiles to choose for our bathroom. Superb experience overall!"</p>
-                        <div class="author">Anita D. <small>· Kolhapur</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Best tile shop in Pune. Huge collection of 600x600 matt finish tiles. We found exactly what we wanted."</p>
-                        <div class="author">Manoj R. <small>· Pimpri</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Fast delivery and great pricing. Tile Planet is our go-to supplier for all our construction projects."</p>
-                        <div class="author">Sunil G. <small>· Sangli</small></div>
-                    </div>
-                    <div class="testimonial-item">
-                        <span class="stars">★★★★★</span>
-                        <p class="quote">"Amazing quality and a very professional team. We are completely satisfied with the service and products."</p>
-                        <div class="author">Pooja M. <small>· Solapur</small></div>
+                        <div style="color:#FFD700;">★★★★★</div>
+                        <p style="font-style:italic; margin: 6px 0;">"Best tile collection in Pune. Ramesh bhai guided us perfectly."</p>
+                        <b style="color:var(--gold-light);">Priya Mehta · Mumbai</b>
                     </div>
                 </div>
             </div>
-            <div class="testimonial-dots" id="testimonialDots">
-                <button class="dot active" data-index="0"></button>
-                <button class="dot" data-index="1"></button>
-                <button class="dot" data-index="2"></button>
-                <button class="dot" data-index="3"></button>
-                <button class="dot" data-index="4"></button>
-                <button class="dot" data-index="5"></button>
-                <button class="dot" data-index="6"></button>
-                <button class="dot" data-index="7"></button>
-                <button class="dot" data-index="8"></button>
-                <button class="dot" data-index="9"></button>
-            </div>
-        </div>
-
-        <!-- ═══ 4. COMPANY PROFILE ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">🏛️</span>
-            <span class="lang-en">🏛️ COMPANY PROFILE</span><span class="lang-hi">🏛️ कंपनी प्रोफ़ाइल</span>
-            <span class="label">🏛️</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
-            <img src="Company.png" class="profile-img" alt="Company" />
-            <h2 style="font-size:22px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;">Tile Planet</h2>
-            <p style="color:var(--text-secondary);text-align:center;font-family:'Space Grotesk',sans-serif;">
-                <span class="lang-en">Premium Tiles Supplier · Est. 2018</span>
-                <span class="lang-hi">प्रीमियम टाइल्स सप्लायर · स्थापना 2018</span>
-            </p>
-            <div class="single-btn-wrap">
-                <a href="#" class="contact-btn magnetic" data-strength="12">
-                    📄 <span class="lang-en">VIEW / DOWNLOAD PROFILE</span><span class="lang-hi">प्रोफ़ाइल देखें / डाउनलोड करें</span>
-                </a>
-            </div>
-            <div class="feature-list">
-                <span>Wall Tiles</span>
-                <span>Floor Tiles</span>
-                <span>Vitrified Tiles</span>
-                <span>Parking Tiles</span>
-                <span>Bathroom Fitting</span>
-                <span>Sanitaryware</span>
+            <div class="testimonial-dots">
+                <button class="dot active" onclick="setSlide(0)"></button>
+                <button class="dot" onclick="setSlide(1)"></button>
             </div>
         </div>
 
         <!-- ═══ 5. COMPANY DETAILS ═══ -->
-        <div class="section-title" data-delay="0">
+        <div class="section-title">
             <span class="line"></span><span class="label">📋</span>
             <span class="lang-en">📋 COMPANY DETAILS</span><span class="lang-hi">📋 कंपनी विवरण</span>
             <span class="label">📋</span><span class="line"></span>
         </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
-            <table class="info-table">
-                <tr><td class="label">GST</td><td class="value">27AIPPR7422Q1Z9</td></tr>
-                <tr><td class="label"><span class="lang-en">Owner</span><span class="lang-hi">मालिक</span></td><td class="value">Ramesh Chotalia</td></tr>
-                <tr><td class="label"><span class="lang-en">Business</span><span class="lang-hi">व्यवसाय</span></td><td class="value"><span class="lang-en">Retailer &amp; Supplier</span><span class="lang-hi">खुदरा विक्रेता और सप्लायर</span></td></tr>
-                <tr><td class="label"><span class="lang-en">Experience</span><span class="lang-hi">अनुभव</span></td><td class="value">10+ Years</td></tr>
-                <tr><td class="label"><span class="lang-en">Address</span><span class="lang-hi">पता</span></td><td class="value" style="font-size:12px;line-height:1.6;">Sr. No.60, Opp Ashok Leyland,<br />Katraj-Mumbai Road, Ambegaon BK, Pune – 411046</td></tr>
-            </table>
+        <div class="glass-card animate-on-scroll" style="margin:0 12px; font-size:13px; line-height:2;">
+            <div><span style="color:var(--gold-light); font-weight:700;">GST:</span> 27AIPPR7422Q1Z9</div>
+            <div><span style="color:var(--gold-light); font-weight:700;">Owner:</span> Ramesh Chotalia</div>
+            <div><span style="color:var(--gold-light); font-weight:700;">Address:</span> Sr. No.60, Opp Ashok Leyland, Katraj-Mumbai Road, Ambegaon BK, Pune – 411046</div>
         </div>
 
-        <!-- ═══ 6. STOCK ENQUIRY ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">📦</span>
-            <span class="lang-en">📦 STOCK ENQUIRY</span><span class="lang-hi">📦 स्टॉक पूछताछ</span>
-            <span class="label">📦</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
-            <div class="stock-name"> Mayuresh Adagle  </div>
-            <div class="stock-phone">📱 +91 7071503503</div>
-            <div class="btn-group">
-                <a href="tel:+917071503503" class="contact-btn magnetic" style="background:rgba(76,217,100,0.05);border-color:rgba(76,217,100,0.15);" data-strength="12">
-                    📞 <span class="lang-en">CONTACT FOR STOCK</span><span class="lang-hi">स्टॉक के लिए संपर्क करें</span>
-                </a>
-                <a href="#" class="contact-btn btn-live-inventory magnetic" onclick="openLiveInventory(); return false;" data-strength="12">
-                    <span class="pulse-dot"></span>
-                    <span class="lang-en">LIVE INVENTORY</span>
-                    <span class="lang-hi">लाइव इन्वेंटरी</span>
-                    <span class="live-badge" style="margin-left:4px;">
-                        <span class="pulse-dot-sm"></span> LIVE
-                    </span>
-                </a>
-            </div>
-        </div>
-
-        <!-- ═══ 7. PAYMENT ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">💳</span>
-            <span class="lang-en">💳 PAYMENT</span><span class="lang-hi">💳 भुगतान</span>
-            <span class="label">💳</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
-            <img src="upi-qr.png" class="payment-img" alt="UPI QR" />
-            <div class="upi-id">UPI ID <b>ramesh.chotalia13@oksbi</b></div>
-            <a href="upi://pay?pa=ramesh.chotalia13@oksbi&pn=Ramesh%20Chotalia" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">
-                💳 <span class="lang-en">PAY NOW</span><span class="lang-hi">अभी भुगतान करें</span>
-            </a>
-        </div>
-
-        <!-- ═══ 8. GOOGLE REVIEWS ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">⭐</span>
-            <span class="lang-en">⭐ GOOGLE REVIEWS</span><span class="lang-hi">⭐ गूगल समीक्षाएँ</span>
-            <span class="label">⭐</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;text-align:center;">
-            <div class="google-brand">
-                <span class="g g-1">G</span><span class="g g-2">o</span><span class="g g-3">o</span>
-                <span class="g g-4">g</span><span class="g g-5">l</span><span class="g g-6">e</span>
-            </div>
-            <span class="stars-bright">★★★★★</span>
-            <h2 style="font-size:19px;font-weight:700;font-family:'Playfair Display',serif;">
-                <span class="lang-en">Love Our Service?</span><span class="lang-hi">हमारी सेवा पसंद आई?</span>
-            </h2>
-            <p style="color:var(--text-secondary);font-family:'Space Grotesk',sans-serif;">
-                <span class="lang-en">Share your experience on Google</span>
-                <span class="lang-hi">गूगल पर अपना अनुभव साझा करें</span>
-            </p>
-            <a href="#" target="_blank" class="contact-btn w-full justify-center magnetic" style="margin-top:14px;" data-strength="15">
-                ⭐ <span class="lang-en">WRITE REVIEW</span><span class="lang-hi">समीक्षा लिखें</span>
-            </a>
-        </div>
-
-        <!-- ═══ 9. FOLLOW US ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">📱</span>
-            <span class="lang-en">📱 FOLLOW US</span><span class="lang-hi">📱 हमें फॉलो करें</span>
-            <span class="label">📱</span><span class="line"></span>
-        </div>
-        <div class="two-grid animate-on-scroll">
-            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">📸</span> Instagram</a>
-            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">👍</span> Facebook</a>
-            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">▶️</span> YouTube</a>
-            <a href="#" class="glass-btn magnetic" data-strength="8"><span class="icon">💬</span> WhatsApp</a>
-        </div>
-
-        <!-- ═══ 10. QUICK ACTIONS ═══ -->
-        <div class="section-title" data-delay="0">
+        <!-- ═══ 6. QUICK ACTION BUTTONS ═══ -->
+        <div class="section-title">
             <span class="line"></span><span class="label">⚡</span>
             <span class="lang-en">⚡ QUICK ACTIONS</span><span class="lang-hi">⚡ त्वरित कार्य</span>
             <span class="label">⚡</span><span class="line"></span>
         </div>
         <div class="two-grid animate-on-scroll">
-            <a href="#" download class="glass-btn magnetic" data-strength="8"><span class="icon">💾</span> <span class="lang-en">Save Contact</span><span class="lang-hi">कॉन्टैक्ट सेव करें</span></a>
-            <a href="#" onclick="shareCard()" class="glass-btn magnetic" data-strength="8"><span class="icon">📤</span> <span class="lang-en">Share Card</span><span class="lang-hi">शेयर करें</span></a>
-            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📝</span> <span class="lang-en">Get Quote</span><span class="lang-hi">कोटेशन लें</span></a>
-            <a href="#" target="_blank" class="glass-btn magnetic" data-strength="8"><span class="icon">📩</span> <span class="lang-en">Enquiry</span><span class="lang-hi">पूछताछ</span></a>
-        </div>
-
-        <!-- ═══ 11. LOCATION ═══ -->
-        <div class="section-title" data-delay="0">
-            <span class="line"></span><span class="label">📍</span>
-            <span class="lang-en">📍 LOCATION</span><span class="lang-hi">📍 स्थान</span>
-            <span class="label">📍</span><span class="line"></span>
-        </div>
-        <div class="glass-card animate-on-scroll" style="margin:0 12px;">
-            <img src="map.jpeg" class="map-img" alt="Map" />
-            <a href="https://www.google.com/maps/place/Tile+Planet/@18.452741,73.8325995,3a,75y,225.2h,91.78t/data=!3m7!1e1!3m5!1sznFZvJqmnkeRlSPWsaJAcQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-1.7821103971745913%26panoid%3DznFZvJqmnkeRlSPWsaJAcQ%26yaw%3D225.1950943741403!7i13312!8i6656!4m6!3m5!1s0x3bc295121b067477:0x3783906c9b053079!8m2!3d18.4527376!4d73.8325465!16s%2Fg%2F11fr3q2v90?entry=ttu&g_ep=EgoyMDI2MDgxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="contact-btn w-full justify-center magnetic" data-strength="15">
-                📍 <span class="lang-en">OPEN MAP</span><span class="lang-hi">मैप खोलें</span>
-            </a>
-        </div>
-
-        <!-- ═══ 12. VISITOR COUNTER ═══ -->
-        <div class="visitor-counter animate-on-scroll">
-            <span class="label">👁️ <span class="lang-en">Today's Visitors</span><span class="lang-hi">आज के विज़िटर</span></span>
-            <span class="count" id="visitorCount">0</span>
-        </div>
-
-        <!-- ═══ 13. FOOTER ═══ -->
-        <div class="footer-card animate-on-scroll">
-            <img src="Logo.png" class="footer-logo" alt="Tile Planet" />
-            <div class="brand">🏛️ TILE <span>PLANET</span></div>
-            <div class="sub"><span class="lang-en">Your One-Stop Tile Solution</span><span class="lang-hi">आपका एक-स्टॉप टाइल समाधान</span></div>
-            <div class="slogan-highlight">✦ <span class="lang-en">Visit Our Showroom Once</span><span class="lang-hi">एक बार हमारे शोरूम आएँ</span> ✦</div>
-            <div class="copy">© 2026 Tile Planet. All Rights Reserved.</div>
+            <button onclick="downloadVCard()" class="glass-btn"><span class="icon">💾</span> <span class="lang-en">Save Contact</span><span class="lang-hi">कॉन्टैक्ट सेव करें</span></button>
+            <button onclick="shareCard()" class="glass-btn"><span class="icon">📤</span> <span class="lang-en">Share Card</span><span class="lang-hi">शेयर करें</span></button>
         </div>
 
     </div>
@@ -2066,602 +949,123 @@
     <!-- ═══ SCROLLING TICKER ═══ -->
     <div class="ticker-bar">
         <div class="ticker-track">
-            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: 10/07/2026 – Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">📢 ऑफर: 10/07/2026 – टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
-            <span><i class="fas fa-bullhorn"></i> 📢 <span class="lang-en">Offer: 10/07/2026 – Tile prices revised. Contact Tile Planet for best rates!</span><span class="lang-hi">📢 ऑफर: 10/07/2026 – टाइल के दर संशोधित हुए। बेस्ट रेट के लिए Tile Planet से संपर्क करें!</span></span>
+            <span>📢 Special Offer: Best wholesale tile rates for new home constructions! Contact Tile Planet today!</span>
+            <span>📢 Special Offer: Best wholesale tile rates for new home constructions! Contact Tile Planet today!</span>
         </div>
     </div>
 
     <!-- ═══ BOTTOM NAV ═══ -->
     <div class="bottom-nav">
-        <a href="tel:+919922533033" class="nav-item active"><span class="nav-icon">📞</span> Call</a>
-        <a href="https://wa.me/919922533033" class="nav-item"><span class="nav-icon">💬</span> Chat</a>
-        <a href="#" class="nav-item"><span class="nav-icon">📍</span> Map</a>
-        <a href="#" onclick="shareCard(); return false;" class="nav-item"><span class="nav-icon">📤</span> Share</a>
+        <a href="tel:+919922533033" class="nav-item active"><span style="font-size:18px;">📞</span> Call</a>
+        <a href="https://wa.me/919922533033" class="nav-item"><span style="font-size:18px;">💬</span> Chat</a>
+        <a href="https://www.google.com/maps/place/Tile+Planet/@18.452741,73.8325995,17z" target="_blank" class="nav-item"><span style="font-size:18px;">📍</span> Map</a>
+        <a href="javascript:void(0)" onclick="shareCard()" class="nav-item"><span style="font-size:18px;">📤</span> Share</a>
     </div>
 
-    <!-- ═══ INSTALL MODALS ═══ -->
-    <div id="iosModal" class="install-modal-overlay">
-        <div class="install-modal-box">
-            <button class="close-modal" onclick="closeModal('iosModal')">✕</button>
-            <span class="modal-icon">📲</span>
-            <h2><span class="lang-en">Install App</span><span class="lang-hi">ऐप इंस्टॉल करें</span></h2>
-            <p><span class="lang-en">Add to Home Screen</span><span class="lang-hi">होम स्क्रीन पर जोड़ें</span></p>
-            <div class="step"><span class="num">1</span><div class="desc"><span class="lang-en">Tap Share</span><span class="lang-hi">शेयर बटन दबाएँ</span> <small>⬆️ <span class="lang-en">at bottom</span><span class="lang-hi">नीचे</span></small></div></div>
-            <div class="step"><span class="num">2</span><div class="desc"><span class="lang-en">Select "Add to Home Screen"</span><span class="lang-hi">"होम स्क्रीन पर जोड़ें" चुनें</span> <small>🟢 <span class="lang-en">scroll down</span><span class="lang-hi">नीचे स्क्रॉल करें</span></small></div></div>
-            <div class="step"><span class="num">3</span><div class="desc"><span class="lang-en">Tap "Add"</span><span class="lang-hi">"जोड़ें" दबाएँ</span> <small>✅ <span class="lang-en">done!</span><span class="lang-hi">हो गया!</span></small></div></div>
-            <button class="got-it-btn" onclick="closeModal('iosModal')"><span class="lang-en">Got it!</span><span class="lang-hi">समझ गया!</span></button>
-        </div>
-    </div>
-
-    <div id="androidModal" class="install-modal-overlay">
-        <div class="install-modal-box">
-            <button class="close-modal" onclick="closeModal('androidModal')">✕</button>
-            <span class="modal-icon">📲</span>
-            <h2><span class="lang-en">Add to Home Screen</span><span class="lang-hi">होम स्क्रीन पर जोड़ें</span></h2>
-            <p><span class="lang-en">Install in one step</span><span class="lang-hi">एक क्लिक में इंस्टॉल करें</span></p>
-            <div class="step"><span class="num">1</span><div class="desc"><span class="lang-en">Tap menu (⋮) or (︙)</span><span class="lang-hi">मेनू (⋮) या (︙) दबाएँ</span> <small><span class="lang-en">top right</span><span class="lang-hi">ऊपर दाएँ</span></small></div></div>
-            <div class="step"><span class="num">2</span><div class="desc"><span class="lang-en">Select "Install App"</span><span class="lang-hi">"ऐप इंस्टॉल करें" चुनें</span> <small><span class="lang-en">scroll down</span><span class="lang-hi">नीचे स्क्रॉल करें</span></small></div></div>
-            <div class="step"><span class="num">3</span><div class="desc"><span class="lang-en">Tap "Add"</span><span class="lang-hi">"जोड़ें" दबाएँ</span> <small>✅ <span class="lang-en">done!</span><span class="lang-hi">हो गया!</span></small></div></div>
-            <button class="got-it-btn" onclick="closeModal('androidModal')"><span class="lang-en">Got it!</span><span class="lang-hi">समझ गया!</span></button>
-        </div>
+    <!-- ═══ LIGHTBOX MODAL ═══ -->
+    <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+        <button class="lightbox-close">&times;</button>
+        <img id="lightboxImg" class="lightbox-img" src="" alt="Tile Zoom">
     </div>
 
     <script>
-        // ═══════════════════════════════════════════════
-        // ─── EVENT BANNER SYSTEM ───
-        // ═══════════════════════════════════════════════
+        // ─── 1. HAPTIC FEEDBACK ───
+        document.querySelectorAll('button, a, .glass-btn, .product, .catalog-card').forEach(el => {
+            el.addEventListener('click', () => {
+                if ('vibrate' in navigator) navigator.vibrate(15);
+            });
+        });
 
-        function getEventBanner() {
-            const now = new Date();
-            const day = now.getDate();
-            const month = now.getMonth() + 1;
-            const dateStr = `${day}/${month}`;
-            const year = now.getFullYear();
-
-            // ─── ALL EVENTS (Add new events here) ───
-            const events = {
-                '15/8': {
-                    icon: '🇮🇳',
-                    title: '🇮🇳 Happy Independence Day!',
-                    sub: `15 August ${year}`,
-                    offer: '🎉 Special Discount on All Tiles!',
-                    bg: 'linear-gradient(135deg, #FF9933, #FFFFFF, #138808)',
-                    triColor: true,
-                    fireworks: true,
-                    textColor: '#FFFFFF'
-                },
-                '26/1': {
-                    icon: '🇮🇳',
-                    title: '🇮🇳 Happy Republic Day!',
-                    sub: `26 January ${year}`,
-                    offer: '🎉 Special Republic Day Offer!',
-                    bg: 'linear-gradient(135deg, #FF9933, #FFFFFF, #138808)',
-                    triColor: true,
-                    fireworks: true,
-                    textColor: '#FFFFFF'
-                },
-                '25/12': {
-                    icon: '🎄',
-                    title: '🎄 Merry Christmas!',
-                    sub: `25 December ${year}`,
-                    offer: '🎁 Christmas Special Discount!',
-                    bg: 'linear-gradient(135deg, #0a2f1f, #1a4a2a, #0a2f1f)',
-                    triColor: false,
-                    fireworks: false,
-                    textColor: '#FFFFFF'
-                },
-                '1/1': {
-                    icon: '🎆',
-                    title: `🎆 Happy New Year ${year+1}!`,
-                    sub: `1 January ${year+1}`,
-                    offer: '🎉 New Year Special Offer!',
-                    bg: 'linear-gradient(135deg, #1a0a2a, #2a1a4a, #1a0a2a)',
-                    triColor: false,
-                    fireworks: true,
-                    textColor: '#FFFFFF'
-                },
-                '14/11': {
-                    icon: '🪔',
-                    title: '🪔 Happy Diwali!',
-                    sub: `14 November ${year}`,
-                    offer: '✨ Diwali Special Discount on All Tiles!',
-                    bg: 'linear-gradient(135deg, #1a0a0a, #2a1a0a, #1a0a0a)',
-                    triColor: false,
-                    fireworks: false,
-                    textColor: '#FFD700'
-                },
-                '14/3': {
-                    icon: '🌈',
-                    title: '🌈 Happy Holi!',
-                    sub: `14 March ${year}`,
-                    offer: '🎨 Holi Special Offer!',
-                    bg: 'linear-gradient(135deg, #FF6B6B, #4ECDC4, #FFE66D, #A8E6CF)',
-                    triColor: false,
-                    fireworks: false,
-                    textColor: '#FFFFFF'
-                },
-                '10/10': {
-                    icon: '🎃',
-                    title: '🎃 Happy Halloween!',
-                    sub: `10 October ${year}`,
-                    offer: '🎃 Spooky Halloween Offer!',
-                    bg: 'linear-gradient(135deg, #1a0a0a, #2a1a0a, #1a0a0a)',
-                    triColor: false,
-                    fireworks: false,
-                    textColor: '#FF6B00'
-                }
-            };
-
-            // Check if today is an event
-            const event = events[dateStr];
-            if (event) {
-                return event;
-            }
-
-            // Check for upcoming events within 7 days
-            for (const [key, value] of Object.entries(events)) {
-                const [eventDay, eventMonth] = key.split('/').map(Number);
-                const eventDate = new Date(now.getFullYear(), eventMonth - 1, eventDay);
-                const diffDays = Math.ceil((eventDate - now) / (1000 * 60 * 60 * 24));
-                if (diffDays > 0 && diffDays <= 7) {
-                    return {
-                        icon: '📅',
-                        title: `🎉 Coming Soon: ${value.title.replace(/[^\w\s]/g, '').trim()}`,
-                        sub: `In ${diffDays} days`,
-                        offer: `🔔 ${value.offer}`,
-                        bg: 'linear-gradient(135deg, #1a1008, #2a1a0e, #1a1008)',
-                        triColor: false,
-                        fireworks: false,
-                        isTeaser: true,
-                        textColor: '#FFFFFF'
-                    };
-                }
-            }
-
-            // Default banner
-            return {
-                icon: '🏛️',
-                title: '✨ Welcome to <span class="highlight">Tile Planet</span>',
-                sub: 'Premium Tiles · Perfect Spaces',
-                offer: '📞 Contact Us for Best Prices!',
-                bg: 'linear-gradient(135deg, #0a0806, #1a1008, #0a0806)',
-                triColor: false,
-                fireworks: false,
-                textColor: '#FFFFFF'
-            };
-        }
-
-        function createFireworks(container) {
-            if (!container) return;
-            const colors = ['#FF9933', '#FFFFFF', '#138808', '#FFD700', '#FF6B6B', '#4ECDC4', '#FFE66D'];
-            for (let i = 0; i < 30; i++) {
-                const fw = document.createElement('div');
-                fw.className = 'firework';
-                const angle = Math.random() * 2 * Math.PI;
-                const distance = 50 + Math.random() * 80;
-                fw.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
-                fw.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
-                fw.style.background = colors[Math.floor(Math.random() * colors.length)];
-                fw.style.left = (20 + Math.random() * 60) + '%';
-                fw.style.top = (20 + Math.random() * 40) + '%';
-                fw.style.animationDelay = (Math.random() * 0.8) + 's';
-                fw.style.width = (2 + Math.random() * 4) + 'px';
-                fw.style.height = fw.style.width;
-                container.appendChild(fw);
-                setTimeout(() => fw.remove(), 2000);
-            }
-        }
-
-        function renderEventBanner() {
-            const container = document.getElementById('eventBannerContainer');
-            const event = getEventBanner();
-
-            let triColorHTML = '';
-            if (event.triColor) {
-                triColorHTML = `
-                    <div class="tricolor-stripes">
-                        <span class="saffron"></span>
-                        <span class="white"></span>
-                        <span class="green"></span>
-                    </div>
-                `;
-            }
-
-            let fireworksHTML = '';
-            if (event.fireworks) {
-                fireworksHTML = `<div class="fireworks-container" id="fireworksContainer"></div>`;
-            }
-
-            container.innerHTML = `
-                <div class="event-banner" style="background: ${event.bg};">
-                    <div class="banner-overlay"></div>
-                    <div class="event-banner-inner">
-                        <span class="banner-icon">${event.icon}</span>
-                        <div class="banner-title" style="color: ${event.textColor} !important;">${event.title}</div>
-                        <div class="banner-sub" style="color: ${event.textColor} !important;">${event.sub}</div>
-                        <div class="banner-offer" style="color: #FFFFFF !important;">${event.offer}</div>
-                    </div>
-                    ${triColorHTML}
-                    ${fireworksHTML}
-                </div>
-            `;
-
-            // Trigger fireworks after render
-            if (event.fireworks) {
-                setTimeout(() => {
-                    const fwContainer = document.getElementById('fireworksContainer');
-                    if (fwContainer) {
-                        for (let i = 0; i < 3; i++) {
-                            setTimeout(() => createFireworks(fwContainer), i * 500);
-                        }
-                        setInterval(() => {
-                            const fwC = document.getElementById('fireworksContainer');
-                            if (fwC) createFireworks(fwC);
-                        }, 3000);
-                    }
-                }, 500);
-            }
-        }
-
-        // ─── INVENTORY URL ───
-        const INVENTORY_URL =
-            'https://script.google.com/macros/s/AKfycbzKWq9Ll8BhLMReIRbgBafyHkbhr9YklavRyQvimovn9hEO1F8IwADfNeEemrG6YG-eOg/exec';
-
-        function openLiveInventory() {
-            window.open(INVENTORY_URL, '_blank');
-            showToast('📦 Opening live inventory…');
-        }
-
-        // ─── TOAST ───
+        // ─── 2. TOAST NOTIFICATION ───
         let toastTimer = null;
-
         function showToast(msg) {
             const el = document.getElementById('toast');
-            const msgEl = document.getElementById('toastMsg');
-            msgEl.textContent = msg;
+            document.getElementById('toastMsg').textContent = msg;
             el.classList.add('show');
             clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => { el.classList.remove('show'); }, 2800);
+            toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
         }
 
-        // ─── CONFETTI ───
-        document.addEventListener('click', function(e) {
-            const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FFE66D', '#A8E6CF', '#FF8A5C', '#E8A87C', '#F5CBA7', '#FF9933',
-                '#FFFFFF', '#138808'
-            ];
-            for (let i = 0; i < 8; i++) {
-                const piece = document.createElement('div');
-                piece.className = 'confetti-piece';
-                const size = Math.random() * 10 + 5;
-                piece.style.width = size + 'px';
-                piece.style.height = size + 'px';
-                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-                piece.style.left = (e.clientX + (Math.random() - 0.5) * 100) + 'px';
-                piece.style.top = (e.clientY + (Math.random() - 0.5) * 100) + 'px';
-                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                piece.style.animationDuration = (Math.random() * 1.2 + 0.8) + 's';
-                document.body.appendChild(piece);
-                setTimeout(() => piece.remove(), 2000);
-            }
-        });
-
-        // ─── SHOOTING STARS ───
-        (function createShootingStars() {
-            const container = document.getElementById('shootingStars');
-            for (let i = 0; i < 6; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.animationDelay = (Math.random() * 10 + 2) + 's';
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                container.appendChild(star);
-            }
-        })();
-
-        // ─── CUSTOM CURSOR ───
-        const cursor = document.getElementById('customCursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-        document.addEventListener('mousedown', () => cursor.classList.add('active'));
-        document.addEventListener('mouseup', () => cursor.classList.remove('active'));
-
-        // ─── CATALOG FIX ───
-        document.addEventListener('DOMContentLoaded', function() {
-            renderEventBanner();
-
-            const cards = document.querySelectorAll('.catalog-card');
-            cards.forEach(card => {
-                const inner = card.querySelector('.catalog-inner');
-                card.addEventListener('click', function(e) {
-                    if (e.target.closest('.dl-btn')) return;
-                    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-                    if (isTouch) {
-                        inner.classList.toggle('flipped');
-                    } else {
-                        const btn = card.querySelector('.dl-btn');
-                        if (btn) {
-                            window.open(btn.href, '_blank');
-                            showToast('📖 Opening catalog…');
-                        }
-                    }
-                });
-                const btn = card.querySelector('.dl-btn');
-                if (btn) {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        window.open(this.href, '_blank');
-                        showToast('📖 Opening catalog…');
-                    });
-                }
-            });
-        });
-
-        // ─── VISITOR COUNTER ───
-        (function updateVisitorCount() {
-            let count = parseInt(localStorage.getItem('tilePlanetVisitors')) || 0;
-            const today = new Date().toDateString();
-            const lastVisit = localStorage.getItem('tilePlanetLastVisit');
-            if (lastVisit !== today) {
-                count += 1;
-                localStorage.setItem('tilePlanetVisitors', count);
-                localStorage.setItem('tilePlanetLastVisit', today);
-            }
-            const el = document.getElementById('visitorCount');
-            let current = 0;
-            const target = count;
-            const duration = 1500;
-            const startTime = performance.now();
-
-            function animateCounter(time) {
-                const progress = Math.min((time - startTime) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                current = Math.round(eased * target);
-                el.textContent = current;
-                if (progress < 1) requestAnimationFrame(animateCounter);
-                else el.textContent = target;
-            }
-            requestAnimationFrame(animateCounter);
-        })();
-
-        // ─── TESTIMONIAL CAROUSEL ───
-        (function initTestimonial() {
-            let current = 0;
-            const track = document.getElementById('testimonialTrack');
-            const dots = document.querySelectorAll('.testimonial-dots .dot');
-            const total = dots.length;
-
-            function goTo(index) {
-                current = index;
-                track.style.transform = `translateX(-${index * 100}%)`;
-                dots.forEach((d, i) => d.classList.toggle('active', i === index));
-            }
-            dots.forEach((dot, i) => { dot.addEventListener('click', () => goTo(i)); });
-            setInterval(() => { goTo((current + 1) % total); }, 6000);
-            let startX = 0;
-            const carousel = document.getElementById('testimonialCarousel');
-            carousel.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
-            carousel.addEventListener('touchend', (e) => {
-                const endX = e.changedTouches[0].clientX;
-                const diff = startX - endX;
-                if (Math.abs(diff) > 40) {
-                    if (diff > 0) goTo(Math.min(current + 1, total - 1));
-                    else goTo(Math.max(current - 1, 0));
-                }
-            });
-        })();
-
-        // ─── LANGUAGE TOGGLE ───
-        let currentLang = 'en';
-
-        function toggleLanguage() {
-            const body = document.body;
-            if (currentLang === 'en') { body.classList.add('lang-hindi');
-                currentLang = 'hi'; } else { body.classList.remove('lang-hindi');
-                currentLang = 'en'; }
+        // ─── 3. VCARD DIRECT DOWNLOAD ───
+        function downloadVCard() {
+            const vcard = `BEGIN:VCARD\nVERSION:3.0\nFN:Ramesh Chotalia (Tile Planet)\nORG:Tile Planet\nTITLE:Proprietor\nTEL;TYPE=CELL:+919922533033\nTEL;TYPE=WORK:+917071503503\nEMAIL:ramesh.chotalia13@gmail.com\nADR;TYPE=WORK:;;Sr. No.60, Opp Ashok Leyland, Katraj-Mumbai Road, Ambegaon BK;Pune;Maharashtra;411046;India\nEND:VCARD`;
+            const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Ramesh_Chotalia_Tile_Planet.vcf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('📇 Contact Card Saved!');
         }
 
-        // ─── AUDIO GREETING ───
-        let audioPlaying = false;
-        let audioElement = null;
-
-        function toggleAudio() {
-            const btn = document.getElementById('audioBtn');
-            if (!audioElement) {
-                audioElement = new Audio();
-                audioElement.src = 'data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVoAAACAgICAf39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f4CAgA==';
-            }
-            if (audioPlaying) {
-                audioElement.pause();
-                audioElement.currentTime = 0;
-                audioPlaying = false;
-                btn.classList.remove('playing');
-                btn.innerHTML = '<i class="fas fa-play"></i> <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>';
-            } else {
-                audioElement.play().then(() => {
-                    audioPlaying = true;
-                    btn.classList.add('playing');
-                    btn.innerHTML = '<i class="fas fa-pause"></i> <span class="lang-en">Playing…</span><span class="lang-hi">बज रहा…</span>';
-                }).catch(() => {
-                    btn.classList.add('playing');
-                    btn.innerHTML = '<i class="fas fa-check"></i> <span class="lang-en">Welcome!</span><span class="lang-hi">स्वागत है!</span>';
-                    setTimeout(() => {
-                        btn.classList.remove('playing');
-                        btn.innerHTML = '<i class="fas fa-play"></i> <span class="lang-en">Greeting</span><span class="lang-hi">अभिवादन</span>';
-                    }, 2000);
-                });
-            }
-        }
-
-        // ─── SHARE ───
-        function shareCard() {
-            if (navigator.share) {
-                navigator.share({ title: 'Tile Planet', text: 'Tile Planet — Premium Tiles', url: window.location.href })
-                    .catch(() => {});
-            } else {
-                navigator.clipboard.writeText(window.location.href)
-                    .then(() => showToast('✅ Link copied!'))
-                    .catch(() => showToast('📋 Copy: ' + window.location.href));
-            }
-        }
-
-        // ─── PWA INSTALL ───
-        let deferredPrompt = null;
-        let isAppInstalled = false;
-        const installBtn = document.getElementById('installAppBtn');
-
-        function checkIfInstalled() {
-            if (window.navigator.standalone === true) isAppInstalled = true;
-            if (window.matchMedia('(display-mode: standalone)').matches) isAppInstalled = true;
-            return isAppInstalled;
-        }
-
-        function hideInstallButton() {
-            if (isAppInstalled) installBtn.classList.add('install-hidden');
-            else installBtn.classList.remove('install-hidden');
-        }
-
-        function openModal(id) { document.getElementById(id).classList.add('active'); }
-
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-        function handleInstallClick(e) {
-            e.preventDefault();
-            if (isAppInstalled) return;
-            const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            if (isIos) { openModal('iosModal'); return; }
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') { isAppInstalled = true;
-                        hideInstallButton(); }
-                    deferredPrompt = null;
-                });
+        // ─── 4. TILE CALCULATOR ───
+        function calculateTiles() {
+            const l = parseFloat(document.getElementById('roomL').value) || 0;
+            const w = parseFloat(document.getElementById('roomW').value) || 0;
+            const boxCoverage = parseFloat(document.getElementById('tileSize').value);
+            
+            if (l <= 0 || w <= 0) {
+                showToast('⚠️ कृपया लंबाई और चौड़ाई भरें');
                 return;
             }
-            openModal('androidModal');
+            const sqFt = l * w;
+            const totalWithWastage = sqFt * 1.10;
+            const boxes = Math.ceil(totalWithWastage / boxCoverage);
+            
+            const res = document.getElementById('calcResult');
+            res.style.display = 'block';
+            res.innerHTML = `कुल एरिया: <b>${sqFt} Sq.Ft</b> (+10% वेस्टेज)<br>जरूरी बॉक्सेस: <span style="font-size:18px; color:#4cd964;">${boxes} Boxes</span>`;
+            showToast('✅ कैलकुलेशन पूर्ण!');
         }
 
-        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault();
-            deferredPrompt = e; if (!isAppInstalled) installBtn.classList.remove('install-hidden'); });
-        window.addEventListener('appinstalled', () => { isAppInstalled = true;
-            hideInstallButton(); });
-        window.addEventListener('load', () => { if (checkIfInstalled()) hideInstallButton(); else installBtn.classList.remove(
-                'install-hidden'); });
+        // ─── 5. LIGHTBOX ───
+        function openLightbox(src, title) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
 
-        installBtn.addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            ripple.className = 'ripple';
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-            this.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-            handleInstallClick(e);
-        });
+        // ─── 6. TESTIMONIAL SLIDER ───
+        let currentSlide = 0;
+        function setSlide(i) {
+            currentSlide = i;
+            document.getElementById('testimonialTrack').style.transform = `translateX(-${i * 100}%)`;
+            document.querySelectorAll('.testimonial-dots .dot').forEach((d, idx) => d.classList.toggle('active', idx === i));
+        }
 
-        document.querySelectorAll('.install-modal-overlay, .modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); });
-        });
+        // ─── 7. LANGUAGE TOGGLE ───
+        let currentLang = 'en';
+        function toggleLanguage() {
+            document.body.classList.toggle('lang-hindi');
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            showToast(currentLang === 'en' ? '🌐 Language: English' : '🌐 भाषा: हिंदी');
+        }
 
-        // ─── MAGNETIC BUTTONS ───
-        document.querySelectorAll('.magnetic').forEach(btn => {
-            if (window.matchMedia('(hover: hover)').matches) {
-                btn.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    const strength = parseFloat(this.dataset.strength) || 10;
-                    this.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
-                });
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translate(0, 0)';
-                });
+        // ─── 8. SHARE ───
+        function shareCard() {
+            if (navigator.share) {
+                navigator.share({ title: 'Tile Planet', text: 'Check out Tile Planet Pune Digital Card', url: window.location.href });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                showToast('✅ Link copied to clipboard!');
             }
-        });
+        }
 
-        // ─── SCROLL PROGRESS ───
+        // ─── 9. SCROLL PROGRESS & ANIMATIONS ───
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (scrollTop / docHeight) * 100;
-            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-bar').style.width = (scrollTop / docHeight) * 100 + '%';
         });
 
-        // ─── 3D TILT + SPOTLIGHT ───
-        document.addEventListener('DOMContentLoaded', function() {
-            const card = document.getElementById('tiltCard');
-            const wrapper = document.getElementById('tiltWrapper');
-            const spotlight = document.getElementById('spotlight');
-            const layers = card.querySelectorAll('.layer');
-
-            wrapper.addEventListener('mousemove', function(e) {
-                const rect = wrapper.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -8;
-                const rotateY = ((x - centerX) / centerX) * 8;
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                layers.forEach((layer, index) => {
-                    const speed = 0.5 + (index * 0.1);
-                    const moveX = (x - centerX) / centerX * 10 * speed;
-                    const moveY = (y - centerY) / centerY * 10 * speed;
-                    layer.style.transform = `translate(${moveX}px, ${moveY}px) translateZ(${20 + index * 20}px)`;
-                });
-                const px = (x / rect.width) * 100;
-                const py = (y / rect.height) * 100;
-                spotlight.style.setProperty('--mx', px + '%');
-                spotlight.style.setProperty('--my', py + '%');
-            });
-
-            wrapper.addEventListener('mouseleave', function() {
-                card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-                layers.forEach(layer => {
-                    layer.style.transform =
-                        `translate(0, 0) translateZ(${parseInt(layer.style.transform?.match(/translateZ\((\d+)px\)/)?.[1] || 20)}px)`;
-                });
-                spotlight.style.setProperty('--mx', '50%');
-                spotlight.style.setProperty('--my', '50%');
-            });
-        });
-
-        // ─── SCROLL ANIMATIONS ───
-        document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        const delay = parseFloat(el.dataset.delay) || 0;
-                        setTimeout(() => { el.classList.add('visible'); }, delay * 1000);
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-            document.querySelectorAll('.section-title, .product, .catalog-card, .animate-on-scroll').forEach(el => observer
-                .observe(el));
-        });
-
-        // ─── BOTTOM NAV ACTIVE ───
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // ─── SERVICE WORKER ───
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js').catch(() => {});
-        }
-
-        console.log('✅ Tile Planet — 5D Premium Digital Card with Event Banner System Loaded!');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.section-title, .product, .catalog-card, .animate-on-scroll').forEach(el => observer.observe(el));
     </script>
-
 </body>
 </html>
