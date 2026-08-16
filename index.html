@@ -31,7 +31,7 @@
             --rose-gold: #f4a261;
             --rose-gold-light: #fcd5ce;
             --dark-bg: #07090e;
-            --card-surface: rgba(15, 20, 30, 0.75);
+            --card-surface: rgba(15, 20, 32, 0.75);
             --glass-bg: rgba(255, 255, 255, 0.035);
             --glass-border: rgba(229, 192, 123, 0.14);
             --accent-green: #00e676;
@@ -341,7 +341,7 @@
             pointer-events: none;
         }
 
-        /* ─── GLASS CARD 2.0 ─── */
+        /* ─── GLASS CARD ─── */
         .glass-card {
             background: var(--card-surface);
             backdrop-filter: blur(40px) saturate(1.8);
@@ -402,9 +402,7 @@
             filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px var(--gold-glow));
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .logo:hover {
-            transform: scale(1.04) rotate(-1deg);
-        }
+        .logo:hover { transform: scale(1.04) rotate(-1deg); }
         .tagline {
             text-align: center;
             font-size: 10px;
@@ -516,7 +514,6 @@
             -webkit-text-fill-color: #07090e;
         }
 
-        /* ─── GOLD FOIL BUTTONS ─── */
         .contact-btn {
             display: inline-flex;
             align-items: center;
@@ -766,6 +763,28 @@
             color: var(--text-primary);
         }
 
+        /* ─── 5D HOLOGRAPHIC IMAGE EFFECT ─── */
+        .holographic-img {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            transition: all var(--transition);
+        }
+        .holographic-img::after {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.15), transparent, rgba(255, 255, 255, 0.08), transparent);
+            background-size: 200% 200%;
+            animation: holographicShine 4s linear infinite;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        @keyframes holographicShine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* ─── CALCULATOR INPUTS ─── */
         .calc-input {
             width: 100%;
@@ -842,15 +861,8 @@
             gap: 6px;
         }
         .catalog-front .icon-big { font-size: 24px; margin-bottom: 4px; }
-        .catalog-front h3 {
-            font-size: 11px;
-            font-weight: 700;
-            color: #fff;
-        }
-        .catalog-front p {
-            font-size: 8px;
-            color: var(--text-muted);
-        }
+        .catalog-front h3 { font-size: 11px; font-weight: 700; color: #fff; }
+        .catalog-front p { font-size: 8px; color: var(--text-muted); }
         .catalog-back .dl-btn {
             display: inline-flex;
             padding: 6px 14px;
@@ -1790,7 +1802,7 @@
             </div>
         </div>
 
-        <!-- ═══ 5. COMPANY PROFILE ═══ -->
+        <!-- ═══ 5. COMPANY PROFILE (FIXED PDF LINK) ═══ -->
         <div class="section-title" data-delay="0">
             <span class="line"></span><span class="label">🏛️</span>
             <span><span class="lang-en">COMPANY</span><span class="lang-hi">कंपनी</span> <span class="title-accent"><span class="lang-en">PROFILE</span><span class="lang-hi">प्रोफ़ाइल</span></span></span>
@@ -1804,7 +1816,7 @@
                 <span class="lang-hi">प्रीमियम टाइल्स सप्लायर · स्थापना 2018</span>
             </p>
             <div class="single-btn-wrap">
-                <a href="#" class="contact-btn magnetic" data-strength="12">
+                <a href="company-profile.pdf" target="_blank" class="contact-btn magnetic" data-strength="12">
                     📄 <span class="lang-en">VIEW / DOWNLOAD PROFILE</span><span class="lang-hi">प्रोफ़ाइल देखें / डाउनलोड करें</span>
                 </a>
             </div>
